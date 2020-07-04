@@ -50,18 +50,8 @@ namespace Everybody_Edits_CTF
                         PlayersDatabaseTable.Load();
                         Console.WriteLine($"[{(PlayersDatabaseTable.Loaded ? "SUCCESS" : $"FAIL")}]");
     
-                        Console.WriteLine("Connecting to Everybody Edits...");
-
-                        PlayerIOError connectionError;
-                        if ((connectionError = CaptureTheFlagBot.Connect()) == null)
-                        {
-                            Console.WriteLine("Connected!");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Unable to connect to the Everybody Edits world with the ID {GameSettings.WorldId}.");
-                            Console.WriteLine($"\nError reason: \"{connectionError.Message}\".");
-                        }
+                        Console.Write("Connecting to Everybody Edits... ");
+                        Console.WriteLine($"[{(CaptureTheFlagBot.Connect() == null ? "SUCCESS" : $"FAIL")}]");
                     }
                     else if (string.Equals(inputCmd, "disconnect", CommandCompareCase))
                     {
