@@ -153,12 +153,13 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
             foreach (Player player in CaptureTheFlagBot.PlayersInWorld.Values)
             {
-                if (!player.IsPlayingGame)
+                PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+
+                if (playerData == null || !player.IsPlayingGame)
                 {
                     continue;
                 }
 
-                PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
                 if (player.Team == winningTeam)
                 {
                     playerData.TotalWins++;
@@ -176,6 +177,8 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
             CaptureTheFlagBot.LoadLevel();
             CaptureTheFlagBot.SendChatMessage($"Game over! Team {TeamHelper.EnumToString(winningTeam)} has won the game.");
+
+            PlayersDatabaseTable.Save();
         }
 
         private static int GetSplitGameFund(Team winningTeam)
