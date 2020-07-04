@@ -5,6 +5,7 @@
 using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
+using Everybody_Edits_CTF.Logging;
 using PlayerIOClient;
 using System;
 using System.Data.OleDb;
@@ -72,6 +73,14 @@ namespace Everybody_Edits_CTF
                         Console.WriteLine("connect - Connects the bot to Everybody Edits.");
                         Console.WriteLine("disconnect - Disconnects the bot from Everybody Edits.");
                         Console.WriteLine("help - Shows a list of commands on how to use the program.");
+                    }
+                    else if (string.Equals(inputCmd, "logs", CommandCompareCase))
+                    {
+                        string outputLogTxt = Logger.LogText == string.Empty ? "Log text is empty." : Logger.LogText;
+
+                        Console.WriteLine("=== LOGS ==================");
+                        Console.WriteLine(outputLogTxt);
+                        Console.WriteLine("===========================");
                     }
                     else if (string.Equals(inputCmd, "users", CommandCompareCase))
                     {

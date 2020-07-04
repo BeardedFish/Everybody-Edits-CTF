@@ -3,6 +3,8 @@
 // Date:          Monday, June 29, 2020
 
 using Everybody_Edits_CTF.Core.DataStructures;
+using Everybody_Edits_CTF.Logging;
+using Everybody_Edits_CTF.Logging.Enums;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -54,9 +56,11 @@ namespace Everybody_Edits_CTF.Core.Data
                     }
                 }
             }
-            catch (MySqlException)
+            catch (MySqlException ex)
             {
                 Rows = null;
+
+                Logger.WriteLog(LogType.Exception, $"Exception caught while trying to load the database (message: {ex.Message}).");
             }
         }
 
@@ -139,7 +143,7 @@ namespace Everybody_Edits_CTF.Core.Data
                 }
                 catch (MySqlException ex)
                 {
-                    // Console.WriteLine(ex.Message); // TODO: Use Logger.cs class
+                    Logger.WriteLog(LogType.Exception, $"Fail while trying to save the database (reason: {ex.Message}).");
                 }
             }
         }

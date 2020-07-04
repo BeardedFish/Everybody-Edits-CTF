@@ -7,11 +7,12 @@ using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.GameMechanics;
 using Everybody_Edits_CTF.Enums;
 using Everybody_Edits_CTF.Helpers;
+using Everybody_Edits_CTF.Logging;
+using Everybody_Edits_CTF.Logging.Enums;
 using PlayerIOClient;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace Everybody_Edits_CTF.Core.Bot
 {
@@ -39,6 +40,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             PlayersInWorld.Clear();
 
             PlayersDatabaseTable.Save();
+            Logger.WriteLog(LogType.EverybodyEditsMessage, $"Disconnected from the Everybody Edits world (Reason: {message}).");
         }
 
         /// <summary>
@@ -59,6 +61,8 @@ namespace Everybody_Edits_CTF.Core.Bot
                     {
                         CaptureTheFlagBot.SendChatMessage("Connected!");
                         CaptureTheFlagBot.SetWorldTitle(true);
+
+                        Logger.WriteLog(LogType.EverybodyEditsMessage, "Connected to Everybody Edits succesfully!");
                     }
                     break;
                 case EverybodyEditsMessage.PlayerJoinedWorld:
