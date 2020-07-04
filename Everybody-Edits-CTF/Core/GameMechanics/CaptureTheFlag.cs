@@ -163,6 +163,8 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                 {
                     playerData.TotalWins++;
                     playerData.Coins += coinsWon;
+
+                    CaptureTheFlagBot.SendPrivateMessage(player, $"You received {coinsWon} coin{(coinsWon == 1 ? "" : "s")} for winning!");
                 }
                 else
                 {
