@@ -76,7 +76,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                         {
                             if (!PlayersInWorld[playerId].IsGuest && !PlayersDatabaseTable.PlayerExists(username))
                             {
-                                PlayersDatabaseTable.AddNewUser(username);
+                                PlayersDatabaseTable.AddNewPlayer(username);
 
                                 CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
                             }

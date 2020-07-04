@@ -11,12 +11,23 @@ namespace Everybody_Edits_CTF.Core.Data
 {
     public static class PlayersDatabaseTable
     {
+        /// <summary>
+        /// The name of the Players table in the MySql database.
+        /// </summary>
+        private const string PlayersTableName = "Players";
+
+        /// <summary>
+        /// States whether the Players table has been loaded or not.
+        /// </summary>
         public static bool Loaded
         {
             get => Rows != null;
         }
 
-        public static List<PlayerDatabaseRow> Rows;
+        /// <summary>
+        /// The rows of the Players table loaded from the MySql database.
+        /// </summary>
+        private static List<PlayerDatabaseRow> Rows;
 
         /// <summary>
         /// Loads the Players table from the MySql database.
@@ -29,7 +40,7 @@ namespace Everybody_Edits_CTF.Core.Data
             {
                 using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
                 {
-                    string query = $"SELECT * FROM Players;";
+                    string query = $"SELECT * FROM {PlayersTableName};";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
@@ -49,6 +60,11 @@ namespace Everybody_Edits_CTF.Core.Data
             }
         }
 
+        /// <summary>
+        /// Returns a boolean on whether a player exists in the "Rows" list or not.
+        /// </summary>
+        /// <param name="username">The username of the player.</param>
+        /// <returns>True if the player exists in the "Rows" list, if not, false.</returns>
         public static bool PlayerExists(string username)
         {
             foreach (PlayerDatabaseRow row in Rows)
@@ -62,40 +78,53 @@ namespace Everybody_Edits_CTF.Core.Data
             return false;
         }
 
+        /// <summary>
+        /// Gets the PlayerDatabaseRow of a specified player via their username.
+        /// </summary>
+        /// <param name="username">The username of the player to be searched for in the "Rows" list.</param>
+        /// <returns>
+        /// If the player is found, then the PlayerDatabaseRow object that correspond to that player is returned. If the player is not found, then null is returned.
+        /// </returns>
         public static PlayerDatabaseRow GetPlayerDatabaseRow(string username)
         {
-            foreach (PlayerDatabaseRow row in Rows)
+            foreach (PlayerDatabaseRow player in Rows)
             {
-                if (string.Equals(username, row.Username, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(username, player.Username, StringComparison.OrdinalIgnoreCase))
                 {
-                    return row;
+                    return player;
                 }
             }
 
             return null;
         }
 
-        public static void AddNewUser(string username)
+        /// <summary>
+        /// Adds a new player to the "Rows" list with default data.
+        /// </summary>
+        /// <param name="username">The username of the player to be added.</param>
+        public static void AddNewPlayer(string username)
         {
             Rows.Add(new PlayerDatabaseRow(username, 0, 0, 0, true));
         }
 
+        /// <summary>
+        /// Saves all data in the "Rows" list by uploading it to the MySql database.
+        /// </summary>
         public static void Save()
         {
             foreach (PlayerDatabaseRow player in Rows)
             {
-
                 try
                 {
                     string sqlQuery;
 
                     if (player.IsNewPlayer)
                     {
-                        sqlQuery = $"INSERT INTO Players (Id, Username, TotalWins, TotalLosses, Coins) VALUES (NULL, \"{player.Username}\", {player.TotalWins}, {player.TotalLosses}, {player.Coins});";
+                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, Coins) VALUES (NULL, \"{player.Username}\", {player.TotalWins}, {player.TotalLosses}, {player.Coins});";
                     }
                     else
                     {
-                        sqlQuery = $"UPDATE Players SET TotalWins={player.TotalWins}, TotalLosses={player.TotalLosses}, Coins={player.Coins} WHERE Username=\"{player.Username}\";";
+                        sqlQuery = $"UPDATE {PlayersTableName} SET TotalWins={player.TotalWins}, TotalLosses={player.TotalLosses}, Coins={player.Coins} WHERE Username=\"{player.Username}\";";
                     }
 
                     using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
@@ -110,7 +139,7 @@ namespace Everybody_Edits_CTF.Core.Data
                 }
                 catch (MySqlException ex)
                 {
-                    Console.WriteLine(ex.Message); // TODO: Use Logger.cs class
+                    // Console.WriteLine(ex.Message); // TODO: Use Logger.cs class
                 }
             }
         }
