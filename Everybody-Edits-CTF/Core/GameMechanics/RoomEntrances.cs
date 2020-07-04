@@ -20,6 +20,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
         private static readonly Dictionary<Point, Point> EmptyBuildingEntrances = new Dictionary<Point, Point>()
         {
+            { new Point(45, 110), new Point(47, 110) },
             { new Point(78, 108), new Point(80, 108) },
             { new Point(91, 108), new Point(93, 108) },
             { new Point(98, 110), new Point(100, 110) },
