@@ -324,15 +324,21 @@ namespace Everybody_Edits_CTF.Core.Bot
                                         }
                                         break;
                                     case "totalwins":
+                                    case "totallosses":
+                                    case "losses":
+                                    case "wins":
                                         {
                                             if (PlayersDatabaseTable.Loaded)
                                             {
                                                 PlayerDatabaseRow row = PlayersDatabaseTable.GetPlayerDatabaseRow(PlayersInWorld[playerId].Username);
+                                                int resultCount = cmd == "totalwins" || cmd == "wins" ? row.TotalWins : row.TotalLosses;
+                                                string type = cmd == "totalwins" || cmd == "wins" ? "won" : "lost";
 
-                                                CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You have won {row.TotalWins} time{(row.TotalWins == 1 ? "" : "s")}.");
+                                                CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You have {type} {resultCount} time{(row.TotalWins == 1 ? "" : "s")}.");
                                             }
                                         }
                                         break;
+
                                     default:
                                         {
                                             CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"The command \"{cmd}\" is invalid!");
