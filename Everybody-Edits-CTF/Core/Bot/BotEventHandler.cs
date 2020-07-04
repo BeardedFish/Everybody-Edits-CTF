@@ -145,6 +145,7 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                             Traps.Handle(PlayersInWorld[playerId]);
                             RoomEntrances.Handle(PlayersInWorld[playerId]);
+                            Shop.Handle(PlayersInWorld[playerId]);
 
                             CaptureTheFlag.CaptureFlag(PlayersInWorld[playerId]);
                             CaptureTheFlag.TakeFlag(PlayersInWorld[playerId]);
