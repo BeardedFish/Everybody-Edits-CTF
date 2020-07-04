@@ -16,13 +16,6 @@ namespace Everybody_Edits_CTF.Core.Data
             get => Rows != null;
         }
 
-        private const string ServerUrl = "";
-        private const string DatabaseUsername = "";
-        private const string DatabasePassword = "";
-        private const ushort DatabasePort = 0;
-        
-        private static readonly string SqlConnectionString = $"Server={ServerUrl}; Port={DatabasePort}; Database={DatabaseUsername}; Uid={DatabaseUsername}; Pwd={DatabasePassword};";
-
         public static List<PlayerDatabaseRow> Rows;
 
         /// <summary>
@@ -34,7 +27,7 @@ namespace Everybody_Edits_CTF.Core.Data
 
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(SqlConnectionString))
+                using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
                 {
                     string query = $"SELECT * FROM Players;";
 
@@ -105,7 +98,7 @@ namespace Everybody_Edits_CTF.Core.Data
                         sqlQuery = $"UPDATE Players SET TotalWins={player.TotalWins}, TotalLosses={player.TotalLosses}, Coins={player.Coins} WHERE Username=\"{player.Username}\";";
                     }
 
-                    using (MySqlConnection connection = new MySqlConnection(SqlConnectionString))
+                    using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
                     {
                         using (MySqlCommand sqlCommand = new MySqlCommand(sqlQuery, connection))
                         {
