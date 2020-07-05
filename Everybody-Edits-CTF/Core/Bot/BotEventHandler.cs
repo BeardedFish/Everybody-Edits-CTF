@@ -13,6 +13,7 @@ using PlayerIOClient;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 
 namespace Everybody_Edits_CTF.Core.Bot
 {
@@ -61,6 +62,8 @@ namespace Everybody_Edits_CTF.Core.Bot
                     {
                         CaptureTheFlagBot.SendChatMessage("Connected!");
                         CaptureTheFlagBot.SetWorldTitle(true);
+                        CaptureTheFlagBot.SetGodMode(true);
+                        CaptureTheFlagBot.Move(new Point(0, 0));
 
                         Logger.WriteLog(LogType.EverybodyEditsMessage, "Connected to Everybody Edits succesfully!");
                     }
@@ -180,172 +183,10 @@ namespace Everybody_Edits_CTF.Core.Bot
                     {
                         int playerId = m.GetInt(0);
                         string msg = m.GetString(1);
-                        string[] cmdTokens = msg.Split(' ');
 
                         if (PlayersInWorld.ContainsKey(playerId))
                         {
-                            if (CommandHelper.IsBotCommand(cmdTokens[0]))
-                            {
-                                string cmd = msg.Substring(1, cmdTokens[0].Length - 1).ToLower();
-
-                                switch (cmd)
-                                {
-                                    case "amiadmin":
-                                        {
-                                            string result = PlayersInWorld[playerId].IsAdmin ? "You are an administrator." : "You are not an administrator.";
-
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], result);
-                                        }
-                                        break;
-                                    case "blueflag":
-                                    case "redflag":
-                                        {
-                                            Team targetTeam = cmd == "blueflag" ? Team.Blue : Team.Red;
-                                            string flagHolder = "";
-
-                                            foreach (Player enemyPlayer in PlayersInWorld.Values)
-                                            {
-                                                if (enemyPlayer.Team == targetTeam && enemyPlayer.HasEnemyFlag)
-                                                {
-                                                    flagHolder = enemyPlayer.Username;
-                                                    break;
-                                                }
-                                            }
-
-                                            string msgToSend = flagHolder != "" ? $"Player {flagHolder} has the blue flag." : $"No one has blue flag.";
-                                            CaptureTheFlagBot.SendChatMessage(msgToSend);
-                                        }
-                                        break;
-                                    case "coins":
-                                        {
-                                            if (PlayersDatabaseTable.Loaded)
-                                            {
-                                                PlayerDatabaseRow row = PlayersDatabaseTable.GetPlayerDatabaseRow(PlayersInWorld[playerId].Username);
-
-                                                CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You currently have {row.Coins} coin{(row.Coins == 1 ? "" : "s")}.");
-                                            }
-                                        }
-                                        break;
-                                    case "disconnect":
-                                        {
-                                            if (PlayersInWorld[playerId].IsAdmin)
-                                            {
-                                                CaptureTheFlagBot.Disconnect();
-                                            }
-                                            else
-                                            {
-                                                CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You don't have permission to execute this command.");
-                                            }
-                                        }
-                                        break;
-                                    case "gamefund":
-                                        {
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"The game fund is currently: {CaptureTheFlag.GameFund} coins.");
-                                        }
-                                        break;
-                                    case "heal":
-                                        {
-                                            string resultMsg = "You cannot heal yourself because you are not inside your base!"; // Default message if the player is not inside their base
-
-                                            if ((PlayersInWorld[playerId].Team == Team.Blue && PlayersInWorld[playerId].IsInBlueBase)
-                                                || (PlayersInWorld[playerId].Team == Team.Red && PlayersInWorld[playerId].IsInRedBase))
-                                            {
-                                                PlayersInWorld[playerId].RestoreHealth();
-
-                                                resultMsg = "Success! Your health was restored fully.";
-                                            }
-
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], resultMsg);
-                                        }
-                                        break;
-                                    case "health":
-                                    case "hp":
-                                        {
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"Your current health is: {PlayersInWorld[playerId].Health} HP.");
-                                        }
-                                        break;
-                                    case "help":
-                                        {
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"Command prefixes: . > ! #");
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"Commands: amiadmin, disconnect, heal, health, help, lobby, scores, suicide, blueflag, redflag");
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"Use nurse smiley to heal your teammates!");
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"Bot is still work in progress so some things might be glitchy/not work.");
-                                        }
-                                        break;
-                                    case "kick":
-                                        {
-                                            if (PlayersInWorld[playerId].IsAdmin)
-                                            {
-                                                if (cmdTokens.Length >= 2)
-                                                {
-                                                    string playerToKick = cmdTokens[1];
-                                                    string reason = "";
-
-                                                    if (cmdTokens.Length >= 3)
-                                                    {
-                                                        for (int i = 2; i < cmdTokens.Length; i++)
-                                                        {
-                                                            reason += cmdTokens[i] + " ";
-                                                        }
-                                                    }
-
-                                                    CaptureTheFlagBot.KickPlayer(playerToKick, reason);
-                                                }
-                                                else
-                                                {
-                                                    CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"Insufficient amount of parameters for command.");
-                                                }
-                                            }
-                                            else
-                                            {
-                                                CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You don't have permission to execute this command.");
-                                            }
-                                        }
-                                        break;
-                                    case "lobby":
-                                    case "quit":
-                                        {
-                                            CaptureTheFlagBot.TeleportPlayer(PlayersInWorld[playerId], 199, 1);
-                                        }
-                                        break;
-                                    case "maxflags":
-                                        {
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"The maximum number of flags to win is {GameSettings.MaxScoreToWin} flag{(GameSettings.MaxScoreToWin == 1 ? "" : "s")}.");
-                                        }
-                                        break;
-                                    case "scores":
-                                        {
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"Blue: {CaptureTheFlag.BlueTeamScore} | Red: {CaptureTheFlag.RedTeamScore}");
-                                        }
-                                        break;
-                                    case "suicide":
-                                        {
-                                            CaptureTheFlagBot.KillPlayer(PlayersInWorld[playerId], null, DeathReason.Suicide);
-                                        }
-                                        break;
-                                    case "totalwins":
-                                    case "totallosses":
-                                    case "losses":
-                                    case "wins":
-                                        {
-                                            if (PlayersDatabaseTable.Loaded)
-                                            {
-                                                PlayerDatabaseRow row = PlayersDatabaseTable.GetPlayerDatabaseRow(PlayersInWorld[playerId].Username);
-                                                int resultCount = cmd == "totalwins" || cmd == "wins" ? row.TotalWins : row.TotalLosses;
-                                                string type = cmd == "totalwins" || cmd == "wins" ? "won" : "lost";
-
-                                                CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You have {type} {resultCount} time{(row.TotalWins == 1 ? "" : "s")}.");
-                                            }
-                                        }
-                                        break;
-
-                                    default:
-                                        {
-                                            CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"The command \"{cmd}\" is invalid!");
-                                        }
-                                        break;
-                                }
-                            }
+                            ChatMessageCommands.Handle(PlayersInWorld[playerId], msg);
                         }
                     }
                     break;

@@ -9,6 +9,7 @@ using Everybody_Edits_CTF.Enums;
 using PlayerIOClient;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 
 namespace Everybody_Edits_CTF.Core.Bot
@@ -73,6 +74,16 @@ namespace Everybody_Edits_CTF.Core.Bot
             SetWorldTitle(false);
 
             connection?.Disconnect();
+        }
+
+        public static void SetGodMode(bool turnOn)
+        {
+            connection?.Send(EverybodyEditsMessage.GodModeToggled, turnOn);
+        }
+
+        public static void Move(Point loc)
+        {
+            connection?.Send(EverybodyEditsMessage.PlayerMoved, loc.X * 16, loc.Y * 16, 0, 0, 0, 0, 0, 0, 0, false, false, 0);
         }
 
         public static void Send(string command)
