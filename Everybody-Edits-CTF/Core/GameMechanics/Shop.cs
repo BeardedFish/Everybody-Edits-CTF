@@ -29,7 +29,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         };
 
         /// <summary>
-        /// Handles a player if there located in the shop.
+        /// Handles a player if they're located in the shop.
         /// </summary>
         /// <param name="player">The player to handle in the shop.</param>
         public static void Handle(Player player)
@@ -58,7 +58,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
                         CaptureTheFlagBot.SendPrivateMessage(player, msgResult);
 
-                        break;
+                        break; // Player attempted to purchase the item, no need to check the other shop items
                     }
                 }
             }
