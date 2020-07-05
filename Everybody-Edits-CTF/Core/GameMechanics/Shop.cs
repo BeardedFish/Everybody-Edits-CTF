@@ -24,8 +24,10 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
             new ShopItem("curse effect", 30, new Point(232, PurchaseFloorY), new Point(232, SuccesfulPurchaseY)),
             new ShopItem("zombie effect", 60, new Point(234, PurchaseFloorY), new Point(234, SuccesfulPurchaseY)),
             new ShopItem("higher jump effect", 500, new Point(236, PurchaseFloorY), new Point(236, SuccesfulPurchaseY)),
-            new ShopItem("speed effect", 750, new Point(238, PurchaseFloorY), new Point(238, SuccesfulPurchaseY)),
-            new ShopItem("fly effect", 3500, new Point(240, PurchaseFloorY), new Point(240, SuccesfulPurchaseY))
+            new ShopItem("speed effect", 1000, new Point(238, PurchaseFloorY), new Point(238, SuccesfulPurchaseY)),
+            new ShopItem("minimap", 3000, new Point(240, PurchaseFloorY), new Point(240, SuccesfulPurchaseY)),
+            new ShopItem("mysterious switch", 5000, new Point(242, PurchaseFloorY), new Point(242, SuccesfulPurchaseY)),
+            new ShopItem("fly effect", 10000, new Point(244, PurchaseFloorY), new Point(244, SuccesfulPurchaseY))
         };
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                         if (playerData.Coins >= shopItem.Cost)
                         {
                             playerData.Coins -= shopItem.Cost;
-                            msgResult = $"You succesfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Coins == 1 ? "" : "s")}";
+                            msgResult = $"You succesfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Coins == 1 ? "" : "s")}.";
                             
                             CaptureTheFlagBot.TeleportPlayer(player, shopItem.PurchaseTeleportLocation.X, shopItem.PurchaseTeleportLocation.Y);
                         }
