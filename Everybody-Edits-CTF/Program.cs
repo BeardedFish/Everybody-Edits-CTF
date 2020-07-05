@@ -6,9 +6,7 @@ using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Logging;
-using PlayerIOClient;
 using System;
-using System.Data.OleDb;
 
 namespace Everybody_Edits_CTF
 {
@@ -16,7 +14,6 @@ namespace Everybody_Edits_CTF
     {
         private const string ProgramTitle = "Everybody Edits - Capture The Flag";
         private const StringComparison CommandCompareCase = StringComparison.OrdinalIgnoreCase;
-
 
         /// <summary>
         /// Main entry point of the program.
@@ -103,7 +100,7 @@ namespace Everybody_Edits_CTF
 
                     Console.WriteLine();
                 }
-            } while (!string.Equals(inputCmd, "quit", StringComparison.OrdinalIgnoreCase));
+            } while (!string.Equals(inputCmd, "quit", CommandCompareCase));
         }
     }
 }
