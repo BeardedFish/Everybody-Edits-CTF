@@ -225,6 +225,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                                 PlayersInWorld[playerId].RestoreHealth();
 
                                 CaptureTheFlag.ReturnFlag(PlayersInWorld[playerId], true);
+                                CaptureTheFlagBot.RemoveEffects(PlayersInWorld[playerId]);
                             }
                         }
                     }

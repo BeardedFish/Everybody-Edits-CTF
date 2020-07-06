@@ -176,6 +176,16 @@ namespace Everybody_Edits_CTF.Core.Bot
             connection?.Send(EverybodyEditsMessage.PlaceBlock, layer, x, y, blockId, morphId);
         }
 
+        public static void RemoveEffects(Player player)
+        {
+            string[] effects = { "fly", "jump", "speed" };
+
+            foreach (string effect in effects)
+            {
+                connection?.Send(EverybodyEditsMessage.ChatMessage, $"/removeeffect {player.Username} {effect}");
+            }
+        }
+
         public static void TeleportPlayer(Player player, int x, int y)
         {
             connection?.Send(EverybodyEditsMessage.ChatMessage, $"/teleport {player.Username} {x} {y}");
