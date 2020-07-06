@@ -2,6 +2,7 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
+using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.GameMechanics;
 using Everybody_Edits_CTF.Core.GameMechanics.Enums;
@@ -160,9 +161,9 @@ namespace Everybody_Edits_CTF.Core.Bot
             playerToKill.LastAttacker = null;
         }
 
-        public static void LoadLevel()
+        public static void ResetLevel()
         {
-            connection?.Send(EverybodyEditsMessage.ChatMessage, "/loadlevel");
+            connection?.Send(EverybodyEditsMessage.ChatMessage, "/resetall");
         }
 
         public static void PlaceBlock(int layer, int x, int y, int blockId)

@@ -1,4 +1,4 @@
-﻿// File Name:     CaptureTheFlag.cs
+// File Name:     CaptureTheFlag.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, July 3, 2020
 
@@ -175,7 +175,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
             GameFund = 0;
 
-            CaptureTheFlagBot.LoadLevel();
+            CaptureTheFlagBot.ResetLevel();
             CaptureTheFlagBot.SendChatMessage($"Game over! Team {TeamHelper.EnumToString(winningTeam)} has won the game.");
 
             PlayersDatabaseTable.Save();
