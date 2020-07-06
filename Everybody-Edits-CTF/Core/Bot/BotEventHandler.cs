@@ -234,8 +234,8 @@ namespace Everybody_Edits_CTF.Core.Bot
                 case EverybodyEditsMessage.PlayerTeleported:
                     {
                         int playerId = m.GetInt(0);
-                        int xLoc = m.GetInt(1);
-                        int yLoc = m.GetInt(2);
+                        int xLoc = (int)Math.Round(m.GetInt(1) / 16.0);
+                        int yLoc = (int)Math.Round(m.GetInt(2) / 16.0);
 
                         if (PlayersInWorld.ContainsKey(playerId))
                         {
