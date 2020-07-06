@@ -13,7 +13,6 @@ using PlayerIOClient;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
 
 namespace Everybody_Edits_CTF.Core.Bot
 {
@@ -185,24 +184,26 @@ namespace Everybody_Edits_CTF.Core.Bot
                         if (PlayersInWorld.ContainsKey(playerId))
                         {
                             Team joinedTeam = (Team)teamId;
-                            bool playingGame = joinedTeam != Team.None;
 
-                            if (playingGame)
+                            PlayersInWorld[playerId].Team = joinedTeam;
+
+                            if (PlayersInWorld[playerId].IsPlayingGame)
                             {
                                 string resultMsg = $"You joined the {TeamHelper.EnumToString(joinedTeam)} team!";
+                                int joinedTeamTotalPlayers = TeamHelper.TotalPlayers(PlayersInWorld, joinedTeam) - 1;
+                                int oppositeTeamTotalPlayers = TeamHelper.TotalPlayers(PlayersInWorld, TeamHelper.GetOppositeTeam(joinedTeam));
 
-                                if (GameSettings.AutoBalanceTeams && TeamHelper.TotalPlayers(PlayersInWorld, joinedTeam) > TeamHelper.TotalPlayers(PlayersInWorld, TeamHelper.GetOppositeTeam(joinedTeam)))
+                                if (GameSettings.AutoBalanceTeams)
                                 {
-                                    resultMsg = "Unbalanced teams! You have been transferred to the other team!";
+                                    if (joinedTeamTotalPlayers > oppositeTeamTotalPlayers)
+                                    {
+                                        resultMsg = "Unbalanced teams! You have been transferred to the other team!";
 
-                                    int teleX = joinedTeam == Team.Blue ? 398 : 1;
-                                    int teleY = 1;
+                                        int teleX = joinedTeam == Team.Blue ? 398 : 1;
+                                        int teleY = 1;
 
-                                    CaptureTheFlagBot.TeleportPlayer(PlayersInWorld[playerId], teleX, teleY);
-                                }
-                                else
-                                {
-                                    PlayersInWorld[playerId].Team = joinedTeam;
+                                        CaptureTheFlagBot.TeleportPlayer(PlayersInWorld[playerId], teleX, teleY);
+                                    }
                                 }
 
                                 CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], resultMsg);
