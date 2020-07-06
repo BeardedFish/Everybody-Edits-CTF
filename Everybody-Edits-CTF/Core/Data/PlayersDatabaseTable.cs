@@ -51,7 +51,7 @@ namespace Everybody_Edits_CTF.Core.Data
                         MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            Rows.Add(new PlayerDatabaseRow(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), false));
+                            Rows.Add(new PlayerDatabaseRow(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), false));
                         }
                     }
                 }
@@ -108,7 +108,7 @@ namespace Everybody_Edits_CTF.Core.Data
         /// <param name="username">The username of the player to be added.</param>
         public static void AddNewPlayer(string username)
         {
-            Rows.Add(new PlayerDatabaseRow(username, 0, 0, 0, true));
+            Rows.Add(new PlayerDatabaseRow(username, 0, 0, 0, 0, true));
         }
 
         /// <summary>
@@ -124,11 +124,11 @@ namespace Everybody_Edits_CTF.Core.Data
 
                     if (player.IsNewPlayer)
                     {
-                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, Coins) VALUES (NULL, \"{player.Username}\", {player.TotalWins}, {player.TotalLosses}, {player.Coins});";
+                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins) VALUES (NULL, \"{player.Username}\", {player.TotalWins}, {player.TotalLosses}, {player.TotalKills}, {player.Coins});";
                     }
                     else
                     {
-                        sqlQuery = $"UPDATE {PlayersTableName} SET TotalWins={player.TotalWins}, TotalLosses={player.TotalLosses}, Coins={player.Coins} WHERE Username=\"{player.Username}\";";
+                        sqlQuery = $"UPDATE {PlayersTableName} SET TotalWins={player.TotalWins}, TotalLosses={player.TotalLosses}, TotalKills={player.TotalKills}, Coins={player.Coins} WHERE Username=\"{player.Username}\";";
                     }
 
                     using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
