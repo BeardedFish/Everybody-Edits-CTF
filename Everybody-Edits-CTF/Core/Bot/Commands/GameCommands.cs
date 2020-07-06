@@ -41,9 +41,9 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
                     case "blueflag":
                     case "redflag":
                         {
-                            Team targetTeam = cmd == "blueflag" ? Team.Blue : Team.Red;
+                            Team targetTeam = cmd == "blueflag" ? Team.Red : Team.Blue;
                             string flagHolder = "";
-                            string team = TeamHelper.EnumToString(targetTeam);
+                            string team = TeamHelper.EnumToString(TeamHelper.GetOppositeTeam(targetTeam));
 
                             foreach (Player enemyPlayer in CaptureTheFlagBot.PlayersInWorld.Values)
                             {
