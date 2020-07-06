@@ -59,10 +59,10 @@ namespace Everybody_Edits_CTF.Core.Bot
                     break;
                 case EverybodyEditsMessage.InitEnd:
                     {
-                        CaptureTheFlagBot.SendChatMessage("Connected!");
                         CaptureTheFlagBot.SetWorldTitle(true);
                         CaptureTheFlagBot.SetGodMode(true);
                         CaptureTheFlagBot.Move(new Point(0, 0));
+                        CaptureTheFlagBot.SendChatMessage("Connected!");
 
                         Logger.WriteLog(LogType.EverybodyEditsMessage, "Connected to Everybody Edits succesfully!");
                     }
