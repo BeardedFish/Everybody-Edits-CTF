@@ -1,4 +1,4 @@
-﻿// File Name:     CaptureTheFlagBot.cs
+// File Name:     CaptureTheFlagBot.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -142,6 +142,16 @@ namespace Everybody_Edits_CTF.Core.Bot
             {
                 SendPrivateMessage(playerToKill, $"You were killed by player {playerKiller.Username}!");
                 SendPrivateMessage(playerKiller, $"You killed player {playerToKill.Username}!");
+
+                if (PlayersDatabaseTable.Loaded)
+                {
+                    PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(playerKiller.Username);
+
+                    if (playerData != null)
+                    {
+                        playerData.TotalKills++;
+                    }
+                }
 
                 CaptureTheFlag.IncreaseGameFund(GameFundIncreaseReason.PlayerKilledEnemy);
             }
