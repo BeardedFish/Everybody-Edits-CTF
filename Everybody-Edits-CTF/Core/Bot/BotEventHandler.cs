@@ -1,4 +1,4 @@
-﻿// File Name:     BotEventHandler.cs
+// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -153,7 +153,6 @@ namespace Everybody_Edits_CTF.Core.Bot
                             CaptureTheFlag.CaptureFlag(PlayersInWorld[playerId]);
                             CaptureTheFlag.TakeFlag(PlayersInWorld[playerId]);
 
-                            // Attack/heal system
                             foreach (Player otherPlayer in PlayersInWorld.Values)
                             {
                                 if (otherPlayer == PlayersInWorld[playerId])
@@ -162,19 +161,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                                 }
 
                                 AttackSystem.Handle(PlayersInWorld[playerId], otherPlayer);
-
-                                // Heal teammate
-                                if (!TeamHelper.IsEnemyPlayer(PlayersInWorld[playerId].Team, otherPlayer.Team)
-                                    && PlayersInWorld[playerId].IsNearPlayer(otherPlayer)
-                                    && otherPlayer.Health < 100
-                                    && PlayersInWorld[playerId].SmileyId == (int)Smilies.Nurse)
-                                {
-                                    if (otherPlayer.Heal()) // Health restored fully
-                                    {
-                                        CaptureTheFlagBot.SendPrivateMessage(otherPlayer, $"You were healed player {PlayersInWorld[playerId].Username}");
-                                        CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You fully healed player {otherPlayer.Username}");
-                                    }
-                                }
+                                HealingSystem.Handle(PlayersInWorld[playerId], otherPlayer);
                             }
                         }
                     }
