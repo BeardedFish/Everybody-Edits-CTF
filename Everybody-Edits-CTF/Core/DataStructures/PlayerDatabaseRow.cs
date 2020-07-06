@@ -10,13 +10,15 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         public int TotalWins;
         public int TotalLosses;
         public int Coins;
+        public int TotalKills;
         public bool IsNewPlayer;
 
-        public PlayerDatabaseRow(string username, int totalWins, int totalLosses, int coins, bool isNewPlayer)
+        public PlayerDatabaseRow(string username, int totalWins, int totalLosses, int totalKills, int coins, bool isNewPlayer)
         {
             Username = username;
             TotalWins = totalWins;
             TotalLosses = totalLosses;
+            TotalKills = totalKills;
             Coins = coins;
             IsNewPlayer = isNewPlayer;
         }

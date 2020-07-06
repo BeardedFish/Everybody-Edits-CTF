@@ -109,6 +109,16 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
                         }
                     }
                     break;
+                case "totalkills":
+                    {
+                        if (PlayersDatabaseTable.Loaded)
+                        {
+                            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+
+                            CaptureTheFlagBot.SendPrivateMessage(player, $"You have killed a total of {playerData.TotalKills} player{(playerData.TotalKills == 1 ? "" : "s")}.");
+                        }
+                    }
+                    break;
                 default:
                     {
                         CaptureTheFlagBot.SendPrivateMessage(player, $"The command \"{cmd}\" is invalid!");
