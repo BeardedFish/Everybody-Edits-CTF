@@ -39,6 +39,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         {
             PlayersInWorld.Clear();
 
+            CaptureTheFlag.Reset();
             PlayersDatabaseTable.Save();
             Logger.WriteLog(LogType.EverybodyEditsMessage, $"Disconnected from the Everybody Edits world (Reason: {message}).");
         }

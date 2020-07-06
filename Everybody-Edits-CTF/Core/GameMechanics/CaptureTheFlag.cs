@@ -20,6 +20,13 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         public static int BlueTeamScore, RedTeamScore;
         public static int GameFund;
 
+        public static void Reset()
+        {
+            BlueFlagTaken = RedFlagTaken = false;
+            BlueTeamScore = RedTeamScore = 0;
+            GameFund = 0;
+        }
+
         public static void IncreaseGameFund(GameFundIncreaseReason reason)
         {
             switch (reason)
