@@ -25,15 +25,15 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
             switch (reason)
             {
                 case GameFundIncreaseReason.FlagCaptured:
-                    GameFund += 50;
+                    GameFund += 25;
                     break;
                 case GameFundIncreaseReason.FlagReturned:
                 case GameFundIncreaseReason.FlagTaken:
-                    GameFund += 15;
+                    GameFund += 10;
                     break;        
                 default:
                 case GameFundIncreaseReason.PlayerKilledEnemy:
-                    GameFund += 75;
+                    GameFund += 5;
                     break;
             }
         }
