@@ -1,11 +1,14 @@
-// File Name:     Player.cs
+﻿// File Name:     Player.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot;
+using Everybody_Edits_CTF.Core.GameMechanics;
+using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Enums;
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Everybody_Edits_CTF.Core.DataStructures
 {
@@ -100,6 +103,17 @@ namespace Everybody_Edits_CTF.Core.DataStructures
                 const int rightX = 380;
 
                 return Location.X >= leftX && Location.X <= rightX;
+            }
+        }
+
+        public bool IsRespawning
+        {
+            get
+            {
+                return Location.X >= GameSettings.RespawnCooldownZone.X
+                    && Location.X <= GameSettings.RespawnCooldownZone.Width
+                    && Location.Y >= GameSettings.RespawnCooldownZone.Y
+                    && Location.Y <= GameSettings.RespawnCooldownZone.Height;
             }
         }
 
@@ -230,6 +244,24 @@ namespace Everybody_Edits_CTF.Core.DataStructures
             Health += 5;
 
             return Health >= MaxHealth;
+        }
+
+        public void Respawn()
+        {
+            if (!IsPlayingGame || IsRespawning)
+            {
+                return;
+            }
+
+            Point respawnLocation = Team == Team.Blue ? GameSettings.BlueSpawnLocation : GameSettings.RedSpawnLocation;
+            Task.Run(async() =>
+            {
+                CaptureTheFlagBot.TeleportPlayer(this, GameSettings.DeathSpawnLocation.X, GameSettings.DeathSpawnLocation.Y);
+
+                await Task.Delay(GameSettings.RespawnCooldownMs);
+
+                CaptureTheFlagBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
+            });
         }
 
         public void RestoreHealth()

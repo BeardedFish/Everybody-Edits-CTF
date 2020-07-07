@@ -1,4 +1,4 @@
-// File Name:     BotEventHandler.cs
+﻿// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -25,6 +25,10 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// </summary>
         public Dictionary<int, Player> PlayersInWorld { get; private set; } = new Dictionary<int, Player>();
 
+        /// <summary>
+        /// Handles all messages that a Capture the Flag bot receives.
+        /// </summary>
+        /// <param name="connection">The connection of the bot to Everybody Edits.</param>
         public BotEventHandler(Connection connection)
         {
             connection.OnDisconnect += OnDisconnect;
@@ -147,22 +151,25 @@ namespace Everybody_Edits_CTF.Core.Bot
                             PlayersInWorld[playerId].HorizontalDirection = (HorizontalDirection)horizontalDir;
                             PlayersInWorld[playerId].VerticalDirection = (VerticalDirection)verticalDir;
 
-                            Traps.Handle(PlayersInWorld[playerId]);
-                            RoomEntrances.Handle(PlayersInWorld[playerId]);
-                            Shop.Handle(PlayersInWorld[playerId]);
-
-                            CaptureTheFlag.CaptureFlag(PlayersInWorld[playerId]);
-                            CaptureTheFlag.TakeFlag(PlayersInWorld[playerId]);
-
-                            foreach (Player otherPlayer in PlayersInWorld.Values)
+                            if (!PlayersInWorld[playerId].IsRespawning)
                             {
-                                if (otherPlayer == PlayersInWorld[playerId])
-                                {
-                                    continue;
-                                }
+                                Traps.Handle(PlayersInWorld[playerId]);
+                                RoomEntrances.Handle(PlayersInWorld[playerId]);
+                                Shop.Handle(PlayersInWorld[playerId]);
 
-                                AttackSystem.Handle(PlayersInWorld[playerId], otherPlayer);
-                                HealingSystem.Handle(PlayersInWorld[playerId], otherPlayer);
+                                CaptureTheFlag.CaptureFlag(PlayersInWorld[playerId]);
+                                CaptureTheFlag.TakeFlag(PlayersInWorld[playerId]);
+
+                                foreach (Player otherPlayer in PlayersInWorld.Values)
+                                {
+                                    if (otherPlayer == PlayersInWorld[playerId])
+                                    {
+                                        continue;
+                                    }
+
+                                    AttackSystem.Handle(PlayersInWorld[playerId], otherPlayer);
+                                    HealingSystem.Handle(PlayersInWorld[playerId], otherPlayer);
+                                }
                             }
                         }
                     }
@@ -225,6 +232,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                             {
                                 PlayersInWorld[playerId].UpdateLocation((int)xLoc, (int)yLoc);
                                 PlayersInWorld[playerId].RestoreHealth();
+                                PlayersInWorld[playerId].Respawn();
 
                                 CaptureTheFlag.ReturnFlag(PlayersInWorld[playerId], true);
                                 CaptureTheFlagBot.RemoveEffects(PlayersInWorld[playerId]);

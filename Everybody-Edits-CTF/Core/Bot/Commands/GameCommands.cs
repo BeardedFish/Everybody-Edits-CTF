@@ -1,4 +1,4 @@
-// File Name:     GameCommands.cs
+﻿// File Name:     GameCommands.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, July 5, 2020
 
@@ -37,6 +37,13 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
         {
             if (player.IsPlayingGame)
             {
+                if (player.IsRespawning)
+                {
+                    // TODO: Probably should send the player a private message...
+
+                    return;
+                }
+
                 switch (cmd)
                 {
                     case "blueflag":
