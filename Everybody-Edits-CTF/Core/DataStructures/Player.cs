@@ -1,4 +1,4 @@
-﻿// File Name:     Player.cs
+// File Name:     Player.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -41,9 +41,9 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         {
             get
             {
-                for (int i = 0; i < GameSettings.Administrators.Length; i++)
+                for (int i = 0; i < BotSettings.Administrators.Length; i++)
                 {
-                    if (string.Equals(Username, GameSettings.Administrators[i], StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(Username, BotSettings.Administrators[i], StringComparison.OrdinalIgnoreCase))
                     {
                         return true;
                     }

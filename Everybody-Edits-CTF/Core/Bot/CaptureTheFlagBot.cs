@@ -1,4 +1,4 @@
-// File Name:     CaptureTheFlagBot.cs
+﻿// File Name:     CaptureTheFlagBot.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -6,6 +6,7 @@ using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.GameMechanics;
 using Everybody_Edits_CTF.Core.GameMechanics.Enums;
+using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Enums;
 using PlayerIOClient;
 using System;
@@ -33,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             }
         }
 
-        private static readonly int MaxChatMessageLength = 140 - GameSettings.ChatMessagePrefix.Length - 2;
+        private static readonly int MaxChatMessageLength = 140 - BotSettings.ChatMessagePrefix.Length - 2;
 
         private static BotEventHandler botEventHandler;
         private static Client client;
@@ -50,10 +51,10 @@ namespace Everybody_Edits_CTF.Core.Bot
             try
             {
 #pragma warning disable 612
-                client = PlayerIO.QuickConnect.SimpleConnect(GameSettings.EverybodyEditsGameId, GameSettings.BotEmail, GameSettings.BotPassword, null);
+                client = PlayerIO.QuickConnect.SimpleConnect(BotSettings.EverybodyEditsGameId, BotSettings.Email, BotSettings.Password, null);
 #pragma warning restore 612
 
-                connection = client.Multiplayer.CreateJoinRoom(GameSettings.WorldId, "Everybodyedits" + client.BigDB.Load("config", "config")["version"], true, null, null);
+                connection = client.Multiplayer.CreateJoinRoom(BotSettings.WorldId, "Everybodyedits" + client.BigDB.Load("config", "config")["version"], true, null, null);
                 connection.Send(EverybodyEditsMessage.InitBegin);
 
                 botEventHandler = new BotEventHandler(connection);
@@ -103,7 +104,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             {
                 msgChunk = msg.Substring(i, Math.Min(MaxChatMessageLength, msg.Length - i));
 
-                connection?.Send(EverybodyEditsMessage.ChatMessage, GameSettings.ChatMessagePrefix + " " + msgChunk);
+                connection?.Send(EverybodyEditsMessage.ChatMessage, BotSettings.ChatMessagePrefix + " " + msgChunk);
 
                 Thread.Sleep(150);
             }

@@ -2,7 +2,7 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Saturday, July 4, 2020
 
-namespace Everybody_Edits_CTF.Core.Data
+namespace Everybody_Edits_CTF.Core.Settings
 {
     public static class DatabaseSettings
     {
