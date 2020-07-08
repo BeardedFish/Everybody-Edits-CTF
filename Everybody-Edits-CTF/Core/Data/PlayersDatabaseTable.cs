@@ -30,7 +30,7 @@ namespace Everybody_Edits_CTF.Core.Data
         /// <summary>
         /// The rows of the Players table loaded from the MySql database.
         /// </summary>
-        private static List<PlayerDatabaseRow> Rows;
+        public static List<PlayerDatabaseRow> Rows { get; private set; }
 
         /// <summary>
         /// Loads the Players table from the MySql database.

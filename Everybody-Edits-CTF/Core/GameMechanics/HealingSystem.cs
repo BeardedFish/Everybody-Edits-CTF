@@ -11,6 +11,11 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 {
     public static class HealingSystem
     {
+        /// <summary>
+        /// Handles a player healing there team mates if they are wearing the nurse smiley.
+        /// </summary>
+        /// <param name="healer">The player that is healing.</param>
+        /// <param name="playerToHeal">The player the healer is trying to heal.</param>
         public static void Handle(Player healer, Player playerToHeal)
         {
             if (healer.SmileyId != (int)Smilies.Nurse) // Only players with the Nurse smiley can heal team mates

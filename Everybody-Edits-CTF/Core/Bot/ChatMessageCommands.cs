@@ -10,6 +10,9 @@ namespace Everybody_Edits_CTF.Core.Bot
 {
     public static class ChatMessageCommands
     {
+        /// <summary>
+        /// List of characters that an Everybody Edits message must start with in order to be considered a bot command.
+        /// </summary>
         private static readonly char[] CommandPrefixes = { '.', '>', '!', '#' };
 
         /// <summary>

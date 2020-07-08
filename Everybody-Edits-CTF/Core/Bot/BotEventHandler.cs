@@ -65,7 +65,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                     break;
                 case EverybodyEditsMessage.InitEnd:
                     {
-                        CaptureTheFlagBot.SetWorldTitle(true);
+                        CaptureTheFlagBot.SetWorldTitle($"{BotSettings.WorldTitle} [ON]");
                         CaptureTheFlagBot.SetGodMode(true);
                         CaptureTheFlagBot.Move(new Point(0, 0));
                         CaptureTheFlagBot.SendChatMessage("Connected!");

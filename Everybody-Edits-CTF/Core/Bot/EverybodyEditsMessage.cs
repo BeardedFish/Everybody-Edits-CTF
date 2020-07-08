@@ -14,6 +14,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         public const string PlayerRespawn = "tele";
         public const string PlayerTeleported = "teleport";
         public const string PlaceBlock = "b";
+        public const string SetTitle = "name";
         public const string SmileyChanged = "face";
         public const string GodModeToggled = "god";
         public const string InitBegin = "init";
