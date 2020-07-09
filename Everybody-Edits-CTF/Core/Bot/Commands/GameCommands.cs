@@ -110,14 +110,14 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
                         break;
                     case "suicide":
                         {
-                            CaptureTheFlagBot.KillPlayer(player, null, DeathReason.Suicide);
+                            player.Die();
                         }
                         break;
                 }
             }
             else
             {
-                CaptureTheFlagBot.SendPrivateMessage(player, $"You must be on either team blue or team red to use this command.");
+                CaptureTheFlagBot.SendPrivateMessage(player, "You must be on either team blue or team red to use this command.");
             }
         }
     }

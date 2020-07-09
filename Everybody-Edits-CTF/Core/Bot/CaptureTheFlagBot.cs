@@ -162,42 +162,12 @@ namespace Everybody_Edits_CTF.Core.Bot
         }
 
         /// <summary>
-        /// Kills a player in the Everybody Edits world. When the player is killed, they are sent a private message on why they were killed.
+        /// Kills a player in the Everybody Edits world.
         /// </summary>
-        /// <param name="playerToKill">The player to kill.</param>
-        /// <param name="playerKiller">The player that killed the player defined in the "playerToKill" variable.</param>
-        /// <param name="reason">The reason why the player was killed.</param>
-        public static void KillPlayer(Player playerToKill, Player playerKiller, DeathReason reason)
+        /// <param name="player">The player to kill.</param>
+        public static void KillPlayer(Player player)
         {
-            connection?.Send(EverybodyEditsMessage.ChatMessage, $"/kill {playerToKill.Username}");
-
-            if (reason == DeathReason.Hazard || reason == DeathReason.Suicide)
-            {
-                string msg = reason == DeathReason.Hazard ? "You were killed by a hazard." : "You comitted suicide.";
-                
-                SendPrivateMessage(playerToKill, msg);
-            }
-            
-            if (reason == DeathReason.Player)
-            {
-                SendPrivateMessage(playerToKill, $"You were killed by player {playerKiller.Username}!");
-                SendPrivateMessage(playerKiller, $"You killed player {playerToKill.Username}!");
-
-                if (PlayersDatabaseTable.Loaded)
-                {
-                    PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(playerKiller.Username);
-
-                    if (playerData != null)
-                    {
-                        playerData.TotalKills++;
-                    }
-                }
-
-                CaptureTheFlag.IncreaseGameFund(GameFundIncreaseReason.PlayerKilledEnemy);
-            }
-
-            playerToKill.RestoreHealth();
-            playerToKill.LastAttacker = null;
+            connection?.Send(EverybodyEditsMessage.ChatMessage, $"/kill {player.Username}");
         }
 
         /// <summary>

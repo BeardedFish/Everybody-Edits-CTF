@@ -5,6 +5,7 @@
 using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.GameMechanics;
+using Everybody_Edits_CTF.Core.GameMechanics.Enums;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Enums;
 using Everybody_Edits_CTF.Helpers;
@@ -231,8 +232,28 @@ namespace Everybody_Edits_CTF.Core.Bot
                             if (PlayersInWorld.ContainsKey(playerId))
                             {
                                 PlayersInWorld[playerId].UpdateLocation((int)xLoc, (int)yLoc);
-                                PlayersInWorld[playerId].RestoreHealth();
                                 PlayersInWorld[playerId].Respawn();
+                                PlayersInWorld[playerId].RestoreHealth();
+
+                                if (PlayersInWorld[playerId].LastAttacker != null)
+                                {
+                                    CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You were killed by player {PlayersInWorld[playerId].LastAttacker.Username}!");
+                                    CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId].LastAttacker, $"You killed player {PlayersInWorld[playerId].Username}!");
+
+                                    if (PlayersDatabaseTable.Loaded)
+                                    {
+                                        PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(PlayersInWorld[playerId].LastAttacker.Username);
+
+                                        if (playerData != null)
+                                        {
+                                            playerData.TotalKills++;
+                                        }
+                                    }
+
+                                    PlayersInWorld[playerId].LastAttacker = null;
+
+                                    CaptureTheFlag.IncreaseGameFund(GameFundIncreaseReason.PlayerKilledEnemy);
+                                }
 
                                 CaptureTheFlag.ReturnFlag(PlayersInWorld[playerId], true);
                                 CaptureTheFlagBot.RemoveEffects(PlayersInWorld[playerId]);

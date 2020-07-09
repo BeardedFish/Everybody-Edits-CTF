@@ -3,7 +3,9 @@
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot;
+using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.GameMechanics;
+using Everybody_Edits_CTF.Core.GameMechanics.Enums;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Enums;
 using System;
@@ -14,7 +16,7 @@ namespace Everybody_Edits_CTF.Core.DataStructures
 {
     public sealed class Player
     {
-        private const int MaxHealth = 100;
+        public const int MaxHealth = 100;
 
         private string _username;
 
@@ -22,7 +24,7 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// States whether the player is playing capture the flag or not.
         /// </summary>
         public bool IsPlayingGame
-        { 
+        {
             get
             {
                 return Team != Team.None;
@@ -199,7 +201,7 @@ namespace Everybody_Edits_CTF.Core.DataStructures
             get;
             set;
         }
-        
+
         /// <summary>
         /// The last enemy player that attacked this player.
         /// </summary>
@@ -230,9 +232,17 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// <returns>True if the player died after the attack, if not, false.</returns>
         public void Attack(Player attacker)
         {
-            Health -= 5;
+            if (Health > 0)
+            {
+                Health -= 5;
 
-            LastAttacker = attacker;
+                LastAttacker = attacker;
+            }
+        }
+
+        public void Die()
+        {
+            CaptureTheFlagBot.KillPlayer(this);
         }
 
         /// <summary>
@@ -276,12 +286,13 @@ namespace Everybody_Edits_CTF.Core.DataStructures
 
         public bool IsNearPlayer(Player player)
         {
-            const int DISTANCE_OFFSET = 3;
+            const int xOffset = 3;
+            const int yOffset = 2;
 
             int x = Math.Abs(Location.X - player.Location.X);
             int y = Math.Abs(Location.Y - player.Location.Y);
 
-            return x <= DISTANCE_OFFSET && y <= DISTANCE_OFFSET;
+            return x <= xOffset && y <= yOffset;
         }
     }
 }

@@ -15,17 +15,17 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         /// 
         /// </summary>
         /// <param name="attacker"></param>
-        public static void Handle(Player attacker, Player otherPlayer)
+        public static void Handle(Player attacker, Player attackee)
         {
-            if (TeamHelper.IsEnemyPlayer(attacker.Team, otherPlayer.Team) && attacker.IsNearPlayer(otherPlayer))
+            if (TeamHelper.IsEnemyPlayer(attacker.Team, attackee.Team) && attacker.IsNearPlayer(attackee))
             {
-                otherPlayer.Attack(attacker);
+                attackee.Attack(attacker);
 
-                HandleHealthStatusWarning(otherPlayer);
+                HandleHealthStatusWarning(attackee);
 
-                if (otherPlayer.Health <= 0)
+                if (attackee.Health <= 0)
                 {
-                    CaptureTheFlagBot.KillPlayer(otherPlayer, attacker, DeathReason.Player);
+                    attackee.Die();
                 }
             }
         }
