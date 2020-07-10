@@ -11,8 +11,13 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 {
     public static class AntiCheat
     {
+        /// <summary>
+        /// Handles a player if they cheat during a Capture the Flag game.
+        /// </summary>
+        /// <param name="player">The player to be handled if they cheat.</param>
         public static void Handle(Player player)
         {
+            // Remove flag from player if they have the enemy flag and enter God mode
             if (player.HasEnemyFlag && player.IsInGodMode)
             {
                 CaptureTheFlag.ReturnFlag(player, false);
