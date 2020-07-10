@@ -1,10 +1,9 @@
-﻿// File Name:     AttackSystem.cs
+// File Name:     AttackSystem.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Tuesday, June 30, 2020
 
 using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.DataStructures;
-using Everybody_Edits_CTF.Helpers;
 
 namespace Everybody_Edits_CTF.Core.GameMechanics
 {
@@ -17,7 +16,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         /// <param name="atackee">The player getting attacked.</param>
         public static void Handle(Player attacker, Player attackee)
         {
-            if (TeamHelper.IsEnemyPlayer(attacker.Team, attackee.Team) && attacker.IsNearPlayer(attackee))
+            if (attacker.IsEnemiesWith(attackee) && attacker.IsNearPlayer(attackee))
             {
                 attackee.Attack(attacker);
 

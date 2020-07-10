@@ -1,4 +1,4 @@
-﻿// File Name:     TeamHelper.cs
+// File Name:     TeamHelper.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -48,15 +48,12 @@ namespace Everybody_Edits_CTF.Helpers
             return Team.None;
         }
 
-        public static bool IsEnemyPlayer(Team p1, Team p2)
-        {
-            if (p1 == Team.None || p2 == Team.None)
-            {
-                return false;
-            }
-
-            return p1 != p2;
-        }
+        /// <summary>
+        /// Gets the total number of players on a specific team.
+        /// </summary>
+        /// <param name="playersInWorld">The dictionary of players in the Everybody Edits world.</param>
+        /// <param name="team">The team a player must belong to in order to be accumulated.</param>
+        /// <returns></returns>
 
         public static int TotalPlayers(Dictionary<int, Player> playersInWorld, Team team)
         {

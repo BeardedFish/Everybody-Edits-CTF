@@ -3,11 +3,8 @@
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot;
-using Everybody_Edits_CTF.Core.Data;
-using Everybody_Edits_CTF.Core.GameMechanics;
-using Everybody_Edits_CTF.Core.GameMechanics.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Settings;
-using Everybody_Edits_CTF.Enums;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -282,6 +279,22 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         public void UpdateLocation(int x, int y)
         {
             Location = new Point(x, y);
+        }
+
+        /// <summary>
+        /// States whether this player is enemies with another player based on their teams. Players with the same teams are allies, while players with different teams are considered
+        /// enemies. Players not on a team are not considered enemies with other teams.
+        /// </summary>
+        /// <param name="player">The player to compare to this player object.</param>
+        /// <returns>True if this player is enemies with the player in the parameters, if not, false.</returns>
+        public bool IsEnemiesWith(Player player)
+        {
+            if (Team == Team.None || Team == Team.None)
+            {
+                return false;
+            }
+
+            return Team != player.Team;
         }
 
         public bool IsNearPlayer(Player player)

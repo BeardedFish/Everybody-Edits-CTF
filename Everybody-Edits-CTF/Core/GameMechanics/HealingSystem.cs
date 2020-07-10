@@ -1,11 +1,10 @@
-﻿// File Name:     HealingSystem.cs
+// File Name:     HealingSystem.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, July 6, 2020
 
 using Everybody_Edits_CTF.Core.Bot;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.DataStructures;
-using Everybody_Edits_CTF.Enums;
-using Everybody_Edits_CTF.Helpers;
 
 namespace Everybody_Edits_CTF.Core.GameMechanics
 {
@@ -23,7 +22,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                 return;
             }
 
-            if (!TeamHelper.IsEnemyPlayer(healer.Team, playerToHeal.Team) && healer.IsNearPlayer(playerToHeal) && playerToHeal.Health < 100)
+            if (!healer.IsEnemiesWith(playerToHeal) && healer.IsNearPlayer(playerToHeal) && playerToHeal.Health < 100)
             {
                 if (playerToHeal.Heal()) // Health restored fully
                 {
