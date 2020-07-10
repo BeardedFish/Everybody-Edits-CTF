@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Everybody_Edits_CTF</RootNamespace>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,5 +16,4 @@
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.20" />
   </ItemGroup>
-
 </Project>
