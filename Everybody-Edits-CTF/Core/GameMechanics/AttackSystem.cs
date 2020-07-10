@@ -4,7 +4,6 @@
 
 using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.DataStructures;
-using Everybody_Edits_CTF.Enums;
 using Everybody_Edits_CTF.Helpers;
 
 namespace Everybody_Edits_CTF.Core.GameMechanics
@@ -12,9 +11,10 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
     public static class AttackSystem
     {
         /// <summary>
-        /// 
+        /// Handles a player attacking an enemy player. If the attackee's health is less than or equal to zero, then the atackee is killed.
         /// </summary>
-        /// <param name="attacker"></param>
+        /// <param name="attacker">The player attacking.</param>
+        /// <param name="atackee">The player getting attacked.</param>
         public static void Handle(Player attacker, Player attackee)
         {
             if (TeamHelper.IsEnemyPlayer(attacker.Team, attackee.Team) && attacker.IsNearPlayer(attackee))
@@ -31,9 +31,9 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         }
 
         /// <summary>
-        /// 
+        /// Sends a player a private message if their health is at a certain level. The private message is to warn them that they are close to being killed by an enemy player.
         /// </summary>
-        /// <param name="player">The player being attacked.</param>
+        /// <param name="player">The player to warn about their health.</param>
         private static void HandleHealthStatusWarning(Player player)
         {
             string healthDescription = null;
