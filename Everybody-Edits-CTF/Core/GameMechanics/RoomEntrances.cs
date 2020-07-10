@@ -66,6 +66,8 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         /// <param name="player">The player to be handled.</param>
         private static void HandleWarpPipes(Player player)
         {
+            // NOTE: Item1 is the warp pipe entrance and Item2 is the location that the warp pipe leads too
+
             if (player.VerticalDirection == VerticalDirection.Down)
             {
                 foreach ((Point, Point) warpPipe in WarpPipes)
