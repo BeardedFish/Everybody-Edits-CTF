@@ -3,6 +3,7 @@
 // Date:          Friday, July 3, 2020
 
 using Everybody_Edits_CTF.Core.Bot;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.GameMechanics.Enums;
@@ -67,7 +68,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                 player.HasEnemyFlag = true;
 
                 Point enemyFlagLocation = player.Team == Team.Blue ? GameSettings.RedFlagLocation : GameSettings.BlueFlagLocation;
-                CaptureTheFlagBot.PlaceBlock(0, enemyFlagLocation.X, enemyFlagLocation.Y, 0);
+                CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, enemyFlagLocation, 0);
 
                 IncreaseGameFund(GameFundIncreaseReason.FlagTaken);
 
@@ -126,7 +127,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
                 Point enemyFlagLocation = player.Team == Team.Blue ? GameSettings.RedFlagLocation : GameSettings.BlueFlagLocation;
                 int flagMorphId = player.Team == Team.Blue ? 4 : 1;
-                CaptureTheFlagBot.PlaceBlock(0, enemyFlagLocation.X, enemyFlagLocation.Y, 327, flagMorphId);
+                CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, enemyFlagLocation, 327, flagMorphId);
 
                 if (playerDied)
                 {

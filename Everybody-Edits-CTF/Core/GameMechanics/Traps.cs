@@ -8,6 +8,7 @@ using Everybody_Edits_CTF.Core.Bot;
 using System.Drawing;
 using System;
 using System.Threading.Tasks;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 
 namespace Everybody_Edits_CTF.Core.GameMechanics
 {
@@ -78,14 +79,14 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                     BlueBaseTrapActivated = true;
 
                     // Close gate
-                    CaptureTheFlagBot.PlaceBlock(0, 45, 178, 1058);
-                    CaptureTheFlagBot.PlaceBlock(0, 45, 179, 1058);
+                    CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), 1058);
+                    CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), 1058);
 
                     // Pour lava
                     for (int i = 175; i <= 179; i++)
                     {
-                        CaptureTheFlagBot.PlaceBlock(0, 47, i, 416);
-                        CaptureTheFlagBot.PlaceBlock(1, 47, i, 629);
+                        CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), 416);
+                        CaptureTheFlagBot.PlaceBlock(BlockLayer.Background, new Point(47, i), 629);
 
                         await Task.Delay(100);
                     }
@@ -95,15 +96,15 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                     // Remove lava
                     for (int i = 175; i <= 179; i++)
                     {
-                        CaptureTheFlagBot.PlaceBlock(0, 47, i, 0);
-                        CaptureTheFlagBot.PlaceBlock(1, 47, i, 507);
+                        CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), 0);
+                        CaptureTheFlagBot.PlaceBlock(BlockLayer.Background, new Point(47, i), 507);
 
                         await Task.Delay(100);
                     }
 
                     // Open gate
-                    CaptureTheFlagBot.PlaceBlock(0, 45, 178, 0);
-                    CaptureTheFlagBot.PlaceBlock(0, 45, 179, 0);
+                    CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), 0);
+                    CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), 0);
 
                     await Task.Delay(TrapCooldownMs);
 
@@ -130,13 +131,13 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                     RedBaseTrapActivated = true;
 
                     // Close gate
-                    CaptureTheFlagBot.PlaceBlock(0, 354, 178, 1058);
-                    CaptureTheFlagBot.PlaceBlock(0, 354, 179, 1058);
+                    CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(354, 178), 1058);
+                    CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(354, 179), 1058);
 
                     // Remove bridge
                     for (int x = 347; x <= 353; x++)
                     {
-                        CaptureTheFlagBot.PlaceBlock(0, x, 180, 0);
+                        CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 0);
 
                         await Task.Delay(100);
                     }
@@ -146,14 +147,14 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                     // Show bridge
                     for (int x = 347; x <= 353; x++)
                     {
-                        CaptureTheFlagBot.PlaceBlock(0, x, 180, 47);
+                        CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 47);
 
                         await Task.Delay(100);
                     }
 
                     // Remove gate
-                    CaptureTheFlagBot.PlaceBlock(0, 354, 178, 0);
-                    CaptureTheFlagBot.PlaceBlock(0, 354, 179, 0);
+                    CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(354, 178), 0);
+                    CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(354, 179), 0);
 
                     await Task.Delay(TrapCooldownMs);
 
@@ -179,7 +180,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
                         for (int x = 94; x <= 105; x++)
                         {
-                            CaptureTheFlagBot.PlaceBlock(0, x, 180, 0);
+                            CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 0);
 
                             await Task.Delay(100);
                         }
@@ -188,7 +189,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
                         for (int x = 94; x <= 105; x++)
                         {
-                            CaptureTheFlagBot.PlaceBlock(0, x, 180, 47);
+                            CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 47);
 
                             await Task.Delay(100);
                         }
@@ -219,8 +220,8 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
                         for (int y = 176; y >= 172; y--)
                         {
-                            CaptureTheFlagBot.PlaceBlock(0, 259, y, 1058);
-                            CaptureTheFlagBot.PlaceBlock(0, 306, y, 1058);
+                            CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 1058);
+                            CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), 1058);
 
                             await Task.Delay(100);
                         }
@@ -229,8 +230,8 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
                         for (int y = 172; y <= 176; y++)
                         {
-                            CaptureTheFlagBot.PlaceBlock(0, 259, y, 0);
-                            CaptureTheFlagBot.PlaceBlock(0, 306, y, 0);
+                            CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 0);
+                            CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), 0);
 
                             await Task.Delay(100);
                         }

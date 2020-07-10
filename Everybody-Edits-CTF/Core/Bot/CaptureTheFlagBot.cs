@@ -2,12 +2,9 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
-using Everybody_Edits_CTF.Core.Data;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.DataStructures;
-using Everybody_Edits_CTF.Core.GameMechanics;
-using Everybody_Edits_CTF.Core.GameMechanics.Enums;
 using Everybody_Edits_CTF.Core.Settings;
-using Everybody_Edits_CTF.Enums;
 using PlayerIOClient;
 using System;
 using System.Collections.Generic;
@@ -182,25 +179,23 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// Places a block in the Everybody Edits world.
         /// </summary>
         /// <param name="layer">The layer of the block.</param>
-        /// <param name="x">The x location of where to place the block.</param>
-        /// <param name="y">The y location of where to place the block.</param>
+        /// <param name="loc">The location of where the block will be placed.</param>
         /// <param name="blockId">The id of the block to be placed.</param>
-        public static void PlaceBlock(int layer, int x, int y, int blockId)
+        public static void PlaceBlock(BlockLayer layer, Point loc, int blockId)
         {
-            PlaceBlock(layer, x, y, blockId, 0);
+            PlaceBlock(layer, loc, blockId, 0);
         }
 
         /// <summary>
         /// Places a block in the Everybody Edits world.
         /// </summary>
         /// <param name="layer">The layer of the block.</param>
-        /// <param name="x">The x location of where to place the block.</param>
-        /// <param name="y">The y location of where to place the block.</param>
+        /// <param name="loc">The location of where the block will be placed.</param>
         /// <param name="blockId">The id of the block to be placed.</param>
         /// <param name="morphId">The morph id of the block to be placed.</param>
-        public static void PlaceBlock(int layer, int x, int y, int blockId, int morphId)
+        public static void PlaceBlock(BlockLayer layer, Point loc, int blockId, int morphId)
         {
-            connection?.Send(EverybodyEditsMessage.PlaceBlock, layer, x, y, blockId, morphId);
+            connection?.Send(EverybodyEditsMessage.PlaceBlock, (int)layer, loc.X, loc.Y, blockId, morphId);
         }
 
         /// <summary>
