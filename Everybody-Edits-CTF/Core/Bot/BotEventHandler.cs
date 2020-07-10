@@ -117,7 +117,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                         {
                             PlayersInWorld[playerId].SmileyId = smileyId;
 
-                            if (PlayersInWorld[playerId].IsPlayingGame && smileyId == (int)Smilies.Nurse)
+                            if (PlayersInWorld[playerId].IsPlayingGame && smileyId == (int)Smiley.Nurse)
                             {
                                 CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], "You are now a healer for your team!");
                             }

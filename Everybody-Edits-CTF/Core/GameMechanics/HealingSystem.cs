@@ -18,7 +18,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         /// <param name="playerToHeal">The player the healer is trying to heal.</param>
         public static void Handle(Player healer, Player playerToHeal)
         {
-            if (healer.SmileyId != (int)Smilies.Nurse) // Only players with the Nurse smiley can heal team mates
+            if (healer.SmileyId != (int)Smiley.Nurse) // Only players with the Nurse smiley can heal team mates
             {
                 return;
             }

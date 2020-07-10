@@ -4,7 +4,7 @@
 
 namespace Everybody_Edits_CTF.Enums
 {
-    public enum Smilies
+    public enum Smiley
     {
         Nurse = 37
     }
