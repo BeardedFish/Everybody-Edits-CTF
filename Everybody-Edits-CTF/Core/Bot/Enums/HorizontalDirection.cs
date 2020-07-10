@@ -2,7 +2,7 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, July 2, 2020
 
-namespace Everybody_Edits_CTF.Enums
+namespace Everybody_Edits_CTF.Core.Bot.Enums
 {
     public enum HorizontalDirection
     {

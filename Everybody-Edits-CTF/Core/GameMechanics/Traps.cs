@@ -2,13 +2,12 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, June 29, 2020
 
-using Everybody_Edits_CTF.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.Bot;
 using System.Drawing;
 using System;
 using System.Threading.Tasks;
-using Everybody_Edits_CTF.Core.Bot.Enums;
 
 namespace Everybody_Edits_CTF.Core.GameMechanics
 {

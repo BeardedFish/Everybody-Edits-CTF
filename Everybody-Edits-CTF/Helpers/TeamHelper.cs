@@ -2,8 +2,8 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.DataStructures;
-using Everybody_Edits_CTF.Enums;
 using System.Collections.Generic;
 
 namespace Everybody_Edits_CTF.Helpers
@@ -12,15 +12,12 @@ namespace Everybody_Edits_CTF.Helpers
     {
         public static Team IdToEnum(int teamId)
         {
-            switch (teamId)
+            return teamId switch
             {
-                case 1:
-                    return Team.Red;
-                case 2:
-                    return Team.Blue;
-                default:
-                    return Team.None;
-            }
+                1 => Team.Red,
+                2 => Team.Blue,
+                _ => Team.None,
+            };
         }
 
         public static string EnumToString(Team team)

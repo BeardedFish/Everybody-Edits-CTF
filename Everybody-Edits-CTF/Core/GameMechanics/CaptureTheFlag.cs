@@ -8,7 +8,6 @@ using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.GameMechanics.Enums;
 using Everybody_Edits_CTF.Core.Settings;
-using Everybody_Edits_CTF.Enums;
 using Everybody_Edits_CTF.Helpers;
 using System.ComponentModel;
 using System.Drawing;
