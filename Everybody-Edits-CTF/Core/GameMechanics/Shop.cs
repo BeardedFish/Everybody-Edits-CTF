@@ -3,9 +3,9 @@
 // Date:          Saturday, July 4, 2020
 
 using Everybody_Edits_CTF.Core.Bot;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
-using Everybody_Edits_CTF.Enums;
 using System.Collections.Generic;
 using System.Drawing;
 
