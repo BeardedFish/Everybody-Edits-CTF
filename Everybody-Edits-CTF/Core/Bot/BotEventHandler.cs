@@ -2,12 +2,12 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.GameMechanics;
 using Everybody_Edits_CTF.Core.GameMechanics.Enums;
 using Everybody_Edits_CTF.Core.Settings;
-using Everybody_Edits_CTF.Enums;
 using Everybody_Edits_CTF.Helpers;
 using Everybody_Edits_CTF.Logging;
 using Everybody_Edits_CTF.Logging.Enums;
@@ -45,7 +45,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         {
             PlayersInWorld.Clear();
 
-            CaptureTheFlag.Reset();
+            CaptureTheFlag.ResetGameStatistics();
             PlayersDatabaseTable.Save();
             Logger.WriteLog(LogType.EverybodyEditsMessage, $"Disconnected from the Everybody Edits world (Reason: {message}).");
         }
