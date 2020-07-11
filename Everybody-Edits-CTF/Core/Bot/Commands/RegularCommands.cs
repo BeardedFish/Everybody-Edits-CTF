@@ -4,11 +4,25 @@
 
 using Everybody_Edits_CTF.Core.Data;
 using Everybody_Edits_CTF.Core.DataStructures;
+using System.Linq;
 
 namespace Everybody_Edits_CTF.Core.Bot.Commands
 {
     public static class RegularCommands
     {
+        public static readonly string[] ValidCommands =
+        {
+            "amiadmin",
+            "coins",
+            "donatecoins",
+            "help",
+            "totalwins",
+            "totallosses",
+            "losses",
+            "wins",
+            "totalkills"
+        };
+
         /// <summary>
         /// Handles a regular command that an Everybody Edits player wants to execute.
         /// </summary>
@@ -17,114 +31,140 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
         /// <param name="cmdTokens">The command tokens (strings seperated by a space character).</param>
         public static void Handle(Player player, string cmd, string[] cmdTokens)
         {
-            switch (cmd)
+            if (ValidCommands.Contains(cmd))
             {
-                case "amiadmin":
-                    {
-                        string result = player.IsAdmin ? "You are an administrator." : "You are not an administrator.";
-
-                        CaptureTheFlagBot.SendPrivateMessage(player, result);
-                    }
-                    break;
-                case "coins":
-                    {
-                        if (PlayersDatabaseTable.Loaded)
+                switch (cmd)
+                {
+                    case "amiadmin":
                         {
-                            PlayerDatabaseRow row = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+                            string result = player.IsAdmin ? "You are an administrator." : "You are not an administrator.";
 
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"You currently have {row.Coins} coin{(row.Coins == 1 ? "" : "s")}.");
+                            CaptureTheFlagBot.SendPrivateMessage(player, result);
                         }
-                    }
-                    break;
-                case "donatecoins":
-                    {
-                        if (PlayersDatabaseTable.Loaded)
+                        break;
+                    case "coins":
                         {
-                            if (cmdTokens.Length >= 3)
+                            if (PlayersDatabaseTable.Loaded)
                             {
-                                if (cmdTokens[1] != player.Username)
+                                PlayerDatabaseRow row = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+
+                                CaptureTheFlagBot.SendPrivateMessage(player, $"You currently have {row.Coins} coin{(row.Coins == 1 ? "" : "s")}.");
+                            }
+                        }
+                        break;
+                    case "donatecoins":
+                        {
+                            if (PlayersDatabaseTable.Loaded)
+                            {
+                                if (cmdTokens.Length >= 3)
                                 {
-                                    PlayerDatabaseRow playerToDonateData = PlayersDatabaseTable.GetPlayerDatabaseRow(cmdTokens[1]);
-
-                                    if (playerToDonateData != null)
+                                    if (cmdTokens[1] != player.Username)
                                     {
-                                        PlayerDatabaseRow donatorData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+                                        PlayerDatabaseRow playerToDonateData = PlayersDatabaseTable.GetPlayerDatabaseRow(cmdTokens[1]);
 
-                                        if (int.TryParse(cmdTokens[2], out int amount))
+                                        if (playerToDonateData != null)
                                         {
-                                            if (donatorData.Coins >= amount)
-                                            {
-                                                playerToDonateData.Coins += amount;
-                                                donatorData.Coins -= amount;
+                                            PlayerDatabaseRow donatorData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
 
-                                                CaptureTheFlagBot.SendPrivateMessage(player, $"Success! You donated {amount} coin{(amount == 1 ? "" : "s")} to player {cmdTokens[1].ToUpper()}.");
+                                            if (int.TryParse(cmdTokens[2], out int amount))
+                                            {
+                                                if (donatorData.Coins >= amount)
+                                                {
+                                                    playerToDonateData.Coins += amount;
+                                                    donatorData.Coins -= amount;
+
+                                                    CaptureTheFlagBot.SendPrivateMessage(player, $"Success! You donated {amount} coin{(amount == 1 ? "" : "s")} to player {cmdTokens[1].ToUpper()}.");
+                                                }
+                                                else
+                                                {
+                                                    CaptureTheFlagBot.SendPrivateMessage(player, "You don't have enough coins to donate that amount!");
+                                                }
                                             }
                                             else
                                             {
-                                                CaptureTheFlagBot.SendPrivateMessage(player, "You don't have enough coins to donate that amount!");
+                                                CaptureTheFlagBot.SendPrivateMessage(player, "Third parameter of command is invalid! It must be a number.");
                                             }
                                         }
                                         else
                                         {
-                                            CaptureTheFlagBot.SendPrivateMessage(player, "Third parameter of command is invalid! It must be a number.");
+                                            CaptureTheFlagBot.SendPrivateMessage(player, $"Player {cmdTokens[2].ToUpper()} does not exist.");
                                         }
                                     }
                                     else
                                     {
-                                        CaptureTheFlagBot.SendPrivateMessage(player, $"Player {cmdTokens[2].ToUpper()} does not exist.");
+                                        CaptureTheFlagBot.SendPrivateMessage(player, "You can't donate coins to yourself!");
                                     }
                                 }
                                 else
                                 {
-                                    CaptureTheFlagBot.SendPrivateMessage(player, "You can't donate coins to yourself!");
+                                    CaptureTheFlagBot.SendPrivateMessage(player, $"Insufficient amount of parameters for command.");
                                 }
                             }
-                            else
+                        }
+                        break;
+                    case "help":
+                        {
+                            CaptureTheFlagBot.SendPrivateMessage(player, $"Command prefixes: . > ! #");
+
+                            CaptureTheFlagBot.SendPrivateMessage(player, "Regular Commands:");
+                            CaptureTheFlagBot.SendPrivateMessage(player, StringArrayToString(RegularCommands.ValidCommands));
+
+                            CaptureTheFlagBot.SendPrivateMessage(player, "Game Commands:");
+                            CaptureTheFlagBot.SendPrivateMessage(player, StringArrayToString(GameCommands.ValidCommands));
+
+                            CaptureTheFlagBot.SendPrivateMessage(player, "Administrator Commands:");
+                            CaptureTheFlagBot.SendPrivateMessage(player, StringArrayToString(AdminCommands.ValidCommands));
+
+                            CaptureTheFlagBot.SendPrivateMessage(player, "Tips:");
+                            CaptureTheFlagBot.SendPrivateMessage(player, $"- Press arrow keys/WASD keys around an enemy player to attack them.");
+                            CaptureTheFlagBot.SendPrivateMessage(player, $"- Use nurse smiley to heal your teammates!");
+                            CaptureTheFlagBot.SendPrivateMessage(player, $"- There is an item shop in the clouds.");
+                            CaptureTheFlagBot.SendPrivateMessage(player, $"- Watch out for traps around the map.");
+                        }
+                        break;
+                    case "totalwins":
+                    case "totallosses":
+                    case "losses":
+                    case "wins":
+                        {
+                            if (PlayersDatabaseTable.Loaded)
                             {
-                                CaptureTheFlagBot.SendPrivateMessage(player, $"Insufficient amount of parameters for command.");
+                                PlayerDatabaseRow row = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+                                int resultCount = cmd == "totalwins" || cmd == "wins" ? row.TotalWins : row.TotalLosses;
+                                string type = cmd == "totalwins" || cmd == "wins" ? "won" : "lost";
+
+                                CaptureTheFlagBot.SendPrivateMessage(player, $"You have {type} {resultCount} time{(row.TotalWins == 1 ? "" : "s")}.");
                             }
                         }
-                    }
-                    break;
-                case "help":
-                    {
-                        CaptureTheFlagBot.SendPrivateMessage(player, $"Command prefixes: . > ! #");
-                        CaptureTheFlagBot.SendPrivateMessage(player, $"Commands: amiadmin, disconnect, heal, health, help, lobby, scores, suicide, blueflag, redflag");
-                        CaptureTheFlagBot.SendPrivateMessage(player, $"Use nurse smiley to heal your teammates!");
-                        CaptureTheFlagBot.SendPrivateMessage(player, $"Bot is still work in progress so some things might be glitchy/not work.");
-                    }
-                    break;
-                case "totalwins":
-                case "totallosses":
-                case "losses":
-                case "wins":
-                    {
-                        if (PlayersDatabaseTable.Loaded)
+                        break;
+                    case "totalkills":
                         {
-                            PlayerDatabaseRow row = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
-                            int resultCount = cmd == "totalwins" || cmd == "wins" ? row.TotalWins : row.TotalLosses;
-                            string type = cmd == "totalwins" || cmd == "wins" ? "won" : "lost";
+                            if (PlayersDatabaseTable.Loaded)
+                            {
+                                PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
 
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"You have {type} {resultCount} time{(row.TotalWins == 1 ? "" : "s")}.");
+                                CaptureTheFlagBot.SendPrivateMessage(player, $"You have killed a total of {playerData.TotalKills} player{(playerData.TotalKills == 1 ? "" : "s")}.");
+                            }
                         }
-                    }
-                    break;
-                case "totalkills":
-                    {
-                        if (PlayersDatabaseTable.Loaded)
-                        {
-                            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
-
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"You have killed a total of {playerData.TotalKills} player{(playerData.TotalKills == 1 ? "" : "s")}.");
-                        }
-                    }
-                    break;
-                default:
-                    {
-                        CaptureTheFlagBot.SendPrivateMessage(player, $"The command \"{cmd}\" is invalid!");
-                    }
-                    break;
+                        break;
+                }
             }
+            else
+            {
+                CaptureTheFlagBot.SendPrivateMessage(player, $"The command \"{cmd}\" is invalid!");
+            }
+        }
+
+        private static string StringArrayToString(string[] array)
+        {
+            string result = "";
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                result += $"{array[i]}{(i == array.Length - 1 ? "" : ", ")}";
+            }
+
+            return result;
         }
     }
 }
