@@ -117,6 +117,11 @@ namespace Everybody_Edits_CTF.Core.Data
         /// </summary>
         public static void Save()
         {
+            if (!Loaded)
+            {
+                return;
+            }
+
             foreach (PlayerDatabaseRow player in Rows)
             {
                 try
