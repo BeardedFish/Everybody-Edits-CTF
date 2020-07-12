@@ -131,6 +131,8 @@ namespace Everybody_Edits_CTF.Core.Data
                     if (player.IsNewPlayer)
                     {
                         sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins) VALUES (NULL, \"{player.Username}\", {player.TotalWins}, {player.TotalLosses}, {player.TotalKills}, {player.Coins});";
+
+                        player.IsNewPlayer = false;
                     }
                     else
                     {
