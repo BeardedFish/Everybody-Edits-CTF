@@ -48,6 +48,13 @@ namespace Everybody_Edits_CTF.Core.Bot
             CaptureTheFlag.ResetGameStatistics();
             PlayersDatabaseTable.Save();
             Logger.WriteLog(LogType.EverybodyEditsMessage, $"Disconnected from the Everybody Edits world (Reason: {message}).");
+
+            if (BotSettings.AutoReconnectOnDisconnect && message != string.Empty)
+            {
+                Logger.WriteLog(LogType.EverybodyEditsMessage, $"Auto reconnecting...");
+
+                CaptureTheFlagBot.Connect();
+            }
         }
 
         /// <summary>

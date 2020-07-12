@@ -12,6 +12,11 @@ namespace Everybody_Edits_CTF.Core.Settings
         public static readonly string[] Administrators = { "" };
 
         /// <summary>
+        /// States whether the bot should auto reconnect when disconnected due to a server side failure.
+        /// </summary>
+        public const bool AutoReconnectOnDisconnect = true;
+
+        /// <summary>
         /// The chat message prefix for public messages sent by the bot.
         /// </summary>
         public const string ChatMessagePrefix = "[CTF_BOT]:";
