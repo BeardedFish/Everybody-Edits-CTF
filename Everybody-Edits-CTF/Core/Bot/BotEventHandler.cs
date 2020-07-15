@@ -324,7 +324,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                         JoinedWorld.Blocks = WorldDeserializer.DeserializeBlocks(m, JoinedWorld.Width, JoinedWorld.Height);
                     }
                     break;
-                case EverybodyEditsMessage.SignPlaced:
+                case EverybodyEditsMessage.SignBlockPlaced:
                     {
                         if (JoinedWorld.Blocks != null)
                         {
