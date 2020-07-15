@@ -107,13 +107,7 @@ namespace Everybody_Edits_CTF.Core.DataStructures
 
         public bool IsRespawning
         {
-            get
-            {
-                return Location.X >= GameSettings.RespawnCooldownZone.X
-                    && Location.X <= GameSettings.RespawnCooldownZone.Width
-                    && Location.Y >= GameSettings.RespawnCooldownZone.Y
-                    && Location.Y <= GameSettings.RespawnCooldownZone.Height;
-            }
+            get => Location == GameSettings.BlueRespawnCooldownLocation || Location == GameSettings.RedRespawnCooldownLocation;
         }
 
         /// <summary>
@@ -260,10 +254,11 @@ namespace Everybody_Edits_CTF.Core.DataStructures
                 return;
             }
 
+            Point respawnCooldownLocation = Team == Team.Blue ? GameSettings.BlueRespawnCooldownLocation : GameSettings.RedRespawnCooldownLocation;
             Point respawnLocation = Team == Team.Blue ? GameSettings.BlueSpawnLocation : GameSettings.RedSpawnLocation;
             Task.Run(async() =>
             {
-                CaptureTheFlagBot.TeleportPlayer(this, GameSettings.DeathSpawnLocation.X, GameSettings.DeathSpawnLocation.Y);
+                CaptureTheFlagBot.TeleportPlayer(this, respawnCooldownLocation.X, respawnCooldownLocation.Y);
 
                 await Task.Delay(GameSettings.RespawnCooldownMs);
 

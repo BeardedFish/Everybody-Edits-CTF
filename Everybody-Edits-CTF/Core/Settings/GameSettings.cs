@@ -29,18 +29,13 @@ namespace Everybody_Edits_CTF.Core.Settings
         public const ushort RespawnCooldownMs = 5000;
 
         /// <summary>
-        /// The bounds where a player is respawning. In this zone, players can not attack each other.
+        /// The location where a player of a specified team will be teleported when they die to wait the <see cref=">RespawnCooldownMs"/>..
         /// </summary>
-        public static readonly Rectangle RespawnCooldownZone = new Rectangle(180, 31, 218, 53);
+        public static readonly Point BlueRespawnCooldownLocation = new Point(1, 1), RedRespawnCooldownLocation = new Point(398, 1);
 
         /// <summary>
-        /// The location a player will be teleported when they die. This location is located in the respawn cooldown zone (<see cref="RespawnCooldownZone"/>).
+        /// The location where a player of a specified team is teleported after they are finished waiting the <see cref="RespawnCooldownMs"/>.
         /// </summary>
-        public static readonly Point DeathSpawnLocation = new Point(183, 44);
-
-        /// <summary>
-        /// The locations where a player is teleported after they are done waiting in the <see cref="RespawnCooldownZone"/>.
-        /// </summary>
-        public static readonly Point BlueSpawnLocation = new Point(1, 3), RedSpawnLocation = new Point(398, 3);
+        public static readonly Point BlueSpawnLocation = new Point(1, 6), RedSpawnLocation = new Point(398, 6);
     }
 }
