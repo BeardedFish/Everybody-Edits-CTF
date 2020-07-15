@@ -12,10 +12,10 @@ namespace Everybody_Edits_CTF.Core.Deserializer.Blocks
         public uint GateTriggerId { get; set; }
 
         /// <summary>
-        /// 
+        /// Constructor which creates a SwitchBlock object.
         /// </summary>
-        /// <param name="id">The id of the block.</param>
-        /// <param name="gateTriggerId"></param>
+        /// <param name="id">Refer to <see cref="Block.Id"/> for description.</param>
+        /// <param name="gateTriggerId">Refer to <see cref="GateTriggerId"/> for description.</param>
         public SwitchBlock(int id, uint gateTriggerId) : base(id)
         {
             GateTriggerId = gateTriggerId;

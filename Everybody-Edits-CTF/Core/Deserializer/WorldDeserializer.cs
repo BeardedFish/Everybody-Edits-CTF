@@ -1,4 +1,4 @@
-// File Name:     WorldDeserializer.cs
+﻿// File Name:     WorldDeserializer.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Wednesday, July 15, 2020
 
@@ -12,7 +12,8 @@ namespace Everybody_Edits_CTF.Core.Deserializer
     public static class WorldDeserializer
     {
         /// <summary>
-        /// 
+        /// Deserializes blocks from a Message object and stores the deserialized values in a 3 dimensional array of type Block. The first dimension is the layer, the second is the
+        /// horizontal (x) positon, and the third is the vertical (y) posiition.
         /// </summary>
         /// <param name="m">The Message object that contains the data about the Everybody Edits world.</param>
         /// <param name="worldWidth">The width of the Everybody Edits world.</param>
@@ -70,6 +71,8 @@ namespace Everybody_Edits_CTF.Core.Deserializer
 
                                 chunkArgsRead = 7;
 
+                            }
+                            break;
                         case 374:
                             {
                                 string targetWorldId = m.GetString(currentBlockChunk + 4);
@@ -201,8 +204,8 @@ namespace Everybody_Edits_CTF.Core.Deserializer
                         case 1593:
                         case 1594:
                         case 1595:
-                        case 1597:
                         case 1596:
+                        case 1597:
                         case 1605:
                         case 1606:
                         case 1607:
@@ -268,12 +271,12 @@ namespace Everybody_Edits_CTF.Core.Deserializer
         }
 
         /// <summary>
-        /// 
+        /// Creates and initializes a 3 dimensional array of type <see cref="Block"/>.
         /// </summary>
-        /// <param name="totalLayers"></param>
-        /// <param name="worldWidth"></param>
-        /// <param name="worldHeight"></param>
-        /// <returns></returns>
+        /// <param name="totalLayers">The total number of layers to create for the array.</param>
+        /// <param name="worldWidth">The total width of the array, in blocks.</param>
+        /// <param name="worldHeight">The total height of the array, in blocks.</param>
+        /// <returns>A 3 dimensional array of type <see cref="Block"/> which contains empty blocks.</returns>
         private static Block[,,] InitalizeWorldBlocksArray(int totalLayers, int worldWidth, int worldHeight)
         {
             Block[,,] worldBlocks = new Block[totalLayers, worldWidth, worldHeight];

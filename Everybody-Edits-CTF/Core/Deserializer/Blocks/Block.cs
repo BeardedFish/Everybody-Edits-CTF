@@ -22,7 +22,7 @@ namespace Everybody_Edits_CTF.Core.Deserializer.Blocks
         /// <summary>
         /// Constructor which creates a block of a specified id.
         /// </summary>
-        /// <param name="id">The id of the block.</param>
+        /// <param name="id">Refer to <see cref="Id"/> for description.</param>
         public Block(int id)
         {
             Id = id;

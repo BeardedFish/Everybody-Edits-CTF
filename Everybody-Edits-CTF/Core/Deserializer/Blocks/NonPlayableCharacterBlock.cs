@@ -17,11 +17,11 @@ namespace Everybody_Edits_CTF.Core.Deserializer.Blocks
         public string[] Messages { get; set; }
 
         /// <summary>
-        /// 
+        /// Constructor which creates a NonPlayableCharacterBlock object.
         /// </summary>
-        /// <param name="id">The id of the block.</param>
-        /// <param name="name"></param>
-        /// <param name="messages"></param>
+        /// <param name="id">Refer to <see cref="Block.Id"/> for description.</param>
+        /// <param name="name">Refer to <see cref="Name"/> for description.</param>
+        /// <param name="messages">Refer to <see cref="Messages"/> for description.</param>
         public NonPlayableCharacterBlock(int id, string name, string[] messages) : base(id)
         {
             Name = name;

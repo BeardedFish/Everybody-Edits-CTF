@@ -7,18 +7,18 @@ namespace Everybody_Edits_CTF.Core.Deserializer.Blocks
     public class MorphableBlock : Block
     {
         /// <summary>
-        /// 
+        /// The morph id of the block.
         /// </summary>
-        int MorphId { get; set; }
+        public int MorphId { get; set; }
 
         /// <summary>
-        /// 
+        /// Constructor which creates a MorphableBlock object.
         /// </summary>
-        /// <param name="id">The id of the block.</param>
-        /// <param name="rotationId"></param>
-        public MorphableBlock(int id, int rotationId) : base(id)
+        /// <param name="id">Refer to <see cref="Block.Id"/> for description.</param>
+        /// <param name="morphId">Refer to <see cref="MorphId"/> for description.</param>
+        public MorphableBlock(int id, int morphId) : base(id)
         {
-            MorphId = MorphId;
+            MorphId = morphId;
         }
     }
 }
