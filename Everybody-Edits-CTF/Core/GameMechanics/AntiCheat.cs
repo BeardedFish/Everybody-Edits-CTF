@@ -25,7 +25,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                 StringBuilder enemyTeam = new StringBuilder(TeamHelper.EnumToString(TeamHelper.GetOppositeTeam(player.Team)));
                 enemyTeam[0] = char.ToUpper(enemyTeam[0]);
 
-                CaptureTheFlagBot.SendChatMessage($"ANTI-CHEAT! Player {player.Username} has used god mode while carrying the {enemyTeam.ToString().ToLower()} teams flag!");
+                CaptureTheFlagBot.SendChatMessage($"ANTI-CHEAT! Player {player.Username} has used God mode while carrying the {enemyTeam.ToString().ToLower()} teams flag!");
                 CaptureTheFlagBot.SendChatMessage($"{enemyTeam} teams flag has been returned to base.");
             }
         }
