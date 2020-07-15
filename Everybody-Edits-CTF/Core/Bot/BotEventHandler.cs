@@ -352,6 +352,20 @@ namespace Everybody_Edits_CTF.Core.Bot
                         }
                     }
                     break;
+                case EverybodyEditsMessage.WorldPortalBlockPlaced:
+                    {
+                        if (JoinedWorld.Blocks != null)
+                        {
+                            int xLoc = m.GetInt(0);
+                            int yLoc = m.GetInt(1);
+                            int blockId = m.GetInt(2);
+                            string targetWorldId = m.GetString(3);
+                            int targetSpawnId = m.GetInt(4);
+
+                            JoinedWorld.Blocks[(uint)BlockLayer.Foreground, xLoc, yLoc] = new WorldPortalBlock(blockId, targetWorldId, targetSpawnId);
+                        }
+                    }
+                    break;
             }
         }
     }

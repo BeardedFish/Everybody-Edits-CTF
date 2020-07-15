@@ -27,6 +27,8 @@ namespace Everybody_Edits_CTF.Core.Bot
 
         public const string SignBlockPlaced = "ts";
 
+        public const string WorldPortalBlockPlaced = "wp";
+
         public const string WorldStart = "ws";
 
         public const string WorldEnd = "we";
