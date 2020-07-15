@@ -23,6 +23,8 @@ namespace Everybody_Edits_CTF.Core.Bot
 
         public const string MorphableBlockPlaced = "br";
 
+        public const string NonPlayableCharacterBlockPlaced = "bn";
+
         public const string ReloadWorld = "reset";
 
         public const string SignBlockPlaced = "ts";

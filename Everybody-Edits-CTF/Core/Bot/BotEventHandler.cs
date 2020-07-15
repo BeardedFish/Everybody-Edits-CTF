@@ -267,6 +267,20 @@ namespace Everybody_Edits_CTF.Core.Bot
                         }
                     }
                     break;
+                case EverybodyEditsMessage.NonPlayableCharacterBlockPlaced:
+                    {
+                        if (JoinedWorld.Blocks != null)
+                        {
+                            int xLoc = m.GetInt(0);
+                            int yLoc = m.GetInt(1);
+                            int blockId = m.GetInt(2);
+                            string name = m.GetString(3);
+                            string[] messages = new string[] { m.GetString(4), m.GetString(5), m.GetString(6) };
+
+                            JoinedWorld.Blocks[(uint)BlockLayer.Foreground, xLoc, yLoc] = new NonPlayableCharacterBlock(blockId, name, messages);
+                        }
+                    }
+                    break;
                 case EverybodyEditsMessage.MorphableBlockPlaced:
                     {
                         if (JoinedWorld.Blocks != null)
