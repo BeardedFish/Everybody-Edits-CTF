@@ -12,7 +12,6 @@ namespace Everybody_Edits_CTF.Core.Bot
 
         public const string GodModeToggled = "god";
 
-
         public const string InitBegin = "init";
 
         public const string InitEnd = "init2";
@@ -39,9 +38,9 @@ namespace Everybody_Edits_CTF.Core.Bot
 
         public const string SetTitle = "name";
 
-        public const string SmileyChanged = "face";
-
         public const string SignBlockPlaced = "ts";
+
+        public const string SmileyChanged = "face";
 
         public const string WorldEnd = "we";
 
