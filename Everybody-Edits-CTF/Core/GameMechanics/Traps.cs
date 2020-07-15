@@ -213,7 +213,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                 {
                     Task.Run(async() =>
                     {
-                        CaptureTheFlagBot.SendPrivateMessage(player, "You trigerred a secret trap!");
+                        CaptureTheFlagBot.SendPrivateMessage(player, "You triggered a secret trap!");
 
                         SecretTrapActivated = true;
 
