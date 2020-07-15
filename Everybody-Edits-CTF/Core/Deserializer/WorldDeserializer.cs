@@ -1,4 +1,4 @@
-﻿// File Name:     WorldDeserializer.cs
+// File Name:     WorldDeserializer.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Wednesday, July 15, 2020
 
@@ -70,6 +70,13 @@ namespace Everybody_Edits_CTF.Core.Deserializer
 
                                 chunkArgsRead = 7;
 
+                        case 374:
+                            {
+                                string targetWorldId = m.GetString(currentBlockChunk + 4);
+                                int targetSpawn = m.GetInt(currentBlockChunk + 5);
+                                worldBlocks[layer, x, y] = new WorldPortalBlock(blockId, targetWorldId, targetSpawn);
+
+                                chunkArgsRead = 6;
                             }
                             break;
                         case 385:
