@@ -22,6 +22,8 @@ namespace Everybody_Edits_CTF.Core.Bot
         public const string InitEnd = "init2";
         public const string ReloadWorld = "reset";
 
+        public const string SignPlaced = "ts";
+
         public const string WorldStart = "ws";
 
         public const string WorldEnd = "we";

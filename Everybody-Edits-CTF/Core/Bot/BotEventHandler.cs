@@ -324,6 +324,20 @@ namespace Everybody_Edits_CTF.Core.Bot
                         JoinedWorld.Blocks = WorldDeserializer.DeserializeBlocks(m, JoinedWorld.Width, JoinedWorld.Height);
                     }
                     break;
+                case EverybodyEditsMessage.SignPlaced:
+                    {
+                        if (JoinedWorld.Blocks != null)
+                        {
+                            int xLoc = m.GetInt(0);
+                            int yLoc = m.GetInt(1);
+                            int blockId = m.GetInt(2);
+                            string text = m.GetString(3);
+                            int signColour = m.GetInt(4);
+
+                            JoinedWorld.Blocks[(uint)BlockLayer.Foreground, xLoc, yLoc] = new SignBlock(blockId, text, signColour);
+                        }
+                    }
+                    break;
             }
         }
     }
