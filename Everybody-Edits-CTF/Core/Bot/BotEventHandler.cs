@@ -5,6 +5,8 @@
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Database;
 using Everybody_Edits_CTF.Core.DataStructures;
+using Everybody_Edits_CTF.Core.Deserializer;
+using Everybody_Edits_CTF.Core.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.GameMechanics;
 using Everybody_Edits_CTF.Core.GameMechanics.Enums;
 using Everybody_Edits_CTF.Core.Settings;
@@ -66,8 +68,32 @@ namespace Everybody_Edits_CTF.Core.Bot
         {
             switch (m.Type)
             {
+                case EverybodyEditsMessage.ClearWorld:
+                    {
+                        int borderBlockId = m.GetInt(2);
+                        int fillBlockId = m.GetInt(3);
+
+                        if (JoinedWorld.Blocks != null)
+                        {
+                            for (int layer = 0; layer < JoinedWorld.Blocks.GetLength(0); layer++)
+                            {
+                                for (int x = 0; x < JoinedWorld.Blocks.GetLength(0); x++)
+                                {
+                                    for (int y = 0; y < JoinedWorld.Blocks.GetLength(0); y++)
+                                    {
+                                        JoinedWorld.Blocks[layer, x, y] = new Block(fillBlockId);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
                 case EverybodyEditsMessage.InitBegin:
                     {
+                        JoinedWorld.Width = m.GetInt(18);
+                        JoinedWorld.Height = m.GetInt(19);
+                        JoinedWorld.Blocks = WorldDeserializer.DeserializeBlocks(m, JoinedWorld.Width, JoinedWorld.Height);
+
                         CaptureTheFlagBot.Send(EverybodyEditsMessage.InitEnd);
                     }
                     break;
@@ -141,6 +167,19 @@ namespace Everybody_Edits_CTF.Core.Bot
                             PlayersInWorld[playerId].IsInGodMode = isInGodMode;
 
                             AntiCheat.Handle(PlayersInWorld[playerId]);
+                        }
+                    }
+                    break;
+                case EverybodyEditsMessage.PlaceBlock:
+                    {
+                        int layerId = m.GetInt(0);
+                        uint xLoc = m.GetUInt(1);
+                        uint yLoc = m.GetUInt(2);
+                        int blockId = m.GetInt(3);
+
+                        if (JoinedWorld.Blocks != null)
+                        {
+                            JoinedWorld.Blocks[layerId, xLoc, yLoc] = new Block(blockId);
                         }
                     }
                     break;
@@ -278,6 +317,11 @@ namespace Everybody_Edits_CTF.Core.Bot
                         {
                             PlayersInWorld[playerId].UpdateLocation(xLoc, yLoc);
                         }
+                    }
+                    break;
+                case EverybodyEditsMessage.ReloadWorld:
+                    {
+                        JoinedWorld.Blocks = WorldDeserializer.DeserializeBlocks(m, JoinedWorld.Width, JoinedWorld.Height);
                     }
                     break;
             }
