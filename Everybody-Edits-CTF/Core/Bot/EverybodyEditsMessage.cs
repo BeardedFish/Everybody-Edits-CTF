@@ -20,6 +20,9 @@ namespace Everybody_Edits_CTF.Core.Bot
         public const string GodModeToggled = "god";
         public const string InitBegin = "init";
         public const string InitEnd = "init2";
+
+        public const string MorphableBlockPlaced = "br";
+
         public const string ReloadWorld = "reset";
 
         public const string SignBlockPlaced = "ts";
