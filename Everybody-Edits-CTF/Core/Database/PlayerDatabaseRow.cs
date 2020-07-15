@@ -2,7 +2,7 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, July 3, 2020
 
-namespace Everybody_Edits_CTF.Core.DataStructures
+namespace Everybody_Edits_CTF.Core.Database
 {
     public class PlayerDatabaseRow
     {

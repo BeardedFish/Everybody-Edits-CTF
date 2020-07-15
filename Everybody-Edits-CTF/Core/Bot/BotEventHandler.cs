@@ -3,7 +3,7 @@
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.Data;
+using Everybody_Edits_CTF.Core.Database;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.GameMechanics;
 using Everybody_Edits_CTF.Core.GameMechanics.Enums;

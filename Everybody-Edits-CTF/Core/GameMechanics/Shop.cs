@@ -4,7 +4,7 @@
 
 using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.Data;
+using Everybody_Edits_CTF.Core.Database;
 using Everybody_Edits_CTF.Core.DataStructures;
 using System.Collections.Generic;
 using System.Drawing;

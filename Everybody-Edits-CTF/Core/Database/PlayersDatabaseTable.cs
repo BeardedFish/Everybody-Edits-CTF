@@ -10,7 +10,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace Everybody_Edits_CTF.Core.Data
+namespace Everybody_Edits_CTF.Core.Database
 {
     public static class PlayersDatabaseTable
     {
