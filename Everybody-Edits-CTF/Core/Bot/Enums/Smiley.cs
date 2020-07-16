@@ -6,6 +6,7 @@ namespace Everybody_Edits_CTF.Core.Bot.Enums
 {
     public enum Smiley
     {
-        Nurse = 37
+        Nurse = 37,
+        FireDemon = 85
     }
 }

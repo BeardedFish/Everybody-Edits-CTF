@@ -19,22 +19,22 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         private const int TrapCooldownMs = 2500;
 
         /// <summary>
-        /// The location of the trap that can only be accessed by the blue team.
+        /// The location of the trap that can only be triggered by the blue team.
         /// </summary>
         private static readonly Point BlueTeamTrapLocation = new Point(38, 175);
 
         /// <summary>
-        /// The location of the trap that can only be accessed by the red team.
+        /// The location of the trap that can only be triggered by the red team.
         /// </summary>
         private static readonly Point RedTeamTrapLocation = new Point(361, 175);
 
         /// <summary>
-        /// The location of the bridge trap that can be accessed by both the blue team and the red team.
+        /// The location of the bridge trap that can be triggered by both the blue team and the red team.
         /// </summary>
         private static readonly Point[] BridgeTrapLocation = { new Point(89, 179), new Point(110, 179) };
 
         /// <summary>
-        /// The location of the secret trap (aka: trap in the lava lake) that can be accessed by both the blue team and the red team.
+        /// The location of the secret trap (aka: trap in the lava lake) that can be triggered by players wearing the Fire Demon smiley.
         /// </summary>
         private static readonly Point SecretTrapLocation = new Point(277, 179);
 
@@ -202,12 +202,12 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         }
 
         /// <summary>
-        /// Handles the secret trap located in the lava lake. This trap can be used by both the blue team and the red team.
+        /// Handles the secret trap located in the lava lake. This trap can be used by players wearing the Fire Demon smiley.
         /// </summary>
         /// <param name="player">The player that is triggering the trap.</param>
         public static void HandleSecretTrap(Player player)
         {
-            if (PlayerOnTrapTrigger(player, SecretTrapLocation))
+            if (PlayerOnTrapTrigger(player, SecretTrapLocation) && player.SmileyId == (int)Smiley.FireDemon)
             {
                 if (!SecretTrapActivated)
                 {
