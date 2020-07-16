@@ -16,9 +16,9 @@ namespace Everybody_Edits_CTF.Core.Bot
 
         public const string InitEnd = "init2";
 
-        public const string TeamChanged = "team";
-
         public const string MorphableBlockPlaced = "br";
+
+        public const string MusicBlockPlaced = "bs";
 
         public const string NonPlayableCharacterBlockPlaced = "bn";
 
@@ -41,6 +41,8 @@ namespace Everybody_Edits_CTF.Core.Bot
         public const string SignBlockPlaced = "ts";
 
         public const string SmileyChanged = "face";
+
+        public const string TeamChanged = "team";
 
         public const string WorldEnd = "we";
 

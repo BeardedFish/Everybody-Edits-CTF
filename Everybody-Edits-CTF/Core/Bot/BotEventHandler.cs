@@ -295,6 +295,19 @@ namespace Everybody_Edits_CTF.Core.Bot
                         }
                     }
                     break;
+                case EverybodyEditsMessage.MusicBlockPlaced:
+                    {
+                        if (JoinedWorld.Blocks != null)
+                        {
+                            int xLoc = m.GetInt(0);
+                            int yLoc = m.GetInt(1);
+                            int blockId = m.GetInt(2);
+                            int soundId = m.GetInt(3);
+
+                            JoinedWorld.Blocks[(uint)BlockLayer.Foreground, xLoc, yLoc] = new MusicBlock(blockId, soundId);
+                        }
+                    }
+                    break;
                 case EverybodyEditsMessage.PlayerRespawn:
                     {
                         if (m.Count == 6) // A count of six means that a played died
