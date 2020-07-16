@@ -9,6 +9,7 @@ using Everybody_Edits_CTF.Core.Deserializer;
 using Everybody_Edits_CTF.Core.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.GameMechanics;
 using Everybody_Edits_CTF.Core.GameMechanics.Enums;
+using Everybody_Edits_CTF.Core.GameMechanics.Traps;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
 using Everybody_Edits_CTF.Logging;
@@ -27,6 +28,17 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// player.
         /// </summary>
         public Dictionary<int, Player> PlayersInWorld { get; private set; } = new Dictionary<int, Player>();
+
+        /// <summary>
+        /// The traps that can be triggered by players playing the Capture the Flag game.
+        /// </summary>
+        private readonly Trap[] traps = new Trap[]
+        {
+            new BlueBaseTrap(),
+            new BridgeTrap(),
+            new LavaLakeTrap(),
+            new RedBaseTrap()
+        };
 
         /// <summary>
         /// Handles all messages that a Capture the Flag bot receives.
@@ -200,7 +212,15 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                             if (!PlayersInWorld[playerId].IsRespawning)
                             {
-                                Traps.Handle(PlayersInWorld[playerId]);
+                                // Handle traps
+                                if (PlayersInWorld[playerId].CanTriggerTrap)
+                                {
+                                    foreach (Trap trap in traps)
+                                    {
+                                        trap.Handle(PlayersInWorld[playerId]);
+                                    }
+                                }
+
                                 RoomEntrances.Handle(PlayersInWorld[playerId]);
                                 Shop.Handle(PlayersInWorld[playerId]);
 

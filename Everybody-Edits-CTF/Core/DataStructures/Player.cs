@@ -55,6 +55,8 @@ namespace Everybody_Edits_CTF.Core.DataStructures
             }
         }
 
+        public bool CanTriggerTrap => !IsInGodMode && IsPlayingGame && VerticalDirection == VerticalDirection.Down;
+
         /// <summary>
         /// States whether the player is on the blue flag or not.
         /// </summary>
