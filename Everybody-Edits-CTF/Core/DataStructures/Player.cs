@@ -58,6 +58,11 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         public bool CanTriggerTrap => !IsInGodMode && IsPlayingGame && VerticalDirection == VerticalDirection.Down;
 
         /// <summary>
+        /// The number of times the player died in the Everybody Edits world.
+        /// </summary>
+        public int DeathCount { get; set; }
+
+        /// <summary>
         /// States whether the player is on the blue flag or not.
         /// </summary>
         public bool IsOnBlueFlag

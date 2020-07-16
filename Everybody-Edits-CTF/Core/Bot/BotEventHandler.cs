@@ -328,40 +328,50 @@ namespace Everybody_Edits_CTF.Core.Bot
                     break;
                 case EverybodyEditsMessage.PlayerRespawn:
                     {
-                        if (m.Count == 6) // A count of six means that a played died
+                        if (m.Count >= 6)
                         {
-                            int playerId = m.GetInt(2);
-                            double xLoc = Math.Round(m.GetDouble(3) / 16.0);
-                            double yLoc = Math.Round(m.GetDouble(4) / 16.0);
-
-                            if (PlayersInWorld.ContainsKey(playerId))
+                            for (uint i = 2; i <= m.Count - 4; i += 4)
                             {
-                                PlayersInWorld[playerId].UpdateLocation((int)xLoc, (int)yLoc);
-                                PlayersInWorld[playerId].Respawn();
-                                PlayersInWorld[playerId].RestoreHealth();
+                                int playerId = m.GetInt(i);
 
-                                if (PlayersInWorld[playerId].LastAttacker != null)
+                                if (PlayersInWorld.ContainsKey(playerId))
                                 {
-                                    CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You were killed by player {PlayersInWorld[playerId].LastAttacker.Username}!");
-                                    CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId].LastAttacker, $"You killed player {PlayersInWorld[playerId].Username}!");
+                                    double xLoc = Math.Round(m.GetDouble(i + 1) / 16.0);
+                                    double yLoc = Math.Round(m.GetDouble(i + 2) / 16.0);
+                                    int deathCount = m.GetInt(i + 3);
 
-                                    if (PlayersDatabaseTable.Loaded)
+                                    PlayersInWorld[playerId].UpdateLocation((int)xLoc, (int)yLoc);
+
+                                    if (deathCount > PlayersInWorld[playerId].DeathCount)
                                     {
-                                        PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(PlayersInWorld[playerId].LastAttacker.Username);
-
-                                        if (playerData != null)
-                                        {
-                                            playerData.TotalKills++;
-                                        }
+                                        PlayersInWorld[playerId].Respawn();
                                     }
 
-                                    PlayersInWorld[playerId].LastAttacker = null;
+                                    if (PlayersInWorld[playerId].LastAttacker != null)
+                                    {
+                                        CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You were killed by player {PlayersInWorld[playerId].LastAttacker.Username}!");
+                                        CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId].LastAttacker, $"You killed player {PlayersInWorld[playerId].Username}!");
 
-                                    CaptureTheFlag.IncreaseGameFund(GameFundIncreaseReason.PlayerKilledEnemy);
+                                        if (PlayersDatabaseTable.Loaded)
+                                        {
+                                            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(PlayersInWorld[playerId].LastAttacker.Username);
+
+                                            if (playerData != null)
+                                            {
+                                                playerData.TotalKills++;
+                                            }
+                                        }
+
+                                        PlayersInWorld[playerId].LastAttacker = null;
+
+                                        CaptureTheFlag.IncreaseGameFund(GameFundIncreaseReason.PlayerKilledEnemy);
+                                    }
+
+                                    PlayersInWorld[playerId].DeathCount = deathCount;
+
+                                    CaptureTheFlag.ReturnFlag(PlayersInWorld[playerId], true);
+                                    CaptureTheFlagBot.RemoveEffects(PlayersInWorld[playerId]);
                                 }
-
-                                CaptureTheFlag.ReturnFlag(PlayersInWorld[playerId], true);
-                                CaptureTheFlagBot.RemoveEffects(PlayersInWorld[playerId]);
                             }
                         }
                     }
