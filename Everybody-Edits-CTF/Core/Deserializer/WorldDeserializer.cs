@@ -46,6 +46,16 @@ namespace Everybody_Edits_CTF.Core.Deserializer
 
                     switch (blockId)
                     {
+                        case 77:
+                        case 83:
+                        case 1520:
+                            {
+                                int soundId = m.GetInt(currentBlockChunk + 4);
+                                worldBlocks[layer, x, y] = new MusicBlock(blockId, soundId);
+
+                                chunkArgsRead = 5;
+                            }
+                            break;
                         case 113:
                         case 184:
                         case 185:
