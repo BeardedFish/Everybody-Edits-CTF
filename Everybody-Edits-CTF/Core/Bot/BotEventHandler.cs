@@ -255,10 +255,8 @@ namespace Everybody_Edits_CTF.Core.Bot
                                     {
                                         resultMsg = "Unbalanced teams! You have been transferred to the other team!";
 
-                                        int teleX = joinedTeam == Team.Blue ? 398 : 1;
-                                        int teleY = 1;
-
-                                        CaptureTheFlagBot.TeleportPlayer(PlayersInWorld[playerId], teleX, teleY);
+                                        Point teleLocation = joinedTeam == Team.Blue ? GameSettings.RedSpawnLocation : GameSettings.BlueSpawnLocation; 
+                                        CaptureTheFlagBot.TeleportPlayer(PlayersInWorld[playerId], teleLocation.X, teleLocation.Y);
                                     }
                                 }
 
