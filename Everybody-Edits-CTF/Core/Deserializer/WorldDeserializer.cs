@@ -83,6 +83,14 @@ namespace Everybody_Edits_CTF.Core.Deserializer
 
                             }
                             break;
+                        case 1582:
+                        {
+                            int spawnId = m.GetInt(currentBlockChunk + 4);
+                            worldBlocks[layer, x, y] = new WorldPortalSpawnBlock(blockId, spawnId);
+
+                            chunkArgsRead = 5;
+                        }
+                        break;
                         case 374:
                             {
                                 string targetWorldId = m.GetString(currentBlockChunk + 4);
