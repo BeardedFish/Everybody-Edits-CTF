@@ -261,6 +261,8 @@ namespace Everybody_Edits_CTF.Core.DataStructures
                 return;
             }
 
+            RestoreHealth();
+
             Point respawnCooldownLocation = Team == Team.Blue ? GameSettings.BlueRespawnCooldownLocation : GameSettings.RedRespawnCooldownLocation;
             Point respawnLocation = Team == Team.Blue ? GameSettings.BlueSpawnLocation : GameSettings.RedSpawnLocation;
             Task.Run(async() =>
