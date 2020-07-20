@@ -1,4 +1,4 @@
-﻿// File Name:     BotEventHandler.cs
+// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -259,25 +259,10 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                         if (PlayersInWorld.ContainsKey(playerId))
                         {
-                            Team joinedTeam = (Team)teamId;
+                            PlayersInWorld[playerId].Team = (Team)teamId;
 
-                            PlayersInWorld[playerId].Team = joinedTeam;
-
-                            if (PlayersInWorld[playerId].IsPlayingGame)
-                            {
-                                string resultMsg = $"You joined the {TeamHelper.EnumToString(joinedTeam)} team!";
-                                int joinedTeamTotalPlayers = TeamHelper.TotalPlayers(PlayersInWorld, joinedTeam) - 1;
-                                int oppositeTeamTotalPlayers = TeamHelper.TotalPlayers(PlayersInWorld, TeamHelper.GetOppositeTeam(joinedTeam));
-
-                                if (GameSettings.AutoBalanceTeams)
-                                {
-                                    if (joinedTeamTotalPlayers > oppositeTeamTotalPlayers)
-                                    {
-                                        resultMsg = "Unbalanced teams! You have been transferred to the other team!";
-
-                                        Point teleLocation = joinedTeam == Team.Blue ? GameSettings.RedSpawnLocation : GameSettings.BlueSpawnLocation; 
-                                        CaptureTheFlagBot.TeleportPlayer(PlayersInWorld[playerId], teleLocation.X, teleLocation.Y);
-                                    }
+                            AutoBalance.Handle(PlayersInWorld[playerId], PlayersInWorld);
+                        }
                                 }
 
                                 CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], resultMsg);
