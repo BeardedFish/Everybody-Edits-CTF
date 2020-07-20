@@ -9,7 +9,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// The username of the player.
         /// </summary>
-        public string Username;
+        public readonly string Username;
 
         /// <summary>
         /// The total number of times that this player won a Capture the Flag game.
@@ -37,6 +37,16 @@ namespace Everybody_Edits_CTF.Core.Database
         public bool IsNewPlayer;
 
         /// <summary>
+        /// States whether the data of this player was modified or not.
+        /// </summary>
+        public bool ChangesOccured => TotalWins != initialTotalWins || TotalLosses != initialTotalLosses || TotalKills != initialTotalKills || Coins != initialCoins || IsNewPlayer;
+
+        /// <summary>
+        /// States the inital values of the database values when loaded. The username is ignored because it never changes in the MySql database.
+        /// </summary>
+        private readonly int initialTotalWins, initialTotalLosses, initialTotalKills, initialCoins;
+
+        /// <summary>
         /// Constructor for holding data of a single player which will be saved to a MySql database.
         /// </summary>
         /// <param name="username">Refer to <see cref="Username"/> for description.</param>
@@ -48,10 +58,10 @@ namespace Everybody_Edits_CTF.Core.Database
         public PlayerDatabaseRow(string username, int totalWins, int totalLosses, int totalKills, int coins, bool isNewPlayer)
         {
             Username = username;
-            TotalWins = totalWins;
-            TotalLosses = totalLosses;
-            TotalKills = totalKills;
-            Coins = coins;
+            TotalWins = initialTotalWins = totalWins;
+            TotalLosses = initialTotalLosses = totalLosses;
+            TotalKills = initialTotalKills = totalKills;
+            Coins = initialCoins = coins;
             IsNewPlayer = isNewPlayer;
         }
     }

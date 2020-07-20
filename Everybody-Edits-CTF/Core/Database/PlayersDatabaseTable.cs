@@ -122,21 +122,26 @@ namespace Everybody_Edits_CTF.Core.Database
                 return;
             }
 
-            foreach (PlayerDatabaseRow player in Rows)
+            foreach (PlayerDatabaseRow playerData in Rows)
             {
+                if (!playerData.ChangesOccured)
+                {
+                    continue;
+                }
+
                 try
                 {
                     string sqlQuery;
 
-                    if (player.IsNewPlayer)
+                    if (playerData.IsNewPlayer)
                     {
-                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins) VALUES (NULL, \"{player.Username}\", {player.TotalWins}, {player.TotalLosses}, {player.TotalKills}, {player.Coins});";
+                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins) VALUES (NULL, \"{playerData.Username}\", {playerData.TotalWins}, {playerData.TotalLosses}, {playerData.TotalKills}, {playerData.Coins});";
 
-                        player.IsNewPlayer = false;
+                        playerData.IsNewPlayer = false;
                     }
                     else
                     {
-                        sqlQuery = $"UPDATE {PlayersTableName} SET TotalWins={player.TotalWins}, TotalLosses={player.TotalLosses}, TotalKills={player.TotalKills}, Coins={player.Coins} WHERE Username=\"{player.Username}\";";
+                        sqlQuery = $"UPDATE {PlayersTableName} SET TotalWins={playerData.TotalWins}, TotalLosses={playerData.TotalLosses}, TotalKills={playerData.TotalKills}, Coins={playerData.Coins} WHERE Username=\"{playerData.Username}\";";
                     }
 
                     using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
