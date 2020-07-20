@@ -12,7 +12,26 @@ namespace Everybody_Edits_CTF
 {
     class Program
     {
+        /// <summary>
+        /// The title of the console window.
+        /// </summary>
         private const string ProgramTitle = "Everybody Edits - Capture The Flag";
+        
+        /// <summary>
+        /// The art text that will appear at very beginning of the console input/output area.
+        /// </summary>
+        private const string TitleArt = "=+=..............................................................................................=+=\n" +
+                                        "..........~#___________..___________..___________......~#___________..___________..___________.....\n" +
+                                        ".........~#/ _________/./____  ____/./ _________/.....~#/  ____    /./ _______  /./____  ____/.....\n" +
+                                        "........~#/ /.............../ /...../ /________......~#/ /____/ __/./ /      / /....../ /..........\n" +
+                                        ".......~#/ /.............../ /...../ _________/.....~#/ ______ /_../ /      / /....../ /...........\n" +
+                                        "......~#/ /_________....../ /...../ /..............~#/ /_____/  /./ /______/ /....../ /............\n" +
+                                        ".....~#/___________/...../_/...../_/..............~#/__________/./__________/....../_/.............\n" +
+                                        "=+=..............................................................................................=+=";
+
+        /// <summary>
+        /// The case which commands will be compared to.
+        /// </summary>
         private const StringComparison CommandCompareCase = StringComparison.OrdinalIgnoreCase;
 
         /// <summary>
@@ -22,7 +41,9 @@ namespace Everybody_Edits_CTF
         static void Main(string[] args)
         {
             Console.Title = ProgramTitle;
-            Console.WriteLine($"{ProgramTitle}\n");
+            Console.WriteLine($"{TitleArt}\n");
+
+            Console.WriteLine("Type \"help\" for a list of commands.\n");
 
             string inputCmd;
             do
@@ -40,7 +61,7 @@ namespace Everybody_Edits_CTF
                     else if (string.Equals(inputCmd, "cls", CommandCompareCase) || string.Equals(inputCmd, "clear", CommandCompareCase))
                     {
                         Console.Clear();
-                        Console.WriteLine($"{ProgramTitle}");
+                        Console.WriteLine($"{TitleArt}");
                     }
                     else if (string.Equals(inputCmd, "connect", CommandCompareCase))
                     {
