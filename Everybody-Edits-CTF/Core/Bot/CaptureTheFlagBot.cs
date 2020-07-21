@@ -18,19 +18,13 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <summary>
         /// States whether the bot is connected to Everybody Edits or not.
         /// </summary>
-        public static bool Connected
-        {
-            get => connection != null && connection.Connected;
-        }
+        public static bool Connected => connection != null && connection.Connected;
 
         /// <summary>
         /// All the players currently connected in the Everybody Edits world. The key (int) defines the player's id, while the value (Player) defines the object that contains
         /// data about the player.
         /// </summary>
-        public static Dictionary<int, Player> PlayersInWorld
-        {
-            get => botEventHandler?.PlayersInWorld;
-        }
+        public static Dictionary<int, Player> PlayersInWorld => botEventHandler?.PlayersInWorld;
 
         /// <summary>
         /// The max length of a chat message Everybody Edits allows to be sent.
