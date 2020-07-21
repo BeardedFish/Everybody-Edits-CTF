@@ -50,21 +50,12 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
                     case "blueflag":
                     case "redflag":
                         {
-                            /*Team targetTeam = cmd == "blueflag" ? Team.Red : Team.Blue;
-                            string flagHolder = "";
-                            string team = TeamHelper.EnumToString(TeamHelper.GetOppositeTeam(targetTeam));
+                            Team targetTeam = cmd == "blueflag" ? Team.Blue : Team.Red;
+                            string flagHolderUsername = CaptureTheFlag.Flags[targetTeam].Holder == null ? null : CaptureTheFlag.Flags[targetTeam].Holder.Username;
+                            string teamName = TeamHelper.EnumToString(targetTeam);
+                            string msgToSend = flagHolderUsername != null ? $"Player {flagHolderUsername} has the {teamName} flag." : $"No one has {teamName} flag.";
 
-                            foreach (Player enemyPlayer in CaptureTheFlagBot.PlayersInWorld.Values)
-                            {
-                                if (enemyPlayer.Team == targetTeam && enemyPlayer.)
-                                {
-                                    flagHolder = enemyPlayer.Username;
-                                    break;
-                                }
-                            }
-
-                            string msgToSend = flagHolder != "" ? $"Player {flagHolder} has the {team} flag." : $"No one has {team} flag.";
-                            CaptureTheFlagBot.SendChatMessage(msgToSend);*/
+                            CaptureTheFlagBot.SendChatMessage(msgToSend);
                         }
                         break;
                     case "dropflag":
