@@ -47,7 +47,7 @@ namespace Everybody_Edits_CTF.Core.Database
         private int initialTotalWins, initialTotalLosses, initialTotalKills, initialCoins;
 
         /// <summary>
-        /// Constructor for holding data of a single player which will be saved to a MySql database.
+        /// Constructor for creating a PlayerDatabaseRow object which holds data of a single player.
         /// </summary>
         /// <param name="username">Refer to <see cref="Username"/> for description.</param>
         /// <param name="totalWins">Refer to <see cref="TotalWins"/> for description.</param>
