@@ -63,7 +63,8 @@ namespace Everybody_Edits_CTF.Core.Bot
             PlayersDatabaseTable.Save();
             Logger.WriteLog(LogType.EverybodyEditsMessage, $"Disconnected from the Everybody Edits world (Reason: {message}).");
 
-            if (BotSettings.AutoReconnectOnDisconnect && message != string.Empty)
+            // Only reconnect if the bot was not disconnected on purpose
+            if (BotSettings.AutoReconnectOnDisconnect && message != "Disconnect")
             {
                 Logger.WriteLog(LogType.EverybodyEditsMessage, $"Auto reconnecting...");
 
