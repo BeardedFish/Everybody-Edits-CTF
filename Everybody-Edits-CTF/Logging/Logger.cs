@@ -1,8 +1,7 @@
-﻿// File Name:     Logger.cs
+// File Name:     Logger.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Tuesday, June 30, 2020
 
-using Everybody_Edits_CTF.Logging.Enums;
 using System;
 
 namespace Everybody_Edits_CTF.Logging

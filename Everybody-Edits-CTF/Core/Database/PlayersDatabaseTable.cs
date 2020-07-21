@@ -1,11 +1,10 @@
-﻿// File Name:     Database.cs
+// File Name:     Database.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, June 29, 2020
 
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Logging;
-using Everybody_Edits_CTF.Logging.Enums;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
