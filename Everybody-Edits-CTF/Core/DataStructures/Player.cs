@@ -4,7 +4,9 @@
 
 using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.GameMechanics;
 using Everybody_Edits_CTF.Core.Settings;
+using Everybody_Edits_CTF.Helpers;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -20,21 +22,12 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// <summary>
         /// States whether the player is playing capture the flag or not.
         /// </summary>
-        public bool IsPlayingGame
-        {
-            get
-            {
-                return Team != Team.None;
-            }
-        }
+        public bool IsPlayingGame => Team != Team.None;
 
         /// <summary>
         /// States whether this player is a guest or not.
         /// </summary>
-        public bool IsGuest
-        {
-            get => Username.ToLower().StartsWith("guest-");
-        }
+        public bool IsGuest => Username.ToLower().StartsWith("guest-");
 
         /// <summary>
         /// States whether the player is an administrator or not. Administrators are defined in the GameSettings.cs file.
@@ -43,9 +36,9 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         {
             get
             {
-                for (int i = 0; i < BotSettings.Administrators.Length; i++)
+                foreach (string admin in BotSettings.Administrators)
                 {
-                    if (string.Equals(Username, BotSettings.Administrators[i], StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(Username, admin, StringComparison.OrdinalIgnoreCase))
                     {
                         return true;
                     }
@@ -63,26 +56,9 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         public int DeathCount { get; set; }
 
         /// <summary>
-        /// States whether the player is on the blue flag or not.
+        /// 
         /// </summary>
-        public bool IsOnBlueFlag
-        {
-            get
-            {
-                return Location == GameSettings.BlueFlagLocation;
-            }
-        }
-
-        /// <summary>
-        /// States whether the player is on the red flag or not.
-        /// </summary>
-        public bool IsOnRedFlag
-        {
-            get
-            {
-                return Location == GameSettings.RedFlagLocation;
-            }
-        }
+        public bool HasEnemyFlag => CaptureTheFlag.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this;
 
         /// <summary>
         /// States whether the player is in the blue teams base or not.
@@ -112,37 +88,25 @@ namespace Everybody_Edits_CTF.Core.DataStructures
             }
         }
 
-        public bool IsRespawning
-        {
-            get => Location == GameSettings.BlueRespawnCooldownLocation || Location == GameSettings.RedRespawnCooldownLocation;
-        }
+        /// <summary>
+        /// States whether the play is respawning in a respawn cooldown zone or not.
+        /// </summary>
+        public bool IsRespawning => Location == GameSettings.BlueRespawnCooldownLocation || Location == GameSettings.RedRespawnCooldownLocation;
 
         /// <summary>
         /// States whether the player is currently in god mode or not.
         /// </summary>
-        public bool IsInGodMode
-        {
-            get;
-            set;
-        }
+        public bool IsInGodMode { get; set; }
 
         /// <summary>
         /// The smiley id that the player currently has.
         /// </summary>
-        public int SmileyId
-        {
-            get;
-            set;
-        }
+        public int SmileyId { get; set; }
 
         /// <summary>
         /// The current HP of the player.
         /// </summary>
-        public int Health
-        {
-            get;
-            private set;
-        } = MaxHealth;
+        public int Health { get; private set; } = MaxHealth;
 
         /// <summary>
         /// The username of the player.
@@ -154,33 +118,16 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         }
 
         /// <summary>
-        /// States whether the player has the enemy flag or not.
-        /// </summary>
-        public bool HasEnemyFlag
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// The location of the player in the Everybody Edits world.
         /// 
         /// NOTE: This location is not always accurate.
         /// </summary>
-        public Point Location
-        {
-            get;
-            set;
-        }
+        public Point Location { get; set; }
 
         /// <summary>
         /// The team that the player is currently playing for.
         /// </summary>
-        public Team Team
-        {
-            get;
-            set;
-        }
+        public Team Team { get; set; }
 
         /// <summary>
         /// The horizontal direction that the player is currently travelling.
@@ -203,11 +150,7 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// <summary>
         /// The last enemy player that attacked this player.
         /// </summary>
-        public Player LastAttacker
-        {
-            get;
-            set;
-        } = null;
+        public Player LastAttacker { get; set; } = null;
 
         /// <summary>
         /// 
@@ -238,6 +181,9 @@ namespace Everybody_Edits_CTF.Core.DataStructures
             }
         }
 
+        /// <summary>
+        /// Tells the bot to kill this player.
+        /// </summary>
         public void Die()
         {
             CaptureTheFlagBot.KillPlayer(this);

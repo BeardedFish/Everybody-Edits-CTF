@@ -1,4 +1,4 @@
-// File Name:     BotEventHandler.cs
+﻿// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -13,7 +13,6 @@ using Everybody_Edits_CTF.Core.GameMechanics.Traps;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
 using Everybody_Edits_CTF.Logging;
-using Everybody_Edits_CTF.Logging.Enums;
 using PlayerIOClient;
 using System;
 using System.Collections.Generic;
@@ -59,10 +58,10 @@ namespace Everybody_Edits_CTF.Core.Bot
         {
             PlayersInWorld.Clear();
 
-            CaptureTheFlag.ResetGameStatistics();
+            //CaptureTheFlag.ResetGameStatistics();
             PlayersDatabaseTable.Save();
             Logger.WriteLog(LogType.EverybodyEditsMessage, $"Disconnected from the Everybody Edits world (Reason: {message}).");
-
+            
             // Only reconnect if the bot was not disconnected on purpose
             if (BotSettings.AutoReconnectOnDisconnect && message != "Disconnect")
             {
@@ -148,7 +147,10 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                         if (PlayersInWorld.ContainsKey(playerId))
                         {
-                            CaptureTheFlag.ReturnFlag(PlayersInWorld[playerId], false);
+                            if (PlayersInWorld[playerId].HasEnemyFlag)
+                            {
+                                CaptureTheFlag.Flags[TeamHelper.GetOppositeTeam(PlayersInWorld[playerId].Team)].Return(null, false);
+                            }
 
                             PlayersInWorld.Remove(playerId);
                         }
@@ -206,13 +208,16 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                         if (PlayersInWorld.ContainsKey(playerId) && PlayersInWorld[playerId].IsPlayingGame)
                         {
-                            PlayersInWorld[playerId].UpdateLocation((int)xLoc, (int)yLoc);
-                            
+                            PlayersInWorld[playerId].UpdateLocation((int)xLoc, (int)yLoc);                   
                             PlayersInWorld[playerId].HorizontalDirection = (HorizontalDirection)horizontalDir;
                             PlayersInWorld[playerId].VerticalDirection = (VerticalDirection)verticalDir;
 
                             if (!PlayersInWorld[playerId].IsRespawning)
                             {
+                                CaptureTheFlag.Handle(PlayersInWorld[playerId]);
+                                RoomEntrances.Handle(PlayersInWorld[playerId]);
+                                Shop.Handle(PlayersInWorld[playerId]);
+
                                 // Handle traps
                                 if (PlayersInWorld[playerId].CanTriggerTrap)
                                 {
@@ -222,12 +227,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                                     }
                                 }
 
-                                RoomEntrances.Handle(PlayersInWorld[playerId]);
-                                Shop.Handle(PlayersInWorld[playerId]);
-
-                                CaptureTheFlag.CaptureFlag(PlayersInWorld[playerId]);
-                                CaptureTheFlag.TakeFlag(PlayersInWorld[playerId]);
-
+                                // Handle attack/heal system
                                 foreach (Player otherPlayer in PlayersInWorld.Values)
                                 {
                                     if (otherPlayer == PlayersInWorld[playerId])
@@ -263,11 +263,6 @@ namespace Everybody_Edits_CTF.Core.Bot
                             PlayersInWorld[playerId].Team = (Team)teamId;
 
                             AutoBalance.Handle(PlayersInWorld[playerId], PlayersInWorld);
-                        }
-                                }
-
-                                CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], resultMsg);
-                            }
                         }
                     }
                     break;
@@ -328,11 +323,6 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                                     PlayersInWorld[playerId].UpdateLocation((int)xLoc, (int)yLoc);
 
-                                    if (deathCount > PlayersInWorld[playerId].DeathCount)
-                                    {
-                                        PlayersInWorld[playerId].Respawn();
-                                    }
-
                                     if (PlayersInWorld[playerId].LastAttacker != null)
                                     {
                                         CaptureTheFlagBot.SendPrivateMessage(PlayersInWorld[playerId], $"You were killed by player {PlayersInWorld[playerId].LastAttacker.Username}!");
@@ -350,13 +340,25 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                                         PlayersInWorld[playerId].LastAttacker = null;
 
-                                        CaptureTheFlag.IncreaseGameFund(GameFundIncreaseReason.PlayerKilledEnemy);
+                                        GameFund.Increase(GameFundIncreaseReason.PlayerKilledEnemy);
+                                    }
+
+                                    if (deathCount > PlayersInWorld[playerId].DeathCount)
+                                    {
+                                        PlayersInWorld[playerId].Respawn();
+
+                                        Team enemyTeam = TeamHelper.GetOppositeTeam(PlayersInWorld[playerId].Team);
+                                        if (CaptureTheFlag.Flags[enemyTeam].Holder == PlayersInWorld[playerId])
+                                        {
+                                            CaptureTheFlagBot.SendChatMessage($"Player {PlayersInWorld[playerId].Username} died while holding {TeamHelper.EnumToString(enemyTeam)} teams flag.");
+
+                                            CaptureTheFlag.Flags[enemyTeam].Return(null, false);
+                                        }
+
+                                        CaptureTheFlagBot.RemoveEffects(PlayersInWorld[playerId]);
                                     }
 
                                     PlayersInWorld[playerId].DeathCount = deathCount;
-
-                                    CaptureTheFlag.ReturnFlag(PlayersInWorld[playerId], true);
-                                    CaptureTheFlagBot.RemoveEffects(PlayersInWorld[playerId]);
                                 }
                             }
                         }

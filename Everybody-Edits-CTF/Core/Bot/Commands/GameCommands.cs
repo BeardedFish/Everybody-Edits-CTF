@@ -16,6 +16,7 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
         {
             "blueflag",
             "redflag",
+            "dropflag",
             "gamefund",
             "heal",
             "health",
@@ -49,13 +50,13 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
                     case "blueflag":
                     case "redflag":
                         {
-                            Team targetTeam = cmd == "blueflag" ? Team.Red : Team.Blue;
+                            /*Team targetTeam = cmd == "blueflag" ? Team.Red : Team.Blue;
                             string flagHolder = "";
                             string team = TeamHelper.EnumToString(TeamHelper.GetOppositeTeam(targetTeam));
 
                             foreach (Player enemyPlayer in CaptureTheFlagBot.PlayersInWorld.Values)
                             {
-                                if (enemyPlayer.Team == targetTeam && enemyPlayer.HasEnemyFlag)
+                                if (enemyPlayer.Team == targetTeam && enemyPlayer.)
                                 {
                                     flagHolder = enemyPlayer.Username;
                                     break;
@@ -63,12 +64,37 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
                             }
 
                             string msgToSend = flagHolder != "" ? $"Player {flagHolder} has the {team} flag." : $"No one has {team} flag.";
-                            CaptureTheFlagBot.SendChatMessage(msgToSend);
+                            CaptureTheFlagBot.SendChatMessage(msgToSend);*/
+                        }
+                        break;
+                    case "dropflag":
+                        {
+                            Team enemyTeam = TeamHelper.GetOppositeTeam(player.Team);
+                            Flag enemyTeamFlag = CaptureTheFlag.Flags[enemyTeam];
+
+                            if (enemyTeamFlag.Holder == player)
+                            {
+                                if (JoinedWorld.Blocks != null)
+                                {
+                                    if (JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y].Id == 0)
+                                    {
+                                        enemyTeamFlag.Drop();
+                                    }
+                                    else
+                                    {
+                                        CaptureTheFlagBot.SendPrivateMessage(player, "You can't drop the flag here!");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                CaptureTheFlagBot.SendPrivateMessage(player, "You are not holding the enemy flag.");
+                            }
                         }
                         break;
                     case "gamefund":
                         {
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"The game fund is currently: {CaptureTheFlag.GameFund} coins.");
+                            CaptureTheFlagBot.SendPrivateMessage(player, $"The game fund is currently: {GameFund.CoinsRaised} coins.");
                         }
                         break;
                     case "heal":
@@ -105,7 +131,7 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
                         break;
                     case "scores":
                         {
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"Blue: {CaptureTheFlag.BlueTeamScore} | Red: {CaptureTheFlag.RedTeamScore}");
+                            CaptureTheFlagBot.SendPrivateMessage(player, $"Blue: {CaptureTheFlag.Scores[Team.Blue]} | Red: {CaptureTheFlag.Scores[Team.Red]}");
                         }
                         break;
                     case "suicide":
