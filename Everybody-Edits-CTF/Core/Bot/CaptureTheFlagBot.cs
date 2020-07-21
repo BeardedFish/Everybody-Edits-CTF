@@ -137,6 +137,11 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="msg">The message to be sent.</param>
         public static void SendPrivateMessage(Player player, string msg)
         {
+            if (player.IsGuest) // Guests can't receive private messages
+            {
+                return;
+            }
+
             connection?.Send(EverybodyEditsMessage.ChatMessage, "/pm " + player.Username + " " + msg);
         }
         
