@@ -121,6 +121,7 @@ namespace Everybody_Edits_CTF.Core.Database
                 return;
             }
 
+            int totalDatabaseModifications = 0;
             foreach (PlayerDatabaseRow playerData in Rows)
             {
                 if (!playerData.ChangesOccured)
@@ -148,8 +149,9 @@ namespace Everybody_Edits_CTF.Core.Database
                         using (MySqlCommand sqlCommand = new MySqlCommand(sqlQuery, connection))
                         {
                             connection.Open();
-
                             sqlCommand.ExecuteNonQuery();
+
+                            totalDatabaseModifications++;
                         }
                     }
                 }
@@ -158,6 +160,8 @@ namespace Everybody_Edits_CTF.Core.Database
                     Logger.WriteLog(LogType.Exception, $"Fail while trying to save the database (reason: {ex.Message}).");
                 }
             }
+
+            Logger.WriteLog(LogType.DatabaseModifcation, $"Total MySql database entries inserted/modified: {totalDatabaseModifications}).");
         }
     }
 }

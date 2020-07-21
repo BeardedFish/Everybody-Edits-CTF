@@ -1,4 +1,4 @@
-// File Name:     Logger.cs
+﻿// File Name:     Logger.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Tuesday, June 30, 2020
 
@@ -11,11 +11,7 @@ namespace Everybody_Edits_CTF.Logging
         /// <summary>
         /// The text written to the logger.
         /// </summary>
-        public static string LogText
-        {
-            get;
-            private set;
-        } = string.Empty;
+        public static string LogText { get; private set; } = string.Empty;
 
         /// <summary>
         /// Writes the log in the format: "[TYPE @ TIME_THROW]: MESSAGE" (excluding double quotes).
@@ -47,6 +43,8 @@ namespace Everybody_Edits_CTF.Logging
         {
             switch (type)
             {
+                case LogType.DatabaseModifcation:
+                    return "DATABASE";
                 case LogType.EverybodyEditsMessage:
                     return "EE_MSG";
                 case LogType.Exception:
