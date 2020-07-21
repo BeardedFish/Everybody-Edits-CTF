@@ -42,9 +42,9 @@ namespace Everybody_Edits_CTF.Core.Database
         public bool ChangesOccured => TotalWins != initialTotalWins || TotalLosses != initialTotalLosses || TotalKills != initialTotalKills || Coins != initialCoins || IsNewPlayer;
 
         /// <summary>
-        /// States the inital values of the database values when loaded. The username is ignored because it never changes in the MySql database.
+        /// States the inital values of the database values when loaded/saved. The username is ignored because it never changes in the MySql database.
         /// </summary>
-        private readonly int initialTotalWins, initialTotalLosses, initialTotalKills, initialCoins;
+        private int initialTotalWins, initialTotalLosses, initialTotalKills, initialCoins;
 
         /// <summary>
         /// Constructor for holding data of a single player which will be saved to a MySql database.
@@ -63,6 +63,18 @@ namespace Everybody_Edits_CTF.Core.Database
             TotalKills = initialTotalKills = totalKills;
             Coins = initialCoins = coins;
             IsNewPlayer = isNewPlayer;
+        }
+
+        /// <summary>
+        /// Updates the inital value variables for wins, losses, kills, and coins. This method should only be called if the current players data has been saved to the MySql
+        /// database successfully.
+        /// </summary>
+        public void UpdateChanges()
+        {
+            initialTotalWins = TotalWins;
+            initialTotalLosses = TotalLosses;
+            initialTotalKills = TotalKills;
+            initialCoins = Coins;
         }
     }
 }
