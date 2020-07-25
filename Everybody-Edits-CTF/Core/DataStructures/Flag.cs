@@ -8,6 +8,7 @@ using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.GameMechanics.Enums;
 using Everybody_Edits_CTF.Helpers;
+using System;
 using System.Drawing;
 using System.Text;
 
@@ -74,6 +75,16 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
                 }
             }
         }
+
+        /// <summary>
+        /// The time a player has to wait in order to pickup the flag after it has been dropped, in milliseconds.
+        /// </summary>
+        private const long PickupCooldownMs = 1500;
+
+        /// <summary>
+        /// The tick time the flag was last dropped, in milliseconds.
+        /// </summary>
+        private long lastDropTick;
         
         /// <summary>
         /// Constructor for building a Flag object.
@@ -95,7 +106,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         /// <returns>True if the player can take the flag, if not, false.</returns>
         public bool CanBeTakenBy(Player player)
         {
-            return player.Team != OwnerTeam && !IsTaken && player.Location == CurrentLocation;
+            return DateTimeOffset.Now.ToUnixTimeMilliseconds() - lastDropTick >= PickupCooldownMs && player.Team != OwnerTeam && !IsTaken && player.Location == CurrentLocation;
         }
 
         /// <summary>
@@ -131,6 +142,8 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
             CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, dropLocation, Block.Id, Block.MorphId);
             CaptureTheFlagBot.SendChatMessage($"Player {Holder.Username} has dropped the {TeamHelper.EnumToString(OwnerTeam)} teams flag.");
+
+            lastDropTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
             DropLocation = dropLocation;
             Holder = null;
