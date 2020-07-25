@@ -89,6 +89,11 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         }
 
         /// <summary>
+        /// States whether the player is currently pressing the spacebar or not.
+        /// </summary>
+        public bool IsPressingSpacebar { get; set; }
+
+        /// <summary>
         /// States whether the play is respawning in a respawn cooldown zone or not.
         /// </summary>
         public bool IsRespawning => Location == GameSettings.BlueRespawnCooldownLocation || Location == GameSettings.RedRespawnCooldownLocation;
@@ -132,20 +137,12 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// <summary>
         /// The horizontal direction that the player is currently travelling.
         /// </summary>
-        public HorizontalDirection HorizontalDirection
-        {
-            get;
-            set;
-        }
+        public HorizontalDirection HorizontalDirection { get; set; }
 
         /// <summary>
         /// The vertical direction that the player is currently travelling.
         /// </summary>
-        public VerticalDirection VerticalDirection
-        {
-            get;
-            set;
-        }
+        public VerticalDirection VerticalDirection { get; set; }
 
         /// <summary>
         /// The last enemy player that attacked this player.

@@ -65,7 +65,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         /// <param name="player">The player to handle.</param>
         public static void Handle(Player player)
         {
-            if (player.IsInGodMode || !player.IsPlayingGame)
+            if (player.IsInGodMode || !player.IsPlayingGame || player.IsPressingSpacebar)
             {
                 return;
             }

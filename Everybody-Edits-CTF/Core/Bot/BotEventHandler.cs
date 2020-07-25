@@ -205,12 +205,14 @@ namespace Everybody_Edits_CTF.Core.Bot
                         double yLoc = Math.Round(m.GetDouble(2) / 16.0);
                         int horizontalDir = m.GetInt(7);
                         int verticalDir = m.GetInt(8);
+                        bool isPressingSpacebar = m.GetBoolean(9);
 
                         if (PlayersInWorld.ContainsKey(playerId) && PlayersInWorld[playerId].IsPlayingGame)
                         {
                             PlayersInWorld[playerId].UpdateLocation((int)xLoc, (int)yLoc);                   
                             PlayersInWorld[playerId].HorizontalDirection = (HorizontalDirection)horizontalDir;
                             PlayersInWorld[playerId].VerticalDirection = (VerticalDirection)verticalDir;
+                            PlayersInWorld[playerId].IsPressingSpacebar = isPressingSpacebar;
 
                             if (!PlayersInWorld[playerId].IsRespawning)
                             {
