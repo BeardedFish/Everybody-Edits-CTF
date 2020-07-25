@@ -48,7 +48,7 @@ namespace Everybody_Edits_CTF
             string inputCmd;
             do
             {
-                Console.Write("Enter a command: ");
+                Console.Write(">> ");
                 inputCmd = Console.ReadLine().Trim();
 
                 if (!string.Equals(inputCmd, "quit", CommandCompareCase))
