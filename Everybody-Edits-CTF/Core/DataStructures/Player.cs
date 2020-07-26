@@ -1,4 +1,4 @@
-﻿// File Name:     Player.cs
+// File Name:     Player.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -236,7 +236,7 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// <returns>True if this player is enemies with the player in the parameters, if not, false.</returns>
         public bool IsEnemiesWith(Player player)
         {
-            if (Team == Team.None || Team == Team.None)
+            if (Team == Team.None || player.Team == Team.None)
             {
                 return false;
             }
