@@ -10,6 +10,9 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
 {
     public static class RegularCommands
     {
+        /// <summary>
+        /// An array of type <see cref="string"/> which contains the valid regular commands.
+        /// </summary>
         public static readonly string[] ValidCommands =
         {
             "amiadmin",
@@ -155,6 +158,11 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
             }
         }
 
+        /// <summary>
+        /// Converts a string array to a single string. Each string item in the string array (excluding the last item) is seperated by a comma and a space.
+        /// </summary>
+        /// <param name="array">The string array to be converted to a single string.</param>
+        /// <returns>A <see cref="string"/> which contains the data of the string array seperated by commas.</returns>
         private static string StringArrayToString(string[] array)
         {
             string result = "";

@@ -8,6 +8,9 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
 {
     public static class AdminCommands
     {
+        /// <summary>
+        /// An array of type <see cref="string"/> which contains the valid administrator commands.
+        /// </summary>
         public static readonly string[] ValidCommands =
         {
             "disconnect",

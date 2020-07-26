@@ -12,6 +12,9 @@ namespace Everybody_Edits_CTF.Core.Bot.Commands
 {
     public static class GameCommands
     {
+        /// <summary>
+        /// An array of type <see cref="string"/> which contains the valid game commands.
+        /// </summary>
         public static readonly string[] ValidCommands =
         {
             "blueflag",
