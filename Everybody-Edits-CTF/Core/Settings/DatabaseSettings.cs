@@ -6,11 +6,29 @@ namespace Everybody_Edits_CTF.Core.Settings
 {
     public static class DatabaseSettings
     {
+        /// <summary>
+        /// The URL to the MySql database.
+        /// </summary>
         public const string ServerUrl = "";
-        public const string DatabaseUsername = "";
-        public const string DatabasePassword = "";
+
+        /// <summary>
+        /// The port to access the MySql database.
+        /// </summary>
         public const ushort DatabasePort = 0;
 
-        public static readonly string SqlConnectionString = $"Server={ServerUrl}; Port={DatabasePort}; Database={DatabaseUsername}; Uid={DatabaseUsername}; Pwd={DatabasePassword};";
+        /// <summary>
+        /// The username for the MySql database.
+        /// </summary>
+        public const string DatabaseUsername = "";
+
+        /// <summary>
+        /// The password for the MySql database.
+        /// </summary>
+        public const string DatabasePassword = "";
+
+        /// <summary>
+        /// The connection string to access the MySql database via <see cref="MySql.Data.MySqlClient.MySqlConnection"/>.
+        /// </summary>
+        public static readonly string SqlConnectionString = $"Server={ServerUrl}; Port={DatabasePort}; Database={DatabaseUsername}; Uid={DatabaseUsername}; Pwd={DataabasePassword};";
     }
 }
