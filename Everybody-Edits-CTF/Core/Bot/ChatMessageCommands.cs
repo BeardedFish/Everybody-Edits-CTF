@@ -18,7 +18,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <summary>
         /// Handles all bot commands (admin, game, and regular).
         /// </summary>
-        /// <param name="player">The player that sent a chat message.</param>
+        /// <param name="player">The player that sent the chat message.</param>
         /// <param name="chatMessage">The chat message that the player said.</param>
         public static void Handle(Player player, string chatMessage)
         {
