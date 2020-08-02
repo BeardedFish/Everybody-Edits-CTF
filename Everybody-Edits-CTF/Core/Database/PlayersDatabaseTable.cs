@@ -15,7 +15,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// The name of the Players table in the MySql database.
         /// </summary>
-        private const string PlayersTableName = "Players";
+        private const string PlayersTableName = "players";
 
         /// <summary>
         /// States whether the Players table has been loaded or not.
