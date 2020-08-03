@@ -40,6 +40,7 @@ namespace Everybody_Edits_CTF.Core.Settings
         /// The password of the bot account.
         /// </summary>
         public const string Password = "";
+
         /// <summary>
         /// The title the bot will set the Everybody Edits world to when connected.
         /// </summary>
