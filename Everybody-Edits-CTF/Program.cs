@@ -1,4 +1,4 @@
-﻿// File Name:     Program.cs
+// File Name:     Program.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -99,20 +99,6 @@ namespace Everybody_Edits_CTF
                         Console.WriteLine("=== LOGS ==================");
                         Console.WriteLine(outputLogTxt);
                         Console.WriteLine("===========================");
-                    }
-                    else if (string.Equals(inputCmd, "users", CommandCompareCase))
-                    {
-                        if (CaptureTheFlagBot.Connected)
-                        {
-                            foreach (Player player in CaptureTheFlagBot.PlayersInWorld.Values)
-                            {
-                                Console.WriteLine($"{player.Username}");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("The bot is not connected!");
-                        }
                     }
                     else
                     {
