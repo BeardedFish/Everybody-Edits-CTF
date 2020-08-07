@@ -21,12 +21,6 @@ namespace Everybody_Edits_CTF.Core.Bot
         public static bool Connected => connection != null && connection.Connected;
 
         /// <summary>
-        /// All the players currently connected in the Everybody Edits world. The key (int) defines the player's id, while the value (Player) defines the object that contains
-        /// data about the player.
-        /// </summary>
-        public static Dictionary<int, Player> PlayersInWorld => botEventHandler?.PlayersInWorld;
-
-        /// <summary>
         /// The max length of a chat message Everybody Edits allows to be sent.
         /// </summary>
         private static readonly int MaxChatMessageLength = 140 - BotSettings.ChatMessagePrefix.Length - 2;

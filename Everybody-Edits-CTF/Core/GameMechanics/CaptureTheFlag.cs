@@ -97,7 +97,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         /// <returns>An int that represents the amount of coins each player has won on the winning team.</returns>
         private static int GetGameFundShare(Team winningTeam)
         {
-            int totalTeamPlayers = (CaptureTheFlagBot.PlayersInWorld.Values.Where(player => player.Team == winningTeam)).Count();
+            int totalTeamPlayers = (JoinedWorld.Players.Values.Where(player => player.Team == winningTeam)).Count();
 
             return GameFund.CoinsRaised / totalTeamPlayers;
         }
@@ -111,7 +111,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
         {
             int coinsWon = GetGameFundShare(winningTeam);
 
-            foreach (Player player in CaptureTheFlagBot.PlayersInWorld.Values)
+            foreach (Player player in JoinedWorld.Players.Values)
             {
                 PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
 
