@@ -10,38 +10,22 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// <summary>
         /// The name of the item.
         /// </summary>
-        public string Name
-        {
-            get;
-            private set;
-        }
+        public string Name { get; private set; }
 
         /// <summary>
         /// The cost of the item (in coins).
         /// </summary>
-        public int Cost
-        {
-            get;
-            private set;
-        }
+        public int Cost { get; private set; }
 
         /// <summary>
         /// The location in the Everybody Edits world where the player can buy the item.
         /// </summary>
-        public Point PurchaseLocation
-        {
-            get;
-            private set;
-        }
+        public Point PurchaseLocation { get; private set; }
 
         /// <summary>
         /// The location in the Everybody Edits world where the purchasing player will be teleported if a succesful purchase is made.
         /// </summary>
-        public Point PurchaseTeleportLocation
-        {
-            get;
-            private set;
-        }
+        public Point PurchaseTeleportLocation { get; private set; }
 
         /// <summary>
         /// Constructor for creating a shop item.
