@@ -57,3 +57,4 @@ Coming soon!
 ![Bridge trap](Images/BridgeTrap.png "Player triggering the bridge trap")
 ![Secret lava lake trap](Images/LavaLakeTrap.png "Player triggering the \"secret trap\" at the lava lake")
 ![Red team trap](Images/RedTeamTrap.png "Player triggering the red teams base trap")
+![Shop](Images/Shop.png "Player inside the shop where they can purchase items with coins")
