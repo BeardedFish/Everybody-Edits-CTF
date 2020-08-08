@@ -37,7 +37,7 @@ namespace Everybody_Edits_CTF
         /// Main entry point of the program.
         /// </summary>
         /// <param name="args">The command line arguments passed to the program.</param>
-        static void Main(string[] args)
+        static void Main()
         {
             Console.Title = ProgramTitle;
             Console.WriteLine($"{TitleArt}\n");
