@@ -1,2 +1,56 @@
 # Everybody-Edits-CTF
-Capture the flag bot made for the flash game Everybody Edits.
+This repository contains the source code files for a Capture The Flag bot made for the flash game Everybody Edits.
+
+This bot was originally written in 2015, however, due to protocol changes the old bot stopped working. This is a complete rewrite of the entire Capture The Flag bot.
+
+## Current Features
+* Ability for a Everybody Edits player to take, drop, and capture an enemy flag.
+* Auto reconnect when bot disconnects for unknown reason.
+* Ability for players to attack each other.
+* Respawn cooldown when a player dies.
+* Shop where players can spend coins for power ups.
+* Traps that can be triggered by players.
+* Player data (coins, total wins, total losses, and total kills) , excluding guest accounts, is saved through a MySql database.
+
+## Bot Commands
+
+### Administrator:
+| Command       | Parameter(s)        | Description                                            |
+| ------------- | ------------------- | ------------------------------------------------------ |
+| disconnect    |                     | Disconnects the bot from the Everybody Edits world.    |
+| kick          | [username] [reason] | Kicks a specifies user from the Everybody Edits world. |
+
+### Regular:
+| Command       | Parameter(s)        | Description   |
+| ------------- | ------------------- | ------------- |
+| amiadmin      |                     | Sends the user saying the command a private message stating whether they are an administrator or not.  |
+| coins         |                     | Sends the user saying the command a private message stating how many coins.                            |
+| donatecoins   | [username]          | Donates coins to another user.                                                                         |
+| help          |                     | Sends the user saying the command a private message on how to use the bot.                             |
+| totalwins     |                     |                                                                                                        |
+| totallosses   |                     |                                                                                                        |
+| totalkills    |                     |                                                                                                        |
+
+### Game:
+| Command       | Parameter(s)        | Description   |
+| ------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| blueflag      |                     | Sends a chat message saying the username of the player holding the blue flag.                                                 |
+| redflag       |                     | Sends a chat message saying the username of the player holding the red flag.                                                  |
+| dropflag      |                     | If the player saying the command has the flag, the flag is dropped on the ground wherever their last horizontal location was. |
+| gamefund      |                     | Sends a chat message saying the amount of coins raised for the current Capture The Flag game round.                           |
+| heal          |                     | Heals a players health to 100%. This command only works if the player is located in their home base.                          |
+| health        |                     | Sends the user saying the command a private message which states the amount of health points (HP) the player currently has.   |
+| lobby         |                     | Sends the user saying the command to the game lobby, removing them from the current Capture The Flag game round.              |
+| maxflags      |                     | Sends a chat message stating the maximum number of flags a team must capture in order to win the game.                        |
+| scores        |                     | Sends a chat message stating the number of flags both the blue and red team captured.                                         |
+| suicide       |                     | Kills the player saying the command which results in them respawning.                                                         |
+
+## Frequently Asked Questions
+Coming soon!
+
+## Known Issues
+* Player locations are only accurate on last key press/release.
+* Bot disconnects randomly sometimes.
+
+## Screenshots
+Coming soon!
