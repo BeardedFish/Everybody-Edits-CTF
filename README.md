@@ -53,4 +53,7 @@ Coming soon!
 * Bot disconnects randomly sometimes.
 
 ## Screenshots
-Coming soon!
+![Blue team trap](Images/BlueTeamTrap.png "Player triggering the blue teams base trap")
+![Bridge trap](Images/BridgeTrap.png "Player triggering the bridge trap")
+![Secret lava lake trap](Images/LavaLakeTrap.png "Player triggering the \"secret trap\" at the lava lake")
+![Red team trap](Images/RedTeamTrap.png "Player triggering the red teams base trap")
