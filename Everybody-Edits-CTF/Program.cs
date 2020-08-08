@@ -4,7 +4,6 @@
 
 using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.Database;
-using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Logging;
 using System;
 
