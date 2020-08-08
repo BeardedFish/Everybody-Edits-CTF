@@ -10,10 +10,19 @@ namespace Everybody_Edits_CTF.Core.Bot
 {
     public static class JoinedWorld
     {
+        /// <summary>
+        /// The width of the Everybody Edits world that the bot joined.
+        /// </summary>
         public static int Width;
 
+        /// <summary>
+        /// The height of the Everybody Edits world that the bot joined.
+        /// </summary>
         public static int Height;
 
+        /// <summary>
+        /// The array of blocks in the Everybody Edits world. This array will have a length of <see cref="Width"/> and a width of <see cref="Height"/>.
+        /// </summary>
         public static Block[,,] Blocks;
 
         /// <summary>
