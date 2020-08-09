@@ -150,6 +150,11 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         public Player LastAttacker { get; set; } = null;
 
         /// <summary>
+        /// The amount of health points a player can gain/lose when touched by either a enemy or a team mate.
+        /// </summary>
+        private const int AttackHealHealthAmount = 5;
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="username"></param>
@@ -172,7 +177,7 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         {
             if (Health > 0)
             {
-                Health -= 5;
+                Health -= AttackHealHealthAmount;
 
                 LastAttacker = attacker;
             }
@@ -192,7 +197,7 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// <returns></returns>
         public bool Heal()
         {
-            Health += 5;
+            Health += AttackHealHealthAmount;
 
             return Health >= MaxHealth;
         }
