@@ -20,10 +20,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// States whether the Players table has been loaded or not.
         /// </summary>
-        public static bool Loaded
-        {
-            get => Rows != null;
-        }
+        public static bool Loaded => Rows != null;
 
         /// <summary>
         /// The rows of the Players table loaded from the MySql database.
