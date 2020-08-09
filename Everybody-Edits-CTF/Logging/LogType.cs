@@ -8,6 +8,7 @@ namespace Everybody_Edits_CTF.Logging
     {
         DatabaseModifcation,
         EverybodyEditsMessage,
-        Exception
+        Exception,
+        GameMessage,
     }
 }

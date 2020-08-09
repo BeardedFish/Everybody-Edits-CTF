@@ -49,6 +49,8 @@ namespace Everybody_Edits_CTF.Logging
                     return "EE_MSG";
                 case LogType.Exception:
                     return "EXCEPTION";
+                case LogType.GameMessage:
+                    return "GAME_MSG";
                 default:
                     return "UNKNOWN_TYPE";
             }

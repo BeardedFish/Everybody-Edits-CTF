@@ -1,4 +1,4 @@
-// File Name:     BotEventHandler.cs
+﻿// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -132,6 +132,8 @@ namespace Everybody_Edits_CTF.Core.Bot
                                 CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
                             }
                         }
+
+                        Logger.WriteLog(LogType.EverybodyEditsMessage, $"Player {username.ToUpper()} (id: {playerId}) has joined the world.");
                     }
                     break;
                 case EverybodyEditsMessage.PlayerLeftWorld:
@@ -140,12 +142,16 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                         if (JoinedWorld.Players.ContainsKey(playerId))
                         {
+                            string username = JoinedWorld.Players[playerId].Username;
+
                             if (JoinedWorld.Players[playerId].HasEnemyFlag)
                             {
                                 CaptureTheFlag.Flags[TeamHelper.GetOppositeTeam(JoinedWorld.Players[playerId].Team)].Return(null, false);
                             }
 
                             JoinedWorld.Players.Remove(playerId);
+
+                            Logger.WriteLog(LogType.EverybodyEditsMessage, $"Player {username} (id: {playerId}) has left the world.");
                         }
                     }
                     break;
