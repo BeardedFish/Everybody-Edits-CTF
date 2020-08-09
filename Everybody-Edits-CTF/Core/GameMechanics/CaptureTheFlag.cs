@@ -62,6 +62,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
             }
 
             if (enemyFlag.Holder == player
+                && !friendlyFlag.IsDropped
                 && !friendlyFlag.IsTaken
                 && player.Location == friendlyFlag.HomeLocation)
             {
