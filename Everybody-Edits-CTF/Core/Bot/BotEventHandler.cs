@@ -1,4 +1,4 @@
-﻿// File Name:     BotEventHandler.cs
+// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -58,7 +58,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             // Only reconnect if the bot was not disconnected on purpose
             if (BotSettings.AutoReconnectOnDisconnect && message != "Disconnect")
             {
-                Logger.WriteLog(LogType.EverybodyEditsMessage, $"Auto reconnecting...");
+                Logger.WriteLog(LogType.EverybodyEditsMessage, "Auto reconnecting...");
 
                 CaptureTheFlagBot.Connect();
             }
