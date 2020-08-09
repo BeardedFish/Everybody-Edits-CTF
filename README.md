@@ -18,7 +18,7 @@ This bot was originally written in 2015, however, due to protocol changes the ol
 | Command       | Parameter(s)         | Description                                            |
 | ------------- | -------------------- | ------------------------------------------------------ |
 | `disconnect`  |                      | Disconnects the bot from the Everybody Edits world.    |
-| `kick`        | `username]` `reason` | Kicks a specifies user from the Everybody Edits world. |
+| `kick`        | `username` `reason` | Kicks a specifies user from the Everybody Edits world. |
 
 ### Regular:
 | Command       | Parameter(s)        | Description                                                                                            |
