@@ -58,7 +58,7 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// <summary>
         /// 
         /// </summary>
-        public bool HasEnemyFlag => CaptureTheFlag.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this;
+        public bool HasEnemyFlag => Team != Team.None ? CaptureTheFlag.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
 
         /// <summary>
         /// States whether the player is in the blue teams base or not.
