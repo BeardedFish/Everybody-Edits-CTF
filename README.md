@@ -15,35 +15,35 @@ This bot was originally written in 2015, however, due to protocol changes the ol
 ## Bot Commands
 
 ### Administrator:
-| Command       | Parameter(s)        | Description                                            |
-| ------------- | ------------------- | ------------------------------------------------------ |
-| disconnect    |                     | Disconnects the bot from the Everybody Edits world.    |
-| kick          | [username] [reason] | Kicks a specifies user from the Everybody Edits world. |
+| Command       | Parameter(s)         | Description                                            |
+| ------------- | -------------------- | ------------------------------------------------------ |
+| `disconnect`  |                      | Disconnects the bot from the Everybody Edits world.    |
+| `kick`        | `username]` `reason` | Kicks a specifies user from the Everybody Edits world. |
 
 ### Regular:
-| Command       | Parameter(s)        | Description   |
-| ------------- | ------------------- | ------------- |
-| amiadmin      |                     | Sends the user saying the command a private message stating whether they are an administrator or not.  |
-| coins         |                     | Sends the user saying the command a private message stating how many coins.                            |
-| donatecoins   | [username]          | Donates coins to another user.                                                                         |
-| help          |                     | Sends the user saying the command a private message on how to use the bot.                             |
-| totalwins     |                     |                                                                                                        |
-| totallosses   |                     |                                                                                                        |
-| totalkills    |                     |                                                                                                        |
+| Command       | Parameter(s)        | Description                                                                                            |
+| ------------- | ------------------- | ------------------------------------------------------------------------------------------------------ |
+| `amiadmin`    |                     | Sends the user saying the command a private message stating whether they are an administrator or not.  |
+| `coins`       |                     | Sends the user saying the command a private message stating how many coins.                            |
+| `donatecoins` | `username`          | Donates coins to another user.                                                                         |
+| `help`        |                     | Sends the user saying the command a private message on how to use the bot.                             |
+| `totalwins`   |                     |                                                                                                        |
+| `totallosses` |                     |                                                                                                        |
+| `totalkills`  |                     |                                                                                                        |
 
 ### Game:
 | Command       | Parameter(s)        | Description   |
 | ------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| blueflag      |                     | Sends a chat message saying the username of the player holding the blue flag.                                                 |
-| redflag       |                     | Sends a chat message saying the username of the player holding the red flag.                                                  |
-| dropflag      |                     | If the player saying the command has the flag, the flag is dropped on the ground wherever their last horizontal location was. |
-| gamefund      |                     | Sends a chat message saying the amount of coins raised for the current Capture The Flag game round.                           |
-| heal          |                     | Heals a players health to 100%. This command only works if the player is located in their home base.                          |
-| health        |                     | Sends the user saying the command a private message which states the amount of health points (HP) the player currently has.   |
-| lobby         |                     | Sends the user saying the command to the game lobby, removing them from the current Capture The Flag game round.              |
-| maxflags      |                     | Sends a chat message stating the maximum number of flags a team must capture in order to win the game.                        |
-| scores        |                     | Sends a chat message stating the number of flags both the blue and red team captured.                                         |
-| suicide       |                     | Kills the player saying the command which results in them respawning.                                                         |
+| `blueflag`    |                     | Sends a chat message saying the username of the player holding the blue flag.                                                 |
+| `redflag`     |                     | Sends a chat message saying the username of the player holding the red flag.                                                  |
+| `dropflag`    |                     | If the player saying the command has the flag, the flag is dropped on the ground wherever their last horizontal location was. |
+| `gamefund`    |                     | Sends a chat message saying the amount of coins raised for the current Capture The Flag game round.                           |
+| `heal`        |                     | Heals a players health to 100%. This command only works if the player is located in their home base.                          |
+| `health`      |                     | Sends the user saying the command a private message which states the amount of health points (HP) the player currently has.   |
+| `lobby`       |                     | Sends the user saying the command to the game lobby, removing them from the current Capture The Flag game round.              |
+| `maxflags`    |                     | Sends a chat message stating the maximum number of flags a team must capture in order to win the game.                        |
+| `scores`      |                     | Sends a chat message stating the number of flags both the blue and red team captured.                                         |
+| `suicide`     |                     | Kills the player saying the command which results in them respawning.                                                         |
 
 ## Frequently Asked Questions
 Coming soon!
