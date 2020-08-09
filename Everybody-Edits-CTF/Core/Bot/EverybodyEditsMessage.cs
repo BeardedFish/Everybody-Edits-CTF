@@ -24,6 +24,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         public const string SetTitle = "name";
         public const string SignBlockPlaced = "ts";
         public const string SmileyChanged = "face";
+        public const string SystemMessage = "write";
         public const string TeamChanged = "team";
         public const string WorldEnd = "we";
         public const string WorldPortalBlockPlaced = "wp";

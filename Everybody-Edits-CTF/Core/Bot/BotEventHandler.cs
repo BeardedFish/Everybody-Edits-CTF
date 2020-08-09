@@ -396,6 +396,22 @@ namespace Everybody_Edits_CTF.Core.Bot
                         }
                     }
                     break;
+                case EverybodyEditsMessage.SystemMessage:
+                    {
+                        string[] messageWords = m.GetString(1).Split();
+
+                        if (messageWords[1] == "kicked")
+                        {
+                            string kickedUsername = messageWords[2];
+                            int playerId = JoinedWorld.GetPlayerId(kickedUsername);
+
+                            if (playerId != -1)
+                            {
+                                JoinedWorld.Players.Remove(playerId);
+                            }
+                        }
+                    }
+                    break;
                 case EverybodyEditsMessage.WorldPortalBlockPlaced:
                     {
                         if (JoinedWorld.Blocks != null)

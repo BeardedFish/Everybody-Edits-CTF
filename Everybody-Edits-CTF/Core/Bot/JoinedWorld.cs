@@ -4,6 +4,7 @@
 
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.Deserializer.Blocks;
+using System;
 using System.Collections.Generic;
 
 namespace Everybody_Edits_CTF.Core.Bot
@@ -30,5 +31,23 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// player.
         /// </summary>
         public static Dictionary<int, Player> Players { get; private set; } = new Dictionary<int, Player>();
+
+        /// <summary>
+        /// Searches the <see cref="Players"/> dictionary for a <see cref="Player"/> of a specified username and returns the id of the player.
+        /// </summary>
+        /// <param name="username">The username of the player to be searched for.</param>
+        /// <returns>If the user is found, then their player id is returned. If the user is not found, then -1 is returned.</returns>
+        public static int GetPlayerId(string username)
+        {
+            foreach (KeyValuePair<int, Player> pair in Players)
+            {
+                if (pair.Value.Username.Equals(username, StringComparison.OrdinalIgnoreCase))
+                {
+                    return pair.Key;
+                }
+            }
+
+            return -1;
+        }
     }
 }
