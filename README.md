@@ -21,15 +21,15 @@ This bot was originally written in 2015, however, due to protocol changes the ol
 | `kick`        | `username` `reason` | Kicks a specifies user from the Everybody Edits world. |
 
 ### Regular:
-| Command       | Parameter(s)        | Description                                                                                            |
-| ------------- | ------------------- | ------------------------------------------------------------------------------------------------------ |
-| `amiadmin`    |                     | Sends the user saying the command a private message stating whether they are an administrator or not.  |
-| `coins`       |                     | Sends the user saying the command a private message stating how many coins.                            |
-| `donatecoins` | `username`          | Donates coins to another user.                                                                         |
-| `help`        |                     | Sends the user saying the command a private message on how to use the bot.                             |
-| `totalwins`   |                     |                                                                                                        |
-| `totallosses` |                     |                                                                                                        |
-| `totalkills`  |                     |                                                                                                        |
+| Command       | Parameter(s)        | Description                                                                                             |
+| ------------- | ------------------- | ------------------------------------------------------------------------------------------------------- |
+| `amiadmin`    |                     | Sends the user saying the command a private message stating whether they are an administrator or not.   |
+| `coins`       |                     | Sends the user saying the command a private message stating how many coins.                             |
+| `donatecoins` | `username`          | Donates coins to another user.                                                                          |
+| `help`        |                     | Sends the user saying the command a private message on how to use the bot.                              |
+| `totalwins`   |                     | Sends the user saying the command a private message stating the total Capture The Flag games they won.  |
+| `totallosses` |                     | Sends the user saying the command a private message stating the total Capture The Flag games they lost. |
+| `totalkills`  |                     | Sends the user saying the command a private message stating the total amount of players they've killed. |
 
 ### Game:
 | Command       | Parameter(s)        | Description   |
