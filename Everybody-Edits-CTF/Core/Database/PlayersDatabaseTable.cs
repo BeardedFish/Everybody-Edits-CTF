@@ -131,8 +131,8 @@ namespace Everybody_Edits_CTF.Core.Database
 
                     if (playerData.IsNewPlayer)
                     {
-                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins, LastVisitDate) VALUES (NULL, \"{playerData.Username}\", {playerData.TotalWins}, {playerData.TotalLosses}, {playerData.TotalKills}, {playerData.Coins}, {playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)});";
-
+                        // NOTE: For the SQL query, the "LastVisitDate" column in the players table will use the default value
+                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins) VALUES (NULL, \"{playerData.Username}\", {playerData.TotalWins}, {playerData.TotalLosses}, {playerData.TotalKills}, {playerData.Coins});";
                         playerData.IsNewPlayer = false;
                     }
                     else
