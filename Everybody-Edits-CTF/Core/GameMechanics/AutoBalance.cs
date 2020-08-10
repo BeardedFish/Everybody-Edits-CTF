@@ -1,4 +1,4 @@
-// File Name:     AutoBalance.cs
+﻿// File Name:     AutoBalance.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, July 20, 2020
 
@@ -7,13 +7,17 @@ using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace Everybody_Edits_CTF.Core.GameMechanics
 {
     public static class AutoBalance
     {
+        /// <summary>
+        /// Auto balances the teams for the Capture The Flag game if the team that the player joined has more players than the opposite team. If that condition is true,
+        /// then the player is transferred to the other team.
+        /// </summary>
+        /// <param name="player">The player to be handled.</param>
         public static void Handle(Player player)
         {
             if (!player.IsPlayingGame)
