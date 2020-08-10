@@ -1,4 +1,4 @@
-﻿// File Name:     JoinedWorldInformation.cs
+﻿// File Name:     JoinedWorld.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Wednesday, July 15, 2020
 
