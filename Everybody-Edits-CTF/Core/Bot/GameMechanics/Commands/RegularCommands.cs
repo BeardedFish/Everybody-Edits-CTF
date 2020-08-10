@@ -50,7 +50,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         {
                             if (PlayersDatabaseTable.Loaded)
                             {
-                                PlayerDatabaseRow row = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+                                PlayerDatabaseRow row = PlayersDatabaseTable.GetRow(player.Username);
 
                                 CaptureTheFlagBot.SendPrivateMessage(player, $"You currently have {row.Coins} coin{(row.Coins == 1 ? "" : "s")}.");
                             }
@@ -64,11 +64,11 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                 {
                                     if (cmdTokens[1] != player.Username)
                                     {
-                                        PlayerDatabaseRow playerToDonateData = PlayersDatabaseTable.GetPlayerDatabaseRow(cmdTokens[1]);
+                                        PlayerDatabaseRow playerToDonateData = PlayersDatabaseTable.GetRow(cmdTokens[1]);
 
                                         if (playerToDonateData != null)
                                         {
-                                            PlayerDatabaseRow donatorData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+                                            PlayerDatabaseRow donatorData = PlayersDatabaseTable.GetRow(player.Username);
 
                                             if (int.TryParse(cmdTokens[2], out int amount))
                                             {
@@ -147,7 +147,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         {
                             if (PlayersDatabaseTable.Loaded)
                             {
-                                PlayerDatabaseRow row = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+                                PlayerDatabaseRow row = PlayersDatabaseTable.GetRow(player.Username);
                                 int resultCount = cmd == "totalwins" || cmd == "wins" ? row.TotalWins : row.TotalLosses;
                                 string type = cmd == "totalwins" || cmd == "wins" ? "won" : "lost";
 
@@ -159,7 +159,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         {
                             if (PlayersDatabaseTable.Loaded)
                             {
-                                PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+                                PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(player.Username);
 
                                 CaptureTheFlagBot.SendPrivateMessage(player, $"You have killed a total of {playerData.TotalKills} player{(playerData.TotalKills == 1 ? "" : "s")}.");
                             }

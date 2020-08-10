@@ -79,13 +79,14 @@ namespace Everybody_Edits_CTF.Core.Database
         }
 
         /// <summary>
-        /// Gets the PlayerDatabaseRow of a specified player via their username.
+        /// Gets the <see cref="PlayerDatabaseRow"/> of a specified player via their username.
         /// </summary>
         /// <param name="username">The username of the player to be searched for in the "Rows" list.</param>
         /// <returns>
-        /// If the player is found, then the PlayerDatabaseRow object that correspond to that player is returned. If the player is not found, then null is returned.
+        /// If the player is found, then the <see cref="PlayerDatabaseRow"/> object that correspond to that player is returned. If the player is not found, then null is
+        /// returned.
         /// </returns>
-        public static PlayerDatabaseRow GetPlayerDatabaseRow(string username)
+        public static PlayerDatabaseRow GetRow(string username)
         {
             foreach (PlayerDatabaseRow player in Rows)
             {

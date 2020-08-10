@@ -47,7 +47,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 return;
             }
 
-            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(player.Username);
             if (playerData != null)
             {
                 foreach (ShopItem shopItem in ShopItems)

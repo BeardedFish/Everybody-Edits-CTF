@@ -30,7 +30,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to be handled.</param>
         public static void Handle(Player player)
         {
-            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(player.Username);
+            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(player.Username);
 
             if (playerData != null && DateTime.Today > playerData.LastVisitDate)
             {

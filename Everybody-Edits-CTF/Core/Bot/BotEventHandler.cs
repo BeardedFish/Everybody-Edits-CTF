@@ -367,7 +367,7 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                                         if (PlayersDatabaseTable.Loaded)
                                         {
-                                            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetPlayerDatabaseRow(JoinedWorld.Players[playerId].LastAttacker.Username);
+                                            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(JoinedWorld.Players[playerId].LastAttacker.Username);
 
                                             if (playerData != null)
                                             {
