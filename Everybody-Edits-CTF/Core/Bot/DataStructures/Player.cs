@@ -43,6 +43,14 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             }
         }
 
+        /// <summary>
+        /// States whether this player can trigger a trap or not.
+        /// 
+        /// A player can trigger a trap if:
+        ///     - They are not in God mode.
+        ///     - They are playing the Capture The Flag game (either or team blue or team red).
+        ///     - Their vertical direction is equal to down.
+        /// </summary>
         public bool CanTriggerTrap => !IsInGodMode && IsPlayingGame && VerticalDirection == VerticalDirection.Down;
 
         /// <summary>
@@ -51,9 +59,9 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         public int DeathCount { get; set; }
 
         /// <summary>
-        /// 
+        /// States whether the player is currently holding the enemy flag or not.
         /// </summary>
-        public bool HasEnemyFlag => Team != Team.None ? CaptureTheFlag.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
+        public bool HasEnemyFlag => IsPlayingGame ? CaptureTheFlag.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
 
         /// <summary>
         /// States whether the player is in the blue teams base or not.
@@ -109,7 +117,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         public int Health { get; private set; } = MaxHealth;
 
         /// <summary>
-        /// The username of the player.
+        /// The username of the player. The string returned is CAPITALIZED.
         /// </summary>
         public string Username
         {
@@ -120,9 +128,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         private string _username;
 
         /// <summary>
-        /// The location of the player in the Everybody Edits world.
-        /// 
-        /// NOTE: This location is not always accurate.
+        /// The location of the player in the Everybody Edits world. This location is not always accurate because Everybody Edits only reports the location of a player
+        /// when they initially press a movement key or when they release a movement key.
         /// </summary>
         public Point Location { get; set; }
 
@@ -157,12 +164,12 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         private const int AttackHealHealthAmount = 5;
 
         /// <summary>
-        /// 
+        /// Constructor for creating a <see cref="Player"/> object which contains data about an Everybody Edits player.
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="smileyId"></param>
-        /// <param name="location"></param>
-        /// <param name="team"></param>
+        /// <param name="username">The username of the player</param>
+        /// <param name="smileyId">The smiley id that the player is currently wearing.</param>
+        /// <param name="location">The location of where the player is currently at.</param>
+        /// <param name="team">The team the player is currently playing for.</param>
         public Player(string username, int smileyId, Point location, Team team)
         {
             Username = username;
@@ -205,7 +212,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         }
 
         /// <summary>
-        /// 
+        /// Respawns the player to their teams respawn location. When respawning, the player has to wait <see cref="GameSettings.RespawnCooldownMs"/>. If the players team
+        /// is <see cref="Team.None"/> then this method does nothing. 
         /// </summary>
         public void Respawn()
         {
@@ -216,14 +224,14 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
 
             RestoreHealth();
 
-            Point respawnCooldownLocation = Team == Team.Blue ? GameSettings.BlueRespawnCooldownLocation : GameSettings.RedRespawnCooldownLocation;
-            Point respawnLocation = Team == Team.Blue ? GameSettings.BlueSpawnLocation : GameSettings.RedSpawnLocation;
             Task.Run(async() =>
             {
+                Point respawnCooldownLocation = Team == Team.Blue ? GameSettings.BlueRespawnCooldownLocation : GameSettings.RedRespawnCooldownLocation;
                 CaptureTheFlagBot.TeleportPlayer(this, respawnCooldownLocation.X, respawnCooldownLocation.Y);
 
                 await Task.Delay(GameSettings.RespawnCooldownMs);
 
+                Point respawnLocation = Team == Team.Blue ? GameSettings.BlueSpawnLocation : GameSettings.RedSpawnLocation;
                 CaptureTheFlagBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
             });
         }
@@ -262,15 +270,20 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             return Team != player.Team;
         }
 
+        /// <summary>
+        /// States whether this player is near another player or not. Refer to the method body code for the horizontal and vertical offset values.
+        /// </summary>
+        /// <param name="player">The player to be compared to this player in terms of distance.</param>
+        /// <returns>True if the player is near this</returns>
         public bool IsNearPlayer(Player player)
         {
-            const int xOffset = 3;
-            const int yOffset = 2;
+            const int xOffset = 3; // 2 blocks horizontally
+            const int yOffset = 2; // 1 block vertically
 
             int x = Math.Abs(Location.X - player.Location.X);
             int y = Math.Abs(Location.Y - player.Location.Y);
 
-            return x <= xOffset && y <= yOffset;
+            return Math.Abs(Location.X - player.Location.X) <= xOffset && y <= yOffset;
         }
     }
 }
