@@ -102,10 +102,10 @@
   <ItemGroup>
     <Compile Include="Core\Bot\BotEventHandler.cs" />
     <Compile Include="Core\Bot\CaptureTheFlagBot.cs" />
-    <Compile Include="Core\Bot\ChatMessageCommands.cs" />
-    <Compile Include="Core\Bot\Commands\AdminCommands.cs" />
-    <Compile Include="Core\Bot\Commands\GameCommands.cs" />
-    <Compile Include="Core\Bot\Commands\RegularCommands.cs" />
+    <Compile Include="Core\Bot\GameMechanics\ChatMessageCommands.cs" />
+    <Compile Include="Core\Bot\GameMechanics\Commands\AdminCommands.cs" />
+    <Compile Include="Core\Bot\GameMechanics\Commands\GameCommands.cs" />
+    <Compile Include="Core\Bot\GameMechanics\Commands\RegularCommands.cs" />
     <Compile Include="Core\Bot\Enums\BlockLayer.cs" />
     <Compile Include="Core\Bot\Enums\HorizontalDirection.cs" />
     <Compile Include="Core\Bot\Enums\Smiley.cs" />

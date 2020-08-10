@@ -6,7 +6,7 @@ using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Database;
 using System.Linq;
 
-namespace Everybody_Edits_CTF.Core.Bot.Commands
+namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public static class RegularCommands
     {

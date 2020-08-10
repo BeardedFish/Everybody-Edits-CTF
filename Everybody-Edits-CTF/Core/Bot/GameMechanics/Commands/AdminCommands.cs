@@ -4,7 +4,7 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 
-namespace Everybody_Edits_CTF.Core.Bot.Commands
+namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public static class AdminCommands
     {

@@ -4,11 +4,10 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
 
-namespace Everybody_Edits_CTF.Core.Bot.Commands
+namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public static class GameCommands
     {
