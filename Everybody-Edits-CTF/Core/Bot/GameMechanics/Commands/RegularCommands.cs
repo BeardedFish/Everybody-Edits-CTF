@@ -1,4 +1,4 @@
-// File Name:     RegularCommands.cs
+﻿// File Name:     RegularCommands.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, July 5, 2020
 
@@ -19,6 +19,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
             "coins",
             "donatecoins",
             "help",
+            "spectate",
             "totalwins",
             "totallosses",
             "losses",
@@ -123,6 +124,28 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             CaptureTheFlagBot.SendPrivateMessage(player, "- Use nurse smiley to heal your teammates!");
                             CaptureTheFlagBot.SendPrivateMessage(player, "- There is an item shop in the clouds.");
                             CaptureTheFlagBot.SendPrivateMessage(player, "- Watch out for traps around the map.");
+                        }
+                        break;
+                    case "spectate":
+                        {
+                            if (!player.IsPlayingGame)
+                            {
+                                bool toggleResult = !player.IsSpectating;
+
+                                CaptureTheFlagBot.SetForceFly(player, toggleResult);
+                                player.IsSpectating = toggleResult;
+
+                                if (!player.IsSpectating)
+                                {
+                                    CaptureTheFlagBot.TeleportPlayer(player, 199, 1); // TODO: Move this to a constant
+                                }
+
+                                CaptureTheFlagBot.SendPrivateMessage(player, player.IsSpectating ? "You have entered spectate mode. Type !spectate again to exit out of spectate mode." : "You have left spectate mode.");
+                            }
+                            else
+                            {
+                                CaptureTheFlagBot.SendPrivateMessage(player, "This command is only available to players not playing!");
+                            }
                         }
                         break;
                     case "totalwins":

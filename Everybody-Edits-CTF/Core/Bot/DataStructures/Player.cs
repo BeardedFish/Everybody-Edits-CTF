@@ -102,9 +102,14 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         public bool IsRespawning => Location == GameSettings.BlueRespawnCooldownLocation || Location == GameSettings.RedRespawnCooldownLocation;
 
         /// <summary>
-        /// States whether the player is currently in god mode or not.
+        /// States whether the player is currently in God mode or not.
         /// </summary>
         public bool IsInGodMode { get; set; }
+
+        /// <summary>
+        /// States whether this player is currently spectating the Capture The Flag game or not. Spectating is when the player has force fly set to on.
+        /// </summary>
+        public bool IsSpectating { get; set; }
 
         /// <summary>
         /// The smiley id that the player currently has.

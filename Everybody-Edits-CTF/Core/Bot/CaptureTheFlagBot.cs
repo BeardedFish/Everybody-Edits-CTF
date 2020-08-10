@@ -214,5 +214,15 @@ namespace Everybody_Edits_CTF.Core.Bot
         {
             connection?.Send(EverybodyEditsMessage.ChatMessage, $"/teleport {player.Username} {x} {y}");
         }
+
+        /// <summary>
+        /// Sets the force fly state of a specified player in the Everybody Edits world.
+        /// </summary>
+        /// <param name="player">The player to be modified.</param>
+        /// <param name="forceFly">States whether the player should force fly (true) or not (false).</param>
+        public static void SetForceFly(Player player, bool forceFly)
+        {
+            connection?.Send(EverybodyEditsMessage.ChatMessage, $"/forcefly {player.Username} {forceFly}");
+        }
     }
 }
