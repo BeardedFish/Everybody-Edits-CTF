@@ -8,6 +8,7 @@ namespace Everybody_Edits_CTF.Core.Bot
     {
         public const string ChatMessage = "say";
         public const string ClearWorld = "clear";
+        public const string EditRightsChanged = "editRights";
         public const string GodModeToggled = "god";
         public const string InitBegin = "init";
         public const string InitEnd = "init2";

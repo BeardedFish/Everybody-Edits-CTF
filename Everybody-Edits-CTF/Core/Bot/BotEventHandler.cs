@@ -100,6 +100,17 @@ namespace Everybody_Edits_CTF.Core.Bot
                         }
                     }
                     break;
+                case EverybodyEditsMessage.EditRightsChanged:
+                    {
+                        int playerId = m.GetInt(0);
+                        bool canEdit = m.GetBoolean(1);
+
+                        if (JoinedWorld.Players.ContainsKey(playerId))
+                        {
+                            JoinedWorld.Players[playerId].CanToggleGodMode = canEdit; // A player that can edit will ALWAYS have access to God mode
+                        }
+                    }
+                    break;
                 case EverybodyEditsMessage.InitBegin:
                     {
                         JoinedWorld.Width = m.GetInt(18);
@@ -127,8 +138,9 @@ namespace Everybody_Edits_CTF.Core.Bot
                         double xLoc = Math.Round(m.GetDouble(4) / 16.0);
                         double yLoc = Math.Round(m.GetDouble(5) / 16.0);
                         int teamId = m.GetInt(15);
+                        bool canToggleGodMode = m.GetBoolean(23);
 
-                        JoinedWorld.Players.Add(playerId, new Player(username, smileyId, new Point((int)xLoc, (int)yLoc), TeamHelper.IdToEnum(teamId)));
+                        JoinedWorld.Players.Add(playerId, new Player(username, smileyId, new Point((int)xLoc, (int)yLoc), TeamHelper.IdToEnum(teamId), canToggleGodMode));
 
                         if (PlayersDatabaseTable.Loaded)
                         {
@@ -186,6 +198,17 @@ namespace Everybody_Edits_CTF.Core.Bot
                         if (JoinedWorld.Players.ContainsKey(playerId))
                         {
                             JoinedWorld.Players[playerId].IsInGodMode = isInGodMode;
+
+                            // Handle spectate mode                            
+                            if (!JoinedWorld.Players[playerId].CanToggleGodMode)
+                            {
+                                if (!JoinedWorld.Players[playerId].IsInGodMode)
+                                {
+                                    CaptureTheFlagBot.TeleportPlayer(JoinedWorld.Players[playerId], 199, 1); // TODO: Move this to a constant
+                                }
+
+                                CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], JoinedWorld.Players[playerId].IsInGodMode ? "You have entered spectate mode. Type !spectate again to exit out of spectate mode." : "You have left spectate mode.");
+                            }
 
                             AntiCheat.Handle(JoinedWorld.Players[playerId]);
                         }

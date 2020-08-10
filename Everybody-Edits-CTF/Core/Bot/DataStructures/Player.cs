@@ -107,9 +107,9 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         public bool IsInGodMode { get; set; }
 
         /// <summary>
-        /// States whether this player is currently spectating the Capture The Flag game or not. Spectating is when the player has force fly set to on.
+        /// States whether the player can toggle God mode or not.
         /// </summary>
-        public bool IsSpectating { get; set; }
+        public bool CanToggleGodMode { get; set; }
 
         /// <summary>
         /// The smiley id that the player currently has.
@@ -175,12 +175,13 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <param name="smileyId">The smiley id that the player is currently wearing.</param>
         /// <param name="location">The location of where the player is currently at.</param>
         /// <param name="team">The team the player is currently playing for.</param>
-        public Player(string username, int smileyId, Point location, Team team)
+        public Player(string username, int smileyId, Point location, Team team, bool canToggleGodMode)
         {
             Username = username;
             SmileyId = smileyId;
             Location = location;
             Team = team;
+            CanToggleGodMode = canToggleGodMode;
         }
 
         /// <summary>

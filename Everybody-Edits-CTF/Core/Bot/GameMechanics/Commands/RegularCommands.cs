@@ -128,23 +128,15 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         break;
                     case "spectate":
                         {
-                            if (!player.IsPlayingGame)
+                            if (!player.IsPlayingGame && !player.CanToggleGodMode)
                             {
-                                bool toggleResult = !player.IsSpectating;
-
-                                CaptureTheFlagBot.SetForceFly(player, toggleResult);
-                                player.IsSpectating = toggleResult;
-
-                                if (!player.IsSpectating)
-                                {
-                                    CaptureTheFlagBot.TeleportPlayer(player, 199, 1); // TODO: Move this to a constant
-                                }
-
-                                CaptureTheFlagBot.SendPrivateMessage(player, player.IsSpectating ? "You have entered spectate mode. Type !spectate again to exit out of spectate mode." : "You have left spectate mode.");
+                                CaptureTheFlagBot.SetForceFly(player, !player.IsInGodMode);
                             }
                             else
                             {
-                                CaptureTheFlagBot.SendPrivateMessage(player, "This command is only available to players not playing!");
+                                string privateMessage = player.IsPlayingGame ? "This command is only available to players not playing!" : "You can toggle God mode! Use that instead.";
+
+                                CaptureTheFlagBot.SendPrivateMessage(player, privateMessage);
                             }
                         }
                         break;
