@@ -74,18 +74,26 @@ namespace Everybody_Edits_CTF.Core.Bot
             {
                 case EverybodyEditsMessage.ClearWorld:
                     {
-                        int borderBlockId = m.GetInt(2);
-                        int fillBlockId = m.GetInt(3);
-
                         if (JoinedWorld.Blocks != null)
                         {
+                            int blockId;
+
                             for (int layer = 0; layer < JoinedWorld.Blocks.GetLength(0); layer++)
                             {
-                                for (int x = 0; x < JoinedWorld.Blocks.GetLength(0); x++)
+                                for (int x = 0; x < JoinedWorld.Blocks.GetLength(1); x++)
                                 {
-                                    for (int y = 0; y < JoinedWorld.Blocks.GetLength(0); y++)
+                                    for (int y = 0; y < JoinedWorld.Blocks.GetLength(2); y++)
                                     {
-                                        JoinedWorld.Blocks[layer, x, y] = new Block(fillBlockId);
+                                        if (x == 0 || y == 0 || x == JoinedWorld.Width - 1 || y == JoinedWorld.Height - 1) // Border block
+                                        {
+                                            blockId = m.GetInt(2);
+                                        }
+                                        else // Fill block
+                                        {
+                                            blockId = m.GetInt(3);
+                                        }
+
+                                        JoinedWorld.Blocks[layer, x, y] = new Block(blockId);
                                     }
                                 }
                             }
