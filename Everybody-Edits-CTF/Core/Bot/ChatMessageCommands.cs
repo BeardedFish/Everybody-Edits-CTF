@@ -3,7 +3,7 @@
 // Date:          Saturday, July 4, 2020
 
 using Everybody_Edits_CTF.Core.Bot.Commands;
-using Everybody_Edits_CTF.Core.DataStructures;
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using System;
 
 namespace Everybody_Edits_CTF.Core.Bot

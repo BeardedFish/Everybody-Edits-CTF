@@ -1,6 +1,6 @@
-﻿using Everybody_Edits_CTF.Core.GameMechanics.Enums;
+﻿using Everybody_Edits_CTF.Core.Bot.Enums;
 
-namespace Everybody_Edits_CTF.Core.GameMechanics
+namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
     public static class GameFund
     {

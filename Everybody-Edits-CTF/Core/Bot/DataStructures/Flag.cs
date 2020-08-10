@@ -2,17 +2,15 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, July 19, 2020
 
-using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.DataStructures;
+using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Deserializer.Blocks;
-using Everybody_Edits_CTF.Core.GameMechanics.Enums;
 using Everybody_Edits_CTF.Helpers;
 using System;
 using System.Drawing;
 using System.Text;
 
-namespace Everybody_Edits_CTF.Core.GameMechanics
+namespace Everybody_Edits_CTF.Core.Bot.DataStructures
 {
     public class Flag
     {

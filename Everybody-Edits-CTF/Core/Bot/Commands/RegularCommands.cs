@@ -2,8 +2,8 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, July 5, 2020
 
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Database;
-using Everybody_Edits_CTF.Core.DataStructures;
 using System.Linq;
 
 namespace Everybody_Edits_CTF.Core.Bot.Commands

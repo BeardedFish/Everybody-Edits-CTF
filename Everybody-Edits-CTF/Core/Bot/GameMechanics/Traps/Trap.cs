@@ -2,11 +2,11 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, July 16, 2020
 
-using Everybody_Edits_CTF.Core.DataStructures;
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using System;
 using System.Drawing;
 
-namespace Everybody_Edits_CTF.Core.GameMechanics.Traps
+namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
 {
     public abstract class Trap
     {

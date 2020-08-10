@@ -2,11 +2,10 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, July 6, 2020
 
-using Everybody_Edits_CTF.Core.Bot;
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.DataStructures;
 
-namespace Everybody_Edits_CTF.Core.GameMechanics
+namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
     public static class HealingSystem
     {

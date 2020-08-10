@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
+﻿using System.Drawing;
 
-namespace Everybody_Edits_CTF.Core.DataStructures
+namespace Everybody_Edits_CTF.Core.Bot.DataStructures
 {
     public sealed class ShopItem
     {

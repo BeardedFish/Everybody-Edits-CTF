@@ -2,10 +2,9 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Tuesday, June 30, 2020
 
-using Everybody_Edits_CTF.Core.Bot;
-using Everybody_Edits_CTF.Core.DataStructures;
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 
-namespace Everybody_Edits_CTF.Core.GameMechanics
+namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
     public static class AttackSystem
     {

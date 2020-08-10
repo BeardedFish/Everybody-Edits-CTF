@@ -1,15 +1,14 @@
-// File Name:     BotEventHandler.cs
+﻿// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.GameMechanics;
+using Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps;
 using Everybody_Edits_CTF.Core.Database;
-using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.Deserializer;
 using Everybody_Edits_CTF.Core.Deserializer.Blocks;
-using Everybody_Edits_CTF.Core.GameMechanics;
-using Everybody_Edits_CTF.Core.GameMechanics.Enums;
-using Everybody_Edits_CTF.Core.GameMechanics.Traps;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
 using Everybody_Edits_CTF.Logging;

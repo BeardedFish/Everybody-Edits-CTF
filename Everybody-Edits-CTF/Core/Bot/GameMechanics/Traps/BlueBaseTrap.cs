@@ -2,13 +2,12 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, July 16, 2020
 
-using Everybody_Edits_CTF.Core.Bot;
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.DataStructures;
 using System.Drawing;
 using System.Threading.Tasks;
 
-namespace Everybody_Edits_CTF.Core.GameMechanics.Traps
+namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
 {
     public class BlueBaseTrap : Trap
     {

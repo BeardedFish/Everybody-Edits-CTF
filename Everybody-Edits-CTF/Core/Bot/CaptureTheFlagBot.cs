@@ -2,12 +2,11 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.Settings;
 using PlayerIOClient;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 

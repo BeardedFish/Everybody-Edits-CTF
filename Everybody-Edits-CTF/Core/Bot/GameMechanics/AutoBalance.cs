@@ -2,14 +2,13 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, July 20, 2020
 
-using Everybody_Edits_CTF.Core.Bot;
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.DataStructures;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
 using System.Drawing;
 
-namespace Everybody_Edits_CTF.Core.GameMechanics
+namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
     public static class AutoBalance
     {

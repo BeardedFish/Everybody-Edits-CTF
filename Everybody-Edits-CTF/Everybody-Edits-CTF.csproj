@@ -115,9 +115,9 @@
     <Compile Include="Core\Bot\JoinedWorld.cs" />
     <Compile Include="Core\Database\PlayerDatabaseRow.cs" />
     <Compile Include="Core\Database\PlayersDatabaseTable.cs" />
-    <Compile Include="Core\DataStructures\Flag.cs" />
-    <Compile Include="Core\DataStructures\Player.cs" />
-    <Compile Include="Core\DataStructures\ShopItem.cs" />
+    <Compile Include="Core\Bot\DataStructures\Flag.cs" />
+    <Compile Include="Core\Bot\DataStructures\Player.cs" />
+    <Compile Include="Core\Bot\DataStructures\ShopItem.cs" />
     <Compile Include="Core\Deserializer\Blocks\Block.cs" />
     <Compile Include="Core\Deserializer\Blocks\EffectBlock.cs" />
     <Compile Include="Core\Deserializer\Blocks\MorphableBlock.cs" />
@@ -130,20 +130,20 @@
     <Compile Include="Core\Deserializer\Blocks\WorldPortalBlock.cs" />
     <Compile Include="Core\Deserializer\Blocks\WorldPortalSpawnBlock.cs" />
     <Compile Include="Core\Deserializer\WorldDeserializer.cs" />
-    <Compile Include="Core\GameMechanics\AntiCheat.cs" />
-    <Compile Include="Core\GameMechanics\AttackSystem.cs" />
-    <Compile Include="Core\GameMechanics\AutoBalance.cs" />
-    <Compile Include="Core\GameMechanics\CaptureTheFlag.cs" />
-    <Compile Include="Core\GameMechanics\Enums\GameFundIncreaseReason.cs" />
-    <Compile Include="Core\GameMechanics\GameFund.cs" />
-    <Compile Include="Core\GameMechanics\HealingSystem.cs" />
-    <Compile Include="Core\GameMechanics\RoomEntrances.cs" />
-    <Compile Include="Core\GameMechanics\Shop.cs" />
-    <Compile Include="Core\GameMechanics\Traps\BlueBaseTrap.cs" />
-    <Compile Include="Core\GameMechanics\Traps\BridgeTrap.cs" />
-    <Compile Include="Core\GameMechanics\Traps\LavaLakeTrap.cs" />
-    <Compile Include="Core\GameMechanics\Traps\RedBaseTrap.cs" />
-    <Compile Include="Core\GameMechanics\Traps\Trap.cs" />
+    <Compile Include="Core\Bot\GameMechanics\AntiCheat.cs" />
+    <Compile Include="Core\Bot\GameMechanics\AttackSystem.cs" />
+    <Compile Include="Core\Bot\GameMechanics\AutoBalance.cs" />
+    <Compile Include="Core\Bot\GameMechanics\CaptureTheFlag.cs" />
+    <Compile Include="Core\Bot\Enums\GameFundIncreaseReason.cs" />
+    <Compile Include="Core\Bot\GameMechanics\GameFund.cs" />
+    <Compile Include="Core\Bot\GameMechanics\HealingSystem.cs" />
+    <Compile Include="Core\Bot\GameMechanics\RoomEntrances.cs" />
+    <Compile Include="Core\Bot\GameMechanics\Shop.cs" />
+    <Compile Include="Core\Bot\GameMechanics\Traps\BlueBaseTrap.cs" />
+    <Compile Include="Core\Bot\GameMechanics\Traps\BridgeTrap.cs" />
+    <Compile Include="Core\Bot\GameMechanics\Traps\LavaLakeTrap.cs" />
+    <Compile Include="Core\Bot\GameMechanics\Traps\RedBaseTrap.cs" />
+    <Compile Include="Core\Bot\GameMechanics\Traps\Trap.cs" />
     <Compile Include="Core\Settings\BotSettings.cs" />
     <Compile Include="Core\Settings\DatabaseSettings.cs" />
     <Compile Include="Core\Settings\GameSettings.cs" />
@@ -161,5 +161,6 @@
     <Content Include="Assemblies\PlayerIOClient.dll" />
     <Content Include="Resources\Icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

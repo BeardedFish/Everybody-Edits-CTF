@@ -2,23 +2,18 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
-using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.GameMechanics;
+using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
-namespace Everybody_Edits_CTF.Core.DataStructures
+namespace Everybody_Edits_CTF.Core.Bot.DataStructures
 {
     public sealed class Player
     {
-        public const int MaxHealth = 100;
-
-        private string _username;
-
         /// <summary>
         /// States whether the player is playing capture the flag or not.
         /// </summary>
@@ -122,6 +117,8 @@ namespace Everybody_Edits_CTF.Core.DataStructures
             set => _username = value;
         }
 
+        private string _username;
+
         /// <summary>
         /// The location of the player in the Everybody Edits world.
         /// 
@@ -148,6 +145,11 @@ namespace Everybody_Edits_CTF.Core.DataStructures
         /// The last enemy player that attacked this player.
         /// </summary>
         public Player LastAttacker { get; set; } = null;
+
+        /// <summary>
+        /// The maximum health points a player can have.
+        /// </summary>
+        private const int MaxHealth = 100;
 
         /// <summary>
         /// The amount of health points a player can gain/lose when touched by either a enemy or a team mate.
@@ -202,6 +204,9 @@ namespace Everybody_Edits_CTF.Core.DataStructures
             return Health >= MaxHealth;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Respawn()
         {
             if (!IsPlayingGame || IsRespawning)
@@ -223,11 +228,19 @@ namespace Everybody_Edits_CTF.Core.DataStructures
             });
         }
 
+        /// <summary>
+        /// Sets the players health to <see cref="MaxHealth"/>.
+        /// </summary>
         public void RestoreHealth()
         {
             Health = MaxHealth;
         }
 
+        /// <summary>
+        /// Updates the players <see cref="Location"/> to a specified x and y coordinate.
+        /// </summary>
+        /// <param name="x">The x coordinate of the player.</param>
+        /// <param name="y">The y coordinate of the player.</param>
         public void UpdateLocation(int x, int y)
         {
             Location = new Point(x, y);
