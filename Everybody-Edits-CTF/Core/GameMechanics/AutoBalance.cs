@@ -1,4 +1,4 @@
-﻿// File Name:     AutoBalance.cs
+// File Name:     AutoBalance.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, July 20, 2020
 
@@ -14,7 +14,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 {
     public static class AutoBalance
     {
-        public static void Handle(Player player, Dictionary<int, Player> playersInWorld)
+        public static void Handle(Player player)
         {
             if (!player.IsPlayingGame)
             {
@@ -22,8 +22,8 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
             }
             
             string resultMsg = $"You joined the {TeamHelper.EnumToString(player.Team)} team!";
-            int joinedTeamTotalPlayers = TeamHelper.TotalPlayers(playersInWorld, player.Team) - 1;
-            int oppositeTeamTotalPlayers = TeamHelper.TotalPlayers(playersInWorld, TeamHelper.GetOppositeTeam(player.Team));
+            int joinedTeamTotalPlayers = TeamHelper.TotalPlayers(JoinedWorld.Players, player.Team) - 1;
+            int oppositeTeamTotalPlayers = TeamHelper.TotalPlayers(JoinedWorld.Players, TeamHelper.GetOppositeTeam(player.Team));
 
             if (GameSettings.AutoBalanceTeams)
             {

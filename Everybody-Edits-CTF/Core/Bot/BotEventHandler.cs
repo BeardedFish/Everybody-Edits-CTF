@@ -1,4 +1,4 @@
-﻿// File Name:     BotEventHandler.cs
+// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -263,7 +263,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                         {
                             JoinedWorld.Players[playerId].Team = (Team)teamId;
 
-                            AutoBalance.Handle(JoinedWorld.Players[playerId], JoinedWorld.Players);
+                            AutoBalance.Handle(JoinedWorld.Players[playerId]);
                         }
                     }
                     break;
