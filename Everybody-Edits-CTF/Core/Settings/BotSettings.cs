@@ -2,6 +2,8 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, July 6, 2020
 
+using System.Drawing;
+
 namespace Everybody_Edits_CTF.Core.Settings
 {
     public static class BotSettings
@@ -45,5 +47,10 @@ namespace Everybody_Edits_CTF.Core.Settings
         /// The title the bot will set the Everybody Edits world to when connected.
         /// </summary>
         public const string WorldTitle = "CTF Bot";
+        
+        /// <summary>
+        /// The location where the bot will be moved to when joining the Everybody Edits world.
+        /// </summary>
+        public static readonly Point JoinLocation = new Point(0, 0);
     }
 }

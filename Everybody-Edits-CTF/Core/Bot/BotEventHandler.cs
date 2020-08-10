@@ -1,4 +1,4 @@
-﻿// File Name:     BotEventHandler.cs
+// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -123,7 +123,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                     {
                         CaptureTheFlagBot.SetWorldTitle($"{BotSettings.WorldTitle} [ON]");
                         CaptureTheFlagBot.SetGodMode(true);
-                        CaptureTheFlagBot.Move(new Point(0, 0));
+                        CaptureTheFlagBot.Move(BotSettings.JoinLocation);
                         CaptureTheFlagBot.SendChatMessage("Connected!");
 
                         Logger.WriteLog(LogType.EverybodyEditsMessage, "Connected to Everybody Edits succesfully!");
