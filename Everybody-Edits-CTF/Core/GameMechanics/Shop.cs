@@ -13,7 +13,14 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 {
     public static class Shop
     {
+        /// <summary>
+        /// The Y coordinate where a player can purchase shop items.
+        /// </summary>
         private const int PurchaseFloorY = 108;
+
+        /// <summary>
+        /// The Y coordinate that a player will be teleported to when they succesfully purchase a shop item.
+        /// </summary>
         private const int SuccesfulPurchaseY = 104;
 
         /// <summary>
