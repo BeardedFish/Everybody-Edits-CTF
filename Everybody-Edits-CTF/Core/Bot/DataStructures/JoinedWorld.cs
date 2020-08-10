@@ -2,12 +2,11 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Wednesday, July 15, 2020
 
-using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using System;
 using System.Collections.Generic;
 
-namespace Everybody_Edits_CTF.Core.Bot
+namespace Everybody_Edits_CTF.Core.Bot.DataStructures
 {
     public static class JoinedWorld
     {
