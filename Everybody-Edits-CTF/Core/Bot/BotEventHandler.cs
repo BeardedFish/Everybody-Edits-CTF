@@ -50,7 +50,6 @@ namespace Everybody_Edits_CTF.Core.Bot
         {
             JoinedWorld.Players.Clear();
 
-            //CaptureTheFlag.ResetGameStatistics();
             PlayersDatabaseTable.Save();
             Logger.WriteLog(LogType.EverybodyEditsMessage, $"Disconnected from the Everybody Edits world (Reason: {message}).");
             
@@ -144,15 +143,18 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                         if (PlayersDatabaseTable.Loaded)
                         {
-                            if (!JoinedWorld.Players[playerId].IsGuest && !PlayersDatabaseTable.PlayerExists(username))
+                            if (!JoinedWorld.Players[playerId].IsGuest)
                             {
-                                PlayersDatabaseTable.AddNewPlayer(username);
+                                if (PlayersDatabaseTable.PlayerExists(username))
+                                {
+                                    DailyBonus.Handle(JoinedWorld.Players[playerId]);
+                                }
+                                else
+                                {
+                                    PlayersDatabaseTable.AddNewPlayer(username);
 
-                                CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
-                            }
-                            else
-                            {
-                                DailyBonus.Handle(JoinedWorld.Players[playerId]);
+                                    CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
+                                }
                             }
                         }
 
