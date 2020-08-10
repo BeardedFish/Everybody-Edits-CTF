@@ -2,7 +2,7 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Wednesday, July 15, 2020
 
-namespace Everybody_Edits_CTF.Core.Deserializer.Blocks
+namespace Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks
 {
     public class Block
     {

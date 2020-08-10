@@ -3,7 +3,7 @@
 // Date:          Wednesday, July 15, 2020
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
-using Everybody_Edits_CTF.Core.Deserializer.Blocks;
+using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using System;
 using System.Collections.Generic;
 

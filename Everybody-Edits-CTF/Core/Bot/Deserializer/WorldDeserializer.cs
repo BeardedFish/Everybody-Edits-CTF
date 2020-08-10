@@ -2,12 +2,11 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Wednesday, July 15, 2020
 
-using Everybody_Edits_CTF.Core.Bot;
-using Everybody_Edits_CTF.Core.Deserializer.Blocks;
+using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using PlayerIOClient;
 using System;
 
-namespace Everybody_Edits_CTF.Core.Deserializer
+namespace Everybody_Edits_CTF.Core.Bot.Deserializer
 {
     public static class WorldDeserializer
     {

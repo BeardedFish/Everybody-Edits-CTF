@@ -3,9 +3,9 @@
 // Date:          Friday, July 3, 2020
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
+using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Database;
-using Everybody_Edits_CTF.Core.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
 using System.Collections.Generic;
