@@ -280,10 +280,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             const int xOffset = 3; // 2 blocks horizontally
             const int yOffset = 2; // 1 block vertically
 
-            int x = Math.Abs(Location.X - player.Location.X);
-            int y = Math.Abs(Location.Y - player.Location.Y);
-
-            return Math.Abs(Location.X - player.Location.X) <= xOffset && y <= yOffset;
+            return Math.Abs(Location.X - player.Location.X) <= xOffset && Math.Abs(Location.Y - player.Location.Y) <= yOffset;
         }
     }
 }
