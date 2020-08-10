@@ -2,6 +2,8 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, July 3, 2020
 
+using System;
+
 namespace Everybody_Edits_CTF.Core.Database
 {
     public class PlayerDatabaseRow
@@ -14,37 +16,48 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// The total number of times that this player won a Capture the Flag game.
         /// </summary>
-        public int TotalWins;
+        public int TotalWins {get; set; }
 
         /// <summary>
         /// The total number of times that this player lost a Capture the Flag game.
         /// </summary>
-        public int TotalLosses;
+        public int TotalLosses { get; set; }
 
         /// <summary>
         /// The total number of kills this player has accumulated while playing Capture the Flag.
         /// </summary>
-        public int TotalKills;
+        public int TotalKills { get; set; }
 
         /// <summary>
         /// The amount of coins this player currently possesses.
         /// </summary>
-        public int Coins;
+        public int Coins { get; set; }
+
+        /// <summary>
+        /// The date the player last joined the world.
+        /// </summary>
+        public DateTime LastVisitDate { get; set; }
 
         /// <summary>
         /// States whether this player is a new player or not. A new player is someone who does not exist in the MySql database.
         /// </summary>
-        public bool IsNewPlayer;
+        public bool IsNewPlayer { get; set; }
 
         /// <summary>
         /// States whether the data of this player was modified or not.
         /// </summary>
-        public bool ChangesOccured => TotalWins != initialTotalWins || TotalLosses != initialTotalLosses || TotalKills != initialTotalKills || Coins != initialCoins || IsNewPlayer;
+        public bool ChangesOccured => TotalWins != initialTotalWins
+            || TotalLosses != initialTotalLosses
+            || TotalKills != initialTotalKills
+            || Coins != initialCoins
+            || LastVisitDate != initialLastVisitDate
+            || IsNewPlayer;
 
         /// <summary>
         /// States the inital values of the database values when loaded/saved. The username is ignored because it never changes in the MySql database.
         /// </summary>
         private int initialTotalWins, initialTotalLosses, initialTotalKills, initialCoins;
+        private DateTime initialLastVisitDate;
 
         /// <summary>
         /// Constructor for creating a PlayerDatabaseRow object which holds data of a single player.
@@ -55,14 +68,17 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="totalKills">Refer to <see cref="TotalKills"/> for description.</param>
         /// <param name="coins">Refer to <see cref="Coins"/> for description.</param>
         /// <param name="isNewPlayer">Refer to <see cref="IsNewPlayer"/> for description.</param>
-        public PlayerDatabaseRow(string username, int totalWins, int totalLosses, int totalKills, int coins, bool isNewPlayer)
+        public PlayerDatabaseRow(string username, int totalWins, int totalLosses, int totalKills, int coins, DateTime lastVisitDate, bool isNewPlayer)
         {
             Username = username;
-            TotalWins = initialTotalWins = totalWins;
-            TotalLosses = initialTotalLosses = totalLosses;
-            TotalKills = initialTotalKills = totalKills;
-            Coins = initialCoins = coins;
+            TotalWins = totalWins;
+            TotalLosses = totalLosses;
+            TotalKills = totalKills;
+            Coins = coins;
+            LastVisitDate = lastVisitDate;
             IsNewPlayer = isNewPlayer;
+
+            UpdateChanges();
         }
 
         /// <summary>
@@ -75,6 +91,7 @@ namespace Everybody_Edits_CTF.Core.Database
             initialTotalLosses = TotalLosses;
             initialTotalKills = TotalKills;
             initialCoins = Coins;
+            initialLastVisitDate = LastVisitDate;
         }
     }
 }

@@ -150,6 +150,10 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                                 CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
                             }
+                            else
+                            {
+                                DailyBonus.Handle(JoinedWorld.Players[playerId]);
+                            }
                         }
 
                         Logger.WriteLog(LogType.EverybodyEditsMessage, $"Player {username.ToUpper()} (id: {playerId}) has joined the world.");

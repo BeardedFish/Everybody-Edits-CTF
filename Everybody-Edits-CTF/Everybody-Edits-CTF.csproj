@@ -113,6 +113,7 @@
     <Compile Include="Core\Bot\Enums\VerticalDirection.cs" />
     <Compile Include="Core\Bot\EverybodyEditsMessage.cs" />
     <Compile Include="Core\Bot\DataStructures\JoinedWorld.cs" />
+    <Compile Include="Core\Bot\GameMechanics\DailyBonus.cs" />
     <Compile Include="Core\Database\PlayerDatabaseRow.cs" />
     <Compile Include="Core\Database\PlayersDatabaseTable.cs" />
     <Compile Include="Core\Bot\DataStructures\Flag.cs" />

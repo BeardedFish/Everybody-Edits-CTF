@@ -47,7 +47,7 @@ namespace Everybody_Edits_CTF.Core.Database
                         MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            Rows.Add(new PlayerDatabaseRow(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), false));
+                            Rows.Add(new PlayerDatabaseRow(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetDateTime(6), false));
                         }
                     }
                 }
@@ -104,7 +104,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="username">The username of the player to be added.</param>
         public static void AddNewPlayer(string username)
         {
-            Rows.Add(new PlayerDatabaseRow(username, 0, 0, 0, 0, true));
+            Rows.Add(new PlayerDatabaseRow(username, 0, 0, 0, 0, DateTime.Today, true));
         }
 
         /// <summary>
@@ -131,13 +131,13 @@ namespace Everybody_Edits_CTF.Core.Database
 
                     if (playerData.IsNewPlayer)
                     {
-                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins) VALUES (NULL, \"{playerData.Username}\", {playerData.TotalWins}, {playerData.TotalLosses}, {playerData.TotalKills}, {playerData.Coins});";
+                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins, LastVisitDate) VALUES (NULL, \"{playerData.Username}\", {playerData.TotalWins}, {playerData.TotalLosses}, {playerData.TotalKills}, {playerData.Coins}, {playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)});";
 
                         playerData.IsNewPlayer = false;
                     }
                     else
                     {
-                        sqlQuery = $"UPDATE {PlayersTableName} SET TotalWins={playerData.TotalWins}, TotalLosses={playerData.TotalLosses}, TotalKills={playerData.TotalKills}, Coins={playerData.Coins} WHERE Username=\"{playerData.Username}\";";
+                        sqlQuery = $"UPDATE {PlayersTableName} SET TotalWins={playerData.TotalWins}, TotalLosses={playerData.TotalLosses}, TotalKills={playerData.TotalKills}, Coins={playerData.Coins}, LastVisitDate=\"{playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)}\" WHERE Username=\"{playerData.Username}\";";
                     }
 
                     using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))

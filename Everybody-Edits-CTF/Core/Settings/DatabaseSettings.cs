@@ -7,6 +7,16 @@ namespace Everybody_Edits_CTF.Core.Settings
     public static class DatabaseSettings
     {
         /// <summary>
+        /// The date time format in the MySql database.
+        /// </summary>
+        public const string DateTimeFormat = "yyyy-MM-dd";
+
+        /// <summary>
+        /// The connection string to access the MySql database via <see cref="MySql.Data.MySqlClient.MySqlConnection"/>.
+        /// </summary>
+        public static readonly string SqlConnectionString = $"Server={ServerUrl}; Port={Port}; Database={Name}; Uid={Username}; Pwd={Password};";
+
+        /// <summary>
         /// The URL to the MySql database.
         /// </summary>
         private const string ServerUrl = "127.0.0.1";
@@ -30,10 +40,5 @@ namespace Everybody_Edits_CTF.Core.Settings
         /// The password for the MySql database.
         /// </summary>
         private const string Password = "";
-
-        /// <summary>
-        /// The connection string to access the MySql database via <see cref="MySql.Data.MySqlClient.MySqlConnection"/>.
-        /// </summary>
-        public static readonly string SqlConnectionString = $"Server={ServerUrl}; Port={Port}; Database={Name}; Uid={Username}; Pwd={Password};";
     }
 }
