@@ -24,7 +24,7 @@ namespace Everybody_Edits_CTF.Core.GameMechanics
 
             if (!healer.IsEnemiesWith(playerToHeal) && healer.IsNearPlayer(playerToHeal) && playerToHeal.Health < 100)
             {
-                if (playerToHeal.Heal()) // Health restored fully
+                if (playerToHeal.Heal())
                 {
                     CaptureTheFlagBot.SendPrivateMessage(playerToHeal, $"You were healed player {healer.Username}");
                     CaptureTheFlagBot.SendPrivateMessage(healer, $"You fully healed player {playerToHeal.Username}");
