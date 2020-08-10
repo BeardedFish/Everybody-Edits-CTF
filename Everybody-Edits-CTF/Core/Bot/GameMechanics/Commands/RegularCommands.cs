@@ -1,4 +1,4 @@
-﻿// File Name:     RegularCommands.cs
+// File Name:     RegularCommands.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, July 5, 2020
 
@@ -107,7 +107,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         break;
                     case "help":
                         {
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"Command prefixes: . > ! #");
+                            CaptureTheFlagBot.SendPrivateMessage(player, "Command prefixes: . > ! #");
 
                             CaptureTheFlagBot.SendPrivateMessage(player, "Regular Commands:");
                             CaptureTheFlagBot.SendPrivateMessage(player, StringArrayToString(RegularCommands.ValidCommands));
@@ -119,10 +119,10 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             CaptureTheFlagBot.SendPrivateMessage(player, StringArrayToString(AdminCommands.ValidCommands));
 
                             CaptureTheFlagBot.SendPrivateMessage(player, "Tips:");
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"- Press arrow keys/WASD keys around an enemy player to attack them.");
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"- Use nurse smiley to heal your teammates!");
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"- There is an item shop in the clouds.");
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"- Watch out for traps around the map.");
+                            CaptureTheFlagBot.SendPrivateMessage(player, "- Press arrow keys/WASD keys around an enemy player to attack them.");
+                            CaptureTheFlagBot.SendPrivateMessage(player, "- Use nurse smiley to heal your teammates!");
+                            CaptureTheFlagBot.SendPrivateMessage(player, "- There is an item shop in the clouds.");
+                            CaptureTheFlagBot.SendPrivateMessage(player, "- Watch out for traps around the map.");
                         }
                         break;
                     case "totalwins":
