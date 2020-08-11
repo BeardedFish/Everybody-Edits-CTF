@@ -1,4 +1,4 @@
-// File Name:     BotEventHandler.cs
+﻿// File Name:     BotEventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -210,7 +210,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                             {
                                 if (!JoinedWorld.Players[playerId].IsInGodMode)
                                 {
-                                    CaptureTheFlagBot.TeleportPlayer(JoinedWorld.Players[playerId], 199, 1); // TODO: Move this to a constant
+                                    JoinedWorld.Players[playerId].TeleportToLobby();
                                 }
 
                                 CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], JoinedWorld.Players[playerId].IsInGodMode ? "You have entered spectate mode. Type !spectate again to exit out of spectate mode." : "You have left spectate mode.");
