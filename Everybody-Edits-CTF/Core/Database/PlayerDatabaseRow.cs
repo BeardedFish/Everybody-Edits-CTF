@@ -46,12 +46,18 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// States whether the data of this player was modified or not.
         /// </summary>
-        public bool ChangesOccured => TotalWins != initialTotalWins
-            || TotalLosses != initialTotalLosses
-            || TotalKills != initialTotalKills
-            || Coins != initialCoins
-            || LastVisitDate != initialLastVisitDate
-            || IsNewPlayer;
+        public bool ChangesOccured
+        {
+            get
+            {
+                return TotalWins != initialTotalWins
+                    || TotalLosses != initialTotalLosses
+                    || TotalKills != initialTotalKills
+                    || Coins != initialCoins
+                    || LastVisitDate != initialLastVisitDate
+                    || IsNewPlayer;
+            }
+        }
 
         /// <summary>
         /// States the inital values of the database values when loaded/saved. The username is ignored because it never changes in the MySql database.
