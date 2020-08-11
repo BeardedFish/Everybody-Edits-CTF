@@ -348,6 +348,8 @@ namespace Everybody_Edits_CTF.Core.Bot
                     {
                         if (m.Count >= 6)
                         {
+                            bool propertiesReset = m.GetBoolean(0); 
+
                             for (uint i = 2; i <= m.Count - 4; i += 4)
                             {
                                 int playerId = m.GetInt(i);
@@ -362,22 +364,25 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                                     if (JoinedWorld.Players[playerId].LastAttacker != null)
                                     {
-                                        CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], $"You were killed by player {JoinedWorld.Players[playerId].LastAttacker.Username}!");
-                                        CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId].LastAttacker, $"You killed player {JoinedWorld.Players[playerId].Username}!");
-
-                                        if (PlayersDatabaseTable.Loaded)
+                                        if (!propertiesReset)
                                         {
-                                            PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(JoinedWorld.Players[playerId].LastAttacker.Username);
+                                            CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], $"You were killed by player {JoinedWorld.Players[playerId].LastAttacker.Username}!");
+                                            CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId].LastAttacker, $"You killed player {JoinedWorld.Players[playerId].Username}!");
 
-                                            if (playerData != null)
+                                            if (PlayersDatabaseTable.Loaded)
                                             {
-                                                playerData.TotalKills++;
+                                                PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(JoinedWorld.Players[playerId].LastAttacker.Username);
+
+                                                if (playerData != null)
+                                                {
+                                                    playerData.TotalKills++;
+                                                }
                                             }
+
+                                            GameFund.Increase(GameFundIncreaseReason.PlayerKilledEnemy);
                                         }
 
                                         JoinedWorld.Players[playerId].LastAttacker = null;
-
-                                        GameFund.Increase(GameFundIncreaseReason.PlayerKilledEnemy);
                                     }
 
                                     if (deathCount > JoinedWorld.Players[playerId].DeathCount)
