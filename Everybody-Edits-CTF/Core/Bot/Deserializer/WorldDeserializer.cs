@@ -191,6 +191,16 @@ namespace Everybody_Edits_CTF.Core.Bot.Deserializer
                         case 1002:
                         case 1003:
                         case 1004:
+                        case 1116:
+                        case 1117:
+                        case 1118:
+                        case 1119:
+                        case 1120:
+                        case 1121:
+                        case 1122:
+                        case 1123:
+                        case 1124:
+                        case 1125:
                         case 1041:
                         case 1042:
                         case 1043:
