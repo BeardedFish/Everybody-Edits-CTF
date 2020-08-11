@@ -108,6 +108,8 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="winningTeam">The team that won the Capture the Flag game.</param>
         private static void GameOver(Team winningTeam)
         {
+            CaptureTheFlagBot.SendChatMessage($"Game over! Team {TeamHelper.EnumToString(winningTeam)} has won the game.");
+
             int coinsWon = GetGameFundShare(winningTeam);
 
             foreach (Player player in JoinedWorld.Players.Values)
@@ -133,7 +135,6 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             }
 
             CaptureTheFlagBot.ResetLevel();
-            CaptureTheFlagBot.SendChatMessage($"Game over! Team {TeamHelper.EnumToString(winningTeam)} has won the game.");
 
             PlayersDatabaseTable.Save();
         }
