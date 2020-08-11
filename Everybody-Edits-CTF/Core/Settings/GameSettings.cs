@@ -34,10 +34,10 @@ namespace Everybody_Edits_CTF.Core.Settings
         public static readonly Point[] LobbySpawnPointLocations = new Point[]
         {
             new Point(181, 44),
-            new Point(182, 44),
             new Point(183, 44),
-            new Point(184, 44),
-            new Point(185, 44)
+            new Point(185, 44),
+            new Point(187, 44),
+            new Point(189, 44)
         };
 
         /// <summary>
