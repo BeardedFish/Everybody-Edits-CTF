@@ -68,7 +68,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 
                 Scores[player.Team]++;
 
-                CaptureTheFlagBot.SendChatMessage($"Blue: {Scores[Team.Blue]} | Red: {Scores[Team.Red]}");
+                CaptureTheFlagBot.SendChatMessage(GetScoresString());
                 GameFund.Increase(GameFundIncreaseReason.FlagCaptured);
 
                 if (Scores[player.Team] >= GameSettings.MaxScoreToWin)
@@ -87,6 +87,15 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         {
             Scores[Team.Blue] = Scores[Team.Red] = 0;
             GameFund.CoinsRaised = 0;
+        }
+
+        /// <summary>
+        /// Gets a <see cref="string"/> containing the <see cref="Team.Blue"/> and <see cref="Team.Red"/> scores.
+        /// </summary>
+        /// <returns>A <see cref="string"/> in the format of: "Blue: [BLUE_TEAM_SCORE] | Red: [RED_TEAM_SCORE]" (excluding quotes).</returns>
+        public static string GetScoresString()
+        {
+            return $"Blue: {Scores[Team.Blue]} | Red: {Scores[Team.Red]}";
         }
 
         /// <summary>

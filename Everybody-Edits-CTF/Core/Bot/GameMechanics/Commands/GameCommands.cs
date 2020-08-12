@@ -124,7 +124,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         break;
                     case "scores":
                         {
-                            CaptureTheFlagBot.SendPrivateMessage(player, $"Blue: {CaptureTheFlag.Scores[Team.Blue]} | Red: {CaptureTheFlag.Scores[Team.Red]}");
+                            CaptureTheFlagBot.SendPrivateMessage(player, CaptureTheFlag.GetScoresString());
                         }
                         break;
                     case "suicide":
