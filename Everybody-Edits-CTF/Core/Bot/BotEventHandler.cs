@@ -362,9 +362,13 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                                     JoinedWorld.Players[playerId].UpdateLocation((int)xLoc, (int)yLoc);
 
-                                    if (JoinedWorld.Players[playerId].LastAttacker != null)
+                                    if (propertiesReset)
                                     {
-                                        if (!propertiesReset)
+                                        JoinedWorld.Players[playerId].Team = Team.None;
+                                    }
+                                    else
+                                    {
+                                        if (JoinedWorld.Players[playerId].LastAttacker != null)
                                         {
                                             CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], $"You were killed by player {JoinedWorld.Players[playerId].LastAttacker.Username}!");
                                             CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId].LastAttacker, $"You killed player {JoinedWorld.Players[playerId].Username}!");
