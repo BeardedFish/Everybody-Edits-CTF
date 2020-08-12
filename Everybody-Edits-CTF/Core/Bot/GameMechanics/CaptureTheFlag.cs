@@ -116,21 +116,19 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             {
                 PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(player.Username);
 
-                if (playerData == null || !player.IsPlayingGame)
+                if (playerData != null && player.IsPlayingGame)
                 {
-                    continue;
-                }
+                    if (player.Team == winningTeam)
+                    {
+                        playerData.TotalWins++;
+                        playerData.Coins += coinsWon;
 
-                if (player.Team == winningTeam)
-                {
-                    playerData.TotalWins++;
-                    playerData.Coins += coinsWon;
-
-                    CaptureTheFlagBot.SendPrivateMessage(player, $"You received {coinsWon} coin{(coinsWon == 1 ? "" : "s")} for winning!");
-                }
-                else
-                {
-                    playerData.TotalLosses++;
+                        CaptureTheFlagBot.SendPrivateMessage(player, $"You received {coinsWon} coin{(coinsWon == 1 ? "" : "s")} for winning!");
+                    }
+                    else
+                    {
+                        playerData.TotalLosses++;
+                    }
                 }
             }
 
