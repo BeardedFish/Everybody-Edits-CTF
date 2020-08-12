@@ -1,4 +1,4 @@
-// File Name:     CaptureTheFlag.cs
+﻿// File Name:     CaptureTheFlag.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, July 3, 2020
 
@@ -16,7 +16,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
     public static class CaptureTheFlag
     {
         /// <summary>
-        /// 
+        /// A dictionary that contains the team flags for the Capture The Flag game. To access a specific teams flag, use the <see cref="Team"/> enum as the key.
         /// </summary>
         public static Dictionary<Team, Flag> Flags = new Dictionary<Team, Flag>()
         {
@@ -25,7 +25,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         };
 
         /// <summary>
-        /// 
+        /// A dictionary that stores the <see cref="Team.Blue"/> and the <see cref="Team.Red"/> scores.
         /// </summary>
         public static Dictionary<Team, int> Scores = new Dictionary<Team, int>()
         {
@@ -34,9 +34,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         };
 
         /// <summary>
-        /// 
+        /// Handles events in the Capture The Flag game such as a player taking, returning, and capturing a flag.
         /// </summary>
-        /// <param name="player"></param>
+        /// <param name="player">The player to be handled.</param>
         public static void Handle(Player player)
         {
             if (player.IsInGodMode || !player.IsPlayingGame)
@@ -86,7 +86,6 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         public static void ResetGameStatistics()
         {
             Scores[Team.Blue] = Scores[Team.Red] = 0;
-
             GameFund.CoinsRaised = 0;
         }
 
