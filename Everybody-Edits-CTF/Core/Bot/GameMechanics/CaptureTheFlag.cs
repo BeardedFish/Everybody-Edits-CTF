@@ -68,6 +68,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 
                 Scores[player.Team]++;
 
+                CaptureTheFlagBot.SendChatMessage($"Blue: {Scores[Team.Blue]} | Red: {Scores[Team.Red]}");
                 GameFund.Increase(GameFundIncreaseReason.FlagCaptured);
 
                 if (Scores[player.Team] >= GameSettings.MaxScoreToWin)
