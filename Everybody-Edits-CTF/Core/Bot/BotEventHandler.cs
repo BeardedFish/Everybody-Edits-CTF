@@ -216,7 +216,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                             {
                                 if (!JoinedWorld.Players[playerId].IsInGodMode)
                                 {
-                                    JoinedWorld.Players[playerId].TeleportToLobby();
+                                    JoinedWorld.Players[playerId].GoToLobby();
                                 }
 
                                 CaptureTheFlagBot.SendPrivateMessage(JoinedWorld.Players[playerId], JoinedWorld.Players[playerId].IsInGodMode ? "You have entered spectate mode. Type !spectate again to exit out of spectate mode." : "You have left spectate mode.");

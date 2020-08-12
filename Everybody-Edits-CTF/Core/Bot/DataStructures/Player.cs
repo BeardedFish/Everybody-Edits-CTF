@@ -169,11 +169,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         private const int AttackHealHealthAmount = 5;
 
         /// <summary>
-        /// The random object used for the <see cref="TeleportToLobby()"/> method.
-        /// </summary>
-        private static readonly Random random = new Random();
-
-        /// <summary>
         /// Constructor for creating a <see cref="Player"/> object which contains data about an Everybody Edits player.
         /// </summary>
         /// <param name="username">Refer to <see cref="Username"/> for description.</param>
@@ -259,13 +254,11 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         }
 
         /// <summary>
-        /// Teleports the player to the lobby. The location is randomly selected from the <see cref="GameSettings.LobbySpawnPointLocations"/>.
+        /// Teleports the player to the lobby.
         /// </summary>
-        public void TeleportToLobby()
+        public void GoToLobby()
         {
-            Point randomSpawnLocation = GameSettings.LobbySpawnPointLocations[random.Next(GameSettings.LobbySpawnPointLocations.Length - 1)];
-
-            CaptureTheFlagBot.TeleportPlayer(this, randomSpawnLocation.X, randomSpawnLocation.Y);
+            CaptureTheFlagBot.ResetPlayer(this);
         }
 
         /// <summary>

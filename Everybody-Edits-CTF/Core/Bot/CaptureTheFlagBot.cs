@@ -168,6 +168,16 @@ namespace Everybody_Edits_CTF.Core.Bot
         }
 
         /// <summary>
+        /// Resets a players properties and respawns them at a random respawn point in the Everybody Edits world. If a respawn point doesn't exit, they are respawned at the
+        /// coordinate [1, 1].
+        /// </summary>
+        /// <param name="player">The player to be reset.</param>
+        public static void ResetPlayer(Player player)
+        {
+            connection?.Send(EverybodyEditsMessage.ChatMessage, $"/reset {player.Username}");
+        }
+
+        /// <summary>
         /// Places a block in the Everybody Edits world.
         /// </summary>
         /// <param name="layer">The layer of the block.</param>

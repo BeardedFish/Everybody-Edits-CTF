@@ -114,7 +114,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                     case "lobby":
                     case "quit":
                         {
-                            player.TeleportToLobby();
+                            player.GoToLobby();
                         }
                         break;
                     case "maxflags":
