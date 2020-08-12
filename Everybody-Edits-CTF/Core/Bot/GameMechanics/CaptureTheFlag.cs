@@ -1,4 +1,4 @@
-﻿// File Name:     CaptureTheFlag.cs
+// File Name:     CaptureTheFlag.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, July 3, 2020
 
@@ -91,13 +91,13 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         }
 
         /// <summary>
-        /// Splits the game fund by dividing it by the total number of players on the winning team.
+        /// Splits the game fund by dividing it by the total number of players on the winning team, excluding guest players.
         /// </summary>
         /// <param name="winningTeam">The team that won the Capture the Flag game.</param>
         /// <returns>An int that represents the amount of coins each player has won on the winning team.</returns>
         private static int GetGameFundShare(Team winningTeam)
         {
-            int totalTeamPlayers = (JoinedWorld.Players.Values.Where(player => player.Team == winningTeam)).Count();
+            int totalTeamPlayers = (JoinedWorld.Players.Values.Where(player => !player.IsGuest && player.Team == winningTeam)).Count();
 
             return GameFund.CoinsRaised / totalTeamPlayers;
         }
