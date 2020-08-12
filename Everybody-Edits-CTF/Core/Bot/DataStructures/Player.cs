@@ -176,15 +176,18 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <summary>
         /// Constructor for creating a <see cref="Player"/> object which contains data about an Everybody Edits player.
         /// </summary>
-        /// <param name="username">The username of the player</param>
-        /// <param name="smileyId">The smiley id that the player is currently wearing.</param>
-        /// <param name="location">The location of where the player is currently at.</param>
-        /// <param name="team">The team the player is currently playing for.</param>
-        public Player(string username, int smileyId, Point location, Team team, bool canToggleGodMode)
+        /// <param name="username">Refer to <see cref="Username"/> for description.</param>
+        /// <param name="smileyId">Refer to <see cref="SmileyId"/> for description.</param>
+        /// <param name="location">Refer to <see cref="Location"/> for description.</param>
+        /// <param name="isInGodMode">Refer to <see cref="IsInGodMode"/> for description.</param>
+        /// <param name="team">Refer to <see cref="Team"/> for description.</param>
+        /// <param name="canToggleGodMode">Refer to <see cref="CanToggleGodMode"/> for description.</param>
+        public Player(string username, int smileyId, Point location, bool isInGodMode, Team team, bool canToggleGodMode)
         {
             Username = username;
             SmileyId = smileyId;
             Location = location;
+            IsInGodMode = isInGodMode;
             Team = team;
             CanToggleGodMode = canToggleGodMode;
         }

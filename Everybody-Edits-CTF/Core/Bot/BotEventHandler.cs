@@ -136,10 +136,16 @@ namespace Everybody_Edits_CTF.Core.Bot
                         int smileyId = m.GetInt(3);
                         double xLoc = Math.Round(m.GetDouble(4) / 16.0);
                         double yLoc = Math.Round(m.GetDouble(5) / 16.0);
+                        bool isInGodMode = m.GetBoolean(6);
                         int teamId = m.GetInt(15);
                         bool canToggleGodMode = m.GetBoolean(23);
 
-                        JoinedWorld.Players.Add(playerId, new Player(username, smileyId, new Point((int)xLoc, (int)yLoc), TeamHelper.IdToEnum(teamId), canToggleGodMode));
+                        JoinedWorld.Players.Add(playerId, new Player(username,
+                                                                    smileyId,
+                                                                    new Point((int)xLoc, (int)yLoc),
+                                                                    isInGodMode,
+                                                                    TeamHelper.IdToEnum(teamId),
+                                                                    canToggleGodMode));
 
                         if (PlayersDatabaseTable.Loaded)
                         {
