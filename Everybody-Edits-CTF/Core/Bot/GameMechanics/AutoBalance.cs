@@ -34,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 {
                     resultMsg = "Unbalanced teams! You have been transferred to the other team!";
 
-                    Point teleLocation = player.Team == Team.Blue ? GameSettings.RedSpawnLocation : GameSettings.BlueSpawnLocation;
+                    Point teleLocation = player.Team == Team.Blue ? GameSettings.RedCheckpointLocation : GameSettings.BlueCheckpointLocation;
                     CaptureTheFlagBot.TeleportPlayer(player, teleLocation.X, teleLocation.Y);
                 }
             }

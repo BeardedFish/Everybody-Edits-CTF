@@ -240,7 +240,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
 
                 await Task.Delay(GameSettings.RespawnCooldownMs);
 
-                Point respawnLocation = Team == Team.Blue ? GameSettings.BlueSpawnLocation : GameSettings.RedSpawnLocation;
+                Point respawnLocation = Team == Team.Blue ? GameSettings.BlueCheckpointLocation : GameSettings.RedCheckpointLocation;
                 CaptureTheFlagBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
             });
         }

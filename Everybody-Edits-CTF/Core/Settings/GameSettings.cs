@@ -24,9 +24,9 @@ namespace Everybody_Edits_CTF.Core.Settings
         public static readonly Point BlueRespawnCooldownLocation = new Point(159, 44), RedRespawnCooldownLocation = new Point(239, 44);
 
         /// <summary>
-        /// The location where a player of a specified team is teleported after they are finished waiting the <see cref="RespawnCooldownMs"/>.
+        /// Where a player will respawn after waiting the <see cref="RespawnCooldownMs"/>.
         /// </summary>
-        public static readonly Point BlueSpawnLocation = new Point(BlueRespawnCooldownLocation.X, BlueRespawnCooldownLocation.Y + 4), RedSpawnLocation = new Point(RedRespawnCooldownLocation.X, RedRespawnCooldownLocation.Y + 4);
+        public static readonly Point BlueCheckpointLocation = new Point(BlueRespawnCooldownLocation.X, BlueRespawnCooldownLocation.Y + 5), RedCheckpointLocation = new Point(RedRespawnCooldownLocation.X, RedRespawnCooldownLocation.Y + 5);
 
         /// <summary>
         /// States the max score a team needs to achieve in order to win the game.
