@@ -47,25 +47,10 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             Flag friendlyFlag = Flags[player.Team];
             Flag enemyFlag = Flags[TeamHelper.GetOppositeTeam(player.Team)];
 
-            if (enemyFlag.CanBeTakenBy(player))
-            {
-                enemyFlag.Take(player);
-
-                GameFund.Increase(GameFundIncreaseReason.FlagTaken);
-            }
-
-            if (friendlyFlag.CanBeReturnedBy(player))
-            {
-                friendlyFlag.Return(player, false);
-            }
-
-            if (enemyFlag.Holder == player
-                && !friendlyFlag.IsDropped
-                && !friendlyFlag.IsTaken
-                && player.Location == friendlyFlag.HomeLocation)
+            if (enemyFlag.CanBeCapturedBy(player, friendlyFlag))
             {
                 enemyFlag.Capture();
-                
+
                 Scores[player.Team]++;
 
                 CaptureTheFlagBot.SendChatMessage(GetScoresString());
@@ -77,6 +62,16 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 
                     ResetGameStatistics();
                 }
+            }
+            else if (enemyFlag.CanBeTakenBy(player))
+            {
+                enemyFlag.Take(player);
+
+                GameFund.Increase(GameFundIncreaseReason.FlagTaken);
+            }
+            else if (friendlyFlag.CanBeReturnedBy(player))
+            {
+                friendlyFlag.Return(player, false);
             }
         }
 

@@ -98,6 +98,23 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         }
 
         /// <summary>
+        /// States whether this flag can be captured by a player or not.
+        /// 
+        /// A player can capture a flag if:
+        ///     - They are currently holding the flag.
+        ///     - Their team flag is not dropped.
+        ///     - Their team flag is not taken.
+        ///     - Their current location is equal to the home location of their base flag.
+        /// </summary>
+        /// <param name="player">The player to be checked if they can capture the flag or not.</param>
+        /// <param name="playerTeamFlag">The flag of the players team.</param>
+        /// <returns>True if the player can capture the flag, if not, false.</returns>
+        public bool CanBeCapturedBy(Player player, Flag playerTeamFlag)
+        {
+            return Holder == player && !playerTeamFlag.IsDropped && !playerTeamFlag.IsTaken && player.Location == playerTeamFlag.HomeLocation;
+        }
+
+        /// <summary>
         /// States whether a player is able to take a flag or not.
         /// </summary>
         /// <param name="player">The player to check if they can take the flag or not.</param>
