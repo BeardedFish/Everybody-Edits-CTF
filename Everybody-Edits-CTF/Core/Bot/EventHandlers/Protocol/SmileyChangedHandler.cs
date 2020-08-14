@@ -1,4 +1,4 @@
-﻿// File Name:     SmileyChangedHandler.cs
+// File Name:     SmileyChangedHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -11,6 +11,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
     public sealed class SmileyChangedHandler : BotEvent
     {
         public SmileyChangedHandler() : base(new string[] { EverybodyEditsMessage.ClearWorld }, null)
+        public SmileyChangedHandler() : base(new string[] { EverybodyEditsMessage.SmileyChanged }, null)
         {
 
         }
