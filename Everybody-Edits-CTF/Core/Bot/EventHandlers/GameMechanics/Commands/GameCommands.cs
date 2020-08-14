@@ -114,13 +114,13 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             }
                             break;
                     }
-
-                    return true;
                 }
                 else
                 {
                     CtfBot.SendPrivateMessage(player, "You must be on either team blue or team red to use this command.");
                 }
+
+                return true;
             }
 
             return false;
