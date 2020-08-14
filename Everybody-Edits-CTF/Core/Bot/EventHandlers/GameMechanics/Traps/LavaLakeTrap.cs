@@ -20,8 +20,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
         /// Handles the trap that is located in the lava lake. This trap can be activated by both the blue team and the red team, however, the player must be wearing the Fire Demon
         /// smiley.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player that is triggering the trap.</param>
-        public override void Handle(Player player)
+        public override void Handle(CtfBot ctfBot, Player player)
         {
             if (!CanTriggerTrap(player))
             {
@@ -32,14 +33,14 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
             {
                 Task.Run(async() =>
                 {
-                    CtfBot.SendPrivateMessage(player, "You triggered a secret trap!");
+                    ctfBot.SendPrivateMessage(player, "You triggered a secret trap!");
 
                     TrapActivated = true;
 
                     for (int y = 176; y >= 172; y--)
                     {
-                        CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 1058);
-                        CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), 1058);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 1058);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), 1058);
 
                         await Task.Delay(100);
                     }
@@ -48,8 +49,8 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
 
                     for (int y = 172; y <= 176; y++)
                     {
-                        CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 0);
-                        CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), 0);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 0);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), 0);
 
                         await Task.Delay(100);
                     }

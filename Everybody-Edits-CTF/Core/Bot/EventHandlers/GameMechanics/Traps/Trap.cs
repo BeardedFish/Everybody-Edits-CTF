@@ -30,7 +30,12 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
         /// </summary>
         public bool TrapActivated { get; protected set; }
 
-        public abstract void Handle(Player player);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ctfBot"></param>
+        /// <param name="player"></param>
+        public abstract void Handle(CtfBot ctfBot, Player player);
 
         public virtual bool CanTriggerTrap(Player player)
         {

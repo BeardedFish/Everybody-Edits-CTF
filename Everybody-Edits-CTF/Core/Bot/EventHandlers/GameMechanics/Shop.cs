@@ -39,9 +39,10 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// <summary>
         /// Handles when a player wants to purchase items at the shop in the Capture The Flag game. All shop items are defined in the <see cref="ShopItems"/> array.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
         /// <param name="player">The player to be handled.</param>
-        public void Handle(string messageType, Player player)
+        public void Handle(CtfBot ctfBot, string messageType, Player player)
         {
             if (!PlayersDatabaseTable.Loaded || player.VerticalDirection != VerticalDirection.Down)
             {
@@ -62,10 +63,10 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
                             playerData.Coins -= shopItem.Cost;
                             msgResult = $"You succesfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Coins == 1 ? "" : "s")}.";
 
-                            CtfBot.TeleportPlayer(player, shopItem.PurchaseTeleportLocation.X, shopItem.PurchaseTeleportLocation.Y);
+                            ctfBot.TeleportPlayer(player, shopItem.PurchaseTeleportLocation.X, shopItem.PurchaseTeleportLocation.Y);
                         }
 
-                        CtfBot.SendPrivateMessage(player, msgResult);
+                        ctfBot.SendPrivateMessage(player, msgResult);
 
                         break; // Player attempted to purchase the item, no need to check the other shop items
                     }

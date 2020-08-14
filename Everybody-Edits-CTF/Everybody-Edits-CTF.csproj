@@ -100,7 +100,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Bot\CtfBotEventHandler.cs" />
+    <Compile Include="Core\Bot\CtfBot.EventHandler.cs" />
     <Compile Include="Core\Bot\CtfBot.cs" />
     <Compile Include="Core\Bot\DataStructures\CtfGameRound.cs" />
     <Compile Include="Core\Bot\DataStructures\ParsedCommand.cs" />

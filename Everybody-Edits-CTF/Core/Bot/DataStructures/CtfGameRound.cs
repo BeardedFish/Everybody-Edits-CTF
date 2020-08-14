@@ -21,7 +21,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <summary>
         /// The object that handles the flag system for the Capture The Flag game.
         /// </summary>
-        public static readonly FlagSystem FlagSystem = new FlagSystem();
+        public readonly FlagSystem FlagSystem = new FlagSystem();
 
         /// <summary>
         /// A dictionary that stores the <see cref="Team.Blue"/> and the <see cref="Team.Red"/> scores.
@@ -49,10 +49,11 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <summary>
         /// Ends the Capture The Flag game by awarding the winning team with .
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="winningTeam">The team what won the game.</param>
-        public void End(Team winningTeam)
+        public void End(CtfBot ctfBot, Team winningTeam)
         {
-            CtfBot.SendChatMessage($"Game over! Team {TeamHelper.EnumToString(winningTeam)} has won the game.");
+            ctfBot.SendChatMessage($"Game over! Team {TeamHelper.EnumToString(winningTeam)} has won the game.");
 
             int coinsWon = GetGameFundShare(winningTeam);
             foreach (Player player in JoinedWorld.Players.Values)
@@ -66,7 +67,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
                         playerData.TotalWins++;
                         playerData.Coins += coinsWon;
 
-                        CtfBot.SendPrivateMessage(player, $"You received {coinsWon} coin{(coinsWon == 1 ? "" : "s")} for winning!");
+                        ctfBot.SendPrivateMessage(player, $"You received {coinsWon} coin{(coinsWon == 1 ? "" : "s")} for winning!");
                     }
                     else
                     {
@@ -76,8 +77,9 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             }
 
             ResetRoundStatistics();
-            CtfBot.ResetLevel();
             PlayersDatabaseTable.Save();
+
+            ctfBot.ResetLevel();
         }
 
         /// <summary>

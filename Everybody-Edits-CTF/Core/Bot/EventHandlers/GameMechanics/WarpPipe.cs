@@ -18,9 +18,10 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// Handles all warp pipes in the Everybody Edits. If a player presses down on the block id <see cref="WarpPipeEntranceBlockId"/>, they they are teleported down
         /// one block.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
         /// <param name="player">The player to be handled.</param>
-        public void Handle(string messageType, Player player)
+        public void Handle(CtfBot ctfBot, string messageType, Player player)
         {
             if (JoinedWorld.Blocks == null || !player.IsPlayingGame)
             {
@@ -31,7 +32,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
                 && player.VerticalDirection == VerticalDirection.Down
                 && JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y + 1].Id == WarpPipeEntranceBlockId)
             {
-                CtfBot.TeleportPlayer(player, player.Location.X, player.Location.Y + 1);
+                ctfBot.TeleportPlayer(player, player.Location.X, player.Location.Y + 1);
             }
         }
     }

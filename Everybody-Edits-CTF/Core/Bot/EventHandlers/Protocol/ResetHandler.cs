@@ -24,8 +24,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         /// <summary>
         /// Handles a player being reset in the Everybody Edits world.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
-        public override void Handle(Message message)
+        public override void Handle(CtfBot ctfBot, Message message)
         {
             if (message.Count >= 6)
             {
@@ -51,8 +52,8 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                         {
                             if (JoinedWorld.Players[playerId].LastAttacker != null)
                             {
-                                CtfBot.SendPrivateMessage(JoinedWorld.Players[playerId], $"You were killed by player {JoinedWorld.Players[playerId].LastAttacker.Username}!");
-                                CtfBot.SendPrivateMessage(JoinedWorld.Players[playerId].LastAttacker, $"You killed player {JoinedWorld.Players[playerId].Username}!");
+                                ctfBot.SendPrivateMessage(JoinedWorld.Players[playerId], $"You were killed by player {JoinedWorld.Players[playerId].LastAttacker.Username}!");
+                                ctfBot.SendPrivateMessage(JoinedWorld.Players[playerId].LastAttacker, $"You killed player {JoinedWorld.Players[playerId].Username}!");
 
                                 if (PlayersDatabaseTable.Loaded)
                                 {
@@ -72,17 +73,17 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
                         if (deathCount > JoinedWorld.Players[playerId].DeathCount)
                         {
-                            JoinedWorld.Players[playerId].Respawn();
+                            JoinedWorld.Players[playerId].Respawn(ctfBot);
 
                             Team enemyTeam = TeamHelper.GetOppositeTeam(JoinedWorld.Players[playerId].Team);
-                            if (CtfGameRound.FlagSystem.Flags[enemyTeam].Holder == JoinedWorld.Players[playerId])
+                            if (ctfBot.CurrentGameRound.FlagSystem.Flags[enemyTeam].Holder == JoinedWorld.Players[playerId])
                             {
-                                CtfBot.SendChatMessage($"Player {JoinedWorld.Players[playerId].Username} died while holding {TeamHelper.EnumToString(enemyTeam)} teams flag.");
+                                ctfBot.SendChatMessage($"Player {JoinedWorld.Players[playerId].Username} died while holding {TeamHelper.EnumToString(enemyTeam)} teams flag.");
 
-                                CtfGameRound.FlagSystem.Flags[enemyTeam].Return(null, false);
+                                ctfBot.CurrentGameRound.FlagSystem.Flags[enemyTeam].Return(ctfBot, null, false);
                             }
 
-                            CtfBot.RemoveEffects(JoinedWorld.Players[playerId]);
+                            ctfBot.RemoveEffects(JoinedWorld.Players[playerId]);
                         }
 
                         JoinedWorld.Players[playerId].DeathCount = deathCount;

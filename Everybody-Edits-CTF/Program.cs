@@ -43,6 +43,8 @@ namespace Everybody_Edits_CTF
 
             Console.WriteLine("Type \"help\" for a list of commands.\n");
 
+            CtfBot captureTheFlagBot = new CtfBot();
+
             string inputCmd;
             do
             {
@@ -68,15 +70,15 @@ namespace Everybody_Edits_CTF
                         Console.WriteLine($"[{(PlayersDatabaseTable.Loaded ? "SUCCESS" : $"FAIL")}]");
     
                         Console.Write("Connecting to Everybody Edits... ");
-                        Console.WriteLine($"[{(CtfBot.Connect() == null ? "SUCCESS" : $"FAIL")}]");
+                        Console.WriteLine($"[{(captureTheFlagBot.Connect() == null ? "SUCCESS" : $"FAIL")}]");
                     }
                     else if (string.Equals(inputCmd, "disconnect", CommandCompareCase))
                     {
-                        if (CtfBot.Connected)
+                        if (captureTheFlagBot.Connected)
                         {
                             Console.WriteLine("Disconnecting...");
 
-                            CtfBot.Disconnect();
+                            captureTheFlagBot.Disconnect();
                         }
                         else
                         {

@@ -15,9 +15,10 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// <summary>
         /// Handles team balance in the Capture The Flag game. If a player joins a team and the teams are unbalanced, then they are transferred to the other team.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
         /// <param name="player">The player to be handled.</param>
-        public void Handle(string messageType, Player player)
+        public void Handle(CtfBot ctfBot, string messageType, Player player)
         {
             if (!player.IsPlayingGame)
             {
@@ -35,11 +36,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
                     resultMsg = "Unbalanced teams! You have been transferred to the other team!";
 
                     Point teleLocation = player.Team == Team.Blue ? GameSettings.RedCheckpointLocation : GameSettings.BlueCheckpointLocation;
-                    CtfBot.TeleportPlayer(player, teleLocation.X, teleLocation.Y);
+                    ctfBot.TeleportPlayer(player, teleLocation.X, teleLocation.Y);
                 }
             }
 
-            CtfBot.SendPrivateMessage(player, resultMsg);
+            ctfBot.SendPrivateMessage(player, resultMsg);
         }
     }
 }

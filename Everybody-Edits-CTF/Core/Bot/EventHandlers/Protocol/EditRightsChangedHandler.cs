@@ -22,8 +22,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         /// <summary>
         /// Handles when a player gains/loses their edit rights in the Everybody Edits world.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
-        public override void Handle(Message message)
+        public override void Handle(CtfBot ctfBot, Message message)
         {
             int playerId = message.GetInt(0);
 

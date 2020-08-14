@@ -37,22 +37,24 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers
         /// <summary>
         /// Abstract method which is supposed to handle a <see cref="Message.Type"/>. Implementation will vary.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="message">The message to be handled.</param>
-        public abstract void Handle(Message message);
+        public abstract void Handle(CtfBot ctfBot, Message message);
 
         /// <summary>
         /// Executes all game mechanics in the <see cref="GameMechanics"/> that are not null. The game mechanics are executed via the <see cref="IGameMechanic.Handle(string, Player)"/>
         /// method.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="messageType">The <see cref="Message.Type"/> that is triggering the game mechanic.</param>
         /// <param name="player">The player that the game mechanic(s) is executing for.</param>
-        public virtual void ExecuteGameMechanics(string messageType, Player player)
+        public virtual void ExecuteGameMechanics(CtfBot ctfBot, string messageType, Player player)
         {
             if (GameMechanics != null)
             {
                 foreach (IGameMechanic mechanic in GameMechanics)
                 {
-                    mechanic?.Handle(messageType, player);
+                    mechanic?.Handle(ctfBot, messageType, player);
                 }
             }
         }

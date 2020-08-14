@@ -23,8 +23,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         /// <summary>
         /// Handles a player leaving the Everybody Edits world.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
-        public override void Handle(Message message)
+        public override void Handle(CtfBot ctfBot, Message message)
         {
             int playerId = message.GetInt(0);
 
@@ -32,9 +33,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
             {
                 string username = JoinedWorld.Players[playerId].Username;
 
-                if (JoinedWorld.Players[playerId].HasEnemyFlag)
+                if (JoinedWorld.Players[playerId].HasEnemyFlag(ctfBot))
                 {
-                    CtfGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(JoinedWorld.Players[playerId].Team)].Return(null, false);
+                    ctfBot.CurrentGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(JoinedWorld.Players[playerId].Team)].Return(ctfBot, null, false);
                 }
 
                 JoinedWorld.Players.Remove(playerId);

@@ -26,9 +26,10 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// Handles the flag system in the Capture The Flag game. The flag system consists of capturing, returning, and taking a flag. If the <see cref="GameSettings.MaxScoreToWin"/>
         /// is reached after a flag is captured, then the game is ended via the <see cref="CtfGameRound.End(Team)"/> method.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
         /// <param name="player">The player to be handled.</param>
-        public void Handle(string messageType, Player player)
+        public void Handle(CtfBot ctfBot, string messageType, Player player)
         {
             if (player.IsInGodMode || !player.IsPlayingGame)
             {
@@ -40,26 +41,26 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
 
             if (enemyFlag.CanBeCapturedBy(player, friendlyFlag))
             {
-                enemyFlag.Capture();
+                enemyFlag.Capture(ctfBot);
 
-                CtfBot.CurrentGameRound.Scores[player.Team]++;
-                CtfBot.SendChatMessage(CtfBot.CurrentGameRound.GetScoresString());
-                CtfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagCaptured);
+                ctfBot.CurrentGameRound.Scores[player.Team]++;
+                ctfBot.SendChatMessage(ctfBot.CurrentGameRound.GetScoresString());
+                ctfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagCaptured);
 
-                if (CtfBot.CurrentGameRound.Scores[player.Team] >= GameSettings.MaxScoreToWin)
+                if (ctfBot.CurrentGameRound.Scores[player.Team] >= GameSettings.MaxScoreToWin)
                 {
-                    CtfBot.CurrentGameRound.End(player.Team);
+                    ctfBot.CurrentGameRound.End(ctfBot, player.Team);
                 }
             }
             else if (enemyFlag.CanBeTakenBy(player))
             {
-                enemyFlag.Take(player);
+                enemyFlag.Take(ctfBot, player);
 
-                CtfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagTaken);
+                ctfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagTaken);
             }
             else if (friendlyFlag.CanBeReturnedBy(player))
             {
-                friendlyFlag.Return(player, false);
+                friendlyFlag.Return(ctfBot, player, false);
             }
         }
     }

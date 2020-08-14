@@ -21,8 +21,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         /// <summary>
         /// Handles a player changing their smiley in the Everybody Edits world.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
-        public override void Handle(Message message)
+        public override void Handle(CtfBot ctfBot, Message message)
         {
             int playerId = message.GetInt(0);
             int smileyId = message.GetInt(1);
@@ -33,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
                 if (JoinedWorld.Players[playerId].IsPlayingGame && smileyId == (int)Smiley.Nurse)
                 {
-                    CtfBot.SendPrivateMessage(JoinedWorld.Players[playerId], "You are now a healer for your team!");
+                    ctfBot.SendPrivateMessage(JoinedWorld.Players[playerId], "You are now a healer for your team!");
                 }
             }
         }

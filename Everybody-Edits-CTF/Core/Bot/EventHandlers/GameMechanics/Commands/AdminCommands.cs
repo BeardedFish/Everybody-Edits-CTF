@@ -22,13 +22,14 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         /// <summary>
         /// Handles a player executing an administrator command.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player executing the command.</param>
         /// <param name="parsedCommand">The command being executed.</param>
         /// <returns>
         /// True if the command was succesfully handled, if not, false. A succesful handle is when the parsed command is not equal to null and also the ValidCommands string
         /// array contains the parsed command.
         /// </returns>
-        public override bool Handle(Player player, ParsedCommand parsedCommand)
+        public override bool Handle(CtfBot ctfBot, Player player, ParsedCommand parsedCommand)
         {
             if (parsedCommand != null && ValidCommands.Contains(parsedCommand.Command))
             {
@@ -38,7 +39,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                     {
                         case "disconnect":
                             {
-                                CtfBot.Disconnect();
+                                ctfBot.Disconnect();
                             }
                             break;
                         case "kick":
@@ -58,16 +59,16 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                             }
                                         }
 
-                                        CtfBot.KickPlayer(playerToKick, reason);
+                                        ctfBot.KickPlayer(playerToKick, reason);
                                     }
                                     else
                                     {
-                                        CtfBot.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
+                                        ctfBot.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
                                     }
                                 }
                                 else
                                 {
-                                    CtfBot.SendPrivateMessage(player, "You don't have permission to execute this command.");
+                                    ctfBot.SendPrivateMessage(player, "You don't have permission to execute this command.");
                                 }
                             }
                             break;
@@ -77,7 +78,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                 }
                 else
                 {
-                    CtfBot.SendPrivateMessage(player, "You don't have permission to execute this command.");
+                    ctfBot.SendPrivateMessage(player, "You don't have permission to execute this command.");
                 }
             }
 

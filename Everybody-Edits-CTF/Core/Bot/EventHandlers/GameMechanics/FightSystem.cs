@@ -12,9 +12,10 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// Handles the fight system in the Capture The Flag game. A player can attack another player if they are not on the same team and if they spam WASD/arrow keys
         /// near the enemy player.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
         /// <param name="player">The player to be handled.</param>
-        public void Handle(string messageType, Player player)
+        public void Handle(CtfBot ctfBot, string messageType, Player player)
         {
             if (!player.IsPlayingGame || player.IsInGodMode)
             {
@@ -32,11 +33,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
                 {
                     enemyPlayer.Attack(player);
 
-                    HandleHealthStatusWarning(enemyPlayer);
+                    HandleHealthStatusWarning(ctfBot, enemyPlayer);
 
                     if (enemyPlayer.Health <= 0)
                     {
-                        enemyPlayer.Die();
+                        enemyPlayer.Die(ctfBot);
                     }
                 }
             }
@@ -45,8 +46,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// <summary>
         /// Sends a player a private message if their health is at a certain level. The private message is to warn them that they are close to being killed by an enemy player.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player to warn about their health.</param>
-        private void HandleHealthStatusWarning(Player player)
+        private void HandleHealthStatusWarning(CtfBot ctfBot, Player player)
         {
             string healthDescription = null;
 
@@ -64,7 +66,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
             {
                 string msg = $"Warning! Your health is {healthDescription} ({player.Health} HP).";
 
-                CtfBot.SendPrivateMessage(player, msg);
+                ctfBot.SendPrivateMessage(player, msg);
             }
         }
     }

@@ -24,8 +24,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         /// <summary>
         /// Handles a bot initially joining an Everybody Edits world by getting information about it and doing a few events (such as moving).
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
-        public override void Handle(Message message)
+        public override void Handle(CtfBot ctfBot, Message message)
         {
             if (message.Type == EverybodyEditsMessage.InitBegin)
             {
@@ -33,14 +34,14 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                 JoinedWorld.Height = message.GetInt(19);
                 JoinedWorld.Blocks = WorldDeserializer.DeserializeBlocks(message, JoinedWorld.Width, JoinedWorld.Height);
 
-                CtfBot.Send(EverybodyEditsMessage.InitEnd);
+                ctfBot.Send(EverybodyEditsMessage.InitEnd);
             }
             else // Init end
             {
-                CtfBot.SetWorldTitle($"{BotSettings.WorldTitle} [ON]");
-                CtfBot.SetGodMode(true);
-                CtfBot.Move(BotSettings.JoinLocation);
-                CtfBot.SendChatMessage("Connected!");
+                ctfBot.SetWorldTitle($"{BotSettings.WorldTitle} [ON]");
+                ctfBot.SetGodMode(true);
+                ctfBot.Move(BotSettings.JoinLocation);
+                ctfBot.SendChatMessage("Connected!");
 
                 Logger.WriteLog(LogType.EverybodyEditsMessage, "Connected to Everybody Edits succesfully!");
             }

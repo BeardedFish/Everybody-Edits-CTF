@@ -19,8 +19,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
         /// <summary>
         /// Handles the trap that is located in the blue team's base. This trap can only be activated by the blue team.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player that is triggering the trap.</param>
-        public override void Handle(Player player)
+        public override void Handle(CtfBot ctfBot, Player player)
         {
             if (!CanTriggerTrap(player))
             {
@@ -32,14 +33,14 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
                 TrapActivated = true;
 
                 // Close gate
-                CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), 1058);
-                CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), 1058);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), 1058);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), 1058);
 
                 // Pour lava
                 for (int i = 175; i <= 179; i++)
                 {
-                    CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), 416);
-                    CtfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), 629);
+                    ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), 416);
+                    ctfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), 629);
 
                     await Task.Delay(100);
                 }
@@ -49,15 +50,15 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
                 // Remove lava
                 for (int i = 175; i <= 179; i++)
                 {
-                    CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), 0);
-                    CtfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), 507);
+                    ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), 0);
+                    ctfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), 507);
 
                     await Task.Delay(100);
                 }
 
                 // Open gate
-                CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), 0);
-                CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), 0);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), 0);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), 0);
 
                 await Task.Delay(TrapCooldownMs);
 

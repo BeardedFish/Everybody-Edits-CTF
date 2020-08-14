@@ -60,11 +60,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         public int DeathCount { get; set; }
 
         /// <summary>
-        /// States whether the player is currently holding the enemy flag or not.
-        /// </summary>
-        public bool HasEnemyFlag => IsPlayingGame ? CtfGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
-
-        /// <summary>
         /// States whether the player is in the blue teams base or not.
         /// </summary>
         public bool IsInBlueBase
@@ -203,11 +198,22 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         }
 
         /// <summary>
-        /// Tells the bot to kill this player.
+        /// Tells the Capture The Flag bot to kill this player.
         /// </summary>
-        public void Die()
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        public void Die(CtfBot ctfBot)
         {
-            CtfBot.KillPlayer(this);
+            ctfBot.KillPlayer(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <returns></returns>
+        public bool HasEnemyFlag(CtfBot ctfBot)
+        {
+            return IsPlayingGame ? ctfBot.CurrentGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
         }
 
         /// <summary>
@@ -225,7 +231,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// Respawns the player to their teams respawn location. When respawning, the player has to wait <see cref="GameSettings.RespawnCooldownMs"/>. If the players team
         /// is <see cref="Team.None"/> then this method does nothing. 
         /// </summary>
-        public void Respawn()
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        public void Respawn(CtfBot ctfBot)
         {
             if (!IsPlayingGame || IsRespawning)
             {
@@ -237,12 +244,12 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             Task.Run(async() =>
             {
                 Point respawnCooldownLocation = Team == Team.Blue ? GameSettings.BlueRespawnCooldownLocation : GameSettings.RedRespawnCooldownLocation;
-                CtfBot.TeleportPlayer(this, respawnCooldownLocation.X, respawnCooldownLocation.Y);
+                ctfBot.TeleportPlayer(this, respawnCooldownLocation.X, respawnCooldownLocation.Y);
 
                 await Task.Delay(GameSettings.RespawnCooldownMs);
 
                 Point respawnLocation = Team == Team.Blue ? GameSettings.BlueCheckpointLocation : GameSettings.RedCheckpointLocation;
-                CtfBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
+                ctfBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
             });
         }
 
@@ -257,9 +264,10 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <summary>
         /// Teleports the player to the lobby.
         /// </summary>
-        public void GoToLobby()
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        public void GoToLobby(CtfBot ctfBot)
         {
-            CtfBot.ResetPlayer(this);
+            ctfBot.ResetPlayer(this);
         }
 
         public void UpdateMovementInformation(Message message)

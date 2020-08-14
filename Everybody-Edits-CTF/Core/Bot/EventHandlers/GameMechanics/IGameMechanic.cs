@@ -11,8 +11,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// <summary>
         /// Handles a specific game mechanic for the Capture The Flag game. Implementation will vary.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
         /// <param name="player">The player to be handled.</param>
-        void Handle(string messageType, Player player);
+        void Handle(CtfBot ctfBot, string messageType, Player player);
     }
 }

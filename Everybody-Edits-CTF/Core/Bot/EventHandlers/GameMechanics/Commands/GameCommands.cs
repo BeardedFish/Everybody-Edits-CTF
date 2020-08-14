@@ -24,13 +24,14 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         /// <summary>
         /// Handles a player executing a game command.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player executing the command.</param>
         /// <param name="parsedCommand">The command being executed.</param>
         /// <returns>
         /// True if the command was succesfully handled, if not, false. A succesful handle is when the parsed command is not equal to null and also the ValidCommands string
         /// array contains the parsed command.
         /// </returns>
-        public override bool Handle(Player player, ParsedCommand parsedCommand)
+        public override bool Handle(CtfBot ctfBot, Player player, ParsedCommand parsedCommand)
         {
             if (parsedCommand != null && ValidCommands.Contains(parsedCommand.Command))
             {
@@ -42,17 +43,17 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         case "redflag":
                             {
                                 Team targetTeam = parsedCommand.Command == "blueflag" ? Team.Blue : Team.Red;
-                                string flagHolderUsername = CtfGameRound.FlagSystem.Flags[targetTeam].Holder == null ? null : CtfGameRound.FlagSystem.Flags[targetTeam].Holder.Username;
+                                string flagHolderUsername = ctfBot.CurrentGameRound.FlagSystem.Flags[targetTeam].Holder == null ? null : ctfBot.CurrentGameRound.FlagSystem.Flags[targetTeam].Holder.Username;
                                 string teamName = TeamHelper.EnumToString(targetTeam);
                                 string msgToSend = flagHolderUsername != null ? $"Player {flagHolderUsername} has the {teamName} flag." : $"No one has {teamName} flag.";
 
-                                CtfBot.SendChatMessage(msgToSend);
+                                ctfBot.SendChatMessage(msgToSend);
                             }
                             break;
                         case "dropflag":
                             {
                                 Team enemyTeam = TeamHelper.GetOppositeTeam(player.Team);
-                                Flag enemyTeamFlag = CtfGameRound.FlagSystem.Flags[enemyTeam];
+                                Flag enemyTeamFlag = ctfBot.CurrentGameRound.FlagSystem.Flags[enemyTeam];
 
                                 if (enemyTeamFlag.Holder == player)
                                 {
@@ -60,23 +61,23 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                     {
                                         if (JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y].Id == 0)
                                         {
-                                            enemyTeamFlag.Drop();
+                                            enemyTeamFlag.Drop(ctfBot);
                                         }
                                         else
                                         {
-                                            CtfBot.SendPrivateMessage(player, "You can't drop the flag here!");
+                                            ctfBot.SendPrivateMessage(player, "You can't drop the flag here!");
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    CtfBot.SendPrivateMessage(player, "You are not holding the enemy flag.");
+                                    ctfBot.SendPrivateMessage(player, "You are not holding the enemy flag.");
                                 }
                             }
                             break;
                         case "gamefund":
                             {
-                                CtfBot.SendPrivateMessage(player, $"The game fund is currently: {CtfBot.CurrentGameRound.GameFund} coins.");
+                                ctfBot.SendPrivateMessage(player, $"The game fund is currently: {ctfBot.CurrentGameRound.GameFund} coins.");
                             }
                             break;
                         case "heal":
@@ -91,36 +92,36 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                     resultMsg = "Success! Your health was restored fully.";
                                 }
 
-                                CtfBot.SendPrivateMessage(player, resultMsg);
+                                ctfBot.SendPrivateMessage(player, resultMsg);
                             }
                             break;
                         case "health":
                         case "hp":
                             {
-                                CtfBot.SendPrivateMessage(player, $"Your current health is: {player.Health} HP.");
+                                ctfBot.SendPrivateMessage(player, $"Your current health is: {player.Health} HP.");
                             }
                             break;
                         case "lobby":
                         case "quit":
                             {
-                                player.GoToLobby();
+                                player.GoToLobby(ctfBot);
                             }
                             break;
                         case "maxflags":
                             {
-                                CtfBot.SendPrivateMessage(player, $"The maximum number of flags to win is {GameSettings.MaxScoreToWin} flag{(GameSettings.MaxScoreToWin == 1 ? "" : "s")}.");
+                                ctfBot.SendPrivateMessage(player, $"The maximum number of flags to win is {GameSettings.MaxScoreToWin} flag{(GameSettings.MaxScoreToWin == 1 ? "" : "s")}.");
                             }
                             break;
                         case "scores":
                             {
-                                CtfBot.SendPrivateMessage(player, CtfBot.CurrentGameRound.GetScoresString());
+                                ctfBot.SendPrivateMessage(player, ctfBot.CurrentGameRound.GetScoresString());
                             }
                             break;
                         case "suicide":
                             {
                                 if (!player.IsRespawning)
                                 {
-                                    player.Die();
+                                    player.Die(ctfBot);
                                 }
                             }
                             break;
@@ -128,7 +129,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                 }
                 else
                 {
-                    CtfBot.SendPrivateMessage(player, "You must be on either team blue or team red to use this command.");
+                    ctfBot.SendPrivateMessage(player, "You must be on either team blue or team red to use this command.");
                 }
 
                 return true;

@@ -31,10 +31,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Commands
         /// <summary>
         /// Handles a player executing a bot command. Implementation will vary.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player to be handled.</param>
         /// <param name="parsedCommand">The command to be handled.</param>
         /// <returns>Implementation will vary.</returns>
-        public abstract bool Handle(Player player, ParsedCommand parsedCommand);
+        public abstract bool Handle(CtfBot ctfBot, Player player, ParsedCommand parsedCommand);
 
         /// <summary>
         /// States whether a chat message is a valid bot command or not. A valid bot command has a prefix of any value defined in <see cref="CommandPrefixes"/>.

@@ -28,8 +28,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         /// <summary>
         /// Handles a player joining the Everybody Edits world.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
-        public override void Handle(Message message)
+        public override void Handle(CtfBot ctfBot, Message message)
         {
             int playerId = message.GetInt(0);
 
@@ -58,12 +59,12 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                         {
                             PlayersDatabaseTable.AddNewPlayer(username);
 
-                            CtfBot.SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
+                            ctfBot.SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
                         }
                     }
                 }
 
-                ExecuteGameMechanics(message.Type, JoinedWorld.Players[playerId]);
+                ExecuteGameMechanics(ctfBot, message.Type, JoinedWorld.Players[playerId]);
 
                 Logger.WriteLog(LogType.EverybodyEditsMessage, $"Player {username.ToUpper()} (id: {playerId}) has joined the world.");
             }

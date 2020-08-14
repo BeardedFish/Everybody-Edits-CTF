@@ -19,8 +19,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
         /// <summary>
         /// Handles the bridge trap. This trap can be activated by both the blue team and the red team.
         /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player that is triggering the trap.</param>
-        public override void Handle(Player player)
+        public override void Handle(CtfBot ctfBot, Player player)
         {
             if (!base.CanTriggerTrap(player))
             {
@@ -35,7 +36,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
 
                     for (int x = 94; x <= 105; x++)
                     {
-                        CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 0);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 0);
 
                         await Task.Delay(100);
                     }
@@ -44,7 +45,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
 
                     for (int x = 94; x <= 105; x++)
                     {
-                        CtfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 47);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 47);
 
                         await Task.Delay(100);
                     }
