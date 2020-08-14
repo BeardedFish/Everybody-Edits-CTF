@@ -4,6 +4,7 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Deserializer;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Logging;
 using PlayerIOClient;

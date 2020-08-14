@@ -1,8 +1,10 @@
 ﻿// File Name:     EverybodyEditsMessage.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, July 2, 2020
+//
+// NOTE:          Although this is a class and not an enum data type, it acts like one.
 
-namespace Everybody_Edits_CTF.Core.Bot
+namespace Everybody_Edits_CTF.Core.Bot.Enums
 {
     public static class EverybodyEditsMessage
     {

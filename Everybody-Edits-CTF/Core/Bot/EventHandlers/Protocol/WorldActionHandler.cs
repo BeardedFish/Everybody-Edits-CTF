@@ -5,6 +5,7 @@
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Deserializer;
 using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol

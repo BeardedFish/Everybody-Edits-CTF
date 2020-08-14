@@ -17,7 +17,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
         }
 
         /// <summary>
-        /// Handles the trap that is located in the blue team's base. This trap can only be activated by the red team.
+        /// Handles the trap that is located in the blue team's base. This trap can only be activated by the blue team.
         /// </summary>
         /// <param name="player">The player that is triggering the trap.</param>
         public override void Handle(Player player)
