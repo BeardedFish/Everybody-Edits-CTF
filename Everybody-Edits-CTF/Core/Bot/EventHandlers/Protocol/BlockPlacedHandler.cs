@@ -11,6 +11,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class BlockPlacedHandler : BotEvent
     {
+        /// <summary>
+        /// Event handler for when a block is placed in the Everybody Edits world. This class modifies the <see cref="JoinedWorld.Blocks"/> array.
+        /// </summary>
         public BlockPlacedHandler() : base(new string[]
             {
                 EverybodyEditsMessage.MorphableBlockPlaced,
@@ -25,10 +28,12 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
         }
 
+        /// <summary>
+        /// Handles a block being placed in the Everybody Edits world.
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
-            base.Handle(message);
-
             if (JoinedWorld.Blocks != null)
             {
                 switch (message.Type)
