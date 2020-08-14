@@ -12,15 +12,20 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class InitHandler : BotEvent
     {
+        /// <summary>
+        /// Event handler for when the bot initially joins the world. This class modifies the properties defined in the <see cref="JoinedWorld"/> class..
+        /// </summary>
         public InitHandler() : base(new string[] { EverybodyEditsMessage.InitBegin, EverybodyEditsMessage.InitEnd }, null)
         {
 
         }
 
+        /// <summary>
+        /// Handles a bot initially joining an Everybody Edits world by getting information about it and doing a few events (such as moving).
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
-            base.Handle(message);
-
             if (message.Type == EverybodyEditsMessage.InitBegin)
             {
                 JoinedWorld.Width = message.GetInt(18);
@@ -29,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
                 CtfBot.Send(EverybodyEditsMessage.InitEnd);
             }
-            else
+            else // Init end
             {
                 CtfBot.SetWorldTitle($"{BotSettings.WorldTitle} [ON]");
                 CtfBot.SetGodMode(true);
