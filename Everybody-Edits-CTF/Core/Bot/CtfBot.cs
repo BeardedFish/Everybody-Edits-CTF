@@ -1,4 +1,4 @@
-﻿// File Name:     CtfBot.cs
+// File Name:     CtfBot.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -132,6 +132,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="msg">The chat message to be sent.</param>
         public void SendChatMessage(string msg)
         {
+            int maxChatMessageLength = 140 - BotSettings.ChatMessagePrefix.Length - 2;
             string msgChunk;
 
             for (int i = 0; i < msg.Length; i += maxChatMessageLength)
