@@ -9,7 +9,7 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerTeamChangedHandler : EverybodyEditsBotEvent
+    public sealed class PlayerTeamChangedHandler : BotEvent
     {
         public PlayerTeamChangedHandler() : base(new string[] { EverybodyEditsMessage.TeamChanged }, new IGameMechanic[] { new AutoBalance() })
         {

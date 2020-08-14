@@ -9,7 +9,7 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class WorldActionHandler : EverybodyEditsBotEvent
+    public sealed class WorldActionHandler : BotEvent
     {
         public WorldActionHandler() : base(new string[] { EverybodyEditsMessage.ClearWorld, EverybodyEditsMessage.ReloadWorld, EverybodyEditsMessage.SystemMessage }, null)
         {

@@ -8,7 +8,7 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class GodModeToggledHandler : EverybodyEditsBotEvent
+    public sealed class GodModeToggledHandler : BotEvent
     {
         public GodModeToggledHandler() : base(new string[] { EverybodyEditsMessage.GodModeToggled }, new IGameMechanic[] { new AntiCheat(), new SpectateMode() })
         {

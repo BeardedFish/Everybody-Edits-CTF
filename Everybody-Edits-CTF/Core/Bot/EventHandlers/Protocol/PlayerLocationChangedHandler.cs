@@ -8,9 +8,9 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerLocationChangedHandler : EverybodyEditsBotEvent
+    public sealed class PlayerLocationChangedHandler : BotEvent
     {
-        public PlayerLocationChangedHandler() : base(new string[] { EverybodyEditsMessage.PlayerMoved, EverybodyEditsMessage.PlayerTeleported }, new IGameMechanic[] { new FightSystem(), JoinedWorld.FlagSystem, new HealSystem(), new RoomEntrance(), new Shop(), new TrapSystem(), new WarpPipe() })
+        public PlayerLocationChangedHandler() : base(new string[] { EverybodyEditsMessage.PlayerMoved, EverybodyEditsMessage.PlayerTeleported }, new IGameMechanic[] { new FightSystem(), CtfGameRound.FlagSystem, new HealSystem(), new RoomEntrance(), new Shop(), new TrapSystem(), new WarpPipe() })
         {
 
         }

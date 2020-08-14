@@ -9,7 +9,7 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class ChatMessageReceivedHandler : EverybodyEditsBotEvent
+    public sealed class ChatMessageReceivedHandler : BotEvent
     {
         private Command[] botCommands;
 

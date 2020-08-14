@@ -11,7 +11,7 @@ using System;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerResetHandler : EverybodyEditsBotEvent
+    public sealed class PlayerResetHandler : BotEvent
     {
         public PlayerResetHandler() : base(new string[] { EverybodyEditsMessage.PlayerReset }, null)
         {
@@ -70,11 +70,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                             JoinedWorld.Players[playerId].Respawn();
 
                             Team enemyTeam = TeamHelper.GetOppositeTeam(JoinedWorld.Players[playerId].Team);
-                            if (JoinedWorld.FlagSystem.Flags[enemyTeam].Holder == JoinedWorld.Players[playerId])
+                            if (CtfGameRound.FlagSystem.Flags[enemyTeam].Holder == JoinedWorld.Players[playerId])
                             {
                                 CtfBot.SendChatMessage($"Player {JoinedWorld.Players[playerId].Username} died while holding {TeamHelper.EnumToString(enemyTeam)} teams flag.");
 
-                                JoinedWorld.FlagSystem.Flags[enemyTeam].Return(null, false);
+                                CtfGameRound.FlagSystem.Flags[enemyTeam].Return(null, false);
                             }
 
                             CtfBot.RemoveEffects(JoinedWorld.Players[playerId]);

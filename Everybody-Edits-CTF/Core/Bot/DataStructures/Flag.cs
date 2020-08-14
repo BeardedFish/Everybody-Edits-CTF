@@ -192,7 +192,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             Holder = null;
 
             CtfBot.PlaceBlock(BlockLayer.Foreground, HomeLocation, Block.Id, Block.MorphId);
-            GameFund.Increase(GameFundIncreaseReason.FlagReturned);
+            CtfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagReturned);
 
             if (!flagCaptured)
             {

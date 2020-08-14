@@ -3,7 +3,6 @@
 // Date:          Wednesday, July 15, 2020
 
 using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
-using Everybody_Edits_CTF.Core.Bot.EventHandlers;
 using System;
 using System.Collections.Generic;
 
@@ -11,16 +10,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
 {
     public static class JoinedWorld
     {
-        /// <summary>
-        /// The anti-cheat system for the world that the bot joined.
-        /// </summary>
-        public static readonly AntiCheat AntiCheat = new AntiCheat();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public static readonly FlagSystem FlagSystem = new FlagSystem();
-
         /// <summary>
         /// The width of the Everybody Edits world that the bot joined.
         /// </summary>

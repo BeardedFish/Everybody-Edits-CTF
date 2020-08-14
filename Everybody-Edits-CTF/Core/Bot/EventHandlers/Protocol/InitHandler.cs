@@ -10,7 +10,7 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class InitHandler : EverybodyEditsBotEvent
+    public sealed class InitHandler : BotEvent
     {
         public InitHandler() : base(new string[] { EverybodyEditsMessage.InitBegin, EverybodyEditsMessage.InitEnd }, null)
         {

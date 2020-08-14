@@ -13,7 +13,7 @@ using System.Drawing;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerJoinedWorldHandler : EverybodyEditsBotEvent
+    public sealed class PlayerJoinedWorldHandler : BotEvent
     {
         public PlayerJoinedWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerJoinedWorld }, new IGameMechanic[] { new DailyBonus() } )
         {

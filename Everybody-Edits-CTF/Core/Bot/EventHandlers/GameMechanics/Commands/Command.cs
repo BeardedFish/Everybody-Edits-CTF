@@ -1,6 +1,6 @@
 ﻿// File Name:     Commands.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
-// Date:          Sunday, July 5, 2020
+// Date:          Thursday, August 13, 2020
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using System.Linq;

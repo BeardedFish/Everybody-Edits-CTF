@@ -8,7 +8,7 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class SmileyChangedHandler : EverybodyEditsBotEvent
+    public sealed class SmileyChangedHandler : BotEvent
     {
         public SmileyChangedHandler() : base(new string[] { EverybodyEditsMessage.ClearWorld }, null)
         {

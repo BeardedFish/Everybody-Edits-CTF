@@ -62,7 +62,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <summary>
         /// States whether the player is currently holding the enemy flag or not.
         /// </summary>
-        public bool HasEnemyFlag => IsPlayingGame ? JoinedWorld.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
+        public bool HasEnemyFlag => IsPlayingGame ? CtfGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
 
         /// <summary>
         /// States whether the player is in the blue teams base or not.

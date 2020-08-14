@@ -9,7 +9,7 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerLeftWorldHandler : EverybodyEditsBotEvent
+    public sealed class PlayerLeftWorldHandler : BotEvent
     {
         public PlayerLeftWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerLeftWorld, EverybodyEditsMessage.PlayerJoinedWorld }, null)
         {
@@ -28,7 +28,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
                 if (JoinedWorld.Players[playerId].HasEnemyFlag)
                 {
-                    JoinedWorld.FlagSystem.Flags[TeamHelper.GetOppositeTeam(JoinedWorld.Players[playerId].Team)].Return(null, false);
+                    CtfGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(JoinedWorld.Players[playerId].Team)].Return(null, false);
                 }
 
                 JoinedWorld.Players.Remove(playerId);

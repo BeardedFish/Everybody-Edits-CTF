@@ -20,7 +20,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
                 {
                     CtfBot.SendChatMessage($"ANTI-CHEAT! Player {player.Username} has used God mode while carrying the {TeamHelper.EnumToString(TeamHelper.GetOppositeTeam(player.Team))} teams flag!");
 
-                    JoinedWorld.FlagSystem.Flags[TeamHelper.GetOppositeTeam(player.Team)].Return(null, false);
+                    CtfGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(player.Team)].Return(null, false);
                 }
             }
         }

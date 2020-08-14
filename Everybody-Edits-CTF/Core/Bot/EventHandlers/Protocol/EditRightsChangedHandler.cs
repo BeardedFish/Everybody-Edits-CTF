@@ -7,7 +7,7 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class EditRightsChangedHandler : EverybodyEditsBotEvent
+    public sealed class EditRightsChangedHandler : BotEvent
     {
         public EditRightsChangedHandler() : base(new string[] { EverybodyEditsMessage.EditRightsChanged }, null)
         {

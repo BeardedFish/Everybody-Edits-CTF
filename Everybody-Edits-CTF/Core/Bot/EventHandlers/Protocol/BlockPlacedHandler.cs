@@ -9,7 +9,7 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class BlockPlacedHandler : EverybodyEditsBotEvent
+    public sealed class BlockPlacedHandler : BotEvent
     {
         public BlockPlacedHandler() : base(new string[]
             {

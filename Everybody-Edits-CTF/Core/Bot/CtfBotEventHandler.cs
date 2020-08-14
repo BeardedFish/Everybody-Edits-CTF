@@ -14,7 +14,7 @@ namespace Everybody_Edits_CTF.Core.Bot
 {
     public class CtfBotEventHandler
     {
-        private readonly CtfBotEvent[] botEventHandlers = new CtfBotEvent[]
+        private readonly BotEvent[] botEventHandlers = new BotEvent[]
         {
             new InitHandler(),
             new BlockPlacedHandler(),
@@ -66,7 +66,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="m">The message object that contains data about the message received.</param>
         private void OnMessage(object sender, Message m)
         {
-            foreach (CtfBotEvent eventHandler in botEventHandlers)
+            foreach (BotEvent eventHandler in botEventHandlers)
             {
                 if (!eventHandler.Equals(m.Type))
                 {

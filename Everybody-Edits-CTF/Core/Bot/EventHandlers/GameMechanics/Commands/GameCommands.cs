@@ -31,7 +31,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         case "redflag":
                             {
                                 Team targetTeam = parsedCommand.Command == "blueflag" ? Team.Blue : Team.Red;
-                                string flagHolderUsername = JoinedWorld.FlagSystem.Flags[targetTeam].Holder == null ? null : JoinedWorld.FlagSystem.Flags[targetTeam].Holder.Username;
+                                string flagHolderUsername = CtfGameRound.FlagSystem.Flags[targetTeam].Holder == null ? null : CtfGameRound.FlagSystem.Flags[targetTeam].Holder.Username;
                                 string teamName = TeamHelper.EnumToString(targetTeam);
                                 string msgToSend = flagHolderUsername != null ? $"Player {flagHolderUsername} has the {teamName} flag." : $"No one has {teamName} flag.";
 
@@ -41,7 +41,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         case "dropflag":
                             {
                                 Team enemyTeam = TeamHelper.GetOppositeTeam(player.Team);
-                                Flag enemyTeamFlag = JoinedWorld.FlagSystem.Flags[enemyTeam];
+                                Flag enemyTeamFlag = CtfGameRound.FlagSystem.Flags[enemyTeam];
 
                                 if (enemyTeamFlag.Holder == player)
                                 {
@@ -65,7 +65,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             break;
                         case "gamefund":
                             {
-                                CtfBot.SendPrivateMessage(player, $"The game fund is currently: {GameFund.CoinsRaised} coins.");
+                                CtfBot.SendPrivateMessage(player, $"The game fund is currently: {CtfBot.CurrentGameRound.GameFund} coins.");
                             }
                             break;
                         case "heal":

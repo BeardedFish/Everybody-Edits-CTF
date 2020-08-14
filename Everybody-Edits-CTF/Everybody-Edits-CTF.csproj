@@ -132,7 +132,7 @@
     <Compile Include="Core\Bot\EventHandlers\Protocol\SmileyChangedHandler.cs" />
     <Compile Include="Core\Bot\EventHandlers\Protocol\PlayerLeftWorldHandler.cs" />
     <Compile Include="Core\Bot\EventHandlers\Protocol\EditRightsChangedHandler.cs" />
-    <Compile Include="Core\Bot\EventHandlers\EverybodyEditsBotEvent.cs" />
+    <Compile Include="Core\Bot\EventHandlers\BotEvent.cs" />
     <Compile Include="Core\Bot\EventHandlers\Protocol\WorldActionHandler.cs" />
     <Compile Include="Core\Bot\EventHandlers\Protocol\InitHandler.cs" />
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\Commands\AdminCommands.cs" />

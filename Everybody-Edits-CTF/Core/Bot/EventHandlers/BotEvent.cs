@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers
 {
-    public abstract class EverybodyEditsBotEvent
+    public abstract class BotEvent
     {
         /// <summary>
         /// 
@@ -26,7 +26,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers
         /// 
         /// </summary>
         /// <param name="triggerMessage"></param>
-        public EverybodyEditsBotEvent(string[] triggerMessages, IGameMechanic[] gameMechanics)
+        public BotEvent(string[] triggerMessages, IGameMechanic[] gameMechanics)
         {
             TriggerMessages = triggerMessages;
             GameMechanics = gameMechanics;

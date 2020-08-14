@@ -3,6 +3,7 @@
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics;
 using Everybody_Edits_CTF.Core.Database;
 using Everybody_Edits_CTF.Helpers;
 using System.Collections.Generic;
@@ -13,6 +14,16 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
     public sealed class CtfGameRound
     {
         /// <summary>
+        /// The anti-cheat system for the world that the bot joined.
+        /// </summary>
+        public static readonly AntiCheat AntiCheat = new AntiCheat();
+
+        /// <summary>
+        /// The object that handles the flag system for the Capture The Flag game.
+        /// </summary>
+        public static readonly FlagSystem FlagSystem = new FlagSystem();
+
+        /// <summary>
         /// A dictionary that stores the <see cref="Team.Blue"/> and the <see cref="Team.Red"/> scores.
         /// </summary>
         public Dictionary<Team, int> Scores { get; private set; } = new Dictionary<Team, int>()
@@ -22,7 +33,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         };
 
         /// <summary>
-        /// 
+        /// The amount of coins raised for the current Capture The Flag game round.
         /// </summary>
         public int GameFund { get; private set; } = 0;
 
@@ -35,11 +46,15 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             return $"Blue: {Scores[Team.Blue]} | Red: {Scores[Team.Red]}";
         }
 
+        /// <summary>
+        /// Ends the Capture The Flag game by awarding the winning team with .
+        /// </summary>
+        /// <param name="winningTeam">The team what won the game.</param>
         public void End(Team winningTeam)
         {
             CtfBot.SendChatMessage($"Game over! Team {TeamHelper.EnumToString(winningTeam)} has won the game.");
 
-            /*int coinsWon = GetGameFundShare(winningTeam);
+            int coinsWon = GetGameFundShare(winningTeam);
             foreach (Player player in JoinedWorld.Players.Values)
             {
                 PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(player.Username);
@@ -51,14 +66,14 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
                         playerData.TotalWins++;
                         playerData.Coins += coinsWon;
 
-                        CaptureTheFlagBot.SendPrivateMessage(player, $"You received {coinsWon} coin{(coinsWon == 1 ? "" : "s")} for winning!");
+                        CtfBot.SendPrivateMessage(player, $"You received {coinsWon} coin{(coinsWon == 1 ? "" : "s")} for winning!");
                     }
                     else
                     {
                         playerData.TotalLosses++;
                     }
                 }
-            }*/
+            }
 
             CtfBot.ResetLevel();
 
@@ -96,7 +111,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         {
             int totalTeamPlayers = (JoinedWorld.Players.Values.Where(player => !player.IsGuest && player.Team == winningTeam)).Count();
 
-            return 0; // GameFund.CoinsRaised / totalTeamPlayers;
+            return GameFund / totalTeamPlayers;
         }
     }
 }
