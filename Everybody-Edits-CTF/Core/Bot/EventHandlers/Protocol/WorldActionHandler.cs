@@ -18,8 +18,6 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
         public override void Handle(Message message)
         {
-            base.Handle(message);
-
             if (message.Type == EverybodyEditsMessage.ClearWorld)
             {
                 if (JoinedWorld.Blocks != null)

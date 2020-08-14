@@ -20,8 +20,6 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
         public override void Handle(Message message)
         {
-            base.Handle(message);
-
             if (message.Count >= 6)
             {
                 bool propertiesReset = message.GetBoolean(0);

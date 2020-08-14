@@ -17,8 +17,6 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
         public override void Handle(Message message)
         {
-            base.Handle(message);
-
             int playerId = message.GetInt(0);
             int smileyId = message.GetInt(1);
 
