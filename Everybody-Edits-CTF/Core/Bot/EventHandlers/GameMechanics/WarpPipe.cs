@@ -9,8 +9,17 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
 {
     public sealed class WarpPipe : IGameMechanic
     {
+        /// <summary>
+        /// The Everybody Edits block id that represents a warp pipe entrance that a player can enter when their vertical direction is <see cref="VerticalDirection.Down"/>.
+        /// </summary>
         private const int WarpPipeEntranceBlockId = 1055;
 
+        /// <summary>
+        /// Handles all warp pipes in the Everybody Edits. If a player presses down on the block id <see cref="WarpPipeEntranceBlockId"/>, they they are teleported down
+        /// one block.
+        /// </summary>
+        /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
+        /// <param name="player">The player to be handled.</param>
         public void Handle(string messageType, Player player)
         {
             if (JoinedWorld.Blocks == null || !player.IsPlayingGame)

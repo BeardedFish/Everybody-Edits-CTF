@@ -8,6 +8,12 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
 {
     public sealed class FightSystem : IGameMechanic
     {
+        /// <summary>
+        /// Handles the fight system in the Capture The Flag game. A player can attack another player if they are not on the same team and if they spam WASD/arrow keys
+        /// near the enemy player.
+        /// </summary>
+        /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
+        /// <param name="player">The player to be handled.</param>
         public void Handle(string messageType, Player player)
         {
             if (!player.IsPlayingGame || player.IsInGodMode)

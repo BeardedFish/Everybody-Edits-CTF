@@ -8,6 +8,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
 {
     public sealed class SpectateMode : IGameMechanic
     {
+        /// <summary>
+        /// Handles when a player enters/leaves spectate mode. The command implementation is defined in the <see cref="RegularCommands.cs"/> file.
+        /// </summary>
+        /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
+        /// <param name="player">The player to be handled.</param>
         public void Handle(string messageType, Player player)
         {
             if (!player.CanToggleGodMode)

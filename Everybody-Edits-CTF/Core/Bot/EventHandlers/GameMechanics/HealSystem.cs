@@ -9,6 +9,12 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
 {
     public sealed class HealSystem : IGameMechanic
     {
+        /// <summary>
+        /// Handles the heal system in the Capture The Flag game. The heal system only works for players who wear the <see cref="Smiley.Nurse"/>. A healer can only
+        /// heal their team mates and they must spam WASD/arrow keys near their team mate in order to heal them.
+        /// </summary>
+        /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
+        /// <param name="player">The player to be handled.</param>
         public void Handle(string messageType, Player player)
         {
             if (!player.IsPlayingGame || player.IsInGodMode || player.SmileyId != (int)Smiley.Nurse)

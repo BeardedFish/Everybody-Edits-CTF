@@ -12,6 +12,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
 {
     public sealed class AutoBalance : IGameMechanic
     {
+        /// <summary>
+        /// Handles team balance in the Capture The Flag game. If a player joins a team and the teams are unbalanced, then they are transferred to the other team.
+        /// </summary>
+        /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
+        /// <param name="player">The player to be handled.</param>
         public void Handle(string messageType, Player player)
         {
             if (!player.IsPlayingGame)

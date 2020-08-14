@@ -9,10 +9,10 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
     public interface IGameMechanic
     {
         /// <summary>
-        /// 
+        /// Handles a specific game mechanic for the Capture The Flag game. Implementation will vary.
         /// </summary>
-        /// <param name="messageType"></param>
-        /// <param name="player"></param>
-        public void Handle(string messageType, Player player);
+        /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
+        /// <param name="player">The player to be handled.</param>
+        void Handle(string messageType, Player player);
     }
 }

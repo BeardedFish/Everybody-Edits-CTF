@@ -23,6 +23,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// </summary>
         private const int PrivateMessageDelayMs = 1500;
 
+        /// <summary>
+        /// Handles the daily bonus system for the Capture The Flag game. Every day a player revisits the world, they are awarded <see cref="CoinsAwardAmount"/> coins.
+        /// </summary>
+        /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
+        /// <param name="player">The player to be handled.</param>
         public void Handle(string messageType, Player player)
         {
             if (PlayersDatabaseTable.Loaded && PlayersDatabaseTable.PlayerExists(player.Username))
@@ -34,7 +39,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
                     playerData.Coins += CoinsAwardAmount;
                     playerData.LastVisitDate = DateTime.Today;
 
-                    Task.Run(async () =>
+                    Task.Run(async() =>
                     {
                         await Task.Delay(PrivateMessageDelayMs);
 

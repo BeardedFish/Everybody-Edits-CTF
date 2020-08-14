@@ -36,6 +36,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
             new ShopItem("fly effect", 10000, new Point(244, PurchaseFloorY), new Point(244, SuccesfulPurchaseY))
         };
 
+        /// <summary>
+        /// Handles when a player wants to purchase items at the shop in the Capture The Flag game. All shop items are defined in the <see cref="ShopItems"/> array.
+        /// </summary>
+        /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
+        /// <param name="player">The player to be handled.</param>
         public void Handle(string messageType, Player player)
         {
             if (!PlayersDatabaseTable.Loaded || player.VerticalDirection != VerticalDirection.Down)
