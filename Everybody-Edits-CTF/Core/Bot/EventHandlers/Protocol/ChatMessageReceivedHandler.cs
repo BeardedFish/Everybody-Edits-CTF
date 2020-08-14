@@ -11,8 +11,14 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class ChatMessageReceivedHandler : BotEvent
     {
+        /// <summary>
+        /// The array of command objects. This object is initialized in the <see cref="ChatMessageReceivedHandler()"/> constructor.
+        /// </summary>
         private Command[] botCommands;
 
+        /// <summary>
+        /// Event handler for when a chat message is received in the Everybody Edits world.
+        /// </summary>
         public ChatMessageReceivedHandler() : base(new string[] { EverybodyEditsMessage.ChatMessage }, null)
         {
             botCommands = new Command[]
@@ -23,18 +29,27 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
             };
         }
 
+        /// <summary>
+        /// Handles a chat message being received in the Everybody Edits world.
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
-            base.Handle(message);
-
             int playerId = message.GetInt(0);
 
             if (JoinedWorld.Players.ContainsKey(playerId))
             {
+                // Handle bot commands (admin, game, and regular)
                 HandleCommand(JoinedWorld.Players[playerId], message.GetString(1));
             }
         }
 
+        /// <summary>
+        /// Executes all <see cref="Command"/> objects defined in the <see cref="botCommands"/> array. The objects are executed via the <see cref="Command.Handle(Player, ParsedCommand)"/>
+        /// method. If the method returns true, that means the command was executed succesfully, thus resulting in the other items in the array being ignored.
+        /// </summary>
+        /// <param name="player">The player that is executing a command.</param>
+        /// <param name="chatMessage">The chat message to be parsed.</param>
         private void HandleCommand(Player player, string chatMessage)
         {
             ParsedCommand parsedCommand = Command.GetParsedCommand(chatMessage);
