@@ -13,11 +13,18 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class PlayerResetHandler : BotEvent
     {
+        /// <summary>
+        /// Event handler for when a player is reset in the Everybody Edits world.
+        /// </summary>
         public PlayerResetHandler() : base(new string[] { EverybodyEditsMessage.PlayerReset }, null)
         {
 
         }
 
+        /// <summary>
+        /// Handles a player being reset in the Everybody Edits world.
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
             if (message.Count >= 6)

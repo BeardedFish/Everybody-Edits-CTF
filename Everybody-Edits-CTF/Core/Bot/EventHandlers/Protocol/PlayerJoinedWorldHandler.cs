@@ -15,15 +15,21 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class PlayerJoinedWorldHandler : BotEvent
     {
+        /// <summary>
+        /// Event handler for when a player joins the Everybody Edits world. This class does not handle the bot joining the world. Refer to <see cref="InitHandler"/> for
+        /// bot join handling code.
+        /// </summary>
         public PlayerJoinedWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerJoinedWorld }, new IGameMechanic[] { new DailyBonus() } )
         {
 
         }
 
+        /// <summary>
+        /// Handles a player joining the Everybody Edits world.
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
-            base.Handle(message);
-
             int playerId = message.GetInt(0);
 
             if (!JoinedWorld.Players.ContainsKey(playerId))

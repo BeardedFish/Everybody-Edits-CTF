@@ -1,4 +1,4 @@
-﻿// File Name:     ClearWorldHandler.cs
+﻿// File Name:     WorldActionHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -11,11 +11,18 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class WorldActionHandler : BotEvent
     {
+        /// <summary>
+        /// Event handler for when a world action (world cleared, world reloaded, and a system message) is received.
+        /// </summary>
         public WorldActionHandler() : base(new string[] { EverybodyEditsMessage.ClearWorld, EverybodyEditsMessage.ReloadWorld, EverybodyEditsMessage.SystemMessage }, null)
         {
 
         }
 
+        /// <summary>
+        /// Handles a world action in the Everybody Edits world.
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
             if (message.Type == EverybodyEditsMessage.ClearWorld)

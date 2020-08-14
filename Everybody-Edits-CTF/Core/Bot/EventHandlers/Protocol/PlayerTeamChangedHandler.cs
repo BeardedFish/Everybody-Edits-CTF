@@ -11,11 +11,18 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class PlayerTeamChangedHandler : BotEvent
     {
+        /// <summary>
+        /// Event handler for when a player joins/leaves a team in the Everybody Edits world.
+        /// </summary>
         public PlayerTeamChangedHandler() : base(new string[] { EverybodyEditsMessage.TeamChanged }, new IGameMechanic[] { new AutoBalance() })
         {
 
         }
 
+        /// <summary>
+        /// Handles a player joining/leaving a team in the Everybody Edits world.
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
             int playerId = message.GetInt(0);

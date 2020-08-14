@@ -10,15 +10,20 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class GodModeToggledHandler : BotEvent
     {
+        /// <summary>
+        /// Event handler for when a player toggles God mode in the Everybody Edits world.
+        /// </summary>
         public GodModeToggledHandler() : base(new string[] { EverybodyEditsMessage.GodModeToggled }, new IGameMechanic[] { new AntiCheat(), new SpectateMode() })
         {
 
         }
 
+        /// <summary>
+        /// Handles a player toggling God mode in the Everybody Edits world.
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
-            base.Handle(message);
-
             int playerId = message.GetInt(0);
             bool isInGodMode = message.GetBoolean(1);
 

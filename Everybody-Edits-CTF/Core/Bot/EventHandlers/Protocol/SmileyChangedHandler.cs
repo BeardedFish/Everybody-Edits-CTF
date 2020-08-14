@@ -1,4 +1,4 @@
-// File Name:     SmileyChangedHandler.cs
+﻿// File Name:     SmileyChangedHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -10,12 +10,18 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class SmileyChangedHandler : BotEvent
     {
-        public SmileyChangedHandler() : base(new string[] { EverybodyEditsMessage.ClearWorld }, null)
+        /// <summary>
+        /// Event handler for when a players smiley is changed.
+        /// </summary>
         public SmileyChangedHandler() : base(new string[] { EverybodyEditsMessage.SmileyChanged }, null)
         {
 
         }
 
+        /// <summary>
+        /// Handles a player changing their smiley in the Everybody Edits world.
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
             int playerId = message.GetInt(0);

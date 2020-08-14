@@ -11,15 +11,20 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
     public sealed class PlayerLeftWorldHandler : BotEvent
     {
+        /// <summary>
+        /// Event handler for when a player leaves the Everybody Edits world.
+        /// </summary>
         public PlayerLeftWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerLeftWorld, EverybodyEditsMessage.PlayerJoinedWorld }, null)
         {
 
         }
 
+        /// <summary>
+        /// Handles a player leaving the Everybody Edits world.
+        /// </summary>
+        /// <param name="message">The message to be handled. This message MUST match the one(s) defined in <see cref="BotEvent.TriggerMessages"/>. If not matched, runtime errors can appear.</param>
         public override void Handle(Message message)
         {
-            base.Handle(message);
-
             int playerId = message.GetInt(0);
 
             if (JoinedWorld.Players.ContainsKey(playerId))
