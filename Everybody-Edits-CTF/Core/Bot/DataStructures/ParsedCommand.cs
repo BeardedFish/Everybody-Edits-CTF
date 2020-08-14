@@ -1,4 +1,4 @@
-﻿// File Name:     Commands.cs
+﻿// File Name:     ParsedCommand.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -12,7 +12,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         public char Prefix { get; set; }
 
         /// <summary>
-        /// The command.
+        /// The string which contains the single word command.
         /// </summary>
         public string Command { get; set; }
 
@@ -22,11 +22,11 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         public string[] Parameters { get; set; }
 
         /// <summary>
-        /// 
+        /// Constructor for <see cref="ParsedCommand"/> object which stores data about a parsed command.
         /// </summary>
-        /// <param name="prefix"></param>
-        /// <param name="command"></param>
-        /// <param name="parameters"></param>
+        /// <param name="prefix">Refer to <see cref="Prefix"/> for description.</param>
+        /// <param name="command">Refer to <see cref="Command"/> for description.</param>
+        /// <param name="parameters">Refer to <see cref="Parameters"/> for description.</param>
         public ParsedCommand(char prefix, string command, string[] parameters)
         {
             Prefix = prefix;
