@@ -3,7 +3,6 @@
 // Date:          Thursday, August 13, 2020
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
-using Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics;
 using Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Commands;
 using System.Linq;
 
@@ -11,11 +10,24 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public sealed class AdminCommands : Command
     {
+        /// <summary>
+        /// Contains administrator bot commands implementation. An administrator command can only be executed by players whose username is present in the <see cref="Settings.BotSettings.Administrators"/>
+        /// array.
+        /// </summary>
         public AdminCommands() : base(new string[] { "disconnect", "kick" })
         {
 
         }
 
+        /// <summary>
+        /// Handles a player executing an administrator command.
+        /// </summary>
+        /// <param name="player">The player executing the command.</param>
+        /// <param name="parsedCommand">The command being executed.</param>
+        /// <returns>
+        /// True if the command was succesfully handled, if not, false. A succesful handle is when the parsed command is not equal to null and also the ValidCommands string
+        /// array contains the parsed command.
+        /// </returns>
         public override bool Handle(Player player, ParsedCommand parsedCommand)
         {
             if (parsedCommand != null && ValidCommands.Contains(parsedCommand.Command))
@@ -50,12 +62,12 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                     }
                                     else
                                     {
-                                        CtfBot.SendPrivateMessage(player, $"Insufficient amount of parameters for command.");
+                                        CtfBot.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
                                     }
                                 }
                                 else
                                 {
-                                    CtfBot.SendPrivateMessage(player, $"You don't have permission to execute this command.");
+                                    CtfBot.SendPrivateMessage(player, "You don't have permission to execute this command.");
                                 }
                             }
                             break;
@@ -65,7 +77,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                 }
                 else
                 {
-                    CtfBot.SendPrivateMessage(player, $"You don't have permission to execute this command.");
+                    CtfBot.SendPrivateMessage(player, "You don't have permission to execute this command.");
                 }
             }
 

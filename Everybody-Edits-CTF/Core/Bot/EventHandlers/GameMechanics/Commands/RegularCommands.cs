@@ -11,11 +11,23 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public sealed class RegularCommands : Command
     {
+        /// <summary>
+        /// Contains regular bot commands implementation. A regular command can be executed by any player.
+        /// </summary>
         public RegularCommands() : base(new string[] { "amiadmin", "coins", "donatecoins", "help", "spectate", "totalwins", "totallosses", "losses", "wins", "totalkills" })
         {
 
         }
 
+        /// <summary>
+        /// Handles a player executing a regular command.
+        /// </summary>
+        /// <param name="player">The player executing the command.</param>
+        /// <param name="parsedCommand">The command being executed.</param>
+        /// <returns>
+        /// True if the command was succesfully handled, if not, false. A succesful handle is when the parsed command is not equal to null and also the ValidCommands string
+        /// array contains the parsed command.
+        /// </returns>
         public override bool Handle(Player player, ParsedCommand parsedCommand)
         {
             if (parsedCommand != null && ValidCommands.Contains(parsedCommand.Command))

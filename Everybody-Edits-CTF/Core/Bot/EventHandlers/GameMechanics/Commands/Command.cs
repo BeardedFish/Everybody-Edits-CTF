@@ -33,7 +33,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Commands
         /// </summary>
         /// <param name="player">The player to be handled.</param>
         /// <param name="parsedCommand">The command to be handled.</param>
-        /// <returns></returns>
+        /// <returns>Implementation will vary.</returns>
         public abstract bool Handle(Player player, ParsedCommand parsedCommand);
 
         /// <summary>

@@ -4,7 +4,6 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics;
 using Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Commands;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
@@ -14,11 +13,23 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public sealed class GameCommands : Command
     {
+        /// <summary>
+        /// Contains game bot commands implementation. A game command can only be executed by players whose team is equal to either <see cref="Team.Blue"/> or <see cref="Team.Red"/>.
+        /// </summary>
         public GameCommands() : base(new string[] { "blueflag", "redflag", "dropflag", "gamefund", "heal", "health", "hp", "lobby", "quit", "maxflags", "scores", "suicide" })
         {
 
         }
 
+        /// <summary>
+        /// Handles a player executing a game command.
+        /// </summary>
+        /// <param name="player">The player executing the command.</param>
+        /// <param name="parsedCommand">The command being executed.</param>
+        /// <returns>
+        /// True if the command was succesfully handled, if not, false. A succesful handle is when the parsed command is not equal to null and also the ValidCommands string
+        /// array contains the parsed command.
+        /// </returns>
         public override bool Handle(Player player, ParsedCommand parsedCommand)
         {
             if (parsedCommand != null && ValidCommands.Contains(parsedCommand.Command))
