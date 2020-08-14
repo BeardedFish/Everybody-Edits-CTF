@@ -15,24 +15,24 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Commands
         public static readonly char[] CommandPrefixes = { '.', '>', '!', '#' };
 
         /// <summary>
-        /// 
+        /// The array of strings that are valid commands. Values will vary depending on implementation.
         /// </summary>
         public readonly string[] ValidCommands;
 
         /// <summary>
-        /// 
+        /// Constructor for creating a <see cref="Command"/> object which is used for creating commands for the Capture The Flag bot..
         /// </summary>
-        /// <param name="validCommands"></param>
+        /// <param name="validCommands">The string array of valid commands.</param>
         public Command(string[] validCommands)
         {
             ValidCommands = validCommands;
         }
 
         /// <summary>
-        /// 
+        /// Handles a player executing a bot command. Implementation will vary.
         /// </summary>
-        /// <param name="player"></param>
-        /// <param name="parsedCommand"></param>
+        /// <param name="player">The player to be handled.</param>
+        /// <param name="parsedCommand">The command to be handled.</param>
         /// <returns></returns>
         public abstract bool Handle(Player player, ParsedCommand parsedCommand);
 
@@ -58,10 +58,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Commands
         }
 
         /// <summary>
-        /// 
+        /// Parses an Everybody Edits chat message to a <see cref="ParsedCommand"/> object. The chat message must meet the <see cref="IsBotCommand(string)"/> condition
+        /// in order to be parsed.
         /// </summary>
-        /// <param name="message"></param>
-        /// <returns></returns>
+        /// <param name="message">The chat message to be parsed.</param>
+        /// <returns>A <see cref="ParsedCommand"/> object if the chat message was succesfully parsed, if not, null.</returns>
         public static ParsedCommand GetParsedCommand(string message)
         {
             if (!IsBotCommand(message))
