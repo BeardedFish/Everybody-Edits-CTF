@@ -1,4 +1,4 @@
-﻿// File Name:     FlagSystem.cs
+// File Name:     FlagSystem.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -38,7 +38,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
 
                 CtfBot.CurrentGameRound.Scores[player.Team]++;
                 CtfBot.SendChatMessage(CtfBot.CurrentGameRound.GetScoresString());
-                //GameFund.Increase(GameFundIncreaseReason.FlagCaptured);
+                CtfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagCaptured);
 
                 if (CtfBot.CurrentGameRound.Scores[player.Team] >= GameSettings.MaxScoreToWin)
                 {
@@ -49,7 +49,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
             {
                 enemyFlag.Take(player);
 
-                // GameFund.Increase(GameFundIncreaseReason.FlagTaken);
+                CtfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagTaken);
             }
             else if (friendlyFlag.CanBeReturnedBy(player))
             {
