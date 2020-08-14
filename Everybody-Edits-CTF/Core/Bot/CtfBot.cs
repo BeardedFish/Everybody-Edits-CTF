@@ -37,6 +37,12 @@ namespace Everybody_Edits_CTF.Core.Bot
         private Connection connection;
 
         /// <summary>
+        /// The connection information about the bot. This value is only set when <see cref="Connect(ConnectionInformation)"/> is invoked. If <see cref="Disconnect"/>
+        /// is invoked, then this value becomes null.
+        /// </summary>
+        private ConnectionInformation connectionInformation;
+
+        /// <summary>
         /// Constructor for creating an <see cref="CtfBot"/> object. The bot is able to host a Capture The Flag game in an Everybody Edits world.
         /// </summary>
         public CtfBot()
@@ -61,23 +67,27 @@ namespace Everybody_Edits_CTF.Core.Bot
         }
 
         /// <summary>
-        /// Connects the bot to the Everybody Edits world defined in <see cref="BotSettings.WorldId"/>.
+        /// Connects to an Everybody Edits world.
         /// </summary>
+        /// <param name="connectionInformation">The bot connection information which contains the email, password, and world id.</param>
         /// <returns>
-        /// Either null if the bot connected to Everybody Edits succesfully or a PlayerIOError object that contains the error on why the bot could not connect to Everybody Edits.
+        /// Either null if the bot connected to Everybody Edits succesfully or a PlayerIOError object that contains the error on why the bot could not connect to Everybody
+        /// Edits.
         /// </returns>
-        public PlayerIOError Connect()
+        public PlayerIOError Connect(ConnectionInformation connectionInformation)
         {
             try
             {
 #pragma warning disable 612
-                Client client = PlayerIO.QuickConnect.SimpleConnect(BotSettings.EverybodyEditsGameId, BotSettings.Email, BotSettings.Password, null);
+                Client client = PlayerIO.QuickConnect.SimpleConnect(BotSettings.EverybodyEditsGameId, connectionInformation.Email, connectionInformation.Password, null);
 #pragma warning restore 612
 
-                connection = client.Multiplayer.CreateJoinRoom(BotSettings.WorldId, "Everybodyedits" + client.BigDB.Load("config", "config")["version"], true, null, null);
+                connection = client.Multiplayer.CreateJoinRoom(connectionInformation.WorldId, "Everybodyedits" + client.BigDB.Load("config", "config")["version"], true, null, null);
                 connection.OnDisconnect += OnDisconnect;
                 connection.OnMessage += OnMessage;
                 connection.Send(EverybodyEditsMessage.InitBegin);
+
+                this.connectionInformation = connectionInformation;
             }
             catch (PlayerIOError error)
             {
@@ -96,6 +106,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             SetWorldTitle($"{BotSettings.WorldTitle} [OFF]");
 
             connection?.Disconnect();
+            connectionInformation = null;
         }
 
         /// <summary>
@@ -114,6 +125,15 @@ namespace Everybody_Edits_CTF.Core.Bot
         public void Move(Point loc)
         {
             connection?.Send(EverybodyEditsMessage.PlayerMoved, loc.X * 16, loc.Y * 16, 0, 0, 0, 0, 0, 0, 0, false, false, 0);
+        }
+
+        /// <summary>
+        /// Sends a message through the bots connection.
+        /// </summary>
+        /// <param name="message">The message to be sent.</param>
+        public void Send(string message)
+        {
+            connection?.Send(message);
         }
 
         /// <summary>

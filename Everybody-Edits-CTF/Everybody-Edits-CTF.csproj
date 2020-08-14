@@ -102,6 +102,7 @@
   <ItemGroup>
     <Compile Include="Core\Bot\CtfBot.EventHandler.cs" />
     <Compile Include="Core\Bot\CtfBot.cs" />
+    <Compile Include="Core\Bot\DataStructures\ConnectionInformation.cs" />
     <Compile Include="Core\Bot\DataStructures\CtfGameRound.cs" />
     <Compile Include="Core\Bot\DataStructures\ParsedCommand.cs" />
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\Commands\Command.cs" />

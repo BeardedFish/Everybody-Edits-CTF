@@ -2,7 +2,6 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, August 14, 2020
 
-using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.EventHandlers;
 using Everybody_Edits_CTF.Core.Database;
 using Everybody_Edits_CTF.Core.Settings;
@@ -36,7 +35,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             {
                 Logger.WriteLog(LogType.EverybodyEditsMessage, "Auto reconnecting...");
 
-                Connect();
+                Connect(connectionInformation);
             }
         }
 
