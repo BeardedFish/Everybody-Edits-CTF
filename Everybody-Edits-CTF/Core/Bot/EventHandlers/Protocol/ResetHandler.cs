@@ -65,7 +65,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                                     }
                                 }
 
-                                // GameFund.Increase(GameFundIncreaseReason.PlayerKilledEnemy);
+                                ctfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.PlayerKilledEnemy);
                             }
 
                             ctfBot.JoinedWorld.Players[playerId].LastAttacker = null;
