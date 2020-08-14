@@ -14,7 +14,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
     public sealed class CtfGameRound
     {
         /// <summary>
-        /// The anti-cheat system for the world that the bot joined.
+        /// The anti-cheat system for the Capture The Flag game.
         /// </summary>
         public static readonly AntiCheat AntiCheat = new AntiCheat();
 
@@ -75,8 +75,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
                 }
             }
 
+            ResetRoundStatistics();
             CtfBot.ResetLevel();
-
             PlayersDatabaseTable.Save();
         }
 
@@ -112,6 +112,14 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             int totalTeamPlayers = (JoinedWorld.Players.Values.Where(player => !player.IsGuest && player.Team == winningTeam)).Count();
 
             return GameFund / totalTeamPlayers;
+        }
+
+        /// <summary>
+        /// Resets the scores and the game fund to zero.
+        /// </summary>
+        private void ResetRoundStatistics()
+        {
+            Scores[Team.Blue] = Scores[Team.Red] = GameFund = 0;
         }
     }
 }
