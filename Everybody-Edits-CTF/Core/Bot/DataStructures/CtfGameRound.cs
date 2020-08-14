@@ -55,8 +55,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         {
             ctfBot.SendChatMessage($"Game over! Team {TeamHelper.EnumToString(winningTeam)} has won the game.");
 
-            int coinsWon = GetGameFundShare(winningTeam);
-            foreach (Player player in JoinedWorld.Players.Values)
+            int coinsWon = GetGameFundShare(ctfBot.JoinedWorld.Players, winningTeam);
+            foreach (Player player in ctfBot.JoinedWorld.Players.Values)
             {
                 PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(player.Username);
 
@@ -109,9 +109,9 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// </summary>
         /// <param name="winningTeam">The team that won the Capture the Flag game.</param>
         /// <returns>An int that represents the amount of coins each player has won on the winning team.</returns>
-        private int GetGameFundShare(Team winningTeam)
+        private int GetGameFundShare(Dictionary<int, Player> playersList, Team winningTeam)
         {
-            int totalTeamPlayers = (JoinedWorld.Players.Values.Where(player => !player.IsGuest && player.Team == winningTeam)).Count();
+            int totalTeamPlayers = (playersList.Values.Where(player => !player.IsGuest && player.Team == winningTeam)).Count();
 
             return GameFund / totalTeamPlayers;
         }

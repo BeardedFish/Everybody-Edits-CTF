@@ -151,7 +151,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         public void Drop(CtfBot ctfBot)
         {
             Point dropLocation = Holder.Location;
-            while (dropLocation.Y < JoinedWorld.Blocks.GetLength(2) && JoinedWorld.Blocks[(uint)BlockLayer.Foreground, dropLocation.X, dropLocation.Y + 1].Id == 0)
+            while (dropLocation.Y < ctfBot.JoinedWorld.Blocks.GetLength(2) && ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, dropLocation.X, dropLocation.Y + 1].Id == 0)
             {
                 dropLocation.Y++;
             }

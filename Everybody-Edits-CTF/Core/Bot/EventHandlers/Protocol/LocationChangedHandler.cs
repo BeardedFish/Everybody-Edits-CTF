@@ -28,11 +28,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         {
             int playerId = message.GetInt(0);
 
-            if (JoinedWorld.Players.ContainsKey(playerId) && JoinedWorld.Players[playerId].IsPlayingGame)
+            if (ctfBot.JoinedWorld.Players.ContainsKey(playerId) && ctfBot.JoinedWorld.Players[playerId].IsPlayingGame)
             {
-                JoinedWorld.Players[playerId].UpdateMovementInformation(message);
+                ctfBot.JoinedWorld.Players[playerId].UpdateMovementInformation(message);
 
-                ExecuteGameMechanics(ctfBot, message.Type, JoinedWorld.Players[playerId]);
+                ExecuteGameMechanics(ctfBot, message.Type, ctfBot.JoinedWorld.Players[playerId]);
             }
         }
     }

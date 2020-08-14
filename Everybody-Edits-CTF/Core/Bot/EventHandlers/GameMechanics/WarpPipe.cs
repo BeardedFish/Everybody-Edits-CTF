@@ -23,14 +23,14 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// <param name="player">The player to be handled.</param>
         public void Handle(CtfBot ctfBot, string messageType, Player player)
         {
-            if (JoinedWorld.Blocks == null || !player.IsPlayingGame)
+            if (ctfBot.JoinedWorld.Blocks == null || !player.IsPlayingGame)
             {
                 return;
             }
 
-            if (player.Location.Y < JoinedWorld.Height
+            if (player.Location.Y < ctfBot.JoinedWorld.Height
                 && player.VerticalDirection == VerticalDirection.Down
-                && JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y + 1].Id == WarpPipeEntranceBlockId)
+                && ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y + 1].Id == WarpPipeEntranceBlockId)
             {
                 ctfBot.TeleportPlayer(player, player.Location.X, player.Location.Y + 1);
             }

@@ -34,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         {
             int playerId = message.GetInt(0);
 
-            if (!JoinedWorld.Players.ContainsKey(playerId))
+            if (!ctfBot.JoinedWorld.Players.ContainsKey(playerId))
             {
                 string username = message.GetString(1);
                 int smileyId = message.GetInt(3);
@@ -44,7 +44,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                 int teamId = message.GetInt(15);
                 bool canToggleGodMode = message.GetBoolean(23);
 
-                JoinedWorld.Players.Add(playerId, new Player(username,
+                ctfBot.JoinedWorld.Players.Add(playerId, new Player(username,
                                                             smileyId,
                                                             new Point((int)xLoc, (int)yLoc),
                                                             isInGodMode,
@@ -53,18 +53,18 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
                 if (PlayersDatabaseTable.Loaded)
                 {
-                    if (!JoinedWorld.Players[playerId].IsGuest)
+                    if (!ctfBot.JoinedWorld.Players[playerId].IsGuest)
                     {
                         if (!PlayersDatabaseTable.PlayerExists(username))
                         {
                             PlayersDatabaseTable.AddNewPlayer(username);
 
-                            ctfBot.SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
+                            ctfBot.SendPrivateMessage(ctfBot.JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
                         }
                     }
                 }
 
-                ExecuteGameMechanics(ctfBot, message.Type, JoinedWorld.Players[playerId]);
+                ExecuteGameMechanics(ctfBot, message.Type, ctfBot.JoinedWorld.Players[playerId]);
 
                 Logger.WriteLog(LogType.EverybodyEditsMessage, $"Player {username.ToUpper()} (id: {playerId}) has joined the world.");
             }

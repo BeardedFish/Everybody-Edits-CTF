@@ -28,13 +28,13 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
             int playerId = message.GetInt(0);
             int smileyId = message.GetInt(1);
 
-            if (JoinedWorld.Players.ContainsKey(playerId))
+            if (ctfBot.JoinedWorld.Players.ContainsKey(playerId))
             {
-                JoinedWorld.Players[playerId].SmileyId = smileyId;
+                ctfBot.JoinedWorld.Players[playerId].SmileyId = smileyId;
 
-                if (JoinedWorld.Players[playerId].IsPlayingGame && smileyId == (int)Smiley.Nurse)
+                if (ctfBot.JoinedWorld.Players[playerId].IsPlayingGame && smileyId == (int)Smiley.Nurse)
                 {
-                    ctfBot.SendPrivateMessage(JoinedWorld.Players[playerId], "You are now a healer for your team!");
+                    ctfBot.SendPrivateMessage(ctfBot.JoinedWorld.Players[playerId], "You are now a healer for your team!");
                 }
             }
         }

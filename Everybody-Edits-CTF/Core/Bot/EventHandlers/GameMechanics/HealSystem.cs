@@ -23,7 +23,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
                 return;
             }
 
-            foreach (Player allyPlayer in JoinedWorld.Players.Values)
+            foreach (Player allyPlayer in ctfBot.JoinedWorld.Players.Values)
             {
                 if (player == allyPlayer)
                 {

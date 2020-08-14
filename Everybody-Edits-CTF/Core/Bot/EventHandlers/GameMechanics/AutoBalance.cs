@@ -26,8 +26,8 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
             }
 
             string resultMsg = $"You joined the {TeamHelper.EnumToString(player.Team)} team!";
-            int joinedTeamTotalPlayers = TeamHelper.TotalPlayers(JoinedWorld.Players, player.Team) - 1;
-            int oppositeTeamTotalPlayers = TeamHelper.TotalPlayers(JoinedWorld.Players, TeamHelper.GetOppositeTeam(player.Team));
+            int joinedTeamTotalPlayers = TeamHelper.TotalPlayers(ctfBot.JoinedWorld.Players, player.Team) - 1;
+            int oppositeTeamTotalPlayers = TeamHelper.TotalPlayers(ctfBot.JoinedWorld.Players, TeamHelper.GetOppositeTeam(player.Team));
 
             if (GameSettings.AutoBalanceTeams)
             {

@@ -29,16 +29,16 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         {
             int playerId = message.GetInt(0);
 
-            if (JoinedWorld.Players.ContainsKey(playerId))
+            if (ctfBot.JoinedWorld.Players.ContainsKey(playerId))
             {
-                string username = JoinedWorld.Players[playerId].Username;
+                string username = ctfBot.JoinedWorld.Players[playerId].Username;
 
-                if (JoinedWorld.Players[playerId].HasEnemyFlag(ctfBot))
+                if (ctfBot.JoinedWorld.Players[playerId].HasEnemyFlag(ctfBot))
                 {
-                    ctfBot.CurrentGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(JoinedWorld.Players[playerId].Team)].Return(ctfBot, null, false);
+                    ctfBot.CurrentGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(ctfBot.JoinedWorld.Players[playerId].Team)].Return(ctfBot, null, false);
                 }
 
-                JoinedWorld.Players.Remove(playerId);
+                ctfBot.JoinedWorld.Players.Remove(playerId);
 
                 Logger.WriteLog(LogType.EverybodyEditsMessage, $"Player {username} (id: {playerId}) has left the world.");
             }

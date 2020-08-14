@@ -23,20 +23,20 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// <param name="player">The player to be handled.</param>
         public void Handle(CtfBot ctfBot, string messageType, Player player)
         {
-            if (JoinedWorld.Blocks == null || !player.IsPlayingGame)
+            if (ctfBot.JoinedWorld.Blocks == null || !player.IsPlayingGame)
             {
                 return;
             }
 
             if (player.Location.X > 0
                 && player.HorizontalDirection == HorizontalDirection.Left
-                && JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X - 1, player.Location.Y].Id == DoorBlockId) // Teleport to left
+                && ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X - 1, player.Location.Y].Id == DoorBlockId) // Teleport to left
             {
                 ctfBot.TeleportPlayer(player, player.Location.X - 2, player.Location.Y);
             }
-            else if (player.Location.X < JoinedWorld.Width &&
+            else if (player.Location.X < ctfBot.JoinedWorld.Width &&
                 player.HorizontalDirection == HorizontalDirection.Right
-                && JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X + 1, player.Location.Y].Id == DoorBlockId) // Teleport to right
+                && ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X + 1, player.Location.Y].Id == DoorBlockId) // Teleport to right
             {
                 ctfBot.TeleportPlayer(player, player.Location.X + 2, player.Location.Y);
             }

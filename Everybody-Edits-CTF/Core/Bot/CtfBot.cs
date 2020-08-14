@@ -1,4 +1,4 @@
-// File Name:     CtfBot.cs
+﻿// File Name:     CtfBot.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
@@ -27,9 +27,9 @@ namespace Everybody_Edits_CTF.Core.Bot
         public CtfGameRound CurrentGameRound { get; private set; }
 
         /// <summary>
-        /// The max length of a chat message Everybody Edits allows to be sent.
+        /// Contains information about the Everybody Edits world that the bot joined.
         /// </summary>
-        private readonly int maxChatMessageLength = 140 - BotSettings.ChatMessagePrefix.Length - 2;
+        public WorldInformation JoinedWorld { get; private set; }
 
         /// <summary>
         /// The connection object of the bot that allows communication with the Everybody Edits world it joined.
@@ -42,6 +42,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         public CtfBot()
         {
             CurrentGameRound = new CtfGameRound();
+            JoinedWorld = new WorldInformation();
 
             botEventHandlers = new BotEvent[]
             {

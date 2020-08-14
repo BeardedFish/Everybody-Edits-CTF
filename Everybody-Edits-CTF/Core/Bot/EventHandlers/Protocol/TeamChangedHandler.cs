@@ -29,11 +29,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
             int playerId = message.GetInt(0);
             int teamId = message.GetInt(1);
 
-            if (JoinedWorld.Players.ContainsKey(playerId))
+            if (ctfBot.JoinedWorld.Players.ContainsKey(playerId))
             {
-                JoinedWorld.Players[playerId].Team = (Team)teamId;
+                ctfBot.JoinedWorld.Players[playerId].Team = (Team)teamId;
 
-                ExecuteGameMechanics(ctfBot, message.Type, JoinedWorld.Players[playerId]);
+                ExecuteGameMechanics(ctfBot, message.Type, ctfBot.JoinedWorld.Players[playerId]);
             }
         }
     }

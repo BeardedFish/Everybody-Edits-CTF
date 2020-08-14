@@ -36,28 +36,28 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                 {
                     int playerId = message.GetInt(i);
 
-                    if (JoinedWorld.Players.ContainsKey(playerId))
+                    if (ctfBot.JoinedWorld.Players.ContainsKey(playerId))
                     {
                         double xLoc = Math.Round(message.GetDouble(i + 1) / 16.0);
                         double yLoc = Math.Round(message.GetDouble(i + 2) / 16.0);
                         int deathCount = message.GetInt(i + 3);
 
-                        JoinedWorld.Players[playerId].UpdateLocation((int)xLoc, (int)yLoc);
+                        ctfBot.JoinedWorld.Players[playerId].UpdateLocation((int)xLoc, (int)yLoc);
 
                         if (propertiesReset)
                         {
-                            JoinedWorld.Players[playerId].Team = Team.None;
+                            ctfBot.JoinedWorld.Players[playerId].Team = Team.None;
                         }
                         else
                         {
-                            if (JoinedWorld.Players[playerId].LastAttacker != null)
+                            if (ctfBot.JoinedWorld.Players[playerId].LastAttacker != null)
                             {
-                                ctfBot.SendPrivateMessage(JoinedWorld.Players[playerId], $"You were killed by player {JoinedWorld.Players[playerId].LastAttacker.Username}!");
-                                ctfBot.SendPrivateMessage(JoinedWorld.Players[playerId].LastAttacker, $"You killed player {JoinedWorld.Players[playerId].Username}!");
+                                ctfBot.SendPrivateMessage(ctfBot.JoinedWorld.Players[playerId], $"You were killed by player {ctfBot.JoinedWorld.Players[playerId].LastAttacker.Username}!");
+                                ctfBot.SendPrivateMessage(ctfBot.JoinedWorld.Players[playerId].LastAttacker, $"You killed player {ctfBot.JoinedWorld.Players[playerId].Username}!");
 
                                 if (PlayersDatabaseTable.Loaded)
                                 {
-                                    PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(JoinedWorld.Players[playerId].LastAttacker.Username);
+                                    PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(ctfBot.JoinedWorld.Players[playerId].LastAttacker.Username);
 
                                     if (playerData != null)
                                     {
@@ -68,25 +68,25 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                                 // GameFund.Increase(GameFundIncreaseReason.PlayerKilledEnemy);
                             }
 
-                            JoinedWorld.Players[playerId].LastAttacker = null;
+                            ctfBot.JoinedWorld.Players[playerId].LastAttacker = null;
                         }
 
-                        if (deathCount > JoinedWorld.Players[playerId].DeathCount)
+                        if (deathCount > ctfBot.JoinedWorld.Players[playerId].DeathCount)
                         {
-                            JoinedWorld.Players[playerId].Respawn(ctfBot);
+                            ctfBot.JoinedWorld.Players[playerId].Respawn(ctfBot);
 
-                            Team enemyTeam = TeamHelper.GetOppositeTeam(JoinedWorld.Players[playerId].Team);
-                            if (ctfBot.CurrentGameRound.FlagSystem.Flags[enemyTeam].Holder == JoinedWorld.Players[playerId])
+                            Team enemyTeam = TeamHelper.GetOppositeTeam(ctfBot.JoinedWorld.Players[playerId].Team);
+                            if (ctfBot.CurrentGameRound.FlagSystem.Flags[enemyTeam].Holder == ctfBot.JoinedWorld.Players[playerId])
                             {
-                                ctfBot.SendChatMessage($"Player {JoinedWorld.Players[playerId].Username} died while holding {TeamHelper.EnumToString(enemyTeam)} teams flag.");
+                                ctfBot.SendChatMessage($"Player {ctfBot.JoinedWorld.Players[playerId].Username} died while holding {TeamHelper.EnumToString(enemyTeam)} teams flag.");
 
                                 ctfBot.CurrentGameRound.FlagSystem.Flags[enemyTeam].Return(ctfBot, null, false);
                             }
 
-                            ctfBot.RemoveEffects(JoinedWorld.Players[playerId]);
+                            ctfBot.RemoveEffects(ctfBot.JoinedWorld.Players[playerId]);
                         }
 
-                        JoinedWorld.Players[playerId].DeathCount = deathCount;
+                        ctfBot.JoinedWorld.Players[playerId].DeathCount = deathCount;
                     }
                 }
             }

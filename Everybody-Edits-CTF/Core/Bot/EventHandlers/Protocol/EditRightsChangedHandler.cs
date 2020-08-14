@@ -11,7 +11,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
     public sealed class EditRightsChangedHandler : BotEvent
     {
         /// <summary>
-        /// Event handler for when a when a player gains/loses their edit rights in the Everybody Edits world. This class modified the <see cref="JoinedWorld.Players"/>
+        /// Event handler for when a when a player gains/loses their edit rights in the Everybody Edits world. This class modified the <see cref="WorldInformation.Players"/>
         /// objects.
         /// </summary>
         public EditRightsChangedHandler() : base(new string[] { EverybodyEditsMessage.EditRightsChanged }, null)
@@ -28,11 +28,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         {
             int playerId = message.GetInt(0);
 
-            if (JoinedWorld.Players.ContainsKey(playerId))
+            if (ctfBot.JoinedWorld.Players.ContainsKey(playerId))
             {
                 bool canEdit = message.GetBoolean(1);
 
-                JoinedWorld.Players[playerId].CanToggleGodMode = canEdit; // A player that can edit will ALWAYS have access to God mode
+                ctfBot.JoinedWorld.Players[playerId].CanToggleGodMode = canEdit; // A player that can edit will ALWAYS have access to God mode
             }
         }
     }

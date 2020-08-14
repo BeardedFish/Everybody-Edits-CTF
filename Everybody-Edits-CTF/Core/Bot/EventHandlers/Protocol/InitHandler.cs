@@ -14,7 +14,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
     public sealed class InitHandler : BotEvent
     {
         /// <summary>
-        /// Event handler for when the bot initially joins the world. This class modifies the properties defined in the <see cref="JoinedWorld"/> class..
+        /// Event handler for when the bot initially joins the world. This class modifies the properties defined in the <see cref="WorldInformation"/> class..
         /// </summary>
         public InitHandler() : base(new string[] { EverybodyEditsMessage.InitBegin, EverybodyEditsMessage.InitEnd }, null)
         {
@@ -30,9 +30,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         {
             if (message.Type == EverybodyEditsMessage.InitBegin)
             {
-                JoinedWorld.Width = message.GetInt(18);
-                JoinedWorld.Height = message.GetInt(19);
-                JoinedWorld.Blocks = WorldDeserializer.DeserializeBlocks(message, JoinedWorld.Width, JoinedWorld.Height);
+                ctfBot.JoinedWorld.Width = message.GetInt(18);
+                ctfBot.JoinedWorld.Height = message.GetInt(19);
+                ctfBot.JoinedWorld.Blocks = WorldDeserializer.DeserializeBlocks(message, ctfBot.JoinedWorld.Width, ctfBot.JoinedWorld.Height);
 
                 ctfBot.Send(EverybodyEditsMessage.InitEnd);
             }

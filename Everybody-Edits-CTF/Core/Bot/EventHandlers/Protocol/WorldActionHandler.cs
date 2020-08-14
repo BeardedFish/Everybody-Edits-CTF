@@ -29,17 +29,17 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         {
             if (message.Type == EverybodyEditsMessage.ClearWorld)
             {
-                if (JoinedWorld.Blocks != null)
+                if (ctfBot.JoinedWorld.Blocks != null)
                 {
                     int blockId;
 
-                    for (int layer = 0; layer < JoinedWorld.Blocks.GetLength(0); layer++)
+                    for (int layer = 0; layer < ctfBot.JoinedWorld.Blocks.GetLength(0); layer++)
                     {
-                        for (int x = 0; x < JoinedWorld.Blocks.GetLength(1); x++)
+                        for (int x = 0; x < ctfBot.JoinedWorld.Blocks.GetLength(1); x++)
                         {
-                            for (int y = 0; y < JoinedWorld.Blocks.GetLength(2); y++)
+                            for (int y = 0; y < ctfBot.JoinedWorld.Blocks.GetLength(2); y++)
                             {
-                                if (x == 0 || y == 0 || x == JoinedWorld.Width - 1 || y == JoinedWorld.Height - 1) // Border block
+                                if (x == 0 || y == 0 || x == ctfBot.JoinedWorld.Width - 1 || y == ctfBot.JoinedWorld.Height - 1) // Border block
                                 {
                                     blockId = message.GetInt(2);
                                 }
@@ -48,7 +48,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                                     blockId = message.GetInt(3);
                                 }
 
-                                JoinedWorld.Blocks[layer, x, y] = new Block(blockId);
+                                ctfBot.JoinedWorld.Blocks[layer, x, y] = new Block(blockId);
                             }
                         }
                     }
@@ -56,7 +56,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
             }
             else if (message.Type == EverybodyEditsMessage.ReloadWorld)
             {
-                JoinedWorld.Blocks = WorldDeserializer.DeserializeBlocks(message, JoinedWorld.Width, JoinedWorld.Height);
+                ctfBot.JoinedWorld.Blocks = WorldDeserializer.DeserializeBlocks(message, ctfBot.JoinedWorld.Width, ctfBot.JoinedWorld.Height);
             }
             else // System messages
             {
@@ -65,11 +65,11 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
                 if (messageWords[1] == "kicked")
                 {
                     string kickedUsername = messageWords[2];
-                    int playerId = JoinedWorld.GetPlayerId(kickedUsername);
+                    int playerId = ctfBot.JoinedWorld.GetPlayerId(kickedUsername);
 
                     if (playerId != -1)
                     {
-                        JoinedWorld.Players.Remove(playerId);
+                        ctfBot.JoinedWorld.Players.Remove(playerId);
                     }
                 }
             }

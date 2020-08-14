@@ -44,10 +44,10 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         {
             int playerId = message.GetInt(0);
 
-            if (JoinedWorld.Players.ContainsKey(playerId))
+            if (ctfBot.JoinedWorld.Players.ContainsKey(playerId))
             {
                 // Handle bot commands (admin, game, and regular)
-                HandleCommand(ctfBot, JoinedWorld.Players[playerId], message.GetString(1));
+                HandleCommand(ctfBot, ctfBot.JoinedWorld.Players[playerId], message.GetString(1));
             }
         }
 

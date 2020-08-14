@@ -57,9 +57,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 
                                 if (enemyTeamFlag.Holder == player)
                                 {
-                                    if (JoinedWorld.Blocks != null)
+                                    if (ctfBot.JoinedWorld.Blocks != null)
                                     {
-                                        if (JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y].Id == 0)
+                                        if (ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y].Id == 0)
                                         {
                                             enemyTeamFlag.Drop(ctfBot);
                                         }
