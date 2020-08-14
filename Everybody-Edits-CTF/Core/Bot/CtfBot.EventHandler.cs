@@ -13,6 +13,10 @@ namespace Everybody_Edits_CTF.Core.Bot
 {
     public partial class CtfBot
     {
+        /// <summary>
+        /// The event handlers for the Capture The Flag bot. The event handlers are executed when specific <see cref="Message.Type"/> are received. Refer to
+        /// <see cref="OnMessage(object, Message)"/> for more execution code.
+        /// </summary>
         private readonly BotEvent[] botEventHandlers;
 
         /// <summary>

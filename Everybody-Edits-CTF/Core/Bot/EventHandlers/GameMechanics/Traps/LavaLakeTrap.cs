@@ -11,6 +11,9 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
 {
     public class LavaLakeTrap : Trap
     {
+        /// <summary>
+        /// Trap that is located in the lava lake.
+        /// </summary>
         public LavaLakeTrap() : base(new Point[] { new Point(277, 179) })
         {
 
@@ -37,6 +40,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
 
                     TrapActivated = true;
 
+                    // Place wall
                     for (int y = 176; y >= 172; y--)
                     {
                         ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 1058);
@@ -47,6 +51,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
 
                     await Task.Delay(TrapCooldownMs);
 
+                    // Remove wall
                     for (int y = 172; y <= 176; y++)
                     {
                         ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 0);
@@ -62,6 +67,15 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
             }
         }
 
+        /// <summary>
+        /// States whether a player can trigger this trap or not.
+        /// 
+        /// The condition to trigger this trap is:
+        ///     - The base implementation is met.
+        ///     - The player is wearing the Fire Demon smiley.
+        /// </summary>
+        /// <param name="player">The player to check if they can trigger this trap or not.</param>
+        /// <returns>True if the player can trigger this trap, if not, false.</returns>
         public override bool CanTriggerTrap(Player player)
         {
             return base.CanTriggerTrap(player) && player.SmileyId == (int)Smiley.FireDemon;

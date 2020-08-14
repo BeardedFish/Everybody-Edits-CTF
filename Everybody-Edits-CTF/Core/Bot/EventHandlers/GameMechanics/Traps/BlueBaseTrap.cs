@@ -11,13 +11,16 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
 {
     public class BlueBaseTrap : Trap
     {
+        /// <summary>
+        /// Trap that is located in the blue base.
+        /// </summary>
         public BlueBaseTrap() : base(new Point[] { new Point(38, 175) })
         {
 
         }
 
         /// <summary>
-        /// Handles the trap that is located in the blue team's base. This trap can only be activated by the blue team.
+        /// Handles the trap that is located in the blue teams base. This trap can only be activated by the blue team.
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player that is triggering the trap.</param>
@@ -66,6 +69,15 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
             });
         }
 
+        /// <summary>
+        /// States whether a player can trigger this trap or not.
+        /// 
+        /// The condition to trigger this trap is:
+        ///     - The base implementation is met.
+        ///     - The players team is blue.
+        /// </summary>
+        /// <param name="player">The player to check if they can trigger this trap or not.</param>
+        /// <returns>True if the player can trigger this trap, if not, false.</returns>
         public override bool CanTriggerTrap(Player player)
         {
             return base.CanTriggerTrap(player) && player.Team == Team.Blue;

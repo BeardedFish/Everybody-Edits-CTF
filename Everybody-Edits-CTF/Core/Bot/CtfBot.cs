@@ -77,8 +77,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                 connection = client.Multiplayer.CreateJoinRoom(BotSettings.WorldId, "Everybodyedits" + client.BigDB.Load("config", "config")["version"], true, null, null);
                 connection.OnDisconnect += OnDisconnect;
                 connection.OnMessage += OnMessage;
-
-                Send(EverybodyEditsMessage.InitBegin);
+                connection.Send(EverybodyEditsMessage.InitBegin);
             }
             catch (PlayerIOError error)
             {
@@ -115,15 +114,6 @@ namespace Everybody_Edits_CTF.Core.Bot
         public void Move(Point loc)
         {
             connection?.Send(EverybodyEditsMessage.PlayerMoved, loc.X * 16, loc.Y * 16, 0, 0, 0, 0, 0, 0, 0, false, false, 0);
-        }
-
-        /// <summary>
-        /// Sends a command to the Everybody Edits world.
-        /// </summary>
-        /// <param name="command">The command to be sent.</param>
-        public void Send(string command)
-        {
-            connection?.Send(command);
         }
 
         /// <summary>

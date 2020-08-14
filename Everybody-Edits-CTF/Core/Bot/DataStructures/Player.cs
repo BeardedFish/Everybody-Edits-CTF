@@ -207,10 +207,10 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         }
 
         /// <summary>
-        /// 
+        /// States whether this player is currently holding the enemy flag or not.
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
-        /// <returns></returns>
+        /// <returns>True if the player is holding the enemy flag, if not, false.</returns>
         public bool HasEnemyFlag(CtfBot ctfBot)
         {
             return IsPlayingGame ? ctfBot.CurrentGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
@@ -219,7 +219,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <summary>
         /// Heals the player by 5 health points.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the players health is greater than or equal to <see cref="MaxHealth"/>, if not, false.</returns>
         public bool Heal()
         {
             Health += AttackHealHealthAmount;
@@ -270,6 +270,11 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             ctfBot.ResetPlayer(this);
         }
 
+        /// <summary>
+        /// Updates information about the player related to movement/location based on a <see cref="Message"/> object. This method only supports <see cref="EverybodyEditsMessage.PlayerMoved"/>
+        /// and <see cref="EverybodyEditsMessage.PlayerTeleported"/>. Any other message will result in an exception being thrown.
+        /// </summary>
+        /// <param name="message">The message that contains information about the players location.</param>
         public void UpdateMovementInformation(Message message)
         {
             if (message.Type == EverybodyEditsMessage.PlayerMoved || message.Type == EverybodyEditsMessage.PlayerTeleported)
@@ -285,7 +290,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             }
             else
             {
-                throw new Exception();
+                throw new Exception("The message is not supported for this method.");
             }
         }
 
@@ -300,8 +305,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         }
 
         /// <summary>
-        /// States whether this player is enemies with another player based on their teams. Players with the same teams are allies, while players with different teams are considered
-        /// enemies. Players not on a team are not considered enemies with other teams.
+        /// States whether this player is enemies with another player based on their team. Players with the same teams are allies, while players with different teams are considered
+        /// enemies. Players not on a team are not considered enemies with players on a team.
         /// </summary>
         /// <param name="player">The player to compare to this player object.</param>
         /// <returns>True if this player is enemies with the player in the parameters, if not, false.</returns>
