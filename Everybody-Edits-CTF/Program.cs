@@ -65,12 +65,19 @@ namespace Everybody_Edits_CTF
                     }
                     else if (string.Equals(inputCmd, "connect", CommandCompareCase))
                     {
-                        Console.Write("Loading players table from MySql database... ");
-                        PlayersDatabaseTable.Load();
-                        Console.WriteLine($"[{(PlayersDatabaseTable.Loaded ? "SUCCESS" : $"FAIL")}]");
-    
-                        Console.Write("Connecting to Everybody Edits... ");
-                        Console.WriteLine($"[{(captureTheFlagBot.Connect() == null ? "SUCCESS" : $"FAIL")}]");
+                        if (!captureTheFlagBot.Connected)
+                        {
+                            Console.Write("Loading players table from MySql database... ");
+                            PlayersDatabaseTable.Load();
+                            Console.WriteLine($"[{(PlayersDatabaseTable.Loaded ? "SUCCESS" : $"FAIL")}]");
+
+                            Console.Write("Connecting to Everybody Edits... ");
+                            Console.WriteLine($"[{(captureTheFlagBot.Connect() == null ? "SUCCESS" : $"FAIL")}]");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The bot is already connected!");
+                        }
                     }
                     else if (string.Equals(inputCmd, "disconnect", CommandCompareCase))
                     {
