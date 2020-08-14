@@ -68,15 +68,15 @@ namespace Everybody_Edits_CTF
                         Console.WriteLine($"[{(PlayersDatabaseTable.Loaded ? "SUCCESS" : $"FAIL")}]");
     
                         Console.Write("Connecting to Everybody Edits... ");
-                        Console.WriteLine($"[{(CaptureTheFlagBot.Connect() == null ? "SUCCESS" : $"FAIL")}]");
+                        Console.WriteLine($"[{(CtfBot.Connect() == null ? "SUCCESS" : $"FAIL")}]");
                     }
                     else if (string.Equals(inputCmd, "disconnect", CommandCompareCase))
                     {
-                        if (CaptureTheFlagBot.Connected)
+                        if (CtfBot.Connected)
                         {
                             Console.WriteLine("Disconnecting...");
 
-                            CaptureTheFlagBot.Disconnect();
+                            CtfBot.Disconnect();
                         }
                         else
                         {

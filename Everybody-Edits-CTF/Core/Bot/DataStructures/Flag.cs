@@ -139,7 +139,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// </summary>
         public void Capture()
         {
-            CaptureTheFlagBot.SendChatMessage($"Player {Holder.Username} has captured the {TeamHelper.EnumToString(OwnerTeam)} team's flag.");
+            CtfBot.SendChatMessage($"Player {Holder.Username} has captured the {TeamHelper.EnumToString(OwnerTeam)} team's flag.");
 
             Return(null, true);
         }
@@ -155,8 +155,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
                 dropLocation.Y++;
             }
 
-            CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, dropLocation, Block.Id, Block.MorphId);
-            CaptureTheFlagBot.SendChatMessage($"Player {Holder.Username} has dropped the {TeamHelper.EnumToString(OwnerTeam)} teams flag.");
+            CtfBot.PlaceBlock(BlockLayer.Foreground, dropLocation, Block.Id, Block.MorphId);
+            CtfBot.SendChatMessage($"Player {Holder.Username} has dropped the {TeamHelper.EnumToString(OwnerTeam)} teams flag.");
 
             lastDropTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
@@ -170,8 +170,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <param name="taker">The player taking the flag.</param>
         public void Take(Player taker)
         {
-            CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, CurrentLocation, 0);
-            CaptureTheFlagBot.SendChatMessage($"Player {taker.Username} has taken the {TeamHelper.EnumToString(OwnerTeam)} teams flag.");
+            CtfBot.PlaceBlock(BlockLayer.Foreground, CurrentLocation, 0);
+            CtfBot.SendChatMessage($"Player {taker.Username} has taken the {TeamHelper.EnumToString(OwnerTeam)} teams flag.");
 
             Holder = taker;
         }
@@ -185,13 +185,13 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         {
             if (IsDropped)
             {
-                CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, DropLocation, 0);
+                CtfBot.PlaceBlock(BlockLayer.Foreground, DropLocation, 0);
             }
 
             DropLocation = Point.Empty;
             Holder = null;
 
-            CaptureTheFlagBot.PlaceBlock(BlockLayer.Foreground, HomeLocation, Block.Id, Block.MorphId);
+            CtfBot.PlaceBlock(BlockLayer.Foreground, HomeLocation, Block.Id, Block.MorphId);
             GameFund.Increase(GameFundIncreaseReason.FlagReturned);
 
             if (!flagCaptured)
@@ -199,7 +199,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
                 StringBuilder teamName = new StringBuilder(TeamHelper.EnumToString(OwnerTeam));
                 teamName[0] = char.ToUpper(teamName[0]);
 
-                CaptureTheFlagBot.SendChatMessage($"{teamName} teams flag has been returned to base{(returnee == null ? "." : $" by player {returnee.Username}.")}");
+                CtfBot.SendChatMessage($"{teamName} teams flag has been returned to base{(returnee == null ? "." : $" by player {returnee.Username}.")}");
             }
         }
     }

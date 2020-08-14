@@ -6,6 +6,7 @@ using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
+using PlayerIOClient;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -61,7 +62,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <summary>
         /// States whether the player is currently holding the enemy flag or not.
         /// </summary>
-        public bool HasEnemyFlag => IsPlayingGame ? CaptureTheFlag.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
+        public bool HasEnemyFlag => IsPlayingGame ? JoinedWorld.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
 
         /// <summary>
         /// States whether the player is in the blue teams base or not.
@@ -206,7 +207,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// </summary>
         public void Die()
         {
-            CaptureTheFlagBot.KillPlayer(this);
+            CtfBot.KillPlayer(this);
         }
 
         /// <summary>
@@ -236,12 +237,12 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             Task.Run(async() =>
             {
                 Point respawnCooldownLocation = Team == Team.Blue ? GameSettings.BlueRespawnCooldownLocation : GameSettings.RedRespawnCooldownLocation;
-                CaptureTheFlagBot.TeleportPlayer(this, respawnCooldownLocation.X, respawnCooldownLocation.Y);
+                CtfBot.TeleportPlayer(this, respawnCooldownLocation.X, respawnCooldownLocation.Y);
 
                 await Task.Delay(GameSettings.RespawnCooldownMs);
 
                 Point respawnLocation = Team == Team.Blue ? GameSettings.BlueCheckpointLocation : GameSettings.RedCheckpointLocation;
-                CaptureTheFlagBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
+                CtfBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
             });
         }
 
@@ -258,7 +259,26 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// </summary>
         public void GoToLobby()
         {
-            CaptureTheFlagBot.ResetPlayer(this);
+            CtfBot.ResetPlayer(this);
+        }
+
+        public void UpdateMovementInformation(Message message)
+        {
+            if (message.Type == EverybodyEditsMessage.PlayerMoved || message.Type == EverybodyEditsMessage.PlayerTeleported)
+            {
+                Location = new Point((int)Math.Round(message.GetDouble(1) / 16.0), (int)Math.Round(message.GetDouble(2) / 16.0));
+
+                if (message.Type == EverybodyEditsMessage.PlayerMoved)
+                {
+                    HorizontalDirection = (HorizontalDirection)message.GetInt(7);
+                    VerticalDirection = (VerticalDirection)message.GetInt(8);
+                    IsPressingSpacebar = message.GetBoolean(9);
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
         }
 
         /// <summary>

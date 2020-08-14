@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace Everybody_Edits_CTF.Core.Bot
 {
-    public static class CaptureTheFlagBot
+    public static class CtfBot
     {
         /// <summary>
         /// States whether the bot is connected to Everybody Edits or not.
@@ -27,12 +27,14 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <summary>
         /// The handler for all the message events that the bot receives.
         /// </summary>
-        private static BotEventHandler botEventHandler;
+        private static CtfBotEventHandler botEventHandler;
 
         /// <summary>
         /// The connection object of the bot that allows communication with the Everybody Edits world it joined.
         /// </summary>
         private static Connection connection;
+
+        public static CtfGameRound CurrentGameRound = new CtfGameRound();
 
         /// <summary>
         /// Connects the bot to the Everybody Edits world defined in <see cref="BotSettings.WorldId"/>.
@@ -51,7 +53,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                 connection = client.Multiplayer.CreateJoinRoom(BotSettings.WorldId, "Everybodyedits" + client.BigDB.Load("config", "config")["version"], true, null, null);
                 connection.Send(EverybodyEditsMessage.InitBegin);
 
-                botEventHandler = new BotEventHandler(connection);
+                botEventHandler = new CtfBotEventHandler(connection);
             }
             catch (PlayerIOError error)
             {

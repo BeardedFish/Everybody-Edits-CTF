@@ -19,7 +19,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         public const string PlayerJoinedWorld = "add";
         public const string PlayerLeftWorld = "left";
         public const string PlayerMoved = "m";
-        public const string PlayerRespawn = "tele";
+        public const string PlayerReset = "tele";
         public const string PlayerTeleported = "teleport";
         public const string ReloadWorld = "reset";
         public const string SetTitle = "name";

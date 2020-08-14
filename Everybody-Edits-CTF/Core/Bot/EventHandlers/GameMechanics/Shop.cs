@@ -1,6 +1,6 @@
 ﻿// File Name:     Shop.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
-// Date:          Saturday, July 4, 2020
+// Date:          Thursday, August 13, 2020
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.Enums;
@@ -8,9 +8,9 @@ using Everybody_Edits_CTF.Core.Database;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
+namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
 {
-    public static class Shop
+    public sealed class Shop : IGameMechanic
     {
         /// <summary>
         /// The Y coordinate where a player can purchase shop items.
@@ -25,7 +25,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <summary>
         /// The list of items that the shop offers to players in the Everybody Edits world.
         /// </summary>
-        private static readonly List<ShopItem> ShopItems = new List<ShopItem>()
+        private readonly List<ShopItem> ShopItems = new List<ShopItem>()
         {
             new ShopItem("curse effect", 30, new Point(232, PurchaseFloorY), new Point(232, SuccesfulPurchaseY)),
             new ShopItem("zombie effect", 60, new Point(234, PurchaseFloorY), new Point(234, SuccesfulPurchaseY)),
@@ -36,11 +36,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             new ShopItem("fly effect", 10000, new Point(244, PurchaseFloorY), new Point(244, SuccesfulPurchaseY))
         };
 
-        /// <summary>
-        /// Handles a player if they're located in the shop.
-        /// </summary>
-        /// <param name="player">The player to handle in the shop.</param>
-        public static void Handle(Player player)
+        public void Handle(string messageType, Player player)
         {
             if (!PlayersDatabaseTable.Loaded || player.VerticalDirection != VerticalDirection.Down)
             {
@@ -60,11 +56,11 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                         {
                             playerData.Coins -= shopItem.Cost;
                             msgResult = $"You succesfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Coins == 1 ? "" : "s")}.";
-                            
-                            CaptureTheFlagBot.TeleportPlayer(player, shopItem.PurchaseTeleportLocation.X, shopItem.PurchaseTeleportLocation.Y);
+
+                            CtfBot.TeleportPlayer(player, shopItem.PurchaseTeleportLocation.X, shopItem.PurchaseTeleportLocation.Y);
                         }
 
-                        CaptureTheFlagBot.SendPrivateMessage(player, msgResult);
+                        CtfBot.SendPrivateMessage(player, msgResult);
 
                         break; // Player attempted to purchase the item, no need to check the other shop items
                     }

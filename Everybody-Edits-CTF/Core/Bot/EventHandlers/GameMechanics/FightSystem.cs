@@ -1,29 +1,37 @@
-// File Name:     AttackSystem.cs
+﻿// File Name:     FightSystem.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
-// Date:          Tuesday, June 30, 2020
+// Date:          Thursday, August 13, 2020
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 
-namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
+namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
 {
-    public static class AttackSystem
+    public sealed class FightSystem : IGameMechanic
     {
-        /// <summary>
-        /// Handles a player attacking an enemy player. If the attackee's health is less than or equal to zero, then the atackee is killed.
-        /// </summary>
-        /// <param name="attacker">The player attacking.</param>
-        /// <param name="atackee">The player getting attacked.</param>
-        public static void Handle(Player attacker, Player attackee)
+        public void Handle(string messageType, Player player)
         {
-            if (attacker.IsEnemiesWith(attackee) && attacker.IsNearPlayer(attackee))
+            if (!player.IsPlayingGame || player.IsInGodMode)
             {
-                attackee.Attack(attacker);
+                return;
+            }
 
-                HandleHealthStatusWarning(attackee);
-
-                if (attackee.Health <= 0)
+            foreach (Player enemyPlayer in JoinedWorld.Players.Values)
+            {
+                if (player == enemyPlayer)
                 {
-                    attackee.Die();
+                    continue;
+                }
+
+                if (player.IsEnemiesWith(enemyPlayer) && player.IsNearPlayer(enemyPlayer))
+                {
+                    enemyPlayer.Attack(player);
+
+                    HandleHealthStatusWarning(enemyPlayer);
+
+                    if (enemyPlayer.Health <= 0)
+                    {
+                        enemyPlayer.Die();
+                    }
                 }
             }
         }
@@ -32,7 +40,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// Sends a player a private message if their health is at a certain level. The private message is to warn them that they are close to being killed by an enemy player.
         /// </summary>
         /// <param name="player">The player to warn about their health.</param>
-        private static void HandleHealthStatusWarning(Player player)
+        private void HandleHealthStatusWarning(Player player)
         {
             string healthDescription = null;
 
@@ -50,7 +58,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             {
                 string msg = $"Warning! Your health is {healthDescription} ({player.Health} HP).";
 
-                CaptureTheFlagBot.SendPrivateMessage(player, msg);
+                CtfBot.SendPrivateMessage(player, msg);
             }
         }
     }
