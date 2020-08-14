@@ -55,14 +55,15 @@ namespace Everybody_Edits_CTF.Core.Bot
                 new InitHandler(),
                 new BlockPlacedHandler(),
                 new ChatMessageReceivedHandler(),
-                new WorldActionHandler(),
+                new EditRightsChangedHandler(),
                 new GodModeToggledHandler(),
                 new JoinedWorldHandler(),
                 new LeftWorldHandler(),
                 new LocationChangedHandler(CurrentGameRound.FlagSystem),
                 new ResetHandler(),
+                new SmileyChangedHandler(),
                 new TeamChangedHandler(),
-                new SmileyChangedHandler()
+                new WorldActionHandler()
             };
         }
 
