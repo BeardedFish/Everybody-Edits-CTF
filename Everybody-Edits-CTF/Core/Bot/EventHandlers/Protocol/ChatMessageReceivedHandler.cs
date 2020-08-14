@@ -12,21 +12,26 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
     public sealed class ChatMessageReceivedHandler : BotEvent
     {
         /// <summary>
-        /// The array of command objects. This object is initialized in the <see cref="ChatMessageReceivedHandler()"/> constructor.
+        /// The array of command objects. This array will always have a length of three.
+        /// 
+        /// Index Map:
+        /// 0 - Admin commands
+        /// 1 - Game commands
+        /// 2 - Regular commands
         /// </summary>
-        private Command[] botCommands;
+        public static Command[] BotCommands = new Command[]
+        {
+            new AdminCommands(),
+            new GameCommands(),
+            new RegularCommands()
+        };
 
         /// <summary>
         /// Event handler for when a chat message is received in the Everybody Edits world.
         /// </summary>
         public ChatMessageReceivedHandler() : base(new string[] { EverybodyEditsMessage.ChatMessage }, null)
         {
-            botCommands = new Command[]
-            {
-                new AdminCommands(),
-                new GameCommands(),
-                new RegularCommands()
-            };
+
         }
 
         /// <summary>
@@ -45,7 +50,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         }
 
         /// <summary>
-        /// Executes all <see cref="Command"/> objects defined in the <see cref="botCommands"/> array. The objects are executed via the <see cref="Command.Handle(Player, ParsedCommand)"/>
+        /// Executes all <see cref="Command"/> objects defined in the <see cref="BotCommands"/> array. The objects are executed via the <see cref="Command.Handle(Player, ParsedCommand)"/>
         /// method. If the method returns true, that means the command was executed succesfully, thus resulting in the other items in the array being ignored.
         /// </summary>
         /// <param name="player">The player that is executing a command.</param>
@@ -56,7 +61,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
             if (parsedCommand != null)
             {
-                foreach (Command command in botCommands)
+                foreach (Command command in BotCommands)
                 {
                     if (command.Handle(player, parsedCommand)) // Break out of foreach loop if the command was succesfully handled
                     {

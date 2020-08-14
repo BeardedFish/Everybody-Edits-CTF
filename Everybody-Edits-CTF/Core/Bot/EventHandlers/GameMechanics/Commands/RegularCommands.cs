@@ -4,6 +4,7 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Commands;
+using Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol;
 using Everybody_Edits_CTF.Core.Database;
 using System.Linq;
 
@@ -106,13 +107,13 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             CtfBot.SendPrivateMessage(player, "Command prefixes: . > ! #");
 
                             CtfBot.SendPrivateMessage(player, "Regular Commands:");
-                            //CaptureTheFlagBot.SendPrivateMessage(player, StringArrayToString(RegularCommands.ValidCommands));
+                            CtfBot.SendPrivateMessage(player, StringArrayToString(ChatMessageReceivedHandler.BotCommands[2].ValidCommands));
 
                             CtfBot.SendPrivateMessage(player, "Game Commands:");
-                            //CaptureTheFlagBot.SendPrivateMessage(player, StringArrayToString(GameCommands.));
+                            CtfBot.SendPrivateMessage(player, StringArrayToString(ChatMessageReceivedHandler.BotCommands[1].ValidCommands));
 
                             CtfBot.SendPrivateMessage(player, "Administrator Commands:");
-                            //CaptureTheFlagBot.SendPrivateMessage(player, StringArrayToString(AdminCommands.ValidCommands));
+                            CtfBot.SendPrivateMessage(player, StringArrayToString(ChatMessageReceivedHandler.BotCommands[0].ValidCommands));
 
                             CtfBot.SendPrivateMessage(player, "Tips:");
                             CtfBot.SendPrivateMessage(player, "- Press arrow keys/WASD keys around an enemy player to attack them.");
