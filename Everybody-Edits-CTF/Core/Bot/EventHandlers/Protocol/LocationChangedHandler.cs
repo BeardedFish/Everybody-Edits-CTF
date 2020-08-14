@@ -1,4 +1,4 @@
-﻿// File Name:     PlayerLocationChangedHandler.cs
+﻿// File Name:     LocationChangedHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -8,12 +8,12 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerLocationChangedHandler : BotEvent
+    public sealed class LocationChangedHandler : BotEvent
     {
         /// <summary>
         /// Event handler for when a players location is changed in the Everybody Edits world.
         /// </summary>
-        public PlayerLocationChangedHandler() : base(new string[] { EverybodyEditsMessage.PlayerMoved, EverybodyEditsMessage.PlayerTeleported }, new IGameMechanic[] { new FightSystem(), CtfGameRound.FlagSystem, new HealSystem(), new RoomEntrance(), new Shop(), new TrapSystem(), new WarpPipe() })
+        public LocationChangedHandler() : base(new string[] { EverybodyEditsMessage.PlayerMoved, EverybodyEditsMessage.PlayerTeleported }, new IGameMechanic[] { new FightSystem(), CtfGameRound.FlagSystem, new HealSystem(), new RoomEntrance(), new Shop(), new TrapSystem(), new WarpPipe() })
         {
 
         }

@@ -1,4 +1,4 @@
-﻿// File Name:     PlayerResetHandler.cs
+﻿// File Name:     ResetHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -11,12 +11,12 @@ using System;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerResetHandler : BotEvent
+    public sealed class ResetHandler : BotEvent
     {
         /// <summary>
         /// Event handler for when a player is reset in the Everybody Edits world.
         /// </summary>
-        public PlayerResetHandler() : base(new string[] { EverybodyEditsMessage.PlayerReset }, null)
+        public ResetHandler() : base(new string[] { EverybodyEditsMessage.PlayerReset }, null)
         {
 
         }

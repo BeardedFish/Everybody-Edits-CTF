@@ -1,4 +1,4 @@
-﻿// File Name:     PlayerJoinedWorldHandler.cs
+﻿// File Name:     dJoinedWorldHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -13,13 +13,13 @@ using System.Drawing;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerJoinedWorldHandler : BotEvent
+    public sealed class JoinedWorldHandler : BotEvent
     {
         /// <summary>
         /// Event handler for when a player joins the Everybody Edits world. This class does not handle the bot joining the world. Refer to <see cref="InitHandler"/> for
         /// bot join handling code.
         /// </summary>
-        public PlayerJoinedWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerJoinedWorld }, new IGameMechanic[] { new DailyBonus() } )
+        public JoinedWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerJoinedWorld }, new IGameMechanic[] { new DailyBonus() } )
         {
 
         }

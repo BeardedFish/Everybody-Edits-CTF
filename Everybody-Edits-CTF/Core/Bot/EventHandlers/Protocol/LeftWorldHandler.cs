@@ -1,4 +1,4 @@
-﻿// File Name:     PlayerLeftWorldHandler.cs
+﻿// File Name:     LeftWorldHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -9,12 +9,12 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerLeftWorldHandler : BotEvent
+    public sealed class LeftWorldHandler : BotEvent
     {
         /// <summary>
         /// Event handler for when a player leaves the Everybody Edits world.
         /// </summary>
-        public PlayerLeftWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerLeftWorld, EverybodyEditsMessage.PlayerJoinedWorld }, null)
+        public LeftWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerLeftWorld, EverybodyEditsMessage.PlayerJoinedWorld }, null)
         {
 
         }

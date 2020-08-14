@@ -21,10 +21,10 @@ namespace Everybody_Edits_CTF.Core.Bot
             new ChatMessageReceivedHandler(),
             new WorldActionHandler(),
             new GodModeToggledHandler(),
-            new PlayerJoinedWorldHandler(),
-            new PlayerLocationChangedHandler(),
-            new PlayerResetHandler(),
-            new PlayerTeamChangedHandler(),
+            new JoinedWorldHandler(),
+            new LocationChangedHandler(),
+            new ResetHandler(),
+            new TeamChangedHandler(),
             new SmileyChangedHandler()
         };
 

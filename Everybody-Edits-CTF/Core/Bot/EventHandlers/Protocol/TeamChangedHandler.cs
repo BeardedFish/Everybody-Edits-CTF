@@ -1,4 +1,4 @@
-﻿// File Name:     PlayerTeamChangedHandler.cs
+﻿// File Name:     TeamChangedHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
@@ -9,12 +9,12 @@ using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 {
-    public sealed class PlayerTeamChangedHandler : BotEvent
+    public sealed class TeamChangedHandler : BotEvent
     {
         /// <summary>
         /// Event handler for when a player joins/leaves a team in the Everybody Edits world.
         /// </summary>
-        public PlayerTeamChangedHandler() : base(new string[] { EverybodyEditsMessage.TeamChanged }, new IGameMechanic[] { new AutoBalance() })
+        public TeamChangedHandler() : base(new string[] { EverybodyEditsMessage.TeamChanged }, new IGameMechanic[] { new AutoBalance() })
         {
 
         }
