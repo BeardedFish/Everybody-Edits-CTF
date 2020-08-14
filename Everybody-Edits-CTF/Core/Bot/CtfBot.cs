@@ -1,4 +1,4 @@
-﻿// File Name:     CaptureTheFlagBot.cs
+﻿// File Name:     CtfBot.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Sunday, June 28, 2020
 
