@@ -69,7 +69,7 @@ namespace Everybody_Edits_CTF.Core.Database
         {
             foreach (PlayerDatabaseRow row in Rows)
             {
-                if (row.Username == username)
+                if (username.Equals(row.Username, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }

@@ -51,6 +51,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                 new WorldActionHandler(),
                 new GodModeToggledHandler(),
                 new JoinedWorldHandler(),
+                new LeftWorldHandler(),
                 new LocationChangedHandler(CurrentGameRound.FlagSystem),
                 new ResetHandler(),
                 new TeamChangedHandler(),
@@ -132,6 +133,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         public void SendChatMessage(string msg)
         {
             string msgChunk;
+
             for (int i = 0; i < msg.Length; i += maxChatMessageLength)
             {
                 msgChunk = msg.Substring(i, Math.Min(maxChatMessageLength, msg.Length - i));

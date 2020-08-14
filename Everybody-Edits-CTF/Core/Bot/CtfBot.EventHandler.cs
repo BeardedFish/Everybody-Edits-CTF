@@ -4,7 +4,6 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Bot.EventHandlers;
-using Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol;
 using Everybody_Edits_CTF.Core.Database;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Logging;

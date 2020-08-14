@@ -15,7 +15,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
         /// <summary>
         /// Event handler for when a player leaves the Everybody Edits world.
         /// </summary>
-        public LeftWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerLeftWorld, EverybodyEditsMessage.PlayerJoinedWorld }, null)
+        public LeftWorldHandler() : base(new string[] { EverybodyEditsMessage.PlayerLeftWorld }, null)
         {
 
         }
