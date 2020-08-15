@@ -2,7 +2,7 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
-namespace Everybody_Edits_CTF.Core.Bot.DataStructures
+namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 {
     public sealed class ParsedCommand
     {

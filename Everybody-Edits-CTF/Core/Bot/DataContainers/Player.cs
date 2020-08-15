@@ -10,7 +10,7 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
-namespace Everybody_Edits_CTF.Core.Bot.DataStructures
+namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 {
     public sealed class Player
     {

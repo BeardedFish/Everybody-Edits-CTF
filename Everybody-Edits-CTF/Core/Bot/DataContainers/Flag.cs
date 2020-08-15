@@ -9,7 +9,7 @@ using System;
 using System.Drawing;
 using System.Text;
 
-namespace Everybody_Edits_CTF.Core.Bot.DataStructures
+namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 {
     public class Flag
     {

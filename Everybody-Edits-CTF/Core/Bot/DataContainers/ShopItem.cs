@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Everybody_Edits_CTF.Core.Bot.DataStructures
+namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 {
     public sealed class ShopItem
     {

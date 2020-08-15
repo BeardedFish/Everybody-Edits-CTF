@@ -6,7 +6,7 @@ using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using System;
 using System.Collections.Generic;
 
-namespace Everybody_Edits_CTF.Core.Bot.DataStructures
+namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 {
     public class WorldInformation
     {

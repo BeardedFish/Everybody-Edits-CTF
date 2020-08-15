@@ -9,7 +9,7 @@ using Everybody_Edits_CTF.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Everybody_Edits_CTF.Core.Bot.DataStructures
+namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 {
     public sealed class CtfGameRound
     {

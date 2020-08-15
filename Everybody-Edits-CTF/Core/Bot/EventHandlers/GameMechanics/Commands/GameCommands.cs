@@ -2,7 +2,7 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Thursday, August 13, 2020
 
-using Everybody_Edits_CTF.Core.Bot.DataStructures;
+using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Commands;
 using Everybody_Edits_CTF.Core.Settings;
