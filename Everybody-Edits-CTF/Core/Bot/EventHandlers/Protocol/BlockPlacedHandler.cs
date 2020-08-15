@@ -12,7 +12,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
     public sealed class BlockPlacedHandler : BotEvent
     {
         /// <summary>
-        /// Event handler for when a block is placed in the Everybody Edits world. This class modifies the <see cref="WorldInformation.Blocks"/> array.
+        /// Event handler for when a block is placed in the Everybody Edits world.
         /// </summary>
         public BlockPlacedHandler() : base(new string[]
             {

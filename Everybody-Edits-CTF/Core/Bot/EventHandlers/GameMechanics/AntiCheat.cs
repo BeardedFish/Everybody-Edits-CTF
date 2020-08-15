@@ -30,6 +30,13 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
                     ctfBot.CurrentGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(player.Team)].Return(ctfBot, null, false);
                 }
             }
+            else if (messageType == EverybodyEditsMessage.Effect)
+            {
+                if (!player.PurchasedItemLegally)
+                {
+                    ctfBot.KickPlayer(player.Username, "You were kicked by the anti-cheat system for attemping to cheat.");
+                }
+            }
         }
     }
 }

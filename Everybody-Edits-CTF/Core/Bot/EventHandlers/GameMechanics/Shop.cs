@@ -25,7 +25,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         /// <summary>
         /// The list of items that the shop offers to players in the Everybody Edits world.
         /// </summary>
-        private readonly List<ShopItem> ShopItems = new List<ShopItem>()
+        private readonly List<ShopItem> shopItems = new List<ShopItem>()
         {
             new ShopItem("curse effect", 30, new Point(232, PurchaseFloorY), new Point(232, SuccesfulPurchaseY)),
             new ShopItem("zombie effect", 60, new Point(234, PurchaseFloorY), new Point(234, SuccesfulPurchaseY)),
@@ -37,7 +37,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
         };
 
         /// <summary>
-        /// Handles when a player wants to purchase items at the shop in the Capture The Flag game. All shop items are defined in the <see cref="ShopItems"/> array.
+        /// Handles when a player wants to purchase items at the shop in the Capture The Flag game. All shop items are defined in the <see cref="shopItems"/> array.
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
@@ -52,7 +52,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
             PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(player.Username);
             if (playerData != null)
             {
-                foreach (ShopItem shopItem in ShopItems)
+                foreach (ShopItem shopItem in shopItems)
                 {
                     if (player.Location == shopItem.PurchaseLocation) // Player wants to purchase an item
                     {
@@ -62,6 +62,8 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics
                         {
                             playerData.Coins -= shopItem.Cost;
                             msgResult = $"You succesfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Coins == 1 ? "" : "s")}.";
+
+                            player.PurchasedItemLegally = true;
 
                             ctfBot.TeleportPlayer(player, shopItem.PurchaseTeleportLocation.X, shopItem.PurchaseTeleportLocation.Y);
                         }

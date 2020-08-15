@@ -3,7 +3,6 @@
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
 using PlayerIOClient;
@@ -106,6 +105,12 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// States whether the player can toggle God mode or not.
         /// </summary>
         public bool CanToggleGodMode { get; set; }
+
+        /// <summary>
+        /// States whether this player purchased a <see cref="ShopItem"/> legally or not. This is a flag variable that will be set to true when the player purchases an item
+        /// from the shop. The variable will be set to false when the player receives the effect.
+        /// </summary>
+        public bool PurchasedItemLegally { get; set; }
 
         /// <summary>
         /// The smiley id that the player currently has.

@@ -56,6 +56,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                 new BlockPlacedHandler(),
                 new ChatMessageReceivedHandler(),
                 new EditRightsChangedHandler(),
+                new EffectHandler(),
                 new GodModeToggledHandler(),
                 new JoinedWorldHandler(),
                 new LeftWorldHandler(),

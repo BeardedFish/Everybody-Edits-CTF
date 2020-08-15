@@ -105,6 +105,7 @@
     <Compile Include="Core\Bot\DataStructures\ConnectionInformation.cs" />
     <Compile Include="Core\Bot\DataStructures\CtfGameRound.cs" />
     <Compile Include="Core\Bot\DataStructures\ParsedCommand.cs" />
+    <Compile Include="Core\Bot\Enums\Effect.cs" />
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\Commands\Command.cs" />
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\HealSystem.cs" />
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\FightSystem.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\AutoBalance.cs" />
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\AntiCheat.cs" />
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\IGameMechanic.cs" />
+    <Compile Include="Core\Bot\EventHandlers\Protocol\EffectHandler.cs" />
     <Compile Include="Core\Bot\EventHandlers\Protocol\ChatMessageReceivedHandler.cs" />
     <Compile Include="Core\Bot\EventHandlers\Protocol\JoinedWorldHandler.cs" />
     <Compile Include="Core\Bot\EventHandlers\Protocol\ResetHandler.cs" />
