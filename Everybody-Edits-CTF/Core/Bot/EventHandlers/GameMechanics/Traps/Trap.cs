@@ -46,6 +46,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
         /// 
         /// By default, the condition to trigger a trap is:
         ///     - The trap must not be currently activated.
+        ///     - The player must not be in God mode.
         ///     - The player must be playing the Capture The Flag game (aka: team must be blue or red).
         ///     - The players vertical direction must be equal to <see cref="VerticalDirection.Down"/>.
         /// </summary>
@@ -53,7 +54,7 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Traps
         /// <returns>True if the player can trigger this trap, if not, false.</returns>
         public virtual bool CanTriggerTrap(Player player)
         {
-            return !TrapActivated && player.IsPlayingGame && player.VerticalDirection == VerticalDirection.Down;
+            return !TrapActivated && !player.IsInGodMode && player.IsPlayingGame && player.VerticalDirection == VerticalDirection.Down;
         }
     }
 }
