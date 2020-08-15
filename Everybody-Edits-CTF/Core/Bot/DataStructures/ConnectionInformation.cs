@@ -1,4 +1,4 @@
-﻿// File Name:     BotInformation.cs
+﻿// File Name:     ConnectionInformation.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, August 14, 2020
 
