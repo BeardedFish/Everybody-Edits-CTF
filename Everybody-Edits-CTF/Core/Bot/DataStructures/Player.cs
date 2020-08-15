@@ -6,6 +6,7 @@ using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
+using PlayerIOClient;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -57,11 +58,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// The number of times the player died in the Everybody Edits world.
         /// </summary>
         public int DeathCount { get; set; }
-
-        /// <summary>
-        /// States whether the player is currently holding the enemy flag or not.
-        /// </summary>
-        public bool HasEnemyFlag => IsPlayingGame ? CaptureTheFlag.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
 
         /// <summary>
         /// States whether the player is in the blue teams base or not.
@@ -202,17 +198,28 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         }
 
         /// <summary>
-        /// Tells the bot to kill this player.
+        /// Tells the Capture The Flag bot to kill this player.
         /// </summary>
-        public void Die()
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        public void Die(CtfBot ctfBot)
         {
-            CaptureTheFlagBot.KillPlayer(this);
+            ctfBot.KillPlayer(this);
+        }
+
+        /// <summary>
+        /// States whether this player is currently holding the enemy flag or not.
+        /// </summary>
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <returns>True if the player is holding the enemy flag, if not, false.</returns>
+        public bool HasEnemyFlag(CtfBot ctfBot)
+        {
+            return IsPlayingGame ? ctfBot.CurrentGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
         }
 
         /// <summary>
         /// Heals the player by 5 health points.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the players health is greater than or equal to <see cref="MaxHealth"/>, if not, false.</returns>
         public bool Heal()
         {
             Health += AttackHealHealthAmount;
@@ -224,7 +231,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// Respawns the player to their teams respawn location. When respawning, the player has to wait <see cref="GameSettings.RespawnCooldownMs"/>. If the players team
         /// is <see cref="Team.None"/> then this method does nothing. 
         /// </summary>
-        public void Respawn()
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        public void Respawn(CtfBot ctfBot)
         {
             if (!IsPlayingGame || IsRespawning)
             {
@@ -236,12 +244,12 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
             Task.Run(async() =>
             {
                 Point respawnCooldownLocation = Team == Team.Blue ? GameSettings.BlueRespawnCooldownLocation : GameSettings.RedRespawnCooldownLocation;
-                CaptureTheFlagBot.TeleportPlayer(this, respawnCooldownLocation.X, respawnCooldownLocation.Y);
+                ctfBot.TeleportPlayer(this, respawnCooldownLocation.X, respawnCooldownLocation.Y);
 
                 await Task.Delay(GameSettings.RespawnCooldownMs);
 
                 Point respawnLocation = Team == Team.Blue ? GameSettings.BlueCheckpointLocation : GameSettings.RedCheckpointLocation;
-                CaptureTheFlagBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
+                ctfBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
             });
         }
 
@@ -256,9 +264,34 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         /// <summary>
         /// Teleports the player to the lobby.
         /// </summary>
-        public void GoToLobby()
+        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        public void GoToLobby(CtfBot ctfBot)
         {
-            CaptureTheFlagBot.ResetPlayer(this);
+            ctfBot.ResetPlayer(this);
+        }
+
+        /// <summary>
+        /// Updates information about the player related to movement/location based on a <see cref="Message"/> object. This method only supports <see cref="EverybodyEditsMessage.PlayerMoved"/>
+        /// and <see cref="EverybodyEditsMessage.PlayerTeleported"/>. Any other message will result in an exception being thrown.
+        /// </summary>
+        /// <param name="message">The message that contains information about the players location.</param>
+        public void UpdateMovementInformation(Message message)
+        {
+            if (message.Type == EverybodyEditsMessage.PlayerMoved || message.Type == EverybodyEditsMessage.PlayerTeleported)
+            {
+                Location = new Point((int)Math.Round(message.GetDouble(1) / 16.0), (int)Math.Round(message.GetDouble(2) / 16.0));
+
+                if (message.Type == EverybodyEditsMessage.PlayerMoved)
+                {
+                    HorizontalDirection = (HorizontalDirection)message.GetInt(7);
+                    VerticalDirection = (VerticalDirection)message.GetInt(8);
+                    IsPressingSpacebar = message.GetBoolean(9);
+                }
+            }
+            else
+            {
+                throw new Exception("The message is not supported for this method.");
+            }
         }
 
         /// <summary>
@@ -272,8 +305,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataStructures
         }
 
         /// <summary>
-        /// States whether this player is enemies with another player based on their teams. Players with the same teams are allies, while players with different teams are considered
-        /// enemies. Players not on a team are not considered enemies with other teams.
+        /// States whether this player is enemies with another player based on their team. Players with the same teams are allies, while players with different teams are considered
+        /// enemies. Players not on a team are not considered enemies with players on a team.
         /// </summary>
         /// <param name="player">The player to compare to this player object.</param>
         /// <returns>True if this player is enemies with the player in the parameters, if not, false.</returns>

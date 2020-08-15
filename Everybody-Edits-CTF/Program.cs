@@ -3,6 +3,7 @@
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot;
+using Everybody_Edits_CTF.Core.Bot.DataStructures;
 using Everybody_Edits_CTF.Core.Database;
 using Everybody_Edits_CTF.Logging;
 using System;
@@ -38,6 +39,9 @@ namespace Everybody_Edits_CTF
         /// </summary>
         static void Main()
         {
+            CtfBot ctfBot = new CtfBot();
+            ConnectionInformation botConnectionInfo = null;
+
             Console.Title = ProgramTitle;
             Console.WriteLine($"{TitleArt}\n");
 
@@ -63,20 +67,34 @@ namespace Everybody_Edits_CTF
                     }
                     else if (string.Equals(inputCmd, "connect", CommandCompareCase))
                     {
-                        Console.Write("Loading players table from MySql database... ");
-                        PlayersDatabaseTable.Load();
-                        Console.WriteLine($"[{(PlayersDatabaseTable.Loaded ? "SUCCESS" : $"FAIL")}]");
-    
-                        Console.Write("Connecting to Everybody Edits... ");
-                        Console.WriteLine($"[{(CaptureTheFlagBot.Connect() == null ? "SUCCESS" : $"FAIL")}]");
+                        if (botConnectionInfo == null)
+                        {
+                            Console.WriteLine("Can't connect because the bot connection information has not been setup! Type \"setup\" to setup the bot connection information.");
+                        }
+                        else
+                        {
+                            if (!ctfBot.Connected)
+                            {
+                                Console.Write("Loading players table from MySql database... ");
+                                PlayersDatabaseTable.Load();
+                                Console.WriteLine($"[{(PlayersDatabaseTable.Loaded ? "SUCCESS" : $"FAIL")}]");
+
+                                Console.Write("Connecting to Everybody Edits... ");
+                                Console.WriteLine($"[{(ctfBot.Connect(botConnectionInfo) == null ? "SUCCESS" : $"FAIL")}]");
+                            }
+                            else
+                            {
+                                Console.WriteLine("The bot is already connected!");
+                            }
+                        }
                     }
                     else if (string.Equals(inputCmd, "disconnect", CommandCompareCase))
                     {
-                        if (CaptureTheFlagBot.Connected)
+                        if (ctfBot.Connected)
                         {
                             Console.WriteLine("Disconnecting...");
 
-                            CaptureTheFlagBot.Disconnect();
+                            ctfBot.Disconnect();
                         }
                         else
                         {
@@ -93,6 +111,23 @@ namespace Everybody_Edits_CTF
                     else if (string.Equals(inputCmd, "logs", CommandCompareCase))
                     {
                         Console.WriteLine(Logger.LogText == string.Empty ? "Log text is empty." : Logger.LogText);
+                    }
+                    else if (string.Equals(inputCmd, "setup", CommandCompareCase))
+                    {
+                        Console.WriteLine("[!] NOTE: The information entered here is NOT encrypted or stored securely.\n");
+
+                        Console.Write("Email: ");
+                        string botEmail = Console.ReadLine();
+
+                        Console.Write("Password: ");
+                        string botPassword = Console.ReadLine();
+
+                        Console.Write("World Id: ");
+                        string worldId = Console.ReadLine();
+
+                        botConnectionInfo = new ConnectionInformation(botEmail, botPassword, worldId);
+
+                        Console.WriteLine("\nSetup process complete! You may now connect the bot to Everybody Edits by typing \"connect\".");
                     }
                     else
                     {

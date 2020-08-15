@@ -29,21 +29,6 @@ namespace Everybody_Edits_CTF.Core.Settings
         public const string EverybodyEditsGameId = "everybody-edits-su9rn58o40itdbnw69plyw";
 
         /// <summary>
-        /// The id of the Everybody Edits world that the bot will join.
-        /// </summary>
-        public const string WorldId = "";
-
-        /// <summary>
-        /// The email of the bot account.
-        /// </summary>
-        public const string Email = "";
-
-        /// <summary>
-        /// The password of the bot account.
-        /// </summary>
-        public const string Password = "";
-
-        /// <summary>
         /// The title the bot will set the Everybody Edits world to when connected.
         /// </summary>
         public const string WorldTitle = "CTF Bot";
