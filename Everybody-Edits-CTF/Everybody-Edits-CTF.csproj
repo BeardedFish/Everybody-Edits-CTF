@@ -102,9 +102,9 @@
   <ItemGroup>
     <Compile Include="Core\Bot\CtfBot.EventHandler.cs" />
     <Compile Include="Core\Bot\CtfBot.cs" />
-    <Compile Include="Core\Bot\DataStructures\ConnectionInformation.cs" />
-    <Compile Include="Core\Bot\DataStructures\CtfGameRound.cs" />
-    <Compile Include="Core\Bot\DataStructures\ParsedCommand.cs" />
+    <Compile Include="Core\Bot\DataContainers\ConnectionInformation.cs" />
+    <Compile Include="Core\Bot\DataContainers\CtfGameRound.cs" />
+    <Compile Include="Core\Bot\DataContainers\ParsedCommand.cs" />
     <Compile Include="Core\Bot\Enums\Effect.cs" />
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\Commands\Command.cs" />
     <Compile Include="Core\Bot\EventHandlers\GameMechanics\HealSystem.cs" />
@@ -147,12 +147,12 @@
     <Compile Include="Core\Bot\Enums\Team.cs" />
     <Compile Include="Core\Bot\Enums\VerticalDirection.cs" />
     <Compile Include="Core\Bot\Enums\EverybodyEditsMessage.cs" />
-    <Compile Include="Core\Bot\DataStructures\WorldInformation.cs" />
+    <Compile Include="Core\Bot\DataContainers\WorldInformation.cs" />
     <Compile Include="Core\Database\PlayerDatabaseRow.cs" />
     <Compile Include="Core\Database\PlayersDatabaseTable.cs" />
-    <Compile Include="Core\Bot\DataStructures\Flag.cs" />
-    <Compile Include="Core\Bot\DataStructures\Player.cs" />
-    <Compile Include="Core\Bot\DataStructures\ShopItem.cs" />
+    <Compile Include="Core\Bot\DataContainers\Flag.cs" />
+    <Compile Include="Core\Bot\DataContainers\Player.cs" />
+    <Compile Include="Core\Bot\DataContainers\ShopItem.cs" />
     <Compile Include="Core\Bot\Deserializer\Blocks\Block.cs" />
     <Compile Include="Core\Bot\Deserializer\Blocks\EffectBlock.cs" />
     <Compile Include="Core\Bot\Deserializer\Blocks\MorphableBlock.cs" />
