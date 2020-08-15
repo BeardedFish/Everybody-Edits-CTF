@@ -92,11 +92,7 @@ namespace Everybody_Edits_CTF
                     }
                     else if (string.Equals(inputCmd, "logs", CommandCompareCase))
                     {
-                        string outputLogTxt = Logger.LogText == string.Empty ? "Log text is empty." : Logger.LogText;
-
-                        Console.WriteLine("=== LOGS ==================");
-                        Console.WriteLine(outputLogTxt);
-                        Console.WriteLine("===========================");
+                        Console.WriteLine(Logger.LogText == string.Empty ? "Log text is empty." : Logger.LogText);
                     }
                     else
                     {
