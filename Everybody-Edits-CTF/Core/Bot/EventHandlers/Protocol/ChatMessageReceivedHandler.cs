@@ -6,6 +6,7 @@ using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.EventHandlers.GameMechanics.Commands;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands;
+using Everybody_Edits_CTF.Logging;
 using PlayerIOClient;
 
 namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
@@ -46,8 +47,12 @@ namespace Everybody_Edits_CTF.Core.Bot.EventHandlers.Protocol
 
             if (ctfBot.JoinedWorld.Players.ContainsKey(playerId))
             {
+                string chatMessage = message.GetString(1);
+
                 // Handle bot commands (admin, game, and regular)
-                HandleCommand(ctfBot, ctfBot.JoinedWorld.Players[playerId], message.GetString(1));
+                HandleCommand(ctfBot, ctfBot.JoinedWorld.Players[playerId], chatMessage);
+
+                Logger.WriteLog(LogType.EverybodyEditsMessage, $"Player {ctfBot.JoinedWorld.Players[playerId].Username} said: {chatMessage}");
             }
         }
 
