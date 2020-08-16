@@ -26,6 +26,10 @@ namespace Everybody_Edits_CTF.Core.Bot.Enums
             public static readonly MorphableBlock BlueFlag = new MorphableBlock(327, 1);
 
             public static readonly MorphableBlock RedFlag = new MorphableBlock(327, 4);
+
+            public static readonly MorphableBlock RedFirework = new MorphableBlock(1581, 2);
+
+            public static readonly MorphableBlock BlueFirework = new MorphableBlock(1581, 3);
         }
 
         /// <summary>

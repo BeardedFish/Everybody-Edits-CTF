@@ -7,7 +7,10 @@ using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Helpers;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
@@ -51,6 +54,10 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 {
                     ctfBot.CurrentGameRound.End(ctfBot, player.Team);
                 }
+                else
+                {
+                    CelebrateCapture(ctfBot, player.Team);
+                }
             }
             else if (enemyFlag.CanBeTakenBy(player))
             {
@@ -62,6 +69,35 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             {
                 friendlyFlag.Return(ctfBot, player, false);
             }
+        }
+
+        /// <summary>
+        /// Places a firework above teams flag. This method should only be called when a player captures a flag. This method will throw an exception if the
+        /// team is set to <see cref="Team.None"/>.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        /// <param name="team">The team that captured the flag.</param>
+        private void CelebrateCapture(CaptureTheFlagBot ctfBot, Team team)
+        {
+            if (team == Team.None)
+            {
+                throw new Exception("Unsupported team type!");
+            }
+
+            Task.Run(async() =>
+            {
+                MorphableBlock firework = team == Team.Blue ? Blocks.Foreground.BlueFirework : Blocks.Foreground.RedFirework;
+                Point placeLocation = (team == Team.Blue ? Flags[Team.Blue].HomeLocation : Flags[Team.Red].HomeLocation);
+
+                await Task.Delay(500);
+
+                placeLocation.Offset(0, -3);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, placeLocation, firework);
+
+                await Task.Delay(1000);
+
+                ctfBot.PlaceBlock(BlockLayer.Foreground, placeLocation, Blocks.None);
+            });
         }
     }
 }
