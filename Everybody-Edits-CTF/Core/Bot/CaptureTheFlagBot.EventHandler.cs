@@ -416,10 +416,8 @@ namespace Everybody_Edits_CTF.Core.Bot
                                 {
                                     double xLoc = Math.Round(message.GetDouble(i + 1) / 16.0);
                                     double yLoc = Math.Round(message.GetDouble(i + 2) / 16.0);
-                                    int deathCount = message.GetInt(i + 3);
 
                                     JoinedWorld.Players[playerId].UpdateLocation((int)xLoc, (int)yLoc);
-                                    JoinedWorld.Players[playerId].DeathCount = deathCount;
 
                                     if (propertiesReset)
                                     {

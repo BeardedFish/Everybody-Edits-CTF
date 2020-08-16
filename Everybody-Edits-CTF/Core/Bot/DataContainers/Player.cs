@@ -54,11 +54,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public bool CanTriggerTrap => !IsInGodMode && IsPlayingGame && VerticalDirection == VerticalDirection.Down;
 
         /// <summary>
-        /// The number of times the player died in the Everybody Edits world.
-        /// </summary>
-        public int DeathCount { get; set; }
-
-        /// <summary>
         /// States whether the player is in the blue teams base or not.
         /// </summary>
         public bool IsInBlueBase
