@@ -1,4 +1,4 @@
-﻿// File Name:     Shop.cs
+// File Name:     Shop.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Saturday, August 15, 2020
 
@@ -32,7 +32,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             { Effect.Fly, "fly effect" },
             { Effect.Jump, "higher jump effect" },
             { Effect.Speed, "speed effect" },
-            { Effect.Zombie, "curse effect" },
+            { Effect.Zombie, "zombie effect" },
         };
 
         /// <summary>
