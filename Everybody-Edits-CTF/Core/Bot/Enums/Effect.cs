@@ -6,6 +6,17 @@ namespace Everybody_Edits_CTF.Core.Bot.Enums
 {
     public enum Effect
     {
-        Lava = 8
+        None = -1,
+        Jump = 0,
+        Fly = 1,
+        Speed = 2,
+        Protection = 3,
+        Curse = 4,
+        Zombie = 5,
+        LowGravity = 7,
+        Fire = 8,
+        MultiJump = 9,
+        GravityDirection = 10,
+        Poison = 11
     }
 }

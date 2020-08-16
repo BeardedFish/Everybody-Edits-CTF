@@ -107,12 +107,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public bool CanToggleGodMode { get; set; }
 
         /// <summary>
-        /// States whether this player purchased a <see cref="ShopItem"/> legally or not. This is a flag variable that will be set to true when the player purchases an item
-        /// from the shop. The variable will be set to false when the player receives the effect.
-        /// </summary>
-        public bool PurchasedItemLegally { get; set; }
-
-        /// <summary>
         /// The smiley id that the player currently has.
         /// </summary>
         public int SmileyId { get; set; }
@@ -158,6 +152,11 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// The last enemy player that attacked this player.
         /// </summary>
         public Player LastAttacker { get; set; } = null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Effect PurchasedEffectFlag { get; set; } = Effect.None;
 
         /// <summary>
         /// The maximum health points a player can have.
@@ -206,7 +205,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// Tells the Capture The Flag bot to kill this player.
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
-        public void Die(CtfBot ctfBot)
+        public void Die(CaptureTheFlagBot ctfBot)
         {
             ctfBot.KillPlayer(this);
         }
@@ -216,9 +215,9 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <returns>True if the player is holding the enemy flag, if not, false.</returns>
-        public bool HasEnemyFlag(CtfBot ctfBot)
+        public bool HasEnemyFlag(CaptureTheFlagBot ctfBot)
         {
-            return IsPlayingGame ? ctfBot.CurrentGameRound.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
+            return IsPlayingGame ? ctfBot.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
         }
 
         /// <summary>
@@ -237,7 +236,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// is <see cref="Team.None"/> then this method does nothing. 
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
-        public void Respawn(CtfBot ctfBot)
+        public void Respawn(CaptureTheFlagBot ctfBot)
         {
             if (!IsPlayingGame || IsRespawning)
             {
@@ -270,7 +269,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// Teleports the player to the lobby.
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
-        public void GoToLobby(CtfBot ctfBot)
+        public void GoToLobby(CaptureTheFlagBot ctfBot)
         {
             ctfBot.ResetPlayer(this);
         }

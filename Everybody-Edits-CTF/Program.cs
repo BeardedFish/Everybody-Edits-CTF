@@ -39,7 +39,7 @@ namespace Everybody_Edits_CTF
         /// </summary>
         static void Main()
         {
-            CtfBot ctfBot = new CtfBot();
+            CaptureTheFlagBot ctfBot = new CaptureTheFlagBot();
             ConnectionInformation botConnectionInfo = null;
 
             Console.Title = ProgramTitle;
