@@ -6,11 +6,17 @@ using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.EventArgs;
 using Everybody_Edits_CTF.Helpers;
+using System;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
     public static class AntiCheat
     {
+        /// <summary>
+        /// The maximum time, in milliseconds, a player must send the enabled curse effect message in order to not be considered cheating.
+        /// </summary>
+        private const int CurseEnabledMessageMs = 1000; 
+
         /// <summary>
         /// Handles a player cheating if they enter God mode. A player is considered cheating when they are holding the enemy flag their <see cref="Player.IsInGodMode"/> status
         /// is set to true.
@@ -29,13 +35,20 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         }
 
         /// <summary>
-        /// Handles a player cheating if they take an effect they did not legally purchase in the <see cref="Shop"/>.
+        /// Handles a player cheating if they take an effect they did not legally purchase in the <see cref="Shop"/>. If there are at least two zombies or more in the
+        /// Everybody Edits world then the anti-cheat system does not check for zombie cheaters.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="eventArgs">The arguments for when the player received/lost an effect.</param>
         public static void HandleEffectCheater(CaptureTheFlagBot ctfBot, EffectToggledEventArgs eventArgs)
         {
-            if (!ctfBot.FinishedInit || eventArgs.Effect == Effect.Fire || !eventArgs.IsEffectEnabled)
+            if (!ctfBot.FinishedInit || !eventArgs.IsEffectEnabled || eventArgs.Effect == Effect.Fire)
+            {
+                return;
+            }
+
+            if (eventArgs.Effect == Effect.Zombie && ctfBot.JoinedWorld.TotalZombiePlayers >= 2
+                || eventArgs.Effect == Effect.Curse && DateTimeOffset.Now.ToUnixTimeMilliseconds() - ctfBot.JoinedWorld.LastCurseRemoveTickMs <= CurseEnabledMessageMs)
             {
                 return;
             }

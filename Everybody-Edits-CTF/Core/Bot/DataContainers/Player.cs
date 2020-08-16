@@ -87,6 +87,11 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public bool IsInGodMode { get; set; }
 
         /// <summary>
+        /// States whether this player is currently infected with the zombie effect or not.
+        /// </summary>
+        public bool IsZombie { get; set; }
+
+        /// <summary>
         /// States whether the player can toggle God mode or not.
         /// </summary>
         public bool CanToggleGodMode { get; set; }

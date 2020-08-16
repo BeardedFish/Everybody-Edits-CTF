@@ -240,6 +240,15 @@ namespace Everybody_Edits_CTF.Core.Bot
                             int effectId = message.GetInt(1);
                             bool isEnabled = message.GetBoolean(2);
 
+                            if (effectId == (int)Effect.Curse && !isEnabled)
+                            {
+                                JoinedWorld.LastCurseRemoveTickMs = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                            }
+                            else if (effectId == (int)Effect.Zombie)
+                            {
+                                JoinedWorld.Players[playerId].IsZombie = isEnabled;
+                            }
+
                             OnEffectToggled?.Invoke(this, new EffectToggledEventArgs(JoinedWorld.Players[playerId], (Effect)effectId, isEnabled));
                         }
                     }
@@ -421,6 +430,7 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                                     if (propertiesReset)
                                     {
+                                        JoinedWorld.Players[playerId].IsZombie = false;
                                         JoinedWorld.Players[playerId].Team = Team.None;
                                     }
 
