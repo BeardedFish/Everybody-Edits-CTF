@@ -1,4 +1,8 @@
-﻿using System.Drawing;
+﻿// File Name:     ShopItem.cs
+// By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
+// Date:          Saturday, July 4, 2020
+
+using System.Drawing;
 
 namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 {
