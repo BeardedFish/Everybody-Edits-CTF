@@ -40,7 +40,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                     // Remove bridge
                     for (int x = 94; x <= 105; x++)
                     {
-                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 0);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), Blocks.None);
 
                         await Task.Delay(100);
                     }
@@ -50,7 +50,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                     // Place bridge
                     for (int x = 94; x <= 105; x++)
                     {
-                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), 47);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), Blocks.Foreground.FactoryWood);
 
                         await Task.Delay(100);
                     }

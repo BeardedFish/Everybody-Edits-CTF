@@ -36,14 +36,14 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                 TrapActivated = true;
 
                 // Close gate
-                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), 1058);
-                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), 1058);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), Blocks.Foreground.Caution);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), Blocks.Foreground.Caution);
 
                 // Pour lava
                 for (int i = 175; i <= 179; i++)
                 {
-                    ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), 416);
-                    ctfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), 629);
+                    ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), Blocks.Foreground.Lava);
+                    ctfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), Blocks.Background.DarkOrangeLava);
 
                     await Task.Delay(100);
                 }
@@ -53,15 +53,15 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                 // Remove lava
                 for (int i = 175; i <= 179; i++)
                 {
-                    ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), 0);
-                    ctfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), 507);
+                    ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), Blocks.None);
+                    ctfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), Blocks.Background.BrownBrick);
 
                     await Task.Delay(100);
                 }
 
                 // Open gate
-                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), 0);
-                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), 0);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), Blocks.None);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), Blocks.None);
 
                 await Task.Delay(TrapCooldownMs);
 

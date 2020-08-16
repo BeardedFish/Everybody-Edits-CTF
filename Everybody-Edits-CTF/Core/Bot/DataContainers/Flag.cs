@@ -156,7 +156,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
                 dropLocation.Y++;
             }
 
-            ctfBot.PlaceBlock(BlockLayer.Foreground, dropLocation, Block.Id, Block.MorphId);
+            ctfBot.PlaceBlock(BlockLayer.Foreground, dropLocation, Block);
             ctfBot.SayChatMessage($"Player {Holder.Username} has dropped the {TeamHelper.EnumToString(OwnerTeam)} teams flag.");
 
             lastDropTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -172,7 +172,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <param name="taker">The player taking the flag.</param>
         public void Take(CaptureTheFlagBot ctfBot, Player taker)
         {
-            ctfBot.PlaceBlock(BlockLayer.Foreground, CurrentLocation, 0);
+            ctfBot.PlaceBlock(BlockLayer.Foreground, CurrentLocation, Blocks.None);
             ctfBot.SayChatMessage($"Player {taker.Username} has taken the {TeamHelper.EnumToString(OwnerTeam)} teams flag.");
 
             Holder = taker;
@@ -188,13 +188,13 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         {
             if (IsDropped)
             {
-                ctfBot.PlaceBlock(BlockLayer.Foreground, DropLocation, 0);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, DropLocation, Blocks.None);
             }
 
             DropLocation = Point.Empty;
             Holder = null;
 
-            ctfBot.PlaceBlock(BlockLayer.Foreground, HomeLocation, Block.Id, Block.MorphId);
+            ctfBot.PlaceBlock(BlockLayer.Foreground, HomeLocation, Block);
             ctfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagReturned);
 
             if (!flagCaptured)

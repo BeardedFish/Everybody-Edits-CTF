@@ -43,8 +43,8 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                     // Place wall
                     for (int y = 176; y >= 172; y--)
                     {
-                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 1058);
-                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), 1058);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), Blocks.Foreground.Caution);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), Blocks.Foreground.Caution);
 
                         await Task.Delay(100);
                     }
@@ -54,8 +54,8 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                     // Remove wall
                     for (int y = 172; y <= 176; y++)
                     {
-                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), 0);
-                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), 0);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), Blocks.None);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), Blocks.None);
 
                         await Task.Delay(100);
                     }

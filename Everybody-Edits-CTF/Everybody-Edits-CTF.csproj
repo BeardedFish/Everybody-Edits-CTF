@@ -105,6 +105,7 @@
     <Compile Include="Core\Bot\DataContainers\ConnectionInformation.cs" />
     <Compile Include="Core\Bot\DataContainers\GameRound.cs" />
     <Compile Include="Core\Bot\DataContainers\ParsedCommand.cs" />
+    <Compile Include="Core\Bot\Enums\Blocks.cs" />
     <Compile Include="Core\Bot\Enums\Effect.cs" />
     <Compile Include="Core\Bot\EventArgs\EffectToggledEventArgs.cs" />
     <Compile Include="Core\Bot\EventArgs\PlayerResetEventArgs.cs" />

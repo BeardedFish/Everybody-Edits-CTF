@@ -3,6 +3,7 @@
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
+using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands;
@@ -213,10 +214,10 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// </summary>
         /// <param name="layer">The layer of the block.</param>
         /// <param name="loc">The location of where the block will be placed.</param>
-        /// <param name="blockId">The id of the block to be placed.</param>
-        public void PlaceBlock(BlockLayer layer, Point loc, int blockId)
+        /// <param name="block">The block to be placed.</param>
+        public void PlaceBlock(BlockLayer layer, Point loc, Block block)
         {
-            PlaceBlock(layer, loc, blockId, 0);
+            PlaceBlock(layer, loc, new MorphableBlock(block.Id, 0));
         }
 
         /// <summary>
@@ -224,11 +225,10 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// </summary>
         /// <param name="layer">The layer of the block.</param>
         /// <param name="loc">The location of where the block will be placed.</param>
-        /// <param name="blockId">The id of the block to be placed.</param>
-        /// <param name="morphId">The morph id of the block to be placed.</param>
-        public void PlaceBlock(BlockLayer layer, Point loc, int blockId, int morphId)
+        /// <param name="morphableBlock">The morphable block to be placed.</param>
+        public void PlaceBlock(BlockLayer layer, Point loc, MorphableBlock morphableBlock)
         {
-            Send(EverybodyEditsMessage.PlaceBlock, (int)layer, loc.X, loc.Y, blockId, morphId);
+            Send(EverybodyEditsMessage.PlaceBlock, (int)layer, loc.X, loc.Y, morphableBlock.Id, morphableBlock.MorphId);
         }
 
         /// <summary>
