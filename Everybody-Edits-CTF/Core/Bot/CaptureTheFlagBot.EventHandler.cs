@@ -319,6 +319,8 @@ namespace Everybody_Edits_CTF.Core.Bot
                                 }
                             }
 
+                            Logger.WriteLog(LogType.EverybodyEditsMessage, $"Player {JoinedWorld[playerId].Username} (id: {playerId}) has joined the world.");
+
                             OnPlayerJoined?.Invoke(this, JoinedWorld.Players[playerId]);
                         }
                     }
