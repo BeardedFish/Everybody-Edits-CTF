@@ -96,7 +96,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                 }
                                 else
                                 {
-                                    ctfBot.SendPrivateMessage(player, $"Insufficient amount of parameters for command.");
+                                    ctfBot.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
                                 }
                             }
                         }
