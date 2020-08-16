@@ -44,16 +44,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         }
 
         /// <summary>
-        /// States whether this player can trigger a trap or not.
-        /// 
-        /// A player can trigger a trap if:
-        ///     - They are not in God mode.
-        ///     - They are playing the Capture The Flag game (either or team blue or team red).
-        ///     - Their vertical direction is equal to down.
-        /// </summary>
-        public bool CanTriggerTrap => !IsInGodMode && IsPlayingGame && VerticalDirection == VerticalDirection.Down;
-
-        /// <summary>
         /// States whether the player is in the blue teams base or not.
         /// </summary>
         public bool IsInBlueBase
