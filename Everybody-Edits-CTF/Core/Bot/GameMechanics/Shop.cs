@@ -1,4 +1,4 @@
-// File Name:     Shop.cs
+﻿// File Name:     Shop.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Saturday, August 15, 2020
 
@@ -56,7 +56,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to be handled.</param>
         public static void Handle(CaptureTheFlagBot ctfBot, Player player)
         {
-            if (!PlayersDatabaseTable.Loaded || player.VerticalDirection != VerticalDirection.Down)
+            if (!PlayersDatabaseTable.Loaded || !player.IsPlayingGame || player.IsInGodMode || player.VerticalDirection != VerticalDirection.Down)
             {
                 return;
             }
