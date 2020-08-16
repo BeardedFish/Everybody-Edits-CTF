@@ -29,9 +29,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to be handled.</param>
         public static void Handle(CaptureTheFlagBot ctfBot, Player player)
         {
-            if (PlayersDatabaseTable.Loaded && PlayersDatabaseTable.PlayerExists(player.Username))
+            if (PlayersTable.Loaded && PlayersTable.PlayerExists(player.Username))
             {
-                PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(player.Username);
+                PlayerRow playerData = PlayersTable.GetRow(player.Username);
 
                 if (playerData != null && DateTime.Today > playerData.LastVisitDate)
                 {

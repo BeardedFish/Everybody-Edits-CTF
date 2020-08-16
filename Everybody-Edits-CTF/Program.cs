@@ -76,8 +76,8 @@ namespace Everybody_Edits_CTF
                             if (!ctfBot.Connected)
                             {
                                 Console.Write("Loading players table from MySql database... ");
-                                PlayersDatabaseTable.Load();
-                                Console.WriteLine($"[{(PlayersDatabaseTable.Loaded ? "SUCCESS" : $"FAIL")}]");
+                                PlayersTable.Load();
+                                Console.WriteLine($"[{(PlayersTable.Loaded ? "SUCCESS" : $"FAIL")}]");
 
                                 Console.Write("Connecting to Everybody Edits... ");
                                 Console.WriteLine($"[{(ctfBot.Connect(botConnectionInfo) == null ? "SUCCESS" : $"FAIL")}]");

@@ -146,7 +146,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             FinishedInit = false;
             JoinedWorld.Players.Clear();
 
-            PlayersDatabaseTable.Save();
+            PlayersTable.Save();
             Logger.WriteLog(LogType.EverybodyEditsMessage, $"Disconnected from the Everybody Edits world (Reason: {message}).");
 
             // Only reconnect if the bot was not disconnected on purpose
@@ -309,11 +309,11 @@ namespace Everybody_Edits_CTF.Core.Bot
                                 canToggleGodMode));
 
                             // Add new players to the database
-                            if (PlayersDatabaseTable.Loaded)
+                            if (PlayersTable.Loaded)
                             {
-                                if (!JoinedWorld.Players[playerId].IsGuest && !PlayersDatabaseTable.PlayerExists(username))
+                                if (!JoinedWorld.Players[playerId].IsGuest && !PlayersTable.PlayerExists(username))
                                 {
-                                    PlayersDatabaseTable.AddNewPlayer(username);
+                                    PlayersTable.AddNewPlayer(username);
 
                                     SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
                                 }

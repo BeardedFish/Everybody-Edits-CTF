@@ -1,4 +1,4 @@
-﻿// File Name:     Database.cs
+﻿// File Name:     PlayersTable.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, June 29, 2020
 
@@ -10,12 +10,12 @@ using System.Collections.Generic;
 
 namespace Everybody_Edits_CTF.Core.Database
 {
-    public static class PlayersDatabaseTable
+    public static class PlayersTable
     {
         /// <summary>
         /// The name of the Players table in the MySql database.
         /// </summary>
-        private const string PlayersTableName = "players";
+        private const string Name = "players";
 
         /// <summary>
         /// States whether the Players table has been loaded or not.
@@ -25,20 +25,20 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// The rows of the Players table loaded from the MySql database.
         /// </summary>
-        public static List<PlayerDatabaseRow> Rows { get; private set; }
+        public static List<PlayerRow> Rows { get; private set; }
 
         /// <summary>
         /// Loads the Players table from the MySql database.
         /// </summary>
         public static void Load()
         {
-            Rows = new List<PlayerDatabaseRow>();
+            Rows = new List<PlayerRow>();
 
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
                 {
-                    string query = $"SELECT * FROM {PlayersTableName};";
+                    string query = $"SELECT * FROM {Name};";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
@@ -47,7 +47,7 @@ namespace Everybody_Edits_CTF.Core.Database
                         MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            Rows.Add(new PlayerDatabaseRow(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetDateTime(6), false));
+                            Rows.Add(new PlayerRow(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetDateTime(6), false));
                         }
                     }
                 }
@@ -67,7 +67,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <returns>True if the player exists in the "Rows" list, if not, false.</returns>
         public static bool PlayerExists(string username)
         {
-            foreach (PlayerDatabaseRow row in Rows)
+            foreach (PlayerRow row in Rows)
             {
                 if (username.Equals(row.Username, StringComparison.OrdinalIgnoreCase))
                 {
@@ -79,16 +79,16 @@ namespace Everybody_Edits_CTF.Core.Database
         }
 
         /// <summary>
-        /// Gets the <see cref="PlayerDatabaseRow"/> of a specified player via their username.
+        /// Gets the <see cref="PlayerRow"/> of a specified player via their username.
         /// </summary>
         /// <param name="username">The username of the player to be searched for in the "Rows" list.</param>
         /// <returns>
-        /// If the player is found, then the <see cref="PlayerDatabaseRow"/> object that correspond to that player is returned. If the player is not found, then null is
+        /// If the player is found, then the <see cref="PlayerRow"/> object that correspond to that player is returned. If the player is not found, then null is
         /// returned.
         /// </returns>
-        public static PlayerDatabaseRow GetRow(string username)
+        public static PlayerRow GetRow(string username)
         {
-            foreach (PlayerDatabaseRow player in Rows)
+            foreach (PlayerRow player in Rows)
             {
                 if (string.Equals(username, player.Username, StringComparison.OrdinalIgnoreCase))
                 {
@@ -105,7 +105,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="username">The username of the player to be added.</param>
         public static void AddNewPlayer(string username)
         {
-            Rows.Add(new PlayerDatabaseRow(username, 0, 0, 0, 0, DateTime.Today, true));
+            Rows.Add(new PlayerRow(username, 0, 0, 0, 0, DateTime.Today, true));
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Everybody_Edits_CTF.Core.Database
             }
 
             int totalDatabaseModifications = 0;
-            foreach (PlayerDatabaseRow playerData in Rows)
+            foreach (PlayerRow playerData in Rows)
             {
                 if (!playerData.ChangesOccured)
                 {
@@ -133,12 +133,12 @@ namespace Everybody_Edits_CTF.Core.Database
                     if (playerData.IsNewPlayer)
                     {
                         // NOTE: For the SQL query, the "LastVisitDate" column in the players table will use the default value
-                        sqlQuery = $"INSERT INTO {PlayersTableName} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins) VALUES (NULL, \"{playerData.Username}\", {playerData.TotalWins}, {playerData.TotalLosses}, {playerData.TotalKills}, {playerData.Coins});";
+                        sqlQuery = $"INSERT INTO {Name} (Id, Username, TotalWins, TotalLosses, TotalKills, Coins) VALUES (NULL, \"{playerData.Username}\", {playerData.TotalWins}, {playerData.TotalLosses}, {playerData.TotalKills}, {playerData.Coins});";
                         playerData.IsNewPlayer = false;
                     }
                     else
                     {
-                        sqlQuery = $"UPDATE {PlayersTableName} SET TotalWins={playerData.TotalWins}, TotalLosses={playerData.TotalLosses}, TotalKills={playerData.TotalKills}, Coins={playerData.Coins}, LastVisitDate=\"{playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)}\" WHERE Username=\"{playerData.Username}\";";
+                        sqlQuery = $"UPDATE {Name} SET TotalWins={playerData.TotalWins}, TotalLosses={playerData.TotalLosses}, TotalKills={playerData.TotalKills}, Coins={playerData.Coins}, LastVisitDate=\"{playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)}\" WHERE Username=\"{playerData.Username}\";";
                     }
 
                     using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))

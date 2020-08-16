@@ -43,9 +43,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         break;
                     case "coins":
                         {
-                            if (PlayersDatabaseTable.Loaded)
+                            if (PlayersTable.Loaded)
                             {
-                                PlayerDatabaseRow row = PlayersDatabaseTable.GetRow(player.Username);
+                                PlayerRow row = PlayersTable.GetRow(player.Username);
 
                                 ctfBot.SendPrivateMessage(player, $"You currently have {row.Coins} coin{(row.Coins == 1 ? "" : "s")}.");
                             }
@@ -53,17 +53,17 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         break;
                     case "donatecoins":
                         {
-                            if (PlayersDatabaseTable.Loaded)
+                            if (PlayersTable.Loaded)
                             {
                                 if (parsedCommand.Parameters.Length >= 2)
                                 {
                                     if (parsedCommand.Parameters[0] != player.Username)
                                     {
-                                        PlayerDatabaseRow playerToDonateData = PlayersDatabaseTable.GetRow(parsedCommand.Parameters[0]);
+                                        PlayerRow playerToDonateData = PlayersTable.GetRow(parsedCommand.Parameters[0]);
 
                                         if (playerToDonateData != null)
                                         {
-                                            PlayerDatabaseRow donatorData = PlayersDatabaseTable.GetRow(player.Username);
+                                            PlayerRow donatorData = PlayersTable.GetRow(player.Username);
 
                                             if (int.TryParse(parsedCommand.Parameters[1], out int amount))
                                             {
@@ -147,9 +147,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                     case "losses":
                     case "wins":
                         {
-                            if (PlayersDatabaseTable.Loaded)
+                            if (PlayersTable.Loaded)
                             {
-                                PlayerDatabaseRow row = PlayersDatabaseTable.GetRow(player.Username);
+                                PlayerRow row = PlayersTable.GetRow(player.Username);
                                 int resultCount = parsedCommand.Command == "totalwins" || parsedCommand.Command == "wins" ? row.TotalWins : row.TotalLosses;
                                 string type = parsedCommand.Command == "totalwins" || parsedCommand.Command == "wins" ? "won" : "lost";
 
@@ -159,9 +159,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         break;
                     case "totalkills":
                         {
-                            if (PlayersDatabaseTable.Loaded)
+                            if (PlayersTable.Loaded)
                             {
-                                PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(player.Username);
+                                PlayerRow playerData = PlayersTable.GetRow(player.Username);
 
                                 ctfBot.SendPrivateMessage(player, $"You have killed a total of {playerData.TotalKills} player{(playerData.TotalKills == 1 ? "" : "s")}.");
                             }

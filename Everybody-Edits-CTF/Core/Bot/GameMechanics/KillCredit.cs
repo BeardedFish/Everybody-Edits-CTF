@@ -27,9 +27,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                     ctfBot.SendPrivateMessage(killedPlayer, $"You were killed by player {killedPlayer.LastAttacker.Username}!");
                     ctfBot.SendPrivateMessage(killedPlayer.LastAttacker, $"You killed player {killedPlayer.Username}!");
 
-                    if (PlayersDatabaseTable.Loaded)
+                    if (PlayersTable.Loaded)
                     {
-                        PlayerDatabaseRow playerData = PlayersDatabaseTable.GetRow(killedPlayer.LastAttacker.Username);
+                        PlayerRow playerData = PlayersTable.GetRow(killedPlayer.LastAttacker.Username);
 
                         if (playerData != null)
                         {
