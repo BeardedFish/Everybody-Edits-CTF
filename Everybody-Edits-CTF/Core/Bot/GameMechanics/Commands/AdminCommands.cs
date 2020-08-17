@@ -43,31 +43,24 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             break;
                         case "kick":
                             {
-                                if (player.IsAdmin)
+                                if (parsedCommand.Parameters.Length >= 1)
                                 {
-                                    if (parsedCommand.Parameters.Length >= 1)
-                                    {
-                                        string playerToKick = parsedCommand.Parameters[0];
-                                        string reason = "";
+                                    string playerToKick = parsedCommand.Parameters[0];
+                                    string reason = "";
 
-                                        if (parsedCommand.Parameters.Length >= 2)
+                                    if (parsedCommand.Parameters.Length >= 2)
+                                    {
+                                        for (int i = 2; i < parsedCommand.Parameters.Length; i++)
                                         {
-                                            for (int i = 2; i < parsedCommand.Parameters.Length; i++)
-                                            {
-                                                reason += parsedCommand.Parameters[i] + " ";
-                                            }
+                                            reason += parsedCommand.Parameters[i] + " ";
                                         }
+                                    }
 
-                                        ctfBot.KickPlayer(playerToKick, reason);
-                                    }
-                                    else
-                                    {
-                                        ctfBot.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
-                                    }
+                                    ctfBot.KickPlayer(playerToKick, reason);
                                 }
                                 else
                                 {
-                                    ctfBot.SendPrivateMessage(player, "You don't have permission to execute this command.");
+                                    ctfBot.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
                                 }
                             }
                             break;
