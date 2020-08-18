@@ -32,7 +32,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         /// </returns>
         public override bool Handle(CaptureTheFlagBot ctfBot, Player player, ParsedCommand parsedCommand)
         {
-            if (parsedCommand != null && ValidCommands.Contains(parsedCommand.Command))
+            bool canHandle = base.Handle(ctfBot, player, parsedCommand);
+
+            if (canHandle)
             {
                 if (player.IsPlayingGame)
                 {
@@ -130,11 +132,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                 {
                     ctfBot.SendPrivateMessage(player, "You must be on either team blue or team red to use this command.");
                 }
-
-                return true;
             }
 
-            return false;
+            return canHandle;
         }
     }
 }

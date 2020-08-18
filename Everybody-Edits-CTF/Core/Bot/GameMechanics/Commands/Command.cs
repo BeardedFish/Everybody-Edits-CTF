@@ -29,13 +29,19 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         }
 
         /// <summary>
-        /// Handles a player executing a bot command. Implementation will vary.
+        /// Handles a player executing a bot command. Implementation will vary on class inheritance.
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player to be handled.</param>
         /// <param name="parsedCommand">The command to be handled.</param>
-        /// <returns>Implementation will vary.</returns>
-        public abstract bool Handle(CaptureTheFlagBot ctfBot, Player player, ParsedCommand parsedCommand);
+        /// <returns>
+        /// Default implementation returns true if the command was succesfully handled, if not, false. A succesful handle is when the parsed command is not equal to null
+        /// and also the ValidCommands string array contains the parsed command.
+        /// </returns>
+        public virtual bool Handle(CaptureTheFlagBot ctfBot, Player player, ParsedCommand parsedCommand)
+        {
+            return parsedCommand != null && ValidCommands.Contains(parsedCommand.Command);
+        }
 
         /// <summary>
         /// States whether a chat message is a valid bot command or not. A valid bot command has a prefix of any value defined in <see cref="CommandPrefixes"/>.

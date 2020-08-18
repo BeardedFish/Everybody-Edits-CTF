@@ -30,7 +30,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         /// </returns>
         public override bool Handle(CaptureTheFlagBot ctfBot, Player player, ParsedCommand parsedCommand)
         {
-            if (parsedCommand != null && ValidCommands.Contains(parsedCommand.Command))
+            bool canHandle = base.Handle(ctfBot, player, parsedCommand);
+
+            if (canHandle)
             {
                 switch (parsedCommand.Command)
                 {
@@ -168,15 +170,13 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         }
                         break;
                 }
-
-                return true;
             }
             else
             {
                 ctfBot.SendPrivateMessage(player, $"The command \"{parsedCommand.Command}\" is invalid!");
             }
 
-            return false;
+            return canHandle;
         }
 
         /// <summary>
