@@ -1,4 +1,4 @@
-﻿// File Name:     PlayerRow.cs
+﻿// File Name:     PlayersTableRow.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, July 3, 2020
 
@@ -6,7 +6,7 @@ using System;
 
 namespace Everybody_Edits_CTF.Core.Database
 {
-    public class PlayerRow
+    public class PlayersTableRow
     {
         /// <summary>
         /// The username of the player.
@@ -66,7 +66,7 @@ namespace Everybody_Edits_CTF.Core.Database
         private DateTime initialLastVisitDate;
 
         /// <summary>
-        /// Constructor for creating a <see cref="PlayerRow"/> object which holds data about a player from the <see cref="PlayersTable"/>.
+        /// Constructor for creating a <see cref="PlayersTableRow"/> object which holds data about a player from the <see cref="PlayersTable"/>.
         /// </summary>
         /// <param name="username">Refer to <see cref="Username"/> for description.</param>
         /// <param name="totalWins">Refer to <see cref="TotalWins"/> for description.</param>
@@ -74,7 +74,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="totalKills">Refer to <see cref="TotalKills"/> for description.</param>
         /// <param name="coins">Refer to <see cref="Coins"/> for description.</param>
         /// <param name="isNewPlayer">Refer to <see cref="IsNewPlayer"/> for description.</param>
-        public PlayerRow(string username, int totalWins, int totalLosses, int totalKills, int coins, DateTime lastVisitDate, bool isNewPlayer)
+        public PlayersTableRow(string username, int totalWins, int totalLosses, int totalKills, int coins, DateTime lastVisitDate, bool isNewPlayer)
         {
             Username = username;
             TotalWins = totalWins;

@@ -31,7 +31,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         {
             if (PlayersTable.Loaded && PlayersTable.PlayerExists(player.Username))
             {
-                PlayerRow playerData = PlayersTable.GetRow(player.Username);
+                PlayersTableRow playerData = PlayersTable.GetRow(player.Username);
 
                 if (playerData != null && DateTime.Today > playerData.LastVisitDate)
                 {

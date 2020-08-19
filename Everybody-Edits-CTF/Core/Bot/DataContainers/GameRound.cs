@@ -47,7 +47,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
             int coinsWon = GetGameFundShare(ctfBot.JoinedWorld.Players, winningTeam);
             foreach (Player player in ctfBot.JoinedWorld.Players.Values)
             {
-                PlayerRow playerData = PlayersTable.GetRow(player.Username);
+                PlayersTableRow playerData = PlayersTable.GetRow(player.Username);
 
                 if (playerData != null && player.IsPlayingGame)
                 {

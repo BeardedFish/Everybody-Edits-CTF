@@ -25,14 +25,14 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// The rows of the Players table loaded from the MySql database.
         /// </summary>
-        public static List<PlayerRow> Rows { get; private set; }
+        public static List<PlayersTableRow> Rows { get; private set; }
 
         /// <summary>
         /// Loads the Players table from the MySql database.
         /// </summary>
         public static void Load()
         {
-            Rows = new List<PlayerRow>();
+            Rows = new List<PlayersTableRow>();
 
             try
             {
@@ -47,7 +47,7 @@ namespace Everybody_Edits_CTF.Core.Database
                         MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            Rows.Add(new PlayerRow(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetDateTime(6), false));
+                            Rows.Add(new PlayersTableRow(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetDateTime(6), false));
                         }
                     }
                 }
@@ -67,7 +67,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <returns>True if the player exists in the "Rows" list, if not, false.</returns>
         public static bool PlayerExists(string username)
         {
-            foreach (PlayerRow row in Rows)
+            foreach (PlayersTableRow row in Rows)
             {
                 if (username.Equals(row.Username, StringComparison.OrdinalIgnoreCase))
                 {
@@ -79,16 +79,16 @@ namespace Everybody_Edits_CTF.Core.Database
         }
 
         /// <summary>
-        /// Gets the <see cref="PlayerRow"/> of a specified player via their username.
+        /// Gets the <see cref="PlayersTableRow"/> of a specified player via their username.
         /// </summary>
         /// <param name="username">The username of the player to be searched for in the "Rows" list.</param>
         /// <returns>
-        /// If the player is found, then the <see cref="PlayerRow"/> object that correspond to that player is returned. If the player is not found, then null is
+        /// If the player is found, then the <see cref="PlayersTableRow"/> object that correspond to that player is returned. If the player is not found, then null is
         /// returned.
         /// </returns>
-        public static PlayerRow GetRow(string username)
+        public static PlayersTableRow GetRow(string username)
         {
-            foreach (PlayerRow player in Rows)
+            foreach (PlayersTableRow player in Rows)
             {
                 if (string.Equals(username, player.Username, StringComparison.OrdinalIgnoreCase))
                 {
@@ -105,7 +105,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="username">The username of the player to be added.</param>
         public static void AddNewPlayer(string username)
         {
-            Rows.Add(new PlayerRow(username, 0, 0, 0, 0, DateTime.Today, true));
+            Rows.Add(new PlayersTableRow(username, 0, 0, 0, 0, DateTime.Today, true));
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Everybody_Edits_CTF.Core.Database
             }
 
             int totalDatabaseModifications = 0;
-            foreach (PlayerRow playerData in Rows)
+            foreach (PlayersTableRow playerData in Rows)
             {
                 if (!playerData.ChangesOccured)
                 {

@@ -29,7 +29,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 
                     if (PlayersTable.Loaded)
                     {
-                        PlayerRow playerData = PlayersTable.GetRow(killedPlayer.LastAttacker.Username);
+                        PlayersTableRow playerData = PlayersTable.GetRow(killedPlayer.LastAttacker.Username);
 
                         if (playerData != null)
                         {
