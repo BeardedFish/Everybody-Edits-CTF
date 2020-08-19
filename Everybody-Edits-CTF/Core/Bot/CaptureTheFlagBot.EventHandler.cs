@@ -1,4 +1,4 @@
-﻿// File Name:     CaptureTheFlagBot.EventHandler.cs
+// File Name:     CaptureTheFlagBot.EventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, August 14, 2020
 
@@ -387,7 +387,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                         {
                             Player player = JoinedWorld.Players[playerId];
 
-                            if (player.IsPlayingGame && player.HasEnemyFlag(this))
+                            if (player.HasEnemyFlag(this))
                             {
                                 FlagSystem.Flags[TeamHelper.GetOppositeTeam(player.Team)].Return(this, null, false);
                             }
