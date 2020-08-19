@@ -47,8 +47,8 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 enemyFlag.Capture(ctfBot);
 
                 ctfBot.CurrentGameRound.Scores[player.Team]++;
-                ctfBot.SayChatMessage(ctfBot.CurrentGameRound.GetScoresString());
                 ctfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagCaptured);
+                ctfBot.SayChatMessage(ctfBot.CurrentGameRound.GetScoresString());
 
                 if (ctfBot.CurrentGameRound.Scores[player.Team] >= GameSettings.MaxScoreToWin)
                 {
