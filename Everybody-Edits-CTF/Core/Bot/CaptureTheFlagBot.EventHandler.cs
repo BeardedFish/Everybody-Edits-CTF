@@ -1,4 +1,4 @@
-// File Name:     CaptureTheFlagBot.EventHandler.cs
+﻿// File Name:     CaptureTheFlagBot.EventHandler.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, August 14, 2020
 
@@ -143,6 +143,10 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="message">The reason why the bot was disconnected.</param>
         private void OnDisconnect(object sender, string message)
         {
+            // Unsubscribe from events
+            connection.OnDisconnect -= OnDisconnect;
+            connection.OnMessage -= OnMessage;
+
             FinishedInit = false;
             JoinedWorld.Players.Clear();
 
