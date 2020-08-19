@@ -25,25 +25,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public bool IsGuest => Username.ToLower().StartsWith("guest-");
 
         /// <summary>
-        /// States whether the player is an administrator or not. Administrators are defined in the GameSettings.cs file.
-        /// </summary>
-        public bool IsAdmin
-        {
-            get
-            {
-                foreach (string admin in BotSettings.Administrators)
-                {
-                    if (string.Equals(Username, admin, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-        }
-
-        /// <summary>
         /// States whether the player is in the blue teams base or not.
         /// </summary>
         public bool IsInBlueBase

@@ -39,6 +39,11 @@ namespace Everybody_Edits_CTF.Core.Database
         public DateTime LastVisitDate { get; set; }
 
         /// <summary>
+        /// States whether the player is an administrator or not.
+        /// </summary>
+        public bool IsAdministrator { get; set; }
+
+        /// <summary>
         /// States whether this player is a new player or not. A new player is someone who does not exist in the MySql database.
         /// </summary>
         public bool IsNewPlayer { get; set; }
@@ -50,7 +55,8 @@ namespace Everybody_Edits_CTF.Core.Database
         {
             get
             {
-                return TotalWins != initialTotalWins
+                return IsAdministrator != initialIsAdministrator
+                    || TotalWins != initialTotalWins
                     || TotalLosses != initialTotalLosses
                     || TotalKills != initialTotalKills
                     || Coins != initialCoins
@@ -62,6 +68,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// States the inital values of the database values when loaded/saved. The username is ignored because it never changes in the MySql database.
         /// </summary>
+        private bool initialIsAdministrator;
         private int initialTotalWins, initialTotalLosses, initialTotalKills, initialCoins;
         private DateTime initialLastVisitDate;
 
@@ -73,8 +80,9 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="totalLosses">Refer to <see cref="TotalLosses"/> for description.</param>
         /// <param name="totalKills">Refer to <see cref="TotalKills"/> for description.</param>
         /// <param name="coins">Refer to <see cref="Coins"/> for description.</param>
+        /// <param name="isAdministrator">Refer to <see cref="IsAdministrator"/> for description.</param>
         /// <param name="isNewPlayer">Refer to <see cref="IsNewPlayer"/> for description.</param>
-        public PlayersTableRow(string username, int totalWins, int totalLosses, int totalKills, int coins, DateTime lastVisitDate, bool isNewPlayer)
+        public PlayersTableRow(string username, int totalWins, int totalLosses, int totalKills, int coins, DateTime lastVisitDate, bool isAdministrator, bool isNewPlayer)
         {
             Username = username;
             TotalWins = totalWins;
@@ -82,6 +90,7 @@ namespace Everybody_Edits_CTF.Core.Database
             TotalKills = totalKills;
             Coins = coins;
             LastVisitDate = lastVisitDate;
+            IsAdministrator = isAdministrator;
             IsNewPlayer = isNewPlayer;
 
             UpdateChanges();
@@ -98,6 +107,7 @@ namespace Everybody_Edits_CTF.Core.Database
             initialTotalKills = TotalKills;
             initialCoins = Coins;
             initialLastVisitDate = LastVisitDate;
+            initialIsAdministrator = IsAdministrator;
         }
     }
 }

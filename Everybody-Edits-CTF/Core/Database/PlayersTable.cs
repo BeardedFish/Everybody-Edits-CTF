@@ -38,16 +38,25 @@ namespace Everybody_Edits_CTF.Core.Database
             {
                 using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
                 {
-                    string query = $"SELECT * FROM {Name};";
+                    string query = $"SELECT Username, TotalWins, TotalLosses, TotalKills, Coins, LastVisitDate, IsAdministrator FROM {Name};";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
                         connection.Open();
 
-                        MySqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
+                        MySqlDataReader sqlReader = cmd.ExecuteReader();
+                        while (sqlReader.Read())
                         {
-                            Rows.Add(new PlayersTableRow(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetDateTime(6), false));
+                            PlayersTableRow playerData = new PlayersTableRow(sqlReader.GetString(0), 
+                                sqlReader.GetInt32(1),
+                                sqlReader.GetInt32(2),
+                                sqlReader.GetInt32(3),
+                                sqlReader.GetInt32(4),
+                                sqlReader.GetDateTime(5),
+                                sqlReader.GetBoolean(6),
+                                false);
+
+                            Rows.Add(playerData);
                         }
                     }
                 }
@@ -105,7 +114,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="username">The username of the player to be added.</param>
         public static void AddNewPlayer(string username)
         {
-            Rows.Add(new PlayersTableRow(username, 0, 0, 0, 0, DateTime.Today, true));
+            Rows.Add(new PlayersTableRow(username, 0, 0, 0, 0, DateTime.Today, false, true));
         }
 
         /// <summary>
@@ -138,7 +147,7 @@ namespace Everybody_Edits_CTF.Core.Database
                     }
                     else
                     {
-                        sqlQuery = $"UPDATE {Name} SET TotalWins={playerData.TotalWins}, TotalLosses={playerData.TotalLosses}, TotalKills={playerData.TotalKills}, Coins={playerData.Coins}, LastVisitDate=\"{playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)}\" WHERE Username=\"{playerData.Username}\";";
+                        sqlQuery = $"UPDATE {Name} SET TotalWins={playerData.TotalWins}, TotalLosses={playerData.TotalLosses}, TotalKills={playerData.TotalKills}, Coins={playerData.Coins}, LastVisitDate=\"{playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)}\" IsAdministrator={playerData.IsAdministrator} WHERE Username=\"{playerData.Username}\";";
                     }
 
                     using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))

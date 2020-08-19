@@ -9,11 +9,6 @@ namespace Everybody_Edits_CTF.Core.Settings
     public static class BotSettings
     {
         /// <summary>
-        /// States the usernames of players who are administrators in the Everybody Edits world.
-        /// </summary>
-        public static readonly string[] Administrators = { "" };
-
-        /// <summary>
         /// States whether the bot should auto reconnect when disconnected due to a server side failure.
         /// </summary>
         public const bool AutoReconnectOnDisconnect = true;

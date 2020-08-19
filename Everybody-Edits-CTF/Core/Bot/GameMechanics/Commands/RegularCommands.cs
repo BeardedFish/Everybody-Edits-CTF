@@ -38,7 +38,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                 {
                     case "amiadmin":
                         {
-                            string result = player.IsAdmin ? "You are an administrator." : "You are not an administrator.";
+                            string result = PlayersTable.GetRow(player.Username).IsAdministrator ? "You are an administrator." : "You are not an administrator.";
 
                             ctfBot.SendPrivateMessage(player, result);
                         }
