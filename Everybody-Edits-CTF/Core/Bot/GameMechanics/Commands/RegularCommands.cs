@@ -118,7 +118,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 
                             ctfBot.SendPrivateMessage(player, "Tips:");
                             ctfBot.SendPrivateMessage(player, "- Press arrow keys/WASD keys around an enemy player to attack them.");
-                            ctfBot.SendPrivateMessage(player, "- Use nurse smiley to heal your teammates!");
+                            ctfBot.SendPrivateMessage(player, "- Use doctor/nurse smiley to heal your teammates!");
                             ctfBot.SendPrivateMessage(player, "- There is an item shop in the clouds.");
                             ctfBot.SendPrivateMessage(player, "- Watch out for traps around the map.");
                         }

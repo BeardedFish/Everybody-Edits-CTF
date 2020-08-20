@@ -10,14 +10,14 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
     public static class HealSystem
     {
         /// <summary>
-        /// Handles the heal system in the Capture The Flag game. The heal system only works for players who wear the <see cref="Smiley.Nurse"/>. A healer can only
-        /// heal their team mates and they must spam WASD/arrow keys near their team mate in order to heal them.
+        /// Handles the heal system in the Capture The Flag game. The heal system only works for players who wears the <see cref="Smiley.Doctor"/> or the <see cref="Smiley.Nurse"/>.
+        /// A healer can only heal their teammates and they must spam WASD/arrow keys near their teammate in order to heal them.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
         public static void Handle(CaptureTheFlagBot ctfBot, Player player)
         {
-            if (!player.IsPlayingGame || player.IsInGodMode || player.SmileyId != (int)Smiley.Nurse)
+            if (!player.IsPlayingGame || player.IsInGodMode || player.SmileyId != (int)Smiley.Nurse || player.SmileyId != (int)Smiley.Doctor)
             {
                 return;
             }

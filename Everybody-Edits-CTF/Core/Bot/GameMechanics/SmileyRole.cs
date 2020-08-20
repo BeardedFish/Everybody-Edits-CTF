@@ -22,7 +22,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 return;
             }
 
-            if (player.SmileyId == (int)Smiley.Nurse)
+            if (player.SmileyId == (int)Smiley.Nurse || player.SmileyId == (int)Smiley.Doctor)
             {
                 ctfBot.SendPrivateMessage(player, "You are now a healer for your team!");
             }
