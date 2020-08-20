@@ -153,7 +153,7 @@ namespace Everybody_Edits_CTF.Core.Database
 
                         if (playerData.IsNewPlayer)
                         {
-                            queries.Add(new MySqlCommand($"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator) VALUES (NULL, \"{playerData.Username}\", {playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)}, {Convert.ToInt32(playerData.IsAdministrator)});", connection));
+                            queries.Add(new MySqlCommand($"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator) VALUES (NULL, \"{playerData.Username}\", \"{playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)}\", {Convert.ToInt32(playerData.IsAdministrator)});", connection));
                             queries.Add(new MySqlCommand($"INSERT INTO {GameStatisticsTableName} (PlayerId, TotalWins, TotalLosses, TotalKills, Coins) VALUES ((SELECT Id FROM {PlayersTableName} WHERE Username=\"{playerData.Username}\" LIMIT 1), {playerData.Statistics.TotalWins}, {playerData.Statistics.TotalLosses}, {playerData.Statistics.TotalKills}, {playerData.Statistics.Coins});", connection));
 
                             playerData.IsNewPlayer = false;
