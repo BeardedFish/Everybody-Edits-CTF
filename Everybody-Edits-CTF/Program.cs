@@ -55,12 +55,7 @@ namespace Everybody_Edits_CTF
 
                 if (!string.Equals(inputCmd, "quit", CommandCompareCase))
                 {
-                    if (string.Equals(inputCmd, "about", CommandCompareCase))
-                    {
-                        Console.WriteLine("Version 1.0");
-                        Console.WriteLine("By: Darian Benam");
-                    }
-                    else if (string.Equals(inputCmd, "cls", CommandCompareCase) || string.Equals(inputCmd, "clear", CommandCompareCase))
+                    if (string.Equals(inputCmd, "cls", CommandCompareCase) || string.Equals(inputCmd, "clear", CommandCompareCase))
                     {
                         Console.Clear();
                         Console.WriteLine($"{TitleArt}");
