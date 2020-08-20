@@ -102,7 +102,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         {
             int totalTeamPlayers = (playersList.Values.Where(player => !player.IsGuest && player.Team == winningTeam)).Count();
 
-            return GameFund / totalTeamPlayers;
+            return GameFund / (totalTeamPlayers > 0 ? totalTeamPlayers : 1);
         }
 
         /// <summary>
