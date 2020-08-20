@@ -14,7 +14,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
         /// <summary>
         /// Bridge trap that has two trigger points. 
         /// </summary>
-        public BridgeTrap() : base(new Point[] { new Point(89, 179), new Point(110, 179) })
+        public BridgeTrap() : base(new Point[] { new Point(89, 136), new Point(110, 136) })
         {
 
         }
@@ -40,7 +40,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                     // Remove bridge
                     for (int x = 94; x <= 105; x++)
                     {
-                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), Blocks.None);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 137), Blocks.None);
 
                         await Task.Delay(100);
                     }
@@ -50,7 +50,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                     // Place bridge
                     for (int x = 94; x <= 105; x++)
                     {
-                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 180), Blocks.Foreground.FactoryWood);
+                        ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(x, 137), Blocks.Foreground.FactoryWood);
 
                         await Task.Delay(100);
                     }

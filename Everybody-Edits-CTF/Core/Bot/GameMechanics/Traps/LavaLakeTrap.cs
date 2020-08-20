@@ -14,7 +14,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
         /// <summary>
         /// Trap that is located in the lava lake.
         /// </summary>
-        public LavaLakeTrap() : base(new Point[] { new Point(277, 179) })
+        public LavaLakeTrap() : base(new Point[] { new Point(277, 136) })
         {
 
         }
@@ -41,7 +41,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                     TrapActivated = true;
 
                     // Place wall
-                    for (int y = 176; y >= 172; y--)
+                    for (int y = 133; y >= 129; y--)
                     {
                         ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), Blocks.Foreground.Caution);
                         ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), Blocks.Foreground.Caution);
@@ -52,7 +52,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                     await Task.Delay(TrapCooldownMs);
 
                     // Remove wall
-                    for (int y = 172; y <= 176; y++)
+                    for (int y = 129; y <= 133; y++)
                     {
                         ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(259, y), Blocks.None);
                         ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(306, y), Blocks.None);

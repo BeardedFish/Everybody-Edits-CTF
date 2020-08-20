@@ -14,7 +14,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
         /// <summary>
         /// Trap that is located in the blue base.
         /// </summary>
-        public BlueBaseTrap() : base(new Point[] { new Point(38, 175) })
+        public BlueBaseTrap() : base(new Point[] { new Point(38, 132) })
         {
 
         }
@@ -36,11 +36,11 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                 TrapActivated = true;
 
                 // Close gate
-                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), Blocks.Foreground.Caution);
-                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), Blocks.Foreground.Caution);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 135), Blocks.Foreground.Caution);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 136), Blocks.Foreground.Caution);
 
                 // Pour lava
-                for (int i = 175; i <= 179; i++)
+                for (int i = 132; i <= 136; i++)
                 {
                     ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), Blocks.Foreground.Lava);
                     ctfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), Blocks.Background.DarkOrangeLava);
@@ -51,7 +51,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                 await Task.Delay(TrapCooldownMs);
 
                 // Remove lava
-                for (int i = 175; i <= 179; i++)
+                for (int i = 132; i <= 136; i++)
                 {
                     ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(47, i), Blocks.None);
                     ctfBot.PlaceBlock(BlockLayer.Background, new Point(47, i), Blocks.Background.BrownBrick);
@@ -60,8 +60,8 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
                 }
 
                 // Open gate
-                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 178), Blocks.None);
-                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 179), Blocks.None);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 135), Blocks.None);
+                ctfBot.PlaceBlock(BlockLayer.Foreground, new Point(45, 136), Blocks.None);
 
                 await Task.Delay(TrapCooldownMs);
 

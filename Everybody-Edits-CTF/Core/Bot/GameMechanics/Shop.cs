@@ -16,12 +16,12 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <summary>
         /// The Y coordinate where a player can purchase shop items.
         /// </summary>
-        private const int PurchaseFloorY = 108;
+        private const int PurchaseFloorY = 65;
 
         /// <summary>
         /// The Y coordinate that a player will be teleported to when they succesfully purchase a shop item.
         /// </summary>
-        private const int SuccesfulPurchaseY = 104;
+        private const int SuccesfulPurchaseY = 61;
 
         /// <summary>
         /// Dictionary which defines the string names for effect shop items.

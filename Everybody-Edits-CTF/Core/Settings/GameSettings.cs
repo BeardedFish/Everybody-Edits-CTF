@@ -16,12 +16,12 @@ namespace Everybody_Edits_CTF.Core.Settings
         /// <summary>
         /// The locations of the blue/red team's flag in the world that the bot joined.
         /// </summary>
-        public static readonly Point BlueFlagLocation = new Point(32, 144), RedFlagLocation = new Point(367, 144);
+        public static readonly Point BlueFlagLocation = new Point(32, 101), RedFlagLocation = new Point(367, 101);
 
         /// <summary>
         /// The location where a player of a specified team will be teleported when they die to wait the <see cref=">RespawnCooldownMs"/>.
         /// </summary>
-        public static readonly Point BlueRespawnCooldownLocation = new Point(159, 44), RedRespawnCooldownLocation = new Point(239, 44);
+        public static readonly Point BlueRespawnCooldownLocation = new Point(159, 1), RedRespawnCooldownLocation = new Point(239, 1);
 
         /// <summary>
         /// Where a player will respawn after waiting the <see cref="RespawnCooldownMs"/>.
