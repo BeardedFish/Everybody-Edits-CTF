@@ -53,14 +53,14 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
                 {
                     if (player.Team == winningTeam)
                     {
-                        playerData.TotalWins++;
-                        playerData.Coins += coinsWon;
+                        playerData.Statistics.TotalWins++;
+                        playerData.Statistics.Coins += coinsWon;
 
                         ctfBot.SendPrivateMessage(player, $"You received {coinsWon} coin{(coinsWon == 1 ? "" : "s")} for winning!");
                     }
                     else
                     {
-                        playerData.TotalLosses++;
+                        playerData.Statistics.TotalLosses++;
                     }
                 }
             }

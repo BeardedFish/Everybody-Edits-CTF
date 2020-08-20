@@ -138,6 +138,7 @@
     <Compile Include="Core\Bot\GameMechanics\WarpPipe.cs" />
     <Compile Include="Core\Bot\GameMechanics\TrapSystem.cs" />
     <Compile Include="Core\Bot\GameMechanics\AutoBalance.cs" />
+    <Compile Include="Core\Database\PlayerGameStatistics.cs" />
     <Compile Include="Core\Database\PlayersTableRow.cs" />
     <Compile Include="Core\Database\PlayersTable.cs" />
     <Compile Include="Core\Bot\DataContainers\Flag.cs" />

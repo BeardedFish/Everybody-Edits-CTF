@@ -49,7 +49,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             {
                                 PlayersTableRow row = PlayersTable.GetRow(player.Username);
 
-                                ctfBot.SendPrivateMessage(player, $"You currently have {row.Coins} coin{(row.Coins == 1 ? "" : "s")}.");
+                                ctfBot.SendPrivateMessage(player, $"You currently have {row.Statistics.Coins} coin{(row.Statistics.Coins == 1 ? "" : "s")}.");
                             }
                         }
                         break;
@@ -69,10 +69,10 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 
                                             if (int.TryParse(parsedCommand.Parameters[1], out int amount))
                                             {
-                                                if (donatorData.Coins >= amount)
+                                                if (donatorData.Statistics.Coins >= amount)
                                                 {
-                                                    playerToDonateData.Coins += amount;
-                                                    donatorData.Coins -= amount;
+                                                    playerToDonateData.Statistics.Coins += amount;
+                                                    donatorData.Statistics.Coins -= amount;
 
                                                     ctfBot.SendPrivateMessage(player, $"Success! You donated {amount} coin{(amount == 1 ? "" : "s")} to player {parsedCommand.Parameters[0].ToUpper()}.");
                                                 }
@@ -152,10 +152,10 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             if (PlayersTable.Loaded)
                             {
                                 PlayersTableRow row = PlayersTable.GetRow(player.Username);
-                                int resultCount = parsedCommand.Command == "totalwins" || parsedCommand.Command == "wins" ? row.TotalWins : row.TotalLosses;
+                                int resultCount = parsedCommand.Command == "totalwins" || parsedCommand.Command == "wins" ? row.Statistics.TotalWins : row.Statistics.TotalLosses;
                                 string type = parsedCommand.Command == "totalwins" || parsedCommand.Command == "wins" ? "won" : "lost";
 
-                                ctfBot.SendPrivateMessage(player, $"You have {type} {resultCount} time{(row.TotalWins == 1 ? "" : "s")}.");
+                                ctfBot.SendPrivateMessage(player, $"You have {type} {resultCount} time{(row.Statistics.TotalWins == 1 ? "" : "s")}.");
                             }
                         }
                         break;
@@ -165,7 +165,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             {
                                 PlayersTableRow playerData = PlayersTable.GetRow(player.Username);
 
-                                ctfBot.SendPrivateMessage(player, $"You have killed a total of {playerData.TotalKills} player{(playerData.TotalKills == 1 ? "" : "s")}.");
+                                ctfBot.SendPrivateMessage(player, $"You have killed a total of {playerData.Statistics.TotalKills} player{(playerData.Statistics.TotalKills == 1 ? "" : "s")}.");
                             }
                         }
                         break;

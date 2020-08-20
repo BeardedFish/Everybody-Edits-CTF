@@ -35,7 +35,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 
                 if (playerData != null && DateTime.Today > playerData.LastVisitDate)
                 {
-                    playerData.Coins += CoinsAwardAmount;
+                    playerData.Statistics.Coins += CoinsAwardAmount;
                     playerData.LastVisitDate = DateTime.Today;
 
                     Task.Run(async() =>

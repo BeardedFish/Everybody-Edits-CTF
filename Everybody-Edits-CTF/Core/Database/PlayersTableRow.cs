@@ -14,26 +14,6 @@ namespace Everybody_Edits_CTF.Core.Database
         public readonly string Username;
 
         /// <summary>
-        /// The total number of times that this player won a Capture the Flag game.
-        /// </summary>
-        public int TotalWins {get; set; }
-
-        /// <summary>
-        /// The total number of times that this player lost a Capture the Flag game.
-        /// </summary>
-        public int TotalLosses { get; set; }
-
-        /// <summary>
-        /// The total number of kills this player has accumulated while playing Capture the Flag.
-        /// </summary>
-        public int TotalKills { get; set; }
-
-        /// <summary>
-        /// The amount of coins this player currently possesses.
-        /// </summary>
-        public int Coins { get; set; }
-
-        /// <summary>
         /// The date the player last joined the world.
         /// </summary>
         public DateTime LastVisitDate { get; set; }
@@ -49,18 +29,20 @@ namespace Everybody_Edits_CTF.Core.Database
         public bool IsNewPlayer { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public PlayerGameStatistics Statistics { get; private set; }
+
+        /// <summary>
         /// States whether the data of this player was modified or not.
         /// </summary>
         public bool ChangesOccured
         {
             get
             {
-                return IsAdministrator != initialIsAdministrator
-                    || TotalWins != initialTotalWins
-                    || TotalLosses != initialTotalLosses
-                    || TotalKills != initialTotalKills
-                    || Coins != initialCoins
-                    || LastVisitDate != initialLastVisitDate
+                return LastVisitDate != initialLastVisitDate
+                    || IsAdministrator != initialIsAdministrator
+                    || !Statistics.Equals(initalStatistics)
                     || IsNewPlayer;
             }
         }
@@ -69,28 +51,21 @@ namespace Everybody_Edits_CTF.Core.Database
         /// States the inital values of the database values when loaded/saved. The username is ignored because it never changes in the MySql database.
         /// </summary>
         private bool initialIsAdministrator;
-        private int initialTotalWins, initialTotalLosses, initialTotalKills, initialCoins;
         private DateTime initialLastVisitDate;
+        private PlayerGameStatistics initalStatistics;
 
         /// <summary>
         /// Constructor for creating a <see cref="PlayersTableRow"/> object which holds data about a player from the <see cref="PlayersTable"/>.
         /// </summary>
         /// <param name="username">Refer to <see cref="Username"/> for description.</param>
-        /// <param name="totalWins">Refer to <see cref="TotalWins"/> for description.</param>
-        /// <param name="totalLosses">Refer to <see cref="TotalLosses"/> for description.</param>
-        /// <param name="totalKills">Refer to <see cref="TotalKills"/> for description.</param>
-        /// <param name="coins">Refer to <see cref="Coins"/> for description.</param>
         /// <param name="isAdministrator">Refer to <see cref="IsAdministrator"/> for description.</param>
         /// <param name="isNewPlayer">Refer to <see cref="IsNewPlayer"/> for description.</param>
-        public PlayersTableRow(string username, int totalWins, int totalLosses, int totalKills, int coins, DateTime lastVisitDate, bool isAdministrator, bool isNewPlayer)
+        public PlayersTableRow(string username, DateTime lastVisitDate, bool isAdministrator, PlayerGameStatistics statistics, bool isNewPlayer)
         {
             Username = username;
-            TotalWins = totalWins;
-            TotalLosses = totalLosses;
-            TotalKills = totalKills;
-            Coins = coins;
             LastVisitDate = lastVisitDate;
             IsAdministrator = isAdministrator;
+            Statistics = statistics;
             IsNewPlayer = isNewPlayer;
 
             UpdateChanges();
@@ -102,12 +77,9 @@ namespace Everybody_Edits_CTF.Core.Database
         /// </summary>
         public void UpdateChanges()
         {
-            initialTotalWins = TotalWins;
-            initialTotalLosses = TotalLosses;
-            initialTotalKills = TotalKills;
-            initialCoins = Coins;
             initialLastVisitDate = LastVisitDate;
             initialIsAdministrator = IsAdministrator;
+            initalStatistics = Statistics.Clone() as PlayerGameStatistics;
         }
     }
 }

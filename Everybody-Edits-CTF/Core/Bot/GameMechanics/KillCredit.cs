@@ -33,7 +33,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 
                         if (playerData != null)
                         {
-                            playerData.TotalKills++;
+                            playerData.Statistics.TotalKills++;
                         }
                     }
 

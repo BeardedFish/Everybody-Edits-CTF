@@ -70,10 +70,10 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                     {
                         string msgResult = "You don't have enough coins to purchase this item.";
 
-                        if (playerData.Coins >= shopItem.Cost)
+                        if (playerData.Statistics.Coins >= shopItem.Cost)
                         {
-                            playerData.Coins -= shopItem.Cost;
-                            msgResult = $"You succesfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Coins == 1 ? "" : "s")}.";
+                            playerData.Statistics.Coins -= shopItem.Cost;
+                            msgResult = $"You succesfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Statistics.Coins == 1 ? "" : "s")}.";
 
                             // Set flag variable for the anti-cheat system
                             if (effectNameMap.ContainsValue(shopItem.Name))
