@@ -20,7 +20,7 @@ namespace Everybody_Edits_CTF.Logging
         /// <param name="message">The message of the log.</param>
         public static void WriteLog(LogType type, string message)
         {
-            LogText += $"[{LogTypeToString(type)} @ {DateTime.Now.ToString("hh:mm tt")}]: {message}\n";
+            LogText += $"{(LogText == string.Empty ? "" : "\n")}[{LogTypeToString(type)} @ {DateTime.Now.ToString("hh:mm tt")}]: {message}";
         }
 
         /// <summary>
