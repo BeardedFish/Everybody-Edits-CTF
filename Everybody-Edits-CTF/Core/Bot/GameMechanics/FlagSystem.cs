@@ -27,7 +27,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 
         /// <summary>
         /// Handles the flag system in the Capture The Flag game. The flag system consists of capturing, returning, and taking a flag. If the <see cref="GameSettings.MaxScoreToWin"/>
-        /// is reached after a flag is captured, then the game is ended via the <see cref="CtfGameRound.End(Team)"/> method.
+        /// is reached after a flag is captured, then the game is ended via the <see cref="CtfGameRound.End(CaptureTheFlagBot, Team)"/> method.
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
