@@ -12,17 +12,17 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// The delay a player has to wait in order to perform an action again.
         /// </summary>
-        public int DelayMs { get; private set; };
+        public int DelayMs { get; private set; }
 
         /// <summary>
-        /// A dictionary which keeps track of a players last tick time, in milliseconds.
+        /// A dictionary which keeps track of players last tick time, in milliseconds.
         /// </summary>
         public Dictionary<Player, long> LastPlayerTickMs { get; private set; }
 
         /// <summary>
-        /// 
+        /// Abstract class which keeps track of <see cref="Player"/> time ticks, in milliseconds.
         /// </summary>
-        /// <param name="delayMs"></param>
+        /// <param name="delayMs">The delay in milliseconds all players must wait in order to perform an action again.</param>
         public DelayedAction(int delayMs)
         {
             DelayMs = delayMs;
@@ -32,7 +32,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// Updates the <see cref="LastPlayerTickMs"/> dictionary by logging the current current u
         /// </summary>
-        /// <param name="player"></param>
+        /// <param name="player">The player to be updated.</param>
         protected void UpdatePlayerCurrentTick(Player player)
         {
             if (!LastPlayerTickMs.ContainsKey(player))
@@ -44,7 +44,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         }
 
         /// <summary>
-        /// States whether a player has waited the <see cref="DelayMs"/> since their last time tick logged in the <see cref="LastPlayerTickMs"/> dictionary.
+        /// States whether the delay is over for a player or not.
         /// </summary>
         /// <param name="player">The player to be checked.</param>
         /// <returns>True if the player has waited the <see cref="DelayMs"/> value, if not, false.</returns>

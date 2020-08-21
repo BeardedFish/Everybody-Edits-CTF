@@ -43,7 +43,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         public Command[] BotCommands;
 
         /// <summary>
-        /// 
+        /// The dig system for the Capture The Flag game.
         /// </summary>
         public DigSystem DigSystem { get; private set; }
 
@@ -381,8 +381,8 @@ namespace Everybody_Edits_CTF.Core.Bot
                         if (JoinedWorld.Blocks != null)
                         {
                             int layerId = message.GetInt(0);
-                            uint xLoc = message.GetUInt(1);
-                            uint yLoc = message.GetUInt(2);
+                            int xLoc = message.GetInt(1);
+                            int yLoc = message.GetInt(2);
                             int blockId = message.GetInt(3);
 
                             JoinedWorld.Blocks[layerId, xLoc, yLoc] = new Block(blockId);
