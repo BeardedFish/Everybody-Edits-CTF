@@ -26,6 +26,10 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             {
                 ctfBot.SendPrivateMessage(player, "You are now a healer for your team!");
             }
+            else if (DigSystem.WearingDiggableSmiley(player))
+            {
+                ctfBot.SendPrivateMessage(player, "You can now dig dirt in the world!");
+            }
         }
     }
 }

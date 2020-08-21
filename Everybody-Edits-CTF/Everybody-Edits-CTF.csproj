@@ -103,12 +103,14 @@
     <Compile Include="Core\Bot\CaptureTheFlagBot.EventHandler.cs" />
     <Compile Include="Core\Bot\CaptureTheFlagBot.cs" />
     <Compile Include="Core\Bot\DataContainers\ConnectionInformation.cs" />
+    <Compile Include="Core\Bot\DataContainers\DelayedAction.cs" />
     <Compile Include="Core\Bot\DataContainers\GameRound.cs" />
     <Compile Include="Core\Bot\DataContainers\ParsedCommand.cs" />
     <Compile Include="Core\Bot\Enums\Blocks.cs" />
     <Compile Include="Core\Bot\Enums\Effect.cs" />
     <Compile Include="Core\Bot\EventArgs\EffectToggledEventArgs.cs" />
     <Compile Include="Core\Bot\EventArgs\PlayerResetEventArgs.cs" />
+    <Compile Include="Core\Bot\GameMechanics\DigSystem.cs" />
     <Compile Include="Core\Bot\GameMechanics\KillCredit.cs" />
     <Compile Include="Core\Bot\GameMechanics\Commands\Command.cs" />
     <Compile Include="Core\Bot\GameMechanics\Traps\BlueBaseTrap.cs" />

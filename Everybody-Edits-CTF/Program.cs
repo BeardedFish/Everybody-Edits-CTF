@@ -47,20 +47,20 @@ namespace Everybody_Edits_CTF
 
             Console.WriteLine("Type \"help\" for a list of commands.\n");
 
-            string inputCmd;
+            string userInput;
             do
             {
                 Console.Write(">> ");
-                inputCmd = Console.ReadLine().Trim();
+                userInput = Console.ReadLine().Trim();
 
-                if (!string.Equals(inputCmd, "quit", CommandCompareCase))
+                if (!string.Equals(userInput, "quit", CommandCompareCase))
                 {
-                    if (string.Equals(inputCmd, "cls", CommandCompareCase) || string.Equals(inputCmd, "clear", CommandCompareCase))
+                    if (string.Equals(userInput, "cls", CommandCompareCase) || string.Equals(userInput, "clear", CommandCompareCase))
                     {
                         Console.Clear();
                         Console.WriteLine($"{TitleArt}");
                     }
-                    else if (string.Equals(inputCmd, "connect", CommandCompareCase))
+                    else if (string.Equals(userInput, "connect", CommandCompareCase))
                     {
                         if (botConnectionInfo == null)
                         {
@@ -83,7 +83,7 @@ namespace Everybody_Edits_CTF
                             }
                         }
                     }
-                    else if (string.Equals(inputCmd, "disconnect", CommandCompareCase))
+                    else if (string.Equals(userInput, "disconnect", CommandCompareCase))
                     {
                         if (ctfBot.Connected)
                         {
@@ -96,18 +96,18 @@ namespace Everybody_Edits_CTF
                             Console.WriteLine("The bot is not connected!");
                         }
                     }
-                    else if (string.Equals(inputCmd, "help", CommandCompareCase))
+                    else if (string.Equals(userInput, "help", CommandCompareCase))
                     {
                         Console.WriteLine("about - Shows information about the program.");
                         Console.WriteLine("connect - Connects the bot to Everybody Edits.");
                         Console.WriteLine("disconnect - Disconnects the bot from Everybody Edits.");
                         Console.WriteLine("help - Shows a list of commands on how to use the program.");
                     }
-                    else if (string.Equals(inputCmd, "logs", CommandCompareCase))
+                    else if (string.Equals(userInput, "logs", CommandCompareCase))
                     {
                         Console.WriteLine(Logger.LogText == string.Empty ? "Log text is empty." : Logger.LogText);
                     }
-                    else if (string.Equals(inputCmd, "setup", CommandCompareCase))
+                    else if (string.Equals(userInput, "setup", CommandCompareCase))
                     {
                         Console.WriteLine("[!] NOTE: The information entered here is NOT encrypted or stored securely.\n");
 
@@ -131,7 +131,7 @@ namespace Everybody_Edits_CTF
 
                     Console.WriteLine();
                 }
-            } while (!string.Equals(inputCmd, "quit", CommandCompareCase));
+            } while (!string.Equals(userInput, "quit", CommandCompareCase));
         }
     }
 }
