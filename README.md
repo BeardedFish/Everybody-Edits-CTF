@@ -10,7 +10,8 @@ This bot was originally written in 2015, however, due to protocol changes the ol
 * Respawn cooldown when a player dies.
 * Shop where players can spend coins for power ups.
 * Traps that can be triggered by players.
-* Player data (coins, total wins, total losses, and total kills) , excluding guest accounts, is saved through a MySql database.
+* Dig system.
+* Player data (coins, total wins, total losses, and total kills), excluding guest accounts, is saved through a MySql database.
 
 ## Bot Commands
 
