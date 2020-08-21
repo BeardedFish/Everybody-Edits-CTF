@@ -28,15 +28,12 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             int joinedTeamTotalPlayers = TeamHelper.TotalPlayers(ctfBot.JoinedWorld.Players, player.Team) - 1;
             int oppositeTeamTotalPlayers = TeamHelper.TotalPlayers(ctfBot.JoinedWorld.Players, TeamHelper.GetOppositeTeam(player.Team));
 
-            if (GameSettings.AutoBalanceTeams)
+            if (joinedTeamTotalPlayers > oppositeTeamTotalPlayers)
             {
-                if (joinedTeamTotalPlayers > oppositeTeamTotalPlayers)
-                {
-                    resultMsg = "Unbalanced teams! You have been transferred to the other team!";
+                resultMsg = "Unbalanced teams! You have been transferred to the other team!";
 
-                    Point teleLocation = player.Team == Team.Blue ? GameSettings.RedCheckpointLocation : GameSettings.BlueCheckpointLocation;
-                    ctfBot.TeleportPlayer(player, teleLocation.X, teleLocation.Y);
-                }
+                Point teleLocation = player.Team == Team.Blue ? GameSettings.RedCheckpointLocation : GameSettings.BlueCheckpointLocation;
+                ctfBot.TeleportPlayer(player, teleLocation.X, teleLocation.Y);
             }
 
             ctfBot.SendPrivateMessage(player, resultMsg);

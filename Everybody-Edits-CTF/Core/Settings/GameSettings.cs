@@ -9,11 +9,6 @@ namespace Everybody_Edits_CTF.Core.Settings
     public static class GameSettings
     {
         /// <summary>
-        /// States whether the bot will auto balance teams if they are unbalanced.
-        /// </summary>
-        public const bool AutoBalanceTeams = true;
-
-        /// <summary>
         /// The locations of the blue/red team's flag in the world that the bot joined.
         /// </summary>
         public static readonly Point BlueFlagLocation = new Point(32, 101), RedFlagLocation = new Point(367, 101);
