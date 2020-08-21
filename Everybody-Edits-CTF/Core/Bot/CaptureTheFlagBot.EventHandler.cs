@@ -43,6 +43,11 @@ namespace Everybody_Edits_CTF.Core.Bot
         public Command[] BotCommands;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public DigSystem DigSystem { get; private set; }
+
+        /// <summary>
         /// The flag system for the Capture The Flag game.
         /// </summary>
         public FlagSystem FlagSystem { get; private set; }
@@ -126,6 +131,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             OnTeamChanged += AutoBalance.Handle;
             OnPlayerJoined += DailyBonus.Handle;
             OnPlayerMoved += FightSystem.Handle;
+            OnPlayerMoved += DigSystem.Handle;
             OnPlayerMoved += FlagSystem.Handle;
             OnPlayerMoved += RoomEntrance.Handle;
             OnPlayerMoved += Shop.Handle;
