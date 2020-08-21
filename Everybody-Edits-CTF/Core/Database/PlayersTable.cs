@@ -83,15 +83,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <returns>True if the player exists in the "Rows" list, if not, false.</returns>
         public static bool PlayerExists(string username)
         {
-            foreach (PlayersTableRow row in Rows)
-            {
-                if (username.Equals(row.Username, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return GetRow(username) != null;
         }
 
         /// <summary>
