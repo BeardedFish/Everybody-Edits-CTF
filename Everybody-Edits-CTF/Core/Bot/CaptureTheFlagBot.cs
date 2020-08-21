@@ -34,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         private ConnectionInformation connectionInformation;
 
         /// <summary>
-        /// Constructor for creating an <see cref="CtfBot"/> object. The bot is able to host a Capture The Flag game in an Everybody Edits world.
+        /// Constructor for creating an <see cref="CaptureTheFlagBot"/> object. The bot is able to host a Capture The Flag game in an Everybody Edits world.
         /// </summary>
         public CaptureTheFlagBot()
         {
