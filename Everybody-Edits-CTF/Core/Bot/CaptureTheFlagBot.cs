@@ -46,6 +46,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             };
 
             CurrentGameRound = new GameRound();
+            DigSystem = new DigSystem();
             FlagSystem = new FlagSystem();
             JoinedWorld = new WorldInformation();
 

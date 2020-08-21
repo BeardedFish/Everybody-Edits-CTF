@@ -21,6 +21,8 @@ namespace Everybody_Edits_CTF.Core.Bot.Enums
 
             public static readonly Block Lava = new Block(416);
 
+            public static readonly Block SlowGravityDot = new Block(459);
+
             public static readonly Block Caution = new Block(1058);
 
             public static readonly MorphableBlock BlueFlag = new MorphableBlock(327, 1);
