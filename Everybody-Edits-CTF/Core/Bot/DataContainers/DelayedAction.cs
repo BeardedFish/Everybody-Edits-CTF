@@ -23,10 +23,26 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// Abstract class which keeps track of <see cref="Player"/> time ticks, in milliseconds.
         /// </summary>
         /// <param name="delayMs">The delay in milliseconds all players must wait in order to perform an action again.</param>
-        public DelayedAction(int delayMs)
+        public DelayedAction(CaptureTheFlagBot ctfBot, int delayMs)
         {
+            ctfBot.OnPlayerJoined += OnPlayerJoined;
+            ctfBot.OnPlayerLeft += OnPlayerLeft;
+
             DelayMs = delayMs;
             LastPlayerTickMs = new Dictionary<Player, long>();
+        }
+
+        private void OnPlayerJoined(CaptureTheFlagBot ctfBot, Player player)
+        {
+            UpdatePlayerCurrentTick(player);
+        }
+
+        private void OnPlayerLeft(CaptureTheFlagBot ctfBot, Player player)
+        {
+            if (LastPlayerTickMs.ContainsKey(player))
+            {
+                LastPlayerTickMs.Remove(player);
+            }
         }
 
         /// <summary>

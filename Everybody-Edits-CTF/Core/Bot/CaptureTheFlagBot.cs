@@ -46,9 +46,11 @@ namespace Everybody_Edits_CTF.Core.Bot
             };
 
             CurrentGameRound = new GameRound();
-            DigSystem = new DigSystem();
+            DigSystem = new DigSystem(this);
             FlagSystem = new FlagSystem();
             JoinedWorld = new WorldInformation();
+            RoomEntrance = new RoomEntrance(this);
+            WarpPipe = new WarpPipe(this);
 
             SubscribeToGameMechanics();
         }

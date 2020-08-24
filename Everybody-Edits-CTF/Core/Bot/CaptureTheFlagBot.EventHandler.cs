@@ -53,6 +53,16 @@ namespace Everybody_Edits_CTF.Core.Bot
         public FlagSystem FlagSystem { get; private set; }
 
         /// <summary>
+        /// The room entrance system for the Capture The Flag game.
+        /// </summary>
+        public RoomEntrance RoomEntrance { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private WarpPipe WarpPipe { get; set; }
+
+        /// <summary>
         /// Contains information about the Everybody Edits world that the bot joined.
         /// </summary>
         public WorldInformation JoinedWorld { get; private set; }

@@ -25,7 +25,8 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// integer represents a block id. A player can only dig blocks if they are wearing a specific smiley. Refer to the <see cref="WearingDiggableSmiley(Player)"/>
         /// method for a list of smilies that can dig. A player must tap the WASD or arrow keys in order to dig.
         /// </summary>
-        public DigSystem() : base(DigDelayMs)
+        /// <param name="player">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        public DigSystem(CaptureTheFlagBot ctfBot) : base(ctfBot, DigDelayMs)
         {
 
         }
@@ -40,12 +41,6 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             if (ctfBot.JoinedWorld.Blocks == null || !player.IsPlayingGame || player.IsInGodMode || player.IsPressingSpacebar || !WearingDiggableSmiley(player))
             {
                 return;
-            }
-
-            // Add new players to the tick dictionary
-            if (!LastPlayerTickMs.ContainsKey(player))
-            {
-                UpdatePlayerCurrentTick(player);
             }
 
             if (IsDelayOver(player))
