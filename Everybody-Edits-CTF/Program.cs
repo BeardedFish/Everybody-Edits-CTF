@@ -102,6 +102,7 @@ namespace Everybody_Edits_CTF
                         Console.WriteLine("connect - Connects the bot to Everybody Edits.");
                         Console.WriteLine("disconnect - Disconnects the bot from Everybody Edits.");
                         Console.WriteLine("help - Shows a list of commands on how to use the program.");
+                        Console.WriteLine("setup - Sets up the details of the Everybody Edits bot.");
                     }
                     else if (string.Equals(userInput, "logs", CommandCompareCase))
                     {
