@@ -57,9 +57,6 @@ I used [XAMPP](https://www.apachefriends.org/index.html) to run a MySql database
 ### Is data stored securely through this program?
 No.
 
-## Known Issues
-* Player locations are only accurate on last key press/release. In order to get accurate positions, the Everybody Edits physics engine must be simulated.
-
 ## Screenshots
 ![Blue team trap](Images/BlueTeamTrap.png "Player triggering the blue teams base trap")
 ![Bridge trap](Images/BridgeTrap.png "Player triggering the bridge trap")
