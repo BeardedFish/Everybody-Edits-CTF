@@ -50,7 +50,12 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 | `suicide` | | Kills the player saying the command which results in them respawning. |
 
 ## Frequently Asked Questions
-Coming soon!
+
+### What software did you use to run the database? 
+I used [XAMPP](https://www.apachefriends.org/index.html) to run a MySql database locally on my machine.
+
+### Is data stored securely through this program?
+No.
 
 ## Known Issues
 * Player locations are only accurate on last key press/release. In order to get accurate positions, the Everybody Edits physics engine must be simulated.
