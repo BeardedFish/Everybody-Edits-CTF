@@ -14,7 +14,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         /// Contains administrator bot commands implementation. An administrator command can only be executed by players whose username is present in the <see cref="Settings.BotSettings.Administrators"/>
         /// array.
         /// </summary>
-        public AdminCommands() : base(new string[] { "ban", "disconnect", "kick" })
+        public AdminCommands() : base(new string[] { "disconnect", "kick" })
         {
 
         }
