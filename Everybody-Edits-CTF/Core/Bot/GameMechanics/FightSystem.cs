@@ -49,7 +49,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to warn about their health.</param>
         private static void HandleHealthStatusWarning(CaptureTheFlagBot ctfBot, Player player)
         {
-            string healthDescription = null;
+            string healthDescription = string.Empty;
 
             switch (player.Health)
             {
@@ -61,7 +61,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                     break;
             }
 
-            if (healthDescription != null)
+            if (healthDescription != string.Empty)
             {
                 string msg = $"Warning! Your health is {healthDescription} ({player.Health} HP).";
 
