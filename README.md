@@ -1,7 +1,7 @@
 # Everybody-Edits-CTF
 This repository contains the source code files for a Capture The Flag bot made for the flash game Everybody Edits.
 
-This bot was originally written in 2015, however, due to protocol changes the old bot stopped working. This is a complete rewrite of the entire Capture The Flag bot.
+This bot was originally written in 2015, however, due to the Everybody Edits protocol changes the old bot stopped working. This is a complete rewrite of the entire Capture The Flag bot.
 
 ## Current Features
 * Ability for a Everybody Edits player to take, drop, and capture an enemy flag.
@@ -11,47 +11,49 @@ This bot was originally written in 2015, however, due to protocol changes the ol
 * Shop where players can spend coins for power ups.
 * Traps that can be triggered by players.
 * Dig system.
-* Player data (coins, total wins, total losses, and total kills), excluding guest accounts, is saved through a MySql database.
+* Player data (coins, total wins, total losses, etc.), excluding guest accounts, is saved through a MySql database.
 
 ## Bot Commands
 
+These commands can only be executed when the bot is connected to an Everybody Edits world. Commands must start with a specific prefix. The prefixes are: `.`, `>`, `!`, and `#`.
+
 ### Administrator:
-| Command       | Parameter(s)         | Description                                            |
-| ------------- | -------------------- | ------------------------------------------------------ |
-| `disconnect`  |                      | Disconnects the bot from the Everybody Edits world.    |
-| `kick`        | `username` `reason` | Kicks a specifies user from the Everybody Edits world. |
+| Command | Parameter(s) | Description |
+| - | - | - |
+| `disconnect` | | Disconnects the bot from the Everybody Edits world. |
+| `kick` | `username` `reason`  | Kicks a specifies user from the Everybody Edits world. |
 
 ### Regular:
-| Command       | Parameter(s)        | Description                                                                                             |
-| ------------- | ------------------- | ------------------------------------------------------------------------------------------------------- |
-| `amiadmin`    |                     | Sends the user saying the command a private message stating whether they are an administrator or not.   |
-| `coins`       |                     | Sends the user saying the command a private message stating how many coins.                             |
-| `donatecoins` | `username`          | Donates coins to another user.                                                                          |
-| `help`        |                     | Sends the user saying the command a private message on how to use the bot.                              |
-| `totalwins`   |                     | Sends the user saying the command a private message stating the total Capture The Flag games they won.  |
-| `totallosses` |                     | Sends the user saying the command a private message stating the total Capture The Flag games they lost. |
-| `totalkills`  |                     | Sends the user saying the command a private message stating the total amount of players they've killed. |
+| Command | Parameter(s) | Description |
+| - | - | - |
+| `amiadmin` | | Sends the user saying the command a private message stating whether they are an administrator or not. |
+| `coins` | | Sends the user saying the command a private message stating how many coins. |
+| `donatecoins` | `username`          | Donates coins to another user. |
+| `help` | | Sends the user saying the command a private message on how to use the bot. |
+| `spectate` | | Toggles the spectate mode status of the player. If a player has spectate mode on, they can fly around in the Everybody Edits world. If they have it off, they can't fly around in the Everybody Edits world.|
+| `totalwins` or `wins` | | Sends the user saying the command a private message stating the total Capture The Flag games they won. |
+| `totallosses` or `losses` | | Sends the user saying the command a private message stating the total Capture The Flag games they lost. |
+| `totalkills` | | Sends the user saying the command a private message stating the total amount of players they've killed. |
 
 ### Game:
-| Command       | Parameter(s)        | Description   |
-| ------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `blueflag`    |                     | Sends a chat message saying the username of the player holding the blue flag.                                                 |
-| `redflag`     |                     | Sends a chat message saying the username of the player holding the red flag.                                                  |
-| `dropflag`    |                     | If the player saying the command has the flag, the flag is dropped on the ground wherever their last horizontal location was. |
-| `gamefund`    |                     | Sends a chat message saying the amount of coins raised for the current Capture The Flag game round.                           |
-| `heal`        |                     | Heals a players health to 100%. This command only works if the player is located in their home base.                          |
-| `health`      |                     | Sends the user saying the command a private message which states the amount of health points (HP) the player currently has.   |
-| `lobby`       |                     | Sends the user saying the command to the game lobby, removing them from the current Capture The Flag game round.              |
-| `maxflags`    |                     | Sends a chat message stating the maximum number of flags a team must capture in order to win the game.                        |
-| `scores`      |                     | Sends a chat message stating the number of flags both the blue and red team captured.                                         |
-| `suicide`     |                     | Kills the player saying the command which results in them respawning.                                                         |
+| Command | Parameter(s) | Description |
+| - | - | - |
+| `blueflag` | | Sends a chat message saying the username of the player holding the blue flag. |
+| `redflag` | | Sends a chat message saying the username of the player holding the red flag. |
+| `dropflag` | | If the player saying the command has the flag, the flag is dropped on the ground wherever their last horizontal location was. |
+| `gamefund` | | Sends a chat message saying the amount of coins raised for the current Capture The Flag game round. |
+| `heal` | | Heals a players health to 100%. This command only works if the player is located in their home base. |
+| `health` or `hp` | | Sends the user saying the command a private message which states the amount of health points (HP) the player currently has. |
+| `lobby` or `quit` | | Sends the user saying the command to the game lobby, removing them from the current Capture The Flag game round. |
+| `maxflags` | | Sends a chat message stating the maximum number of flags a team must capture in order to win the game. |
+| `scores` | | Sends a chat message stating the number of flags both the blue and red team captured. |
+| `suicide` | | Kills the player saying the command which results in them respawning. |
 
 ## Frequently Asked Questions
 Coming soon!
 
 ## Known Issues
-* Player locations are only accurate on last key press/release.
-* Bot disconnects randomly sometimes.
+* Player locations are only accurate on last key press/release. In order to get accurate positions, the Everybody Edits physics engine must be simulated.
 
 ## Screenshots
 ![Blue team trap](Images/BlueTeamTrap.png "Player triggering the blue teams base trap")
