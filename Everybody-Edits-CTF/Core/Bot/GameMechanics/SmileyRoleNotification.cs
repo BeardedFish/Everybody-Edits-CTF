@@ -1,17 +1,16 @@
-﻿// File Name:     SmileyRole.cs
+﻿// File Name:     SmileyRoleNotification.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Saturday, August 15, 2020
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
-using Everybody_Edits_CTF.Core.Bot.Enums;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
-    public static class SmileyRole
+    public static class SmileyRoleNotification
     {
         /// <summary>
-        /// Handles special smiley roles by sending a private message to a player if they wear a special smiley. A special smiley is able to perform a unique trait. For
-        /// example, the nurse smiley can heal team mates.
+        /// Notifies a player via a private message if they wear a special smiley. A special smiley is able to perform a unique trait in the Capture The Flag game. For
+        /// example, the nurse smiley can heal teammates. This method should only be called when a players face id changes.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
@@ -22,7 +21,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 return;
             }
 
-            if (player.SmileyId == (int)Smiley.Nurse || player.SmileyId == (int)Smiley.Doctor)
+            if (HealSystem.CanHealTeammates(player))
             {
                 ctfBot.SendPrivateMessage(player, "You are now a healer for your team!");
             }

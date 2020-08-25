@@ -136,7 +136,7 @@
     <Compile Include="Core\Bot\GameMechanics\RespawnSystem.cs" />
     <Compile Include="Core\Bot\GameMechanics\DailyBonus.cs" />
     <Compile Include="Core\Bot\GameMechanics\FightSystem.cs" />
-    <Compile Include="Core\Bot\GameMechanics\SmileyRole.cs" />
+    <Compile Include="Core\Bot\GameMechanics\SmileyRoleNotification.cs" />
     <Compile Include="Core\Bot\GameMechanics\WarpPipe.cs" />
     <Compile Include="Core\Bot\GameMechanics\TrapSystem.cs" />
     <Compile Include="Core\Bot\GameMechanics\AutoBalance.cs" />

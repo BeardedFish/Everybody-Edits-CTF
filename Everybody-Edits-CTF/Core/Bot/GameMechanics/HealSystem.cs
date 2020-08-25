@@ -17,7 +17,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to be handled.</param>
         public static void Handle(CaptureTheFlagBot ctfBot, Player player)
         {
-            if (!player.IsPlayingGame || player.IsInGodMode || player.SmileyId != (int)Smiley.Nurse || player.SmileyId != (int)Smiley.Doctor)
+            if (!player.IsPlayingGame || player.IsInGodMode || !CanHealTeammates(player))
             {
                 return;
             }
@@ -38,6 +38,20 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// States whether a player can heal their teammates.
+        /// 
+        /// A player can heal their teammates if they are either wearing:
+        ///     - Nurse smiley
+        ///     - Doctor smiley
+        /// </summary>
+        /// <param name="player">The player to be checked.</param>
+        /// <returns>True if the player can heal their teammates, if not, false.</returns>
+        public static bool CanHealTeammates(Player player)
+        {
+            return player.SmileyId == (int)Smiley.Nurse || player.SmileyId == (int)Smiley.Doctor;
         }
     }
 }

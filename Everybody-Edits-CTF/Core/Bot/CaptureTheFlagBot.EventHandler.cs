@@ -149,7 +149,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             OnPlayerMoved += WarpPipe.Handle;
             OnPlayerReset += KillCredit.Handle;
             OnPlayerReset += RespawnSystem.Handle;
-            OnSmileyChanged += SmileyRole.Handle;
+            OnSmileyChanged += SmileyRoleNotification.Handle;
         }
 
         /// <summary>
