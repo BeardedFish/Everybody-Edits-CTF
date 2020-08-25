@@ -12,13 +12,15 @@ namespace Everybody_Edits_CTF.Core.Bot.Deserializer
     public static class WorldDeserializer
     {
         /// <summary>
-        /// Deserializes blocks from a Message object and stores the deserialized values in a 3 dimensional array of type Block. The first dimension is the layer, the second is the
-        /// horizontal (x) positon, and the third is the vertical (y) posiition.
+        /// Deserializes the world blocks from an Everybody Edits world based on a <see cref="Message"/> object.
         /// </summary>
         /// <param name="m">The Message object that contains the data about the Everybody Edits world.</param>
         /// <param name="worldWidth">The width of the Everybody Edits world.</param>
         /// <param name="worldHeight">The height of the Everybody Edits world.</param>
-        /// <returns></returns>
+        /// <returns
+        /// A 3-dimensional array of type <see cref="Block"/>. The first dimension represents layer, the second represents horizontal coordinate, and the third represents
+        /// vertical coordinate.
+        /// </returns>
         public static Block[,,] DeserializeBlocks(Message m, int worldWidth, int worldHeight)
         {
             if (!CanDeserializeBlocks(m))
@@ -27,8 +29,8 @@ namespace Everybody_Edits_CTF.Core.Bot.Deserializer
             }
 
             Block[,,] worldBlocks = InitalizeWorldBlocksArray(2, worldWidth, worldHeight);
-
             uint currentBlockChunk = GetWorldStart(m) + 1;
+
             while (m[currentBlockChunk] as string != EverybodyEditsMessage.WorldEnd)
             {
                 int blockId = m.GetInt(currentBlockChunk);
@@ -41,8 +43,6 @@ namespace Everybody_Edits_CTF.Core.Bot.Deserializer
                 {
                     int x = (xPositions[i] << 8) | (xPositions[i + 1]);
                     int y = (yPositions[i] << 8) | (yPositions[i + 1]);
-
-                    // TODO: Probably should move the number values to an enum for clarification...
 
                     switch (blockId)
                     {
