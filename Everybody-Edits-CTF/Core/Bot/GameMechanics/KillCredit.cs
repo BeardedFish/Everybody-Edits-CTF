@@ -12,10 +12,13 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
     public static class KillCredit
     {
         /// <summary>
+        /// Credits a player if they succesfully kill another player during the Capture The Flag game. This method is called each time a player is reset in the Everybody Edits world. Both
+        /// the attacker and the attackee are notifed about the kill credit via a private message.
         /// 
+        /// NOTE: If the <see cref="PlayersTable"/> is not loaded then the kill is not accumulated to the attackers total kill count.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
-        /// <param name="player">The player to be handled.</param>
+        /// <param name="eventArgs">The arguments for when the player (or players) was/were reset.</param>
         public static void Handle(CaptureTheFlagBot ctfBot, PlayerResetEventArgs eventArgs)
         {
             if (eventArgs.PlayersReset.Count == 1)
