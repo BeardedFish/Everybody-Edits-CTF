@@ -4,14 +4,21 @@ This repository contains the source code files for a Capture The Flag bot made f
 This bot was originally written in 2015, however, due to the Everybody Edits protocol changes the old bot stopped working. This is a complete rewrite of the entire Capture The Flag bot.
 
 ## Current Features
-* Ability for a Everybody Edits player to take, drop, and capture an enemy flag.
+* Ability for an Everybody Edits players to:
+    * Attack and kill players of the opposite team.
+    * Execute commands.
+    * Heal teammates.
+    * Take, drop, and capture an enemy flag.
+* Anti-cheat system.
+* Auto balance system.
 * Auto reconnect when bot disconnects for unknown reason.
-* Ability for players to attack each other.
-* Respawn cooldown when a player dies.
-* Shop where players can spend coins for power ups.
-* Traps that can be triggered by players.
+* Daily bonus system.
 * Dig system.
 * Player data (coins, total wins, total losses, etc.), excluding guest accounts, is saved through a MySql database.
+* Respawn cooldown when a player dies.
+* Room entrance/warp pipe system.
+* Shop where players can spend coins on items.
+* Traps that can be triggered by players.
 
 ## Bot Commands
 
