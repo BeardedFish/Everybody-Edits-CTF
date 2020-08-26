@@ -18,6 +18,36 @@ namespace Everybody_Edits_CTF.Core.Database
         public static bool Loaded => rows != null;
 
         /// <summary>
+        /// The date time format in the MySql database.
+        /// </summary>
+        private const string DateTimeFormat = "yyyy-MM-dd";
+
+        /// <summary>
+        /// The URL to the MySql database.
+        /// </summary>
+        private const string ServerUrl = "127.0.0.1";
+
+        /// <summary>
+        /// The port to access the MySql database.
+        /// </summary>
+        private const ushort Port = 3306;
+
+        /// <summary>
+        /// The name of the database that contains the tables.
+        /// </summary>
+        private const string Name = "everybody_edits_ctf";
+
+        /// <summary>
+        /// The username for the MySql database.
+        /// </summary>
+        private const string Username = "root";
+
+        /// <summary>
+        /// The password for the MySql database.
+        /// </summary>
+        private const string Password = "";
+
+        /// <summary>
         /// The name of the Players table in the MySql database.
         /// </summary>
         private const string PlayersTableName = "players";
@@ -26,6 +56,11 @@ namespace Everybody_Edits_CTF.Core.Database
         /// The name of the table which contains game statistics about a player.
         /// </summary>
         private const string GameStatisticsTableName = "player_game_stats";
+
+        /// <summary>
+        /// The connection string to access the MySql database via <see cref="MySqlConnection"/>.
+        /// </summary>
+        private static readonly string SqlConnectionString = $"Server={ServerUrl}; Port={Port}; Database={Name}; Uid={Username}; Pwd={Password};";
 
         /// <summary>
         /// The rows of the Players table loaded from the MySql database.
@@ -41,7 +76,7 @@ namespace Everybody_Edits_CTF.Core.Database
 
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
+                using (MySqlConnection connection = new MySqlConnection(SqlConnectionString))
                 {
                     string query = $"SELECT Username, LastVisitDate, IsAdministrator, TotalWins, TotalLosses, TotalKills, Coins FROM {PlayersTableName} INNER JOIN {GameStatisticsTableName} ON Id = PlayerId;";
 
@@ -131,7 +166,7 @@ namespace Everybody_Edits_CTF.Core.Database
 
             int totalDatabaseModifications = 0;
 
-            using (MySqlConnection connection = new MySqlConnection(DatabaseSettings.SqlConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(SqlConnectionString))
             {
                 connection.Open();
 
@@ -148,14 +183,14 @@ namespace Everybody_Edits_CTF.Core.Database
 
                         if (playerData.IsNewPlayer)
                         {
-                            queries.Add(new MySqlCommand($"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator) VALUES (NULL, \"{playerData.Username}\", \"{playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)}\", {Convert.ToInt32(playerData.IsAdministrator)});", connection));
+                            queries.Add(new MySqlCommand($"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator) VALUES (NULL, \"{playerData.Username}\", \"{playerData.LastVisitDate.ToString(DateTimeFormat)}\", {Convert.ToInt32(playerData.IsAdministrator)});", connection));
                             queries.Add(new MySqlCommand($"INSERT INTO {GameStatisticsTableName} (PlayerId, TotalWins, TotalLosses, TotalKills, Coins) VALUES ((SELECT Id FROM {PlayersTableName} WHERE Username=\"{playerData.Username}\" LIMIT 1), {playerData.Statistics.TotalWins}, {playerData.Statistics.TotalLosses}, {playerData.Statistics.TotalKills}, {playerData.Statistics.Coins});", connection));
 
                             playerData.IsNewPlayer = false;
                         }
                         else
                         {
-                            queries.Add(new MySqlCommand($"UPDATE {PlayersTableName} SET LastVisitDate=\"{playerData.LastVisitDate.ToString(DatabaseSettings.DateTimeFormat)}\", IsAdministrator={Convert.ToInt32(playerData.IsAdministrator)} WHERE Username=\"{playerData.Username}\";", connection));
+                            queries.Add(new MySqlCommand($"UPDATE {PlayersTableName} SET LastVisitDate=\"{playerData.LastVisitDate.ToString(DateTimeFormat)}\", IsAdministrator={Convert.ToInt32(playerData.IsAdministrator)} WHERE Username=\"{playerData.Username}\";", connection));
                             queries.Add(new MySqlCommand($"UPDATE {GameStatisticsTableName} SET TotalWins={playerData.Statistics.TotalWins}, TotalLosses={playerData.Statistics.TotalLosses}, TotalKills={playerData.Statistics.TotalKills}, Coins={playerData.Statistics.Coins} WHERE PlayerId=(SELECT Id FROM {PlayersTableName} WHERE Username=\"{playerData.Username}\" LIMIT 1);", connection));
                         }
 
