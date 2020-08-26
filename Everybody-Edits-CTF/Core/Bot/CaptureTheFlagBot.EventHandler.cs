@@ -57,7 +57,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         public RoomEntrance RoomEntrance { get; private set; }
 
         /// <summary>
-        /// 
+        /// The warp pipe system for the Capture The Flag game.
         /// </summary>
         private WarpPipe WarpPipe { get; set; }
 

@@ -4,24 +4,20 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Database;
-using System.Linq;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public sealed class RegularCommands : Command
     {
-        /// <summary>
-        /// Contains regular bot commands implementation. A regular command can be executed by any player.
-        /// </summary>
         public RegularCommands() : base(new string[] { "amiadmin", "coins", "donatecoins", "help", "spectate", "totalwins", "totallosses", "losses", "wins", "totalkills" })
         {
 
         }
 
         /// <summary>
-        /// Handles a player executing a regular command.
+        /// Handles a player executing a regular command. A regular command can be executed by any player.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player executing the command.</param>
         /// <param name="parsedCommand">The command being executed.</param>
         /// <returns>

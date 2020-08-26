@@ -29,7 +29,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public Point PurchaseTeleportLocation { get; private set; }
 
         /// <summary>
-        /// Constructor for creating a shop item.
+        /// Constructor for creating a shop item. A shop item can be bought by players. Refer to <see cref="GameMechanics.Shop"/> for more information.
         /// </summary>
         /// <param name="name">Refer to <see cref="Name"/> for description.</param>
         /// <param name="cost">Refer to <see cref="Cost"/> for description.</param>

@@ -10,19 +10,15 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public sealed class AdminCommands : Command
     {
-        /// <summary>
-        /// Contains administrator bot commands implementation. An administrator command can only be executed by players whose username is present in the <see cref="Settings.BotSettings.Administrators"/>
-        /// array.
-        /// </summary>
         public AdminCommands() : base(new string[] { "disconnect", "kick" })
         {
 
         }
 
         /// <summary>
-        /// Handles a player executing an administrator command.
+        /// Handles a player executing an administrator command. Administrator players are defined in the MySql database.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player executing the command.</param>
         /// <param name="parsedCommand">The command being executed.</param>
         /// <returns>

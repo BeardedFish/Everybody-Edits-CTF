@@ -11,9 +11,6 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
 {
     public class LavaLakeTrap : Trap
     {
-        /// <summary>
-        /// Trap that is located in the lava lake.
-        /// </summary>
         public LavaLakeTrap() : base(new Point[] { new Point(277, 136) })
         {
 
@@ -23,7 +20,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
         /// Handles the trap that is located in the lava lake. This trap can be activated by both the blue team and the red team, however, the player must be wearing the Fire Demon
         /// smiley.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player that is triggering the trap.</param>
         public override void Handle(CaptureTheFlagBot ctfBot, Player player)
         {

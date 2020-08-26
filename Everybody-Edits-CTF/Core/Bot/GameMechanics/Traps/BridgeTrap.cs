@@ -11,9 +11,6 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
 {
     public class BridgeTrap : Trap
     {
-        /// <summary>
-        /// Bridge trap that has two trigger points. 
-        /// </summary>
         public BridgeTrap() : base(new Point[] { new Point(89, 136), new Point(110, 136) })
         {
 
@@ -22,7 +19,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
         /// <summary>
         /// Handles the bridge trap. This trap can be activated by both the blue team and the red team.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player that is triggering the trap.</param>
         public override void Handle(CaptureTheFlagBot ctfBot, Player player)
         {

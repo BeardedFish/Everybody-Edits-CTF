@@ -17,7 +17,7 @@ namespace Everybody_Edits_CTF.Core.Bot.Deserializer
         /// <param name="m">The Message object that contains the data about the Everybody Edits world.</param>
         /// <param name="worldWidth">The width of the Everybody Edits world.</param>
         /// <param name="worldHeight">The height of the Everybody Edits world.</param>
-        /// <returns
+        /// <returns>
         /// A 3-dimensional array of type <see cref="Block"/>. The first dimension represents layer, the second represents horizontal coordinate, and the third represents
         /// vertical coordinate.
         /// </returns>
@@ -275,7 +275,7 @@ namespace Everybody_Edits_CTF.Core.Bot.Deserializer
         /// States whether a Message object can be deserialized for world block data or not.
         /// </summary>
         /// <param name="m">The Message object to be checked.</param>
-        /// <returns>True if the Message object can be deserialized, if not , false.</returns>
+        /// <returns>True if the Message object can be deserialized, if not, false.</returns>
         private static bool CanDeserializeBlocks(Message m)
         {
             return m.Type == EverybodyEditsMessage.InitBegin || m.Type == EverybodyEditsMessage.ReloadWorld;
@@ -304,7 +304,7 @@ namespace Everybody_Edits_CTF.Core.Bot.Deserializer
         /// <param name="totalLayers">The total number of layers to create for the array.</param>
         /// <param name="worldWidth">The total width of the array, in blocks.</param>
         /// <param name="worldHeight">The total height of the array, in blocks.</param>
-        /// <returns>A 3 dimensional array of type <see cref="Block"/> which contains empty blocks.</returns>
+        /// <returns>A 3-dimensional array of type <see cref="Block"/> which contains empty blocks (id of zero).</returns>
         private static Block[,,] InitalizeWorldBlocksArray(int totalLayers, int worldWidth, int worldHeight)
         {
             Block[,,] worldBlocks = new Block[totalLayers, worldWidth, worldHeight];

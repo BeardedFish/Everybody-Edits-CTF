@@ -10,18 +10,15 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public sealed class GameCommands : Command
     {
-        /// <summary>
-        /// Contains game bot commands implementation. A game command can only be executed by players whose team is equal to either <see cref="Team.Blue"/> or <see cref="Team.Red"/>.
-        /// </summary>
         public GameCommands() : base(new string[] { "blueflag", "redflag", "dropflag", "gamefund", "heal", "health", "hp", "lobby", "quit", "maxflags", "scores", "suicide" })
         {
 
         }
 
         /// <summary>
-        /// Handles a player executing a game command.
+        /// Handles a player executing a game command. A game command can only be executed by a player either on the blue team or red team.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player executing the command.</param>
         /// <param name="parsedCommand">The command being executed.</param>
         /// <returns>

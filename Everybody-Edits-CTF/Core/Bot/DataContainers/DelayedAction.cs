@@ -58,7 +58,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         }
 
         /// <summary>
-        /// Updates the <see cref="lastPlayerTickMs"/> dictionary by logging the current current u
+        /// Updates the <see cref="lastPlayerTickMs"/> dictionary by logging the current current millisecond time tick.
         /// </summary>
         /// <param name="player">The player to be updated.</param>
         protected void UpdatePlayerCurrentTick(Player player)

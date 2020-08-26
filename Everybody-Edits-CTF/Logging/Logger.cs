@@ -34,7 +34,7 @@ namespace Everybody_Edits_CTF.Logging
         /// <summary>
         /// Convert the LogType enum to a readable string.
         /// </summary>
-        /// <param name="type">The LogType enum to be converted to a readable string.</param>
+        /// <param name="type">The <see cref="LogType"/> enum to be converted to a readable string.</param>
         /// <returns>
         /// If the LogType is DatabaseModification, "DATABASE" is returned. If the LogType is EverybodyEditsMessage, "EE_MSG" is returned. If the LogType is Exception, "EXCEPTION" is
         /// returned. If the LogType is neither of those, "UNKNOWN_TYPE" is returned.

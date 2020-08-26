@@ -38,7 +38,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// Ends the Capture The Flag game by awarding the winning team with .
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="winningTeam">The team what won the game.</param>
         public void End(CaptureTheFlagBot ctfBot, Team winningTeam)
         {

@@ -11,9 +11,6 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
 {
     public class RedBaseTrap : Trap
     {
-        /// <summary>
-        /// Trap that is located in the red base.
-        /// </summary>
         public RedBaseTrap() : base(new Point[] { new Point(361, 132) })
         {
 
@@ -22,7 +19,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
         /// <summary>
         /// Handles the trap that is located in the red teams base. This trap can only be activated by the red team.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player that is triggering the trap.</param>
         public override void Handle(CaptureTheFlagBot ctfBot, Player player)
         {

@@ -17,7 +17,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public string Command { get; set; }
 
         /// <summary>
-        /// The parameters of the command. If no parameters, then
+        /// The parameters of the command.
         /// </summary>
         public string[] Parameters { get; set; }
 

@@ -136,7 +136,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// Captures this flag and returns the flag to <see cref="HomeLocation"/>.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         public void Capture(CaptureTheFlagBot ctfBot)
         {
             ctfBot.SayChatMessage($"Player {Holder.Username} has captured the {OwnerTeam.GetStringName()} team's flag.");
@@ -147,7 +147,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// Drops the flag in the Everybody Edits worlds on the ground.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         public void Drop(CaptureTheFlagBot ctfBot)
         {
             Point dropLocation = Holder.Location;
@@ -168,7 +168,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// Removes the flag from the <see cref="HomeLocation"/> and sets the <see cref="Holder"/> to the player that is taking the flag.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="taker">The player taking the flag.</param>
         public void Take(CaptureTheFlagBot ctfBot, Player taker)
         {
@@ -181,7 +181,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// Returns the flag to the <see cref="HomeLocation"/>.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="returnee">The player returning the flag.</param>
         /// <param name="flagCaptured">States whether the reason for returning the flag was because the flag was captured or not.</param>
         public void Return(CaptureTheFlagBot ctfBot, Player returnee, bool flagCaptured)
