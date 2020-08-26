@@ -77,10 +77,12 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                 return null;
             }
 
+            message = message.ToLower();
+
             string[] tokens = message.Substring(1, message.Length - 1).Split(' ');
             string[] parameters = tokens.Skip(1).Take(tokens.Length - 1).ToArray();
 
-            return new ParsedCommand(message[0], tokens[0], parameters);
+            return new ParsedCommand(message[0], tokens[0], parameters); // Prefix, command, parameters
         }
     }
 }
