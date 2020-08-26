@@ -111,6 +111,7 @@
     <Compile Include="Core\Bot\Enums\Extensions\TeamExtensions.cs" />
     <Compile Include="Core\Bot\EventArgs\EffectToggledEventArgs.cs" />
     <Compile Include="Core\Bot\EventArgs\PlayerResetEventArgs.cs" />
+    <Compile Include="Core\Bot\CaptureTheFlagBot.Settings.cs" />
     <Compile Include="Core\Bot\GameMechanics\DigSystem.cs" />
     <Compile Include="Core\Bot\GameMechanics\KillCredit.cs" />
     <Compile Include="Core\Bot\GameMechanics\Commands\Command.cs" />
@@ -160,7 +161,6 @@
     <Compile Include="Core\Bot\Deserializer\Blocks\WorldPortalSpawnBlock.cs" />
     <Compile Include="Core\Bot\Deserializer\WorldDeserializer.cs" />
     <Compile Include="Core\Bot\Enums\GameFundIncreaseReason.cs" />
-    <Compile Include="Core\Settings\BotSettings.cs" />
     <Compile Include="Core\Settings\DatabaseSettings.cs" />
     <Compile Include="Core\Settings\GameSettings.cs" />
     <Compile Include="Logging\Logger.cs" />

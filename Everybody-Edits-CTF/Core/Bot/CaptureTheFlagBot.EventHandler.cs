@@ -170,7 +170,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             Logger.WriteLog(LogType.EverybodyEditsMessage, $"Disconnected from the Everybody Edits world (Reason: {message}).");
 
             // Only reconnect if the bot was not disconnected on purpose
-            if (BotSettings.AutoReconnectOnDisconnect && message != "Disconnect")
+            if (AutoReconnectOnDisconnect && message != "Disconnect")
             {
                 Logger.WriteLog(LogType.EverybodyEditsMessage, "Auto reconnecting...");
 
@@ -297,9 +297,9 @@ namespace Everybody_Edits_CTF.Core.Bot
                     break;
                 case EverybodyEditsMessage.InitEnd:
                     {
-                        SetWorldTitle($"{BotSettings.WorldTitle} [ON]");
+                        SetWorldTitle($"{WorldTitle} [ON]");
                         SetGodMode(true);
-                        Move(BotSettings.JoinLocation);
+                        Move(JoinLocation);
                         SayChatMessage("Connected!");
 
                         FinishedInit = true;

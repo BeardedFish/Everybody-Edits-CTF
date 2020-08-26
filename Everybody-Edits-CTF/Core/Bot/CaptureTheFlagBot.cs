@@ -68,7 +68,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             try
             {
 #pragma warning disable 612
-                Client client = PlayerIO.QuickConnect.SimpleConnect(BotSettings.EverybodyEditsGameId, connectionInformation.Email, connectionInformation.Password, null);
+                Client client = PlayerIO.QuickConnect.SimpleConnect(EverybodyEditsGameId, connectionInformation.Email, connectionInformation.Password, null);
 #pragma warning restore 612
 
                 connection = client.Multiplayer.CreateJoinRoom(connectionInformation.WorldId, "Everybodyedits" + client.BigDB.Load("config", "config")["version"], true, null, null);
@@ -92,7 +92,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         public void Disconnect()
         {
             SayChatMessage("Disconnecting...");
-            SetWorldTitle($"{BotSettings.WorldTitle} [OFF]");
+            SetWorldTitle($"{WorldTitle} [OFF]");
 
             connection?.Disconnect();
             connectionInformation = null;
@@ -142,11 +142,11 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="msg">The chat message to be sent.</param>
         public void SayChatMessage(string msg)
         {
-            int maxChatMessageLength = 140 - BotSettings.ChatMessagePrefix.Length - 2;
+            int maxChatMessageLength = 140 - ChatMessagePrefix.Length - 2;
 
             for (int i = 0; i < msg.Length; i += maxChatMessageLength)
             {
-                Send(EverybodyEditsMessage.ChatMessage, $"{BotSettings.ChatMessagePrefix} {msg.Substring(i, Math.Min(maxChatMessageLength, msg.Length - i))}");
+                Send(EverybodyEditsMessage.ChatMessage, $"{ChatMessagePrefix} {msg.Substring(i, Math.Min(maxChatMessageLength, msg.Length - i))}");
 
                 Task.Delay(150);
             }

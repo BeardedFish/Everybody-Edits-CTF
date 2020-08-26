@@ -1,12 +1,12 @@
-// File Name:     BotSettings.cs
+﻿// File Name:     CaptureTheFlagBot.Settings.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
-// Date:          Monday, July 6, 2020
+// Date:          Tuesday, August 25, 2020
 
 using System.Drawing;
 
-namespace Everybody_Edits_CTF.Core.Settings
+namespace Everybody_Edits_CTF.Core.Bot
 {
-    public static class BotSettings
+    public partial class CaptureTheFlagBot
     {
         /// <summary>
         /// States whether the bot should auto reconnect when disconnected due to a server side failure.
@@ -27,7 +27,7 @@ namespace Everybody_Edits_CTF.Core.Settings
         /// The title the bot will set the Everybody Edits world to when connected.
         /// </summary>
         public const string WorldTitle = "CTF Bot";
-        
+
         /// <summary>
         /// The location where the bot will be moved to when joining the Everybody Edits world.
         /// </summary>
