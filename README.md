@@ -58,6 +58,7 @@ I used [XAMPP](https://www.apachefriends.org/index.html) to run a MySql database
 No.
 
 ## Screenshots
+![Console application](Images/Application.png "Showcase of what the program looks like")
 ![Blue team trap](Images/BlueTeamTrap.png "Player triggering the blue teams base trap")
 ![Bridge trap](Images/BridgeTrap.png "Player triggering the bridge trap")
 ![Secret lava lake trap](Images/LavaLakeTrap.png "Player triggering the \"secret trap\" at the lava lake")
