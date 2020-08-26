@@ -13,6 +13,11 @@ namespace Everybody_Edits_CTF.Core.Database
     public static class PlayersTable
     {
         /// <summary>
+        /// States whether the Players table has been loaded or not.
+        /// </summary>
+        public static bool Loaded => rows != null;
+
+        /// <summary>
         /// The name of the Players table in the MySql database.
         /// </summary>
         private const string PlayersTableName = "players";
@@ -23,21 +28,16 @@ namespace Everybody_Edits_CTF.Core.Database
         private const string GameStatisticsTableName = "player_game_stats";
 
         /// <summary>
-        /// States whether the Players table has been loaded or not.
-        /// </summary>
-        public static bool Loaded => Rows != null;
-
-        /// <summary>
         /// The rows of the Players table loaded from the MySql database.
         /// </summary>
-        public static List<PlayersTableRow> Rows { get; private set; }
+        private static List<PlayersTableRow> rows;
 
         /// <summary>
         /// Loads the Players table from the MySql database.
         /// </summary>
         public static void Load()
         {
-            Rows = new List<PlayersTableRow>();
+            rows = new List<PlayersTableRow>();
 
             try
             {
@@ -63,14 +63,14 @@ namespace Everybody_Edits_CTF.Core.Database
                                 statistics,
                                 false);
 
-                            Rows.Add(playerData);
+                            rows.Add(playerData);
                         }
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                Rows = null;
+                rows = null;
 
                 Logger.WriteLog(LogType.Exception, $"Exception caught while trying to load the database (message: {ex.Message}).");
             }
@@ -96,11 +96,14 @@ namespace Everybody_Edits_CTF.Core.Database
         /// </returns>
         public static PlayersTableRow GetRow(string username)
         {
-            foreach (PlayersTableRow player in Rows)
+            if (Loaded)
             {
-                if (string.Equals(username, player.Username, StringComparison.OrdinalIgnoreCase))
+                foreach (PlayersTableRow player in rows)
                 {
-                    return player;
+                    if (string.Equals(username, player.Username, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return player;
+                    }
                 }
             }
 
@@ -113,7 +116,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="username">The username of the player to be added.</param>
         public static void AddNewPlayer(string username)
         {
-            Rows.Add(new PlayersTableRow(username, DateTime.Today, false, new PlayerGameStatistics(), true));
+            rows.Add(new PlayersTableRow(username, DateTime.Today, false, new PlayerGameStatistics(), true));
         }
 
         /// <summary>
@@ -132,7 +135,7 @@ namespace Everybody_Edits_CTF.Core.Database
             {
                 connection.Open();
 
-                foreach (PlayersTableRow playerData in Rows)
+                foreach (PlayersTableRow playerData in rows)
                 {
                     if (!playerData.ChangesOccured)
                     {
@@ -172,9 +175,9 @@ namespace Everybody_Edits_CTF.Core.Database
                         Logger.WriteLog(LogType.Exception, $"Fail while trying to save the database (reason: {ex.Message}).");
                     }
                 }
-
-                Logger.WriteLog(LogType.DatabaseModifcation, $"Total MySql database entries inserted/modified: {totalDatabaseModifications}).");
             }
+
+            Logger.WriteLog(LogType.DatabaseModifcation, $"Total MySql database entries inserted/modified: {totalDatabaseModifications}).");
         }
     }
 }
