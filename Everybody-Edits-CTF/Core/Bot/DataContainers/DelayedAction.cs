@@ -17,7 +17,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// A dictionary which keeps track of players last tick time, in milliseconds.
         /// </summary>
-        public Dictionary<Player, long> LastPlayerTickMs { get; private set; }
+        public Dictionary<Player, long> lastPlayerTickMs { get; private set; }
 
         /// <summary>
         /// Abstract class which keeps track of <see cref="Player"/> time ticks, in milliseconds.
@@ -25,38 +25,50 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <param name="delayMs">The delay in milliseconds all players must wait in order to perform an action again.</param>
         public DelayedAction(CaptureTheFlagBot ctfBot, int delayMs)
         {
+            DelayMs = delayMs;
+            lastPlayerTickMs = new Dictionary<Player, long>();
+
             ctfBot.OnPlayerJoined += OnPlayerJoined;
             ctfBot.OnPlayerLeft += OnPlayerLeft;
-
-            DelayMs = delayMs;
-            LastPlayerTickMs = new Dictionary<Player, long>();
         }
 
+        /// <summary>
+        /// Event handler for when a player joins the Everybody Edits world. This method adds the player to the <see cref="lastPlayerTickMs"/> dictionary via the
+        /// <see cref="UpdatePlayerCurrentTick"/> method.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        /// <param name="player">The player that joined the world.</param>
         private void OnPlayerJoined(CaptureTheFlagBot ctfBot, Player player)
         {
             UpdatePlayerCurrentTick(player);
         }
 
+        /// <summary>
+        /// Event handler for when a player leaves the Everybody Edits world. This method removes the player from the <see cref="lastPlayerTickMs"/> dictionary if they exist
+        /// in it.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        /// <param name="player">The player that left the world.</param>
         private void OnPlayerLeft(CaptureTheFlagBot ctfBot, Player player)
         {
-            if (LastPlayerTickMs.ContainsKey(player))
+            if (lastPlayerTickMs.ContainsKey(player))
             {
-                LastPlayerTickMs.Remove(player);
+                lastPlayerTickMs.Remove(player);
             }
         }
 
         /// <summary>
-        /// Updates the <see cref="LastPlayerTickMs"/> dictionary by logging the current current u
+        /// Updates the <see cref="lastPlayerTickMs"/> dictionary by logging the current current u
         /// </summary>
         /// <param name="player">The player to be updated.</param>
         protected void UpdatePlayerCurrentTick(Player player)
         {
-            if (!LastPlayerTickMs.ContainsKey(player))
+            if (!lastPlayerTickMs.ContainsKey(player))
             {
-                LastPlayerTickMs.Add(player, 0);
+                lastPlayerTickMs.Add(player, 0);
             }
 
-            LastPlayerTickMs[player] = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            lastPlayerTickMs[player] = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         }
 
         /// <summary>
@@ -66,9 +78,9 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <returns>True if the player has waited the <see cref="DelayMs"/> value, if not, false.</returns>
         protected bool IsDelayOver(Player player)
         {
-            if (LastPlayerTickMs.ContainsKey(player))
+            if (lastPlayerTickMs.ContainsKey(player))
             {
-                return DateTimeOffset.Now.ToUnixTimeMilliseconds() - LastPlayerTickMs[player] >= DelayMs;
+                return DateTimeOffset.Now.ToUnixTimeMilliseconds() - lastPlayerTickMs[player] >= DelayMs;
             }
 
             return false;
