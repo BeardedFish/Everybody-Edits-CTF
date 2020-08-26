@@ -12,8 +12,8 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
     public static class KillCredit
     {
         /// <summary>
-        /// Credits a player if they succesfully kill another player during the Capture The Flag game. This method is called each time a player is reset in the Everybody Edits world. Both
-        /// the attacker and the attackee are notifed about the kill credit via a private message.
+        /// Credits a player if they succesfully kill another player during the Capture The Flag game. This method is called each time a player is reset in the Everybody
+        /// Edits world. Both the attacker and the attackee are notifed about the event credit via a private message.
         /// 
         /// NOTE: If the <see cref="PlayersTable"/> is not loaded then the kill is not accumulated to the attackers total kill count.
         /// </summary>
@@ -25,7 +25,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             {
                 Player killedPlayer = eventArgs.PlayersReset[0];
 
-                if (killedPlayer.LastAttacker != null)
+                if (killedPlayer.LastAttacker != Player.None)
                 {
                     ctfBot.SendPrivateMessage(killedPlayer, $"You were killed by player {killedPlayer.LastAttacker.Username}!");
                     ctfBot.SendPrivateMessage(killedPlayer.LastAttacker, $"You killed player {killedPlayer.Username}!");
@@ -43,7 +43,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                     ctfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.PlayerKilledEnemy);
                 }
 
-                killedPlayer.LastAttacker = null;
+                killedPlayer.LastAttacker = Player.None;
             }
         }
     }

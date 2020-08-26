@@ -15,6 +15,11 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
     public sealed class Player
     {
         /// <summary>
+        /// Object that represents a player that doesn't exist in the Everybody Edits world.
+        /// </summary>
+        public static readonly Player None = new Player("", 0, new Point(0, 0), false, Team.None, false);
+
+        /// <summary>
         /// States whether the player is playing capture the flag or not.
         /// </summary>
         public bool IsPlayingGame => Team != Team.None;
@@ -90,13 +95,12 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// The username of the player. The string returned is CAPITALIZED.
         /// </summary>
+        private string _username;
         public string Username
         {
             get => _username.ToUpper();
             set => _username = value;
         }
-
-        private string _username;
 
         /// <summary>
         /// The location of the player in the Everybody Edits world. This location is not always accurate because Everybody Edits only reports the location of a player
@@ -120,9 +124,9 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public VerticalDirection VerticalDirection { get; set; }
 
         /// <summary>
-        /// The last enemy player that attacked this player.
+        /// The last enemy player that attacked this player. The default value for this property is <see cref="None"/>.
         /// </summary>
-        public Player LastAttacker { get; set; } = null;
+        public Player LastAttacker { get; set; } = None;
 
         /// <summary>
         /// States whether this player purchased an effect legally from the <see cref="GameMechanics.Shop"/> or not. If this is false and the player takes an effect,
