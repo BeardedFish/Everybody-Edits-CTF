@@ -11,7 +11,6 @@ using Everybody_Edits_CTF.Core.Bot.EventArgs;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands;
 using Everybody_Edits_CTF.Core.Database;
-using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Logging;
 using PlayerIOClient;
 using System;

@@ -7,7 +7,6 @@ using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands;
-using Everybody_Edits_CTF.Core.Settings;
 using PlayerIOClient;
 using System;
 using System.Drawing;

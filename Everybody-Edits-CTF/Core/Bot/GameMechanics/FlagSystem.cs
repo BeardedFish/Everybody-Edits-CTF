@@ -6,7 +6,6 @@ using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
-using Everybody_Edits_CTF.Core.Settings;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,16 +16,26 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
     public sealed class FlagSystem
     {
         /// <summary>
+        /// States the max score a team needs to achieve in order to win the game.
+        /// </summary>
+        public const ushort MaxScoreToWin = 5;
+
+        /// <summary>
+        /// The locations of the blue/red team's flag in the world that the bot joined.
+        /// </summary>
+        public static readonly Point BlueFlagLocation = new Point(32, 101), RedFlagLocation = new Point(367, 101);
+
+        /// <summary>
         /// A dictionary that contains the team flags for the Capture The Flag game. To access a specific teams flag, use the <see cref="Team"/> enum as the key.
         /// </summary>
         public Dictionary<Team, Flag> Flags = new Dictionary<Team, Flag>()
         {
-            { Team.Blue, new Flag(Team.Blue, GameSettings.BlueFlagLocation, new MorphableBlock(327, 1)) },
-            { Team.Red, new Flag(Team.Red, GameSettings.RedFlagLocation, new MorphableBlock(327, 4)) },
+            { Team.Blue, new Flag(Team.Blue, BlueFlagLocation, new MorphableBlock(327, 1)) },
+            { Team.Red, new Flag(Team.Red, RedFlagLocation, new MorphableBlock(327, 4)) },
         };
 
         /// <summary>
-        /// Handles the flag system in the Capture The Flag game. The flag system consists of capturing, returning, and taking a flag. If the <see cref="GameSettings.MaxScoreToWin"/>
+        /// Handles the flag system in the Capture The Flag game. The flag system consists of capturing, returning, and taking a flag. If the <see cref="MaxScoreToWin"/>
         /// is reached after a flag is captured, then the game is ended via the <see cref="CtfGameRound.End(CaptureTheFlagBot, Team)"/> method.
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
@@ -50,7 +59,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 ctfBot.CurrentGameRound.IncreaseGameFund(GameFundIncreaseReason.FlagCaptured);
                 ctfBot.SayChatMessage(ctfBot.CurrentGameRound.GetScoresString());
 
-                if (ctfBot.CurrentGameRound.Scores[player.Team] >= GameSettings.MaxScoreToWin)
+                if (ctfBot.CurrentGameRound.Scores[player.Team] >= MaxScoreToWin)
                 {
                     ctfBot.CurrentGameRound.End(ctfBot, player.Team);
                 }

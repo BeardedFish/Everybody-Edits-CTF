@@ -161,7 +161,6 @@
     <Compile Include="Core\Bot\Deserializer\Blocks\WorldPortalSpawnBlock.cs" />
     <Compile Include="Core\Bot\Deserializer\WorldDeserializer.cs" />
     <Compile Include="Core\Bot\Enums\GameFundIncreaseReason.cs" />
-    <Compile Include="Core\Settings\GameSettings.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\LogType.cs" />
     <Compile Include="Program.cs" />

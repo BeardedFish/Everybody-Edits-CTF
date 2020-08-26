@@ -4,11 +4,9 @@
 
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
-using Everybody_Edits_CTF.Core.Settings;
 using PlayerIOClient;
 using System;
 using System.Drawing;
-using System.Threading.Tasks;
 
 namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 {
@@ -61,11 +59,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// States whether the player is currently pressing the spacebar or not.
         /// </summary>
         public bool IsPressingSpacebar { get; set; }
-
-        /// <summary>
-        /// States whether the play is respawning in a respawn cooldown zone or not.
-        /// </summary>
-        public bool IsRespawning => Location == GameSettings.BlueRespawnCooldownLocation || Location == GameSettings.RedRespawnCooldownLocation;
 
         /// <summary>
         /// States whether the player is currently in God mode or not.
@@ -205,32 +198,6 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
             Health += AttackHealHealthAmount;
 
             return Health >= MaxHealth;
-        }
-
-        /// <summary>
-        /// Respawns the player to their teams respawn location. When respawning, the player has to wait <see cref="GameSettings.RespawnCooldownMs"/>. If the players team
-        /// is <see cref="Team.None"/> then this method does nothing. 
-        /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
-        public void Respawn(CaptureTheFlagBot ctfBot)
-        {
-            if (!IsPlayingGame || IsRespawning)
-            {
-                return;
-            }
-
-            RestoreHealth();
-
-            Task.Run(async() =>
-            {
-                Point respawnCooldownLocation = Team == Team.Blue ? GameSettings.BlueRespawnCooldownLocation : GameSettings.RedRespawnCooldownLocation;
-                ctfBot.TeleportPlayer(this, respawnCooldownLocation.X, respawnCooldownLocation.Y);
-
-                await Task.Delay(GameSettings.RespawnCooldownMs);
-
-                Point respawnLocation = Team == Team.Blue ? GameSettings.BlueCheckpointLocation : GameSettings.RedCheckpointLocation;
-                ctfBot.TeleportPlayer(this, respawnLocation.X, respawnLocation.Y);
-            });
         }
 
         /// <summary>

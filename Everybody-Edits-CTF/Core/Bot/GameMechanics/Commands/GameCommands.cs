@@ -5,7 +5,6 @@
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
-using Everybody_Edits_CTF.Core.Settings;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
@@ -109,7 +108,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             break;
                         case "maxflags":
                             {
-                                ctfBot.SendPrivateMessage(player, $"The maximum number of flags to win is {GameSettings.MaxScoreToWin} flag{(GameSettings.MaxScoreToWin == 1 ? "" : "s")}.");
+                                ctfBot.SendPrivateMessage(player, $"The maximum number of flags to win is {FlagSystem.MaxScoreToWin} flag{(FlagSystem.MaxScoreToWin == 1 ? "" : "s")}.");
                             }
                             break;
                         case "scores":
@@ -119,7 +118,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             break;
                         case "suicide":
                             {
-                                if (!player.IsRespawning)
+                                if (!player.IsRespawning())
                                 {
                                     player.Die(ctfBot);
                                 }
