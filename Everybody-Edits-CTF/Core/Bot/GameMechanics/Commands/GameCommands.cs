@@ -4,9 +4,8 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using Everybody_Edits_CTF.Core.Settings;
-using Everybody_Edits_CTF.Helpers;
-using System.Linq;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
@@ -45,7 +44,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             {
                                 Team targetTeam = parsedCommand.Command == "blueflag" ? Team.Blue : Team.Red;
                                 string flagHolderUsername = ctfBot.FlagSystem.Flags[targetTeam].Holder == null ? null : ctfBot.FlagSystem.Flags[targetTeam].Holder.Username;
-                                string teamName = TeamHelper.EnumToString(targetTeam);
+                                string teamName = targetTeam.GetStringName();
                                 string msgToSend = flagHolderUsername != null ? $"Player {flagHolderUsername} has the {teamName} flag." : $"No one has {teamName} flag.";
 
                                 ctfBot.SayChatMessage(msgToSend);
@@ -53,7 +52,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             break;
                         case "dropflag":
                             {
-                                Team enemyTeam = TeamHelper.GetOppositeTeam(player.Team);
+                                Team enemyTeam = player.Team.GetOppositeTeam();
                                 Flag enemyTeamFlag = ctfBot.FlagSystem.Flags[enemyTeam];
 
                                 if (enemyTeamFlag.Holder == player)

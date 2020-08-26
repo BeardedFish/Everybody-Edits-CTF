@@ -6,12 +6,12 @@ using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Deserializer;
 using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using Everybody_Edits_CTF.Core.Bot.EventArgs;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands;
 using Everybody_Edits_CTF.Core.Database;
 using Everybody_Edits_CTF.Core.Settings;
-using Everybody_Edits_CTF.Helpers;
 using Everybody_Edits_CTF.Logging;
 using PlayerIOClient;
 using System;
@@ -325,7 +325,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                                 smileyId,
                                 new Point((int)xLoc, (int)yLoc),
                                 isInGodMode,
-                                TeamHelper.IdToEnum(teamId),
+                                (Team)teamId,
                                 canToggleGodMode));
 
                             // Add new players to the database
@@ -409,7 +409,7 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                             if (player.HasEnemyFlag(this))
                             {
-                                FlagSystem.Flags[TeamHelper.GetOppositeTeam(player.Team)].Return(this, null, false);
+                                FlagSystem.Flags[player.Team.GetOppositeTeam()].Return(this, null, false);
                             }
 
                             JoinedWorld.Players.Remove(playerId);

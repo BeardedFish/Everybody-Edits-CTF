@@ -4,8 +4,9 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using Everybody_Edits_CTF.Core.Settings;
-using Everybody_Edits_CTF.Helpers;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
@@ -24,9 +25,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 return;
             }
 
-            string resultMsg = $"You joined the {TeamHelper.EnumToString(player.Team)} team!";
-            int joinedTeamTotalPlayers = TeamHelper.TotalPlayers(ctfBot.JoinedWorld.Players, player.Team) - 1;
-            int oppositeTeamTotalPlayers = TeamHelper.TotalPlayers(ctfBot.JoinedWorld.Players, TeamHelper.GetOppositeTeam(player.Team));
+            string resultMsg = $"You joined the {player.Team.GetStringName()} team!";
+            int joinedTeamTotalPlayers = CountPlayers(ctfBot.JoinedWorld.Players, player.Team) - 1;
+            int oppositeTeamTotalPlayers = CountPlayers(ctfBot.JoinedWorld.Players, player.Team.GetOppositeTeam());
 
             if (joinedTeamTotalPlayers > oppositeTeamTotalPlayers)
             {
@@ -37,6 +38,27 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             }
 
             ctfBot.SendPrivateMessage(player, resultMsg);
+        }
+
+        /// <summary>
+        /// Gets the total number of players on a specific team.
+        /// </summary>
+        /// <param name="playersInWorld">The dictionary of players in the Everybody Edits world.</param>
+        /// <param name="team">The team a player must belong to in order to be accumulated.</param>
+        /// <returns></returns>
+        private static int CountPlayers(Dictionary<int, Player> playersInWorld, Team team)
+        {
+            int total = 0;
+
+            foreach (Player player in playersInWorld.Values)
+            {
+                if (player.Team == team)
+                {
+                    total++;
+                }
+            }
+
+            return total;
         }
     }
 }

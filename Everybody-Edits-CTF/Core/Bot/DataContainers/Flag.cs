@@ -4,7 +4,7 @@
 
 using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using Everybody_Edits_CTF.Helpers;
+using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using System;
 using System.Drawing;
 using System.Text;
@@ -139,7 +139,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         public void Capture(CaptureTheFlagBot ctfBot)
         {
-            ctfBot.SayChatMessage($"Player {Holder.Username} has captured the {TeamHelper.EnumToString(OwnerTeam)} team's flag.");
+            ctfBot.SayChatMessage($"Player {Holder.Username} has captured the {OwnerTeam.GetStringName()} team's flag.");
 
             Return(ctfBot, null, true);
         }
@@ -157,7 +157,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
             }
 
             ctfBot.PlaceBlock(BlockLayer.Foreground, dropLocation, Block);
-            ctfBot.SayChatMessage($"Player {Holder.Username} has dropped the {TeamHelper.EnumToString(OwnerTeam)} teams flag.");
+            ctfBot.SayChatMessage($"Player {Holder.Username} has dropped the {OwnerTeam.GetStringName()} teams flag.");
 
             lastDropTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
@@ -173,7 +173,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public void Take(CaptureTheFlagBot ctfBot, Player taker)
         {
             ctfBot.PlaceBlock(BlockLayer.Foreground, CurrentLocation, Blocks.None);
-            ctfBot.SayChatMessage($"Player {taker.Username} has taken the {TeamHelper.EnumToString(OwnerTeam)} teams flag.");
+            ctfBot.SayChatMessage($"Player {taker.Username} has taken the {OwnerTeam.GetStringName()} teams flag.");
 
             Holder = taker;
         }
@@ -199,7 +199,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 
             if (!flagCaptured)
             {
-                StringBuilder teamName = new StringBuilder(TeamHelper.EnumToString(OwnerTeam));
+                StringBuilder teamName = new StringBuilder(OwnerTeam.GetStringName());
                 teamName[0] = char.ToUpper(teamName[0]);
 
                 ctfBot.SayChatMessage($"{teamName} teams flag has been returned to base{(returnee == null ? "." : $" by player {returnee.Username}.")}");

@@ -5,8 +5,8 @@
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Deserializer.Blocks;
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using Everybody_Edits_CTF.Core.Settings;
-using Everybody_Edits_CTF.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,7 +40,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             }
 
             Flag friendlyFlag = Flags[player.Team];
-            Flag enemyFlag = Flags[TeamHelper.GetOppositeTeam(player.Team)];
+            Flag enemyFlag = Flags[player.Team.GetOppositeTeam()];
 
             if (enemyFlag.CanBeCapturedBy(player, friendlyFlag))
             {

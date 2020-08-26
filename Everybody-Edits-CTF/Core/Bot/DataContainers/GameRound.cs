@@ -3,8 +3,8 @@
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using Everybody_Edits_CTF.Core.Database;
-using Everybody_Edits_CTF.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,7 +42,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <param name="winningTeam">The team what won the game.</param>
         public void End(CaptureTheFlagBot ctfBot, Team winningTeam)
         {
-            ctfBot.SayChatMessage($"Game over! Team {TeamHelper.EnumToString(winningTeam)} has won the game.");
+            ctfBot.SayChatMessage($"Game over! Team {winningTeam.GetStringName()} has won the game.");
 
             int coinsWon = GetGameFundShare(ctfBot.JoinedWorld.Players, winningTeam);
             foreach (Player player in ctfBot.JoinedWorld.Players.Values)

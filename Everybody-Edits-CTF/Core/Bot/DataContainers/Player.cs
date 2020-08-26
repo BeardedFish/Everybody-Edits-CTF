@@ -3,8 +3,8 @@
 // Date:          Sunday, June 28, 2020
 
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using Everybody_Edits_CTF.Core.Settings;
-using Everybody_Edits_CTF.Helpers;
 using PlayerIOClient;
 using System;
 using System.Drawing;
@@ -188,7 +188,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <returns>True if the player is holding the enemy flag, if not, false.</returns>
         public bool HasEnemyFlag(CaptureTheFlagBot ctfBot)
         {
-            return IsPlayingGame ? ctfBot.FlagSystem.Flags[TeamHelper.GetOppositeTeam(Team)].Holder == this : false;
+            return IsPlayingGame ? ctfBot.FlagSystem.Flags[Team.GetOppositeTeam()].Holder == this : false;
         }
 
         /// <summary>

@@ -108,6 +108,7 @@
     <Compile Include="Core\Bot\DataContainers\ParsedCommand.cs" />
     <Compile Include="Core\Bot\Enums\Blocks.cs" />
     <Compile Include="Core\Bot\Enums\Effect.cs" />
+    <Compile Include="Core\Bot\Enums\Extensions\TeamExtensions.cs" />
     <Compile Include="Core\Bot\EventArgs\EffectToggledEventArgs.cs" />
     <Compile Include="Core\Bot\EventArgs\PlayerResetEventArgs.cs" />
     <Compile Include="Core\Bot\GameMechanics\DigSystem.cs" />
@@ -162,7 +163,6 @@
     <Compile Include="Core\Settings\BotSettings.cs" />
     <Compile Include="Core\Settings\DatabaseSettings.cs" />
     <Compile Include="Core\Settings\GameSettings.cs" />
-    <Compile Include="Helpers\TeamHelper.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\LogType.cs" />
     <Compile Include="Program.cs" />

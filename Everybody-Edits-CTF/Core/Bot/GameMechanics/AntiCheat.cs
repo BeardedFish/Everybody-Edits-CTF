@@ -4,8 +4,8 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using Everybody_Edits_CTF.Core.Bot.EventArgs;
-using Everybody_Edits_CTF.Helpers;
 using System;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
@@ -28,9 +28,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             // Remove flag from player if they have the enemy flag and enter God mode
             if (player.IsPlayingGame && player.IsInGodMode && player.HasEnemyFlag(ctfBot))
             {
-                ctfBot.SayChatMessage($"ANTI-CHEAT! Player {player.Username} has used God mode while carrying the {TeamHelper.EnumToString(TeamHelper.GetOppositeTeam(player.Team))} teams flag!");
+                ctfBot.SayChatMessage($"ANTI-CHEAT! Player {player.Username} has used God mode while carrying the {player.Team.GetOppositeTeam().GetStringName()} teams flag!");
 
-                ctfBot.FlagSystem.Flags[TeamHelper.GetOppositeTeam(player.Team)].Return(ctfBot, null, false);
+                ctfBot.FlagSystem.Flags[player.Team.GetOppositeTeam()].Return(ctfBot, null, false);
             }
         }
 

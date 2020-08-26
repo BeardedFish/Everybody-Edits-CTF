@@ -4,8 +4,8 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Enums;
+using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using Everybody_Edits_CTF.Core.Bot.EventArgs;
-using Everybody_Edits_CTF.Helpers;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
@@ -25,11 +25,11 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                 {
                     if (player.HasEnemyFlag(ctfBot))
                     {
-                        Team enemyTeam = TeamHelper.GetOppositeTeam(player.Team);
+                        Team enemyTeam = player.Team.GetOppositeTeam();
 
                         if (ctfBot.FlagSystem.Flags[enemyTeam].Holder == player)
                         {
-                            ctfBot.SayChatMessage($"Player {player.Username} died while holding {TeamHelper.EnumToString(enemyTeam)} teams flag.");
+                            ctfBot.SayChatMessage($"Player {player.Username} died while holding {enemyTeam.GetStringName()} teams flag.");
 
                             ctfBot.FlagSystem.Flags[enemyTeam].Return(ctfBot, null, false);
                         }
