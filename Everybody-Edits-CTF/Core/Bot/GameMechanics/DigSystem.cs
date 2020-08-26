@@ -21,22 +21,31 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         private readonly int[] diggableBlocks = { 16, 21, 1045, 142, 179, 180, 181 };
 
         /// <summary>
-        /// Handles a player digging dirt blocks in the Everybody Edits world. All diggable blocks are defined in the <see cref="diggableBlocks"/> integer array, where the
-        /// integer represents a block id. A player can only dig blocks if they are wearing a specific smiley. Refer to the <see cref="WearingDiggableSmiley(Player)"/>
-        /// method for a list of smilies that can dig. A player must tap the WASD or arrow keys in order to dig.
+        /// Game mechanic which handles a player digging dirt blocks in the Capture The Flag game. All diggable blocks are defined in the <see cref="diggableBlocks"/>
+        /// integer array, where the integer represents a block id. The dig system only works for players wearing the <see cref="Smiley.HardHat"/> or the <see cref="Smiley.Worker"/>.
         /// </summary>
-        /// <param name="player">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         public DigSystem(CaptureTheFlagBot ctfBot) : base(ctfBot, DigDelayMs)
         {
-
+            ctfBot.OnPlayerMoved += OnPlayerMoved;
         }
 
         /// <summary>
-        /// Handles a player digging in the Everybody Edits world.
+        /// Returns a boolean that states whether a player is wearing a smiley that can dig or not.
+        /// </summary>
+        /// <param name="player">The player to be checked.</param>
+        /// <returns>True if the player is wearing either the <see cref="Smiley.HardHat"/> or the <see cref="Smiley.Worker"/>, if not, false.</returns>
+        public static bool WearingDiggableSmiley(Player player)
+        {
+            return player.SmileyId == (int)Smiley.HardHat || player.SmileyId == (int)Smiley.Worker;
+        }
+
+        /// <summary>
+        /// Handles a player digging in during the Capture The Flag game.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
-        public void Handle(CaptureTheFlagBot ctfBot, Player player)
+        private void OnPlayerMoved(CaptureTheFlagBot ctfBot, Player player)
         {
             if (ctfBot.JoinedWorld.Blocks == null || !player.IsPlayingGame || player.IsInGodMode || player.IsPressingSpacebar || !WearingDiggableSmiley(player))
             {
@@ -77,23 +86,13 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         }
 
         /// <summary>
-        /// Returns a boolean that states whether a player is wearing a smiley that can dig or not.
-        /// </summary>
-        /// <param name="player">The player to be checked.</param>
-        /// <returns>True if the player is wearing either the <see cref="Smiley.HardHat"/> or the <see cref="Smiley.Worker"/>, if not, false.</returns>
-        public static bool WearingDiggableSmiley(Player player)
-        {
-            return player.SmileyId == (int)Smiley.HardHat || player.SmileyId == (int)Smiley.Worker;
-        }
-
-        /// <summary>
         /// States whether a player can dig left in the Everybody Edits world or not.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be checked whether they can dig left or not.</param>
         /// <param name="blockId">The diggable block id.</param>
         /// <returns>True if the player can dig left, if not, false.</returns>
-        private static bool CanDigLeft(CaptureTheFlagBot ctfBot, Player player, int blockId)
+        private bool CanDigLeft(CaptureTheFlagBot ctfBot, Player player, int blockId)
         {
             return player.HorizontalDirection == HorizontalDirection.Left
                 && player.Location.X > 0
@@ -107,7 +106,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to be checked whether they can dig right or not.</param>
         /// <param name="blockId">The diggable block id.</param>
         /// <returns>True if the player can dig right, if not, false.</returns>
-        private static bool CanDigRight(CaptureTheFlagBot ctfBot, Player player, int blockId)
+        private bool CanDigRight(CaptureTheFlagBot ctfBot, Player player, int blockId)
         {
             return player.HorizontalDirection == HorizontalDirection.Right
                 && player.Location.X < ctfBot.JoinedWorld.Width
@@ -121,7 +120,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to be checked whether they can dig up or not.</param>
         /// <param name="blockId">The diggable block id.</param>
         /// <returns>True if the player can dig up, if not, false.</returns>
-        private static bool CanDigUp(CaptureTheFlagBot ctfBot, Player player, int blockId)
+        private bool CanDigUp(CaptureTheFlagBot ctfBot, Player player, int blockId)
         {
             return player.VerticalDirection == VerticalDirection.Up
                 && player.Location.Y > 0
@@ -135,7 +134,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to be checked whether they can dig down or not.</param>
         /// <param name="blockId">The diggable block id.</param>
         /// <returns>True if the player can dig down, if not, false.</returns>
-        private static bool CanDigDown(CaptureTheFlagBot ctfBot, Player player, int blockId)
+        private bool CanDigDown(CaptureTheFlagBot ctfBot, Player player, int blockId)
         {
             return player.VerticalDirection == VerticalDirection.Down
                 && player.Location.Y < ctfBot.JoinedWorld.Height

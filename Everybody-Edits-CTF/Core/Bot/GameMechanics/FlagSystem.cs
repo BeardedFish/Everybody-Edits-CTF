@@ -35,13 +35,21 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         };
 
         /// <summary>
-        /// Handles the flag system in the Capture The Flag game. The flag system consists of capturing, returning, and taking a flag. If the <see cref="MaxScoreToWin"/>
-        /// is reached after a flag is captured, then the game is ended via the <see cref="CtfGameRound.End(CaptureTheFlagBot, Team)"/> method.
+        /// Game mechanic which handles the flag system in the Capture The Flag game. The flag system consists of capturing, returning, and taking a flag.
         /// </summary>
-        /// <param name="ctfBot">The Capture The Flag bot instance.</param>
-        /// <param name="messageType">The <see cref="PlayerIOClient.Message.Type"/> that is calling this method.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        public FlagSystem(CaptureTheFlagBot ctfBot)
+        {
+            ctfBot.OnPlayerMoved += OnPlayerMoved;
+        }
+
+        /// <summary>
+        /// Handles a player trying to capture, return, or take a flag in the Capture The Flag game. If the <see cref="MaxScoreToWin"/> is reached once a flag is captured,
+        /// then the game is ended via the <see cref="CtfGameRound.End(CaptureTheFlagBot, Team)"/> method.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
-        public void Handle(CaptureTheFlagBot ctfBot, Player player)
+        private void OnPlayerMoved(CaptureTheFlagBot ctfBot, Player player)
         {
             if (player.IsInGodMode || !player.IsPlayingGame)
             {

@@ -9,7 +9,7 @@ using System.Drawing;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
-    public static class TrapSystem
+    public sealed class TrapSystem
     {
         /// <summary>
         /// The traps in the Everybody Edits world that can be triggered by players playing the Capture The Flag game.
@@ -23,12 +23,21 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         };
 
         /// <summary>
+        /// Game mechanic which handles the traps in the Capture The Flag game. Traps are defined in the <see cref="trap"/> array.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        public TrapSystem(CaptureTheFlagBot ctfBot)
+        {
+            ctfBot.OnPlayerMoved += OnPlayerMoved;
+        }
+
+        /// <summary>
         /// Handles all traps in the Everybody Edits worlds. Traps can only be triggered when certain conditions are met. Refer to <see cref="Trap.CanTriggerTrap(Player)"/>
         /// for more information.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
-        public static void Handle(CaptureTheFlagBot ctfBot, Player player)
+        private void OnPlayerMoved(CaptureTheFlagBot ctfBot, Player player)
         {
             foreach (Trap trap in traps)
             {
@@ -47,7 +56,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to check if they are on the trap or not.</param>
         /// <param name="trap">The trap to check.</param>
         /// <returns>True if the player is on the trap trigger, if not, false.</returns>
-        private static bool IsPlayerOnTrapTrigger(Player player, Trap trap)
+        private bool IsPlayerOnTrapTrigger(Player player, Trap trap)
         {
             foreach (Point triggerLocation in trap.TriggerLocations)
             {

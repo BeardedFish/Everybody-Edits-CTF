@@ -4,7 +4,6 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Database;
-using System.Linq;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {

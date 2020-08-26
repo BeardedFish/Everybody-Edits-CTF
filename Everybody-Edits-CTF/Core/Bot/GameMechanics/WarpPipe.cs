@@ -9,6 +9,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
     public sealed class WarpPipe : DelayedAction
     {
+        /// <summary>
+        /// The cooldown time in milliseconds a player must wait before they can enter a warp pipe again.
+        /// </summary>
         private const int WarpPipeCooldownMs = 1500;
 
         /// <summary>
@@ -17,12 +20,12 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         private const int WarpPipeEntranceBlockId = 1055;
 
         /// <summary>
-        /// 
+        /// Game mechanic which handles the warp pipes in the Capture The Flag game.
         /// </summary>
-        /// <param name="ctfBot"></param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         public WarpPipe(CaptureTheFlagBot ctfBot) : base(ctfBot, WarpPipeCooldownMs)
         {
-
+            ctfBot.OnPlayerMoved += OnPlayerMoved;
         }
 
         /// <summary>
@@ -31,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
-        public void Handle(CaptureTheFlagBot ctfBot, Player player)
+        private void OnPlayerMoved(CaptureTheFlagBot ctfBot, Player player)
         {
             if (ctfBot.JoinedWorld.Blocks == null || !player.IsPlayingGame)
             {

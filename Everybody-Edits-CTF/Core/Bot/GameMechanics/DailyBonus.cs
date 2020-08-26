@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
-    public static class DailyBonus
+    public sealed class DailyBonus
     {
         /// <summary>
         /// The amount of coins a player is awarded when they join the world on a new day.
@@ -24,10 +24,21 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         private const int PrivateMessageDelayMs = 1500;
 
         /// <summary>
-        /// Handles the daily bonus system for the Capture The Flag game. Every day a player revisits the world, they are awarded <see cref="CoinsAwardAmount"/> coins.        /// </summary>
+        /// Game mechanic which rewards players coins when they revisit the Everybody Edits world on a new day.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        public DailyBonus(CaptureTheFlagBot ctfBot)
+        {
+            ctfBot.OnPlayerJoined += OnPlayerJoined;
+        }
+
+        /// <summary>
+        /// Handles the daily bonus system. If the player is eligible to receive a daily bonus, they are rewarded N coins defined in the <see cref="CoinsAwardAmount"/>
+        /// variable.
+        /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
-        public static void Handle(CaptureTheFlagBot ctfBot, Player player)
+        private void OnPlayerJoined(CaptureTheFlagBot ctfBot, Player player)
         {
             if (PlayersTable.Loaded && PlayersTable.PlayerExists(player.Username))
             {

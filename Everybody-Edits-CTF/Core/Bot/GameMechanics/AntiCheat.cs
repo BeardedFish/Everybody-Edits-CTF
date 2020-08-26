@@ -10,28 +10,21 @@ using System;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
-    public static class AntiCheat
+    public sealed class AntiCheat
     {
         /// <summary>
         /// The maximum time, in milliseconds, a player must send the enabled curse effect message in order to not be considered cheating.
         /// </summary>
-        private const int CurseEnabledMessageMs = 1000; 
+        private const int CurseEnabledMessageMs = 1000;
 
         /// <summary>
-        /// Handles a player cheating if they enter God mode. A player is considered cheating when they are holding the enemy flag their <see cref="Player.IsInGodMode"/> status
-        /// is set to true.
+        /// Game mechanic which handles players attempting to cheat in the Capture The Flag game.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
-        /// <param name="player">The player to be handled.</param>
-        public static void HandleGodModeCheater(CaptureTheFlagBot ctfBot, Player player)
+        public AntiCheat(CaptureTheFlagBot ctfBot)
         {
-            // Remove flag from player if they have the enemy flag and enter God mode
-            if (player.IsPlayingGame && player.IsInGodMode && player.HasEnemyFlag(ctfBot))
-            {
-                ctfBot.SayChatMessage($"ANTI-CHEAT! Player {player.Username} has used God mode while carrying the {player.Team.GetOppositeTeam().GetStringName()} teams flag!");
-
-                ctfBot.FlagSystem.Flags[player.Team.GetOppositeTeam()].Return(ctfBot, null, false);
-            }
+            ctfBot.OnEffectToggled += OnEffectToggled;
+            ctfBot.OnGodModeToggled += OnGodModeToggled;
         }
 
         /// <summary>
@@ -40,7 +33,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="eventArgs">The arguments for when the player received/lost an effect.</param>
-        public static void HandleEffectCheater(CaptureTheFlagBot ctfBot, EffectToggledEventArgs eventArgs)
+        private void OnEffectToggled(CaptureTheFlagBot ctfBot, EffectToggledEventArgs eventArgs)
         {
             if (!ctfBot.FinishedInit || !eventArgs.IsEffectEnabled || eventArgs.Effect == Effect.Fire)
             {
@@ -60,6 +53,23 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 
             // Reset the flag variable
             eventArgs.Player.PurchasedEffectFlag = Effect.None;
+        }
+
+        /// <summary>
+        /// Handles a player cheating if they enter God mode. A player is considered cheating when they are holding the enemy flag their <see cref="Player.IsInGodMode"/> status
+        /// is set to true.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        /// <param name="player">The player to be handled.</param>
+        private void OnGodModeToggled(CaptureTheFlagBot ctfBot, Player player)
+        {
+            // Remove flag from player if they have the enemy flag and enter God mode
+            if (player.IsPlayingGame && player.IsInGodMode && player.HasEnemyFlag(ctfBot))
+            {
+                ctfBot.SayChatMessage($"ANTI-CHEAT! Player {player.Username} has used God mode while carrying the {player.Team.GetOppositeTeam().GetStringName()} teams flag!");
+
+                ctfBot.FlagSystem.Flags[player.Team.GetOppositeTeam()].Return(ctfBot, null, false);
+            }
         }
     }
 }

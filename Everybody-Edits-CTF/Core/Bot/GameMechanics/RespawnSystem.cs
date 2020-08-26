@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
-    public static class RespawnSystem
+    public sealed class RespawnSystem
     {
         /// <summary>
         /// The amount of time, in milliseconds, a player has to wait in the <see cref="RespawnCooldownZone"/> before respawning back into the game.
@@ -29,12 +29,21 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         public static readonly Point BlueCheckpointLocation = new Point(BlueRespawnCooldownLocation.X, BlueRespawnCooldownLocation.Y + 5), RedCheckpointLocation = new Point(RedRespawnCooldownLocation.X, RedRespawnCooldownLocation.Y + 5);
 
         /// <summary>
+        /// Game mechanic which handles a player respawning in the Capture The Flag game.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        public RespawnSystem(CaptureTheFlagBot ctfBot)
+        {
+            ctfBot.OnPlayerReset += OnPlayerReset;
+        }
+
+        /// <summary>
         /// Handles the respawn system for the Capture The Flag game. The respawn system teleports a player to their respective respawn cooldown location, which depends on
         /// which team they are currently on. If a player is holding the flag and this method gets called, then the flag that they're holding is returned to its base.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="eventArgs">The arguments for when the player (or players) was/were reset.</param>
-        public static void Handle(CaptureTheFlagBot ctfBot, PlayerResetEventArgs eventArgs)
+        private void OnPlayerReset(CaptureTheFlagBot ctfBot, PlayerResetEventArgs eventArgs)
         {
             if (!eventArgs.PropertiesReset)
             {
@@ -60,24 +69,14 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         }
 
         /// <summary>
-        /// Extension method which states whether a <see cref="Player"/> is respawning or not.
-        /// </summary>
-        /// <param name="player">The player to be checked.</param>
-        /// <returns>True if the player is respawning, if not, false.</returns>
-        public static bool IsRespawning(this Player player)
-        {
-            return player.Location == BlueRespawnCooldownLocation || player.Location == RedRespawnCooldownLocation;
-        }
-        
-        /// <summary>
         /// Respawns a player in the Capture The Flag game. If this method is called on a player that is either not playing or is respawning then this method does nothing. The
         /// location where the player respawns depends on their team.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to respawn.</param>
-        private static void RespawnPlayer(CaptureTheFlagBot ctfBot, Player player)
+        private void RespawnPlayer(CaptureTheFlagBot ctfBot, Player player)
         {
-            if (!player.IsPlayingGame || player.IsRespawning())
+            if (!player.IsPlayingGame || player.IsRespawning)
             {
                 return;
             }

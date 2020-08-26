@@ -9,17 +9,25 @@ using Everybody_Edits_CTF.Core.Database;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
-    public static class KillCredit
+    public sealed class KillCredit
     {
         /// <summary>
-        /// Credits a player if they succesfully kill another player during the Capture The Flag game. This method is called each time a player is reset in the Everybody
-        /// Edits world. Both the attacker and the attackee are notifed about the event credit via a private message.
+        /// Game mechanic which handles kill credit in the Capture The Flag game. Both the attacker and the attackee are notifed about the event via a private message.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        public KillCredit(CaptureTheFlagBot ctfBot)
+        {
+            ctfBot.OnPlayerReset += OnPlayerReset;
+        }
+
+        /// <summary>
+        /// Credits a player if they succesfully kill another player during the Capture The Flag game.
         /// 
         /// NOTE: If the <see cref="PlayersTable"/> is not loaded then the kill is not accumulated to the attackers total kill count.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="eventArgs">The arguments for when the player (or players) was/were reset.</param>
-        public static void Handle(CaptureTheFlagBot ctfBot, PlayerResetEventArgs eventArgs)
+        private void OnPlayerReset(CaptureTheFlagBot ctfBot, PlayerResetEventArgs eventArgs)
         {
             if (eventArgs.PlayersReset.Count == 1)
             {

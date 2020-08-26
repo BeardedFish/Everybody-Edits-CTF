@@ -4,7 +4,6 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Bot.Enums;
-using System.Threading;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
@@ -21,13 +20,13 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         private const int DoorBlockId = 1026;
 
         /// <summary>
-        /// Handles all room entrance doors in the Everybody Edits world. A room entrance door is defined in the <see cref="DoorBlockId"/> variable. If a player presses
-        /// left or right on that block, they are telported to the opposite side of it.
+        /// Game mechanic which handles all room entrance doors in the Capture The Flag game. A room entrance door is defined in the <see cref="DoorBlockId"/> variable. If
+        /// a player presses left or right on that block, they are telported to the opposite side of it.
         /// </summary>
-        /// <param name="player">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         public RoomEntrance(CaptureTheFlagBot ctfBot) : base(ctfBot, EntranceCooldownMs)
         {
-
+            ctfBot.OnPlayerMoved += OnPlayerMoved;
         }
 
         /// <summary>
@@ -35,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
-        public void Handle(CaptureTheFlagBot ctfBot, Player player)
+        private void OnPlayerMoved(CaptureTheFlagBot ctfBot, Player player)
         {
             if (ctfBot.JoinedWorld.Blocks == null || !player.IsPlayingGame || player.IsInGodMode || player.IsPressingSpacebar)
             {

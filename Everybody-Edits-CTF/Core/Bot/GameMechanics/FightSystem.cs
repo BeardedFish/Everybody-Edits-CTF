@@ -6,15 +6,24 @@ using Everybody_Edits_CTF.Core.Bot.DataContainers;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
-    public class FightSystem
+    public sealed class FightSystem
     {
         /// <summary>
-        /// Handles the fight system in the Capture The Flag game. A player can attack another player if they are not on the same team and if they spam WASD/arrow keys
-        /// near the enemy player.
+        /// Game mechanic which handles a players fighting in the Capture The Flag game. A player can attack another player if they are not on the same team and if they
+        /// spam WASD/arrow keys near the enemy player.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        public FightSystem(CaptureTheFlagBot ctfBot)
+        {
+            ctfBot.OnPlayerMoved += OnPlayerMoved;
+        }
+
+        /// <summary>
+        /// Handles players fighting in the Capture The Flag game.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
-        public static void Handle(CaptureTheFlagBot ctfBot, Player player)
+        private void OnPlayerMoved(CaptureTheFlagBot ctfBot, Player player)
         {
             if (!player.IsPlayingGame || player.IsInGodMode)
             {
@@ -47,7 +56,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// </summary>
         /// <param name="ctfBot">The Capture The Flag bot instance.</param>
         /// <param name="player">The player to warn about their health.</param>
-        private static void HandleHealthStatusWarning(CaptureTheFlagBot ctfBot, Player player)
+        private void HandleHealthStatusWarning(CaptureTheFlagBot ctfBot, Player player)
         {
             string healthDescription = string.Empty;
 

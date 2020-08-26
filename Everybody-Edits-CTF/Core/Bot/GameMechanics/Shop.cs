@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
-    public static class Shop
+    public sealed class Shop
     {
         /// <summary>
         /// The Y coordinate where a player can purchase shop items.
@@ -50,11 +50,20 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         };
 
         /// <summary>
+        /// Game mechanic which handles players trying to purcahse items in the Capture The Flag game. Shop items are defined in the <see cref="shopItem"/> array.
+        /// </summary>
+        /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
+        public Shop(CaptureTheFlagBot ctfBot)
+        {
+            ctfBot.OnPlayerMoved += OnPlayerMoved;
+        }
+
+        /// <summary>
         /// Handles when a player wants to purchase an item at the shop in the Everybody Edits world. All shop items are defined in the <see cref="shopItems"/> array.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
-        public static void Handle(CaptureTheFlagBot ctfBot, Player player)
+        private void OnPlayerMoved(CaptureTheFlagBot ctfBot, Player player)
         {
             if (!PlayersTable.Loaded || !player.IsPlayingGame || player.IsInGodMode || player.VerticalDirection != VerticalDirection.Down)
             {

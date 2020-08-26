@@ -4,6 +4,7 @@
 
 using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
+using Everybody_Edits_CTF.Core.Bot.GameMechanics;
 using PlayerIOClient;
 using System;
 using System.Drawing;
@@ -59,6 +60,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// States whether the player is currently pressing the spacebar or not.
         /// </summary>
         public bool IsPressingSpacebar { get; set; }
+
+        public bool IsRespawning => Location == RespawnSystem.BlueRespawnCooldownLocation || Location == RespawnSystem.RedRespawnCooldownLocation;
 
         /// <summary>
         /// States whether the player is currently in God mode or not.

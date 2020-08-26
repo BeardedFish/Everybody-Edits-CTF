@@ -42,24 +42,9 @@ namespace Everybody_Edits_CTF.Core.Bot
         public Command[] BotCommands;
 
         /// <summary>
-        /// The dig system for the Capture The Flag game.
-        /// </summary>
-        public DigSystem DigSystem { get; private set; }
-
-        /// <summary>
         /// The flag system for the Capture The Flag game.
         /// </summary>
         public FlagSystem FlagSystem { get; private set; }
-
-        /// <summary>
-        /// The room entrance system for the Capture The Flag game.
-        /// </summary>
-        public RoomEntrance RoomEntrance { get; private set; }
-
-        /// <summary>
-        /// The warp pipe system for the Capture The Flag game.
-        /// </summary>
-        private WarpPipe WarpPipe { get; set; }
 
         /// <summary>
         /// Contains information about the Everybody Edits world that the bot joined.
@@ -129,27 +114,6 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="player">The player that joined or left a team.</param>
         public delegate void TeamChangedHandler(CaptureTheFlagBot ctfBot, Player player);
         public event TeamChangedHandler OnTeamChanged;
-
-        /// <summary>
-        /// Subscribes to all the game mechanics this bot needs in order to function.
-        /// </summary>
-        private void SubscribeToGameMechanics()
-        {
-            OnEffectToggled += AntiCheat.HandleEffectCheater;
-            OnGodModeToggled += AntiCheat.HandleGodModeCheater;
-            OnTeamChanged += AutoBalance.Handle;
-            OnPlayerJoined += DailyBonus.Handle;
-            OnPlayerMoved += FightSystem.Handle;
-            OnPlayerMoved += DigSystem.Handle;
-            OnPlayerMoved += FlagSystem.Handle;
-            OnPlayerMoved += RoomEntrance.Handle;
-            OnPlayerMoved += Shop.Handle;
-            OnPlayerMoved += TrapSystem.Handle;
-            OnPlayerMoved += WarpPipe.Handle;
-            OnPlayerReset += KillCredit.Handle;
-            OnPlayerReset += RespawnSystem.Handle;
-            OnSmileyChanged += SmileyRoleNotification.Handle;
-        }
 
         /// <summary>
         /// Event handler for when the bot is disconnected from Everybody Edits.

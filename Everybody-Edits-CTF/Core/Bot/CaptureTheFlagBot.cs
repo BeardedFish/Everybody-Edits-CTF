@@ -44,14 +44,24 @@ namespace Everybody_Edits_CTF.Core.Bot
                 new RegularCommands()
             };
 
-            CurrentGameRound = new GameRound();
-            DigSystem = new DigSystem(this);
-            FlagSystem = new FlagSystem();
-            JoinedWorld = new WorldInformation();
-            RoomEntrance = new RoomEntrance(this);
-            WarpPipe = new WarpPipe(this);
+            // Initialize game mechanics
+            _ = new AntiCheat(this);
+            _ = new AutoBalance(this);
+            _ = new DailyBonus(this);
+            _ = new DigSystem(this);
+            _ = new FightSystem(this);
+            FlagSystem = new FlagSystem(this);
+            _ = new HealSystem(this);
+            _ = new KillCredit(this);
+            _ = new RespawnSystem(this);
+            _ = new RoomEntrance(this);
+            _ = new Shop(this);
+            _ = new SmileyRoleNotification(this);
+            _ = new TrapSystem(this);
+            _ = new WarpPipe(this);
 
-            SubscribeToGameMechanics();
+            CurrentGameRound = new GameRound();
+            JoinedWorld = new WorldInformation();
         }
 
         /// <summary>

@@ -115,7 +115,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                             break;
                         case "suicide":
                             {
-                                if (!player.IsRespawning())
+                                if (!player.IsRespawning)
                                 {
                                     player.Die(ctfBot);
                                 }
