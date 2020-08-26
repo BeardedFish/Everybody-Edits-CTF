@@ -51,6 +51,9 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 
 ## Frequently Asked Questions
 
+### What version of .NET Framework is required in order to run this program?
+You need .NET Framework v4.7.2 in order to run this program.
+
 ### What software did you use to run the database? 
 I used [XAMPP](https://www.apachefriends.org/index.html) to run a MySql database locally on my machine.
 
