@@ -2,7 +2,6 @@
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, June 29, 2020
 
-using Everybody_Edits_CTF.Core.Settings;
 using Everybody_Edits_CTF.Logging;
 using MySql.Data.MySqlClient;
 using System;
