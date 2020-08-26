@@ -16,7 +16,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <summary>
         /// The chat message prefix for public messages sent by the bot.
         /// </summary>
-        public const string ChatMessagePrefix = "[CTF_BOT]:";
+        public const string ChatMessagePrefix = "[CTF]:";
 
         /// <summary>
         /// The game ID for Everybody Edits.
