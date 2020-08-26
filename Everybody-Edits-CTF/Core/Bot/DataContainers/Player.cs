@@ -125,7 +125,8 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public Player LastAttacker { get; set; } = null;
 
         /// <summary>
-        /// 
+        /// States whether this player purchased an effect legally from the <see cref="GameMechanics.Shop"/> or not. If this is false and the player takes an effect,
+        /// then the <see cref="GameMechanics.AntiCheat"/> system will kick this player.
         /// </summary>
         public Effect PurchasedEffectFlag { get; set; } = Effect.None;
 
