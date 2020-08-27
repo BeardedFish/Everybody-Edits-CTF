@@ -145,19 +145,20 @@ namespace Everybody_Edits_CTF.Core.Bot
         }
 
         /// <summary>
-        /// Sends a chat message with a prefix to the Everybody Edits world via the bot. The prefix is defined in <see cref="BotSettings.ChatMessagePrefix"/>. If the message length
-        /// is greater than <see cref="maxChatMessageLength"/>, then the message is split into chunks where each message chunk is sent separately.
+        /// Sends a chat message with a prefix to the Everybody Edits world via the bot. The prefix is defined in the <see cref="ChatMessagePrefix"/> variable. If the
+        /// message is too long (greater than 140 characters, including the prefix), then it is sent in chunks.
         /// </summary>
         /// <param name="msg">The chat message to be sent.</param>
         public void SayChatMessage(string msg)
         {
+            const int chunkSendDelayMs = 150;
             int maxChatMessageLength = 140 - ChatMessagePrefix.Length - 2;
 
             for (int i = 0; i < msg.Length; i += maxChatMessageLength)
             {
                 Send(EverybodyEditsMessage.ChatMessage, $"{ChatMessagePrefix} {msg.Substring(i, Math.Min(maxChatMessageLength, msg.Length - i))}");
 
-                Task.Delay(150);
+                Task.Delay(chunkSendDelayMs);
             }
         }
 
