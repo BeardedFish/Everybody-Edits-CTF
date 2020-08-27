@@ -28,7 +28,7 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 | Command | Parameter(s) | Description |
 | - | - | - |
 | `disconnect` | | Disconnects the bot from the Everybody Edits world. |
-| `kick` | `username` `reason`  | Kicks a specifies user from the Everybody Edits world. |
+| `kick` | `username` `reason`  | Kicks the specified user from the Everybody Edits world. |
 
 ### Regular:
 | Command | Parameter(s) | Description |
