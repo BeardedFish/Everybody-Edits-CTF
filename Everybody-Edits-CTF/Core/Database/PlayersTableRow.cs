@@ -24,6 +24,11 @@ namespace Everybody_Edits_CTF.Core.Database
         public bool IsAdministrator { get; set; }
 
         /// <summary>
+        /// States whether the player is banned from the Everybody Edits world or not.
+        /// </summary>
+        public bool IsBanned { get; set; }
+
+        /// <summary>
         /// States whether this player is a new player or not. A new player is someone who does not exist in the MySql database.
         /// </summary>
         public bool IsNewPlayer { get; set; }
