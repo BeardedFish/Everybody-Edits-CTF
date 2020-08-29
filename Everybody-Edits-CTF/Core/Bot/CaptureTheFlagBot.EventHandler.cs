@@ -311,7 +311,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                                 {
                                     if (!JoinedWorld.Players[playerId].IsGuest)
                                     {
-                                        PlayersTable.AddNewPlayer(username);
+                                        PlayersTable.AddNewPlayer(username, false);
 
                                         SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
                                     }

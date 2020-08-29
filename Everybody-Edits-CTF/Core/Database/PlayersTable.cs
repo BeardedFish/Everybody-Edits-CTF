@@ -149,9 +149,10 @@ namespace Everybody_Edits_CTF.Core.Database
         /// Adds a new player to the "Rows" list with default data.
         /// </summary>
         /// <param name="username">The username of the player to be added.</param>
-        public static void AddNewPlayer(string username)
+        /// <param name="isBanned">States whether this player is banned from the Everybody Edits world or not.</param>
+        public static void AddNewPlayer(string username, bool isBanned)
         {
-            rows.Add(new PlayersTableRow(username, DateTime.Today, false, false, new PlayerGameStatistics(), true));
+            rows.Add(new PlayersTableRow(username, DateTime.Today, false, isBanned, new PlayerGameStatistics(), true));
         }
 
         /// <summary>
