@@ -4,12 +4,13 @@
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Database;
+using System.Linq;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public sealed class AdminCommands : Command
     {
-        public AdminCommands() : base(new string[] { "disconnect", "kick" })
+        public AdminCommands() : base(new string[] { "ban", "disconnect", "kick", "unban" })
         {
 
         }
@@ -34,6 +35,70 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                 {
                     switch (parsedCommand.Command)
                     {
+                        case "ban":
+                        case "unban":
+                            {
+                                if (PlayersTable.Loaded)
+                                {
+                                    if (parsedCommand.Parameters.Length >= 1)
+                                    {
+                                        string username = parsedCommand.Parameters[0];
+                                        PlayersTableRow playerData = PlayersTable.GetRow(username);
+
+                                        if (parsedCommand.Command.Equals("ban", System.StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            if (playerData != null) // Player exists in the database
+                                            {
+                                                if (!playerData.IsBanned)
+                                                {
+                                                    playerData.IsBanned = true;
+                                                    ctfBot?.KickPlayer(username, "You've been banned from this world.");
+                                                }
+                                                else
+                                                {
+                                                    ctfBot?.SendPrivateMessage(player, $"Player {username.ToUpper()} is already banned!");
+                                                }
+                                            }
+                                            else // Player does not exist in the database
+                                            {
+                                                PlayersTable.AddNewPlayer(username, true);
+                                            }
+
+                                            ctfBot?.SendPrivateMessage(player, $"Player {username.ToUpper()} has been banned from the world.");
+                                        }
+                                        else // The command is "unban"
+                                        {
+                                            if (playerData != null)
+                                            {
+                                                if (playerData.IsBanned)
+                                                {
+                                                    playerData.IsBanned = false;
+
+                                                    ctfBot?.ForgivePlayer(username);
+                                                    ctfBot?.SendPrivateMessage(player, $"Player {username.ToUpper()} has been unbanned.");
+                                                }
+                                                else
+                                                {
+                                                    ctfBot?.SendPrivateMessage(player, $"Player {username.ToUpper()} is not banned!");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                ctfBot?.SendPrivateMessage(player, $"Cannot ban player {username.ToUpper()} because they don't exist.");
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ctfBot?.SendPrivateMessage(player, "Insufficient amount of parameters!");
+                                    }
+                                }
+                                else
+                                {
+                                    ctfBot?.SendPrivateMessage(player, "This command is disabled due to the database not being loaded!");
+                                }
+                            }
+                            break;
                         case "disconnect":
                             {
                                 ctfBot.Disconnect();

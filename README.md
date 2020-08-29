@@ -12,6 +12,7 @@ This bot was originally written in 2015, however, due to the Everybody Edits pro
 * Anti-cheat system.
 * Auto balance system.
 * Auto reconnect when bot disconnects for unknown reason.
+* Ban system.
 * Daily bonus system.
 * Dig system.
 * Player data (coins, total wins, total losses, etc.), excluding guest accounts, is saved through a MySql database.
