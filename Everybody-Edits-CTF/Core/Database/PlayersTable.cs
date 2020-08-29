@@ -77,7 +77,7 @@ namespace Everybody_Edits_CTF.Core.Database
             {
                 using (MySqlConnection connection = new MySqlConnection(SqlConnectionString))
                 {
-                    string query = $"SELECT Username, LastVisitDate, IsAdministrator, TotalWins, TotalLosses, TotalKills, Coins FROM {PlayersTableName} INNER JOIN {GameStatisticsTableName} ON Id = PlayerId;";
+                    string query = $"SELECT Username, LastVisitDate, IsAdministrator, IsBanned, TotalWins, TotalLosses, TotalKills, Coins FROM {PlayersTableName} INNER JOIN {GameStatisticsTableName} ON Id = PlayerId;";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
@@ -94,6 +94,7 @@ namespace Everybody_Edits_CTF.Core.Database
                             PlayersTableRow playerData = new PlayersTableRow(sqlReader.GetString(0),
                                 sqlReader.GetDateTime(1),
                                 sqlReader.GetBoolean(2),
+                                sqlReader.GetBoolean(3),
                                 statistics,
                                 false);
 
@@ -150,7 +151,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="username">The username of the player to be added.</param>
         public static void AddNewPlayer(string username)
         {
-            rows.Add(new PlayersTableRow(username, DateTime.Today, false, new PlayerGameStatistics(), true));
+            rows.Add(new PlayersTableRow(username, DateTime.Today, false, false, new PlayerGameStatistics(), true));
         }
 
         /// <summary>
@@ -182,7 +183,7 @@ namespace Everybody_Edits_CTF.Core.Database
 
                         if (playerData.IsNewPlayer)
                         {
-                            queries.Add(new MySqlCommand($"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator) VALUES (NULL, \"{playerData.Username}\", \"{playerData.LastVisitDate.ToString(DateTimeFormat)}\", {Convert.ToInt32(playerData.IsAdministrator)});", connection));
+                            queries.Add(new MySqlCommand($"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator, IsBanned) VALUES (NULL, \"{playerData.Username}\", \"{playerData.LastVisitDate.ToString(DateTimeFormat)}\", {Convert.ToInt32(playerData.IsAdministrator)}, {Convert.ToInt32(playerData.IsBanned)});", connection));
                             queries.Add(new MySqlCommand($"INSERT INTO {GameStatisticsTableName} (PlayerId, TotalWins, TotalLosses, TotalKills, Coins) VALUES ((SELECT Id FROM {PlayersTableName} WHERE Username=\"{playerData.Username}\" LIMIT 1), {playerData.Statistics.TotalWins}, {playerData.Statistics.TotalLosses}, {playerData.Statistics.TotalKills}, {playerData.Statistics.Coins});", connection));
 
                             playerData.IsNewPlayer = false;

@@ -55,7 +55,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// States the inital values of the database values when loaded/saved. The username is ignored because it never changes in the MySql database.
         /// </summary>
-        private bool initialIsAdministrator;
+        private bool initialIsAdministrator, initialIsBanned;
         private DateTime initialLastVisitDate;
         private PlayerGameStatistics initalStatistics;
 
@@ -65,12 +65,13 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="username">Refer to <see cref="Username"/> for description.</param>
         /// <param name="isAdministrator">Refer to <see cref="IsAdministrator"/> for description.</param>
         /// <param name="isNewPlayer">Refer to <see cref="IsNewPlayer"/> for description.</param>
-        public PlayersTableRow(string username, DateTime lastVisitDate, bool isAdministrator, PlayerGameStatistics statistics, bool isNewPlayer)
+        public PlayersTableRow(string username, DateTime lastVisitDate, bool isAdministrator, bool isBanned, PlayerGameStatistics statistics, bool isNewPlayer)
         {
             Username = username;
             LastVisitDate = lastVisitDate;
             IsAdministrator = isAdministrator;
             Statistics = statistics;
+            IsBanned = isBanned;
             IsNewPlayer = isNewPlayer;
 
             UpdateChanges();
@@ -84,6 +85,7 @@ namespace Everybody_Edits_CTF.Core.Database
         {
             initialLastVisitDate = LastVisitDate;
             initialIsAdministrator = IsAdministrator;
+            initialIsBanned = IsBanned;
             initalStatistics = Statistics.Clone() as PlayerGameStatistics;
         }
     }
