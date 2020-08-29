@@ -190,7 +190,7 @@ namespace Everybody_Edits_CTF.Core.Database
                         }
                         else
                         {
-                            queries.Add(new MySqlCommand($"UPDATE {PlayersTableName} SET LastVisitDate=\"{playerData.LastVisitDate.ToString(DateTimeFormat)}\", IsAdministrator={Convert.ToInt32(playerData.IsAdministrator)} WHERE Username=\"{playerData.Username}\";", connection));
+                            queries.Add(new MySqlCommand($"UPDATE {PlayersTableName} SET LastVisitDate=\"{playerData.LastVisitDate.ToString(DateTimeFormat)}\", IsAdministrator={Convert.ToInt32(playerData.IsAdministrator)}, IsBanned={Convert.ToInt32(playerData.IsBanned)} WHERE Username=\"{playerData.Username}\";", connection));
                             queries.Add(new MySqlCommand($"UPDATE {GameStatisticsTableName} SET TotalWins={playerData.Statistics.TotalWins}, TotalLosses={playerData.Statistics.TotalLosses}, TotalKills={playerData.Statistics.TotalKills}, Coins={playerData.Statistics.Coins} WHERE PlayerId=(SELECT Id FROM {PlayersTableName} WHERE Username=\"{playerData.Username}\" LIMIT 1);", connection));
                         }
 

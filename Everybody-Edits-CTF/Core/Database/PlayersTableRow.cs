@@ -47,6 +47,7 @@ namespace Everybody_Edits_CTF.Core.Database
             {
                 return LastVisitDate != initialLastVisitDate
                     || IsAdministrator != initialIsAdministrator
+                    || IsBanned != initialIsBanned
                     || !Statistics.Equals(initalStatistics)
                     || IsNewPlayer;
             }
