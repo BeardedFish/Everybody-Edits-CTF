@@ -174,8 +174,6 @@
     <Content Include="Assemblies\PlayerIOClient.dll" />
     <Content Include="Resources\Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Bot\DataContainers\Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
