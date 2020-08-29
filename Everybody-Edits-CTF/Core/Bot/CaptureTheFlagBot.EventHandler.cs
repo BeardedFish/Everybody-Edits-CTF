@@ -294,11 +294,27 @@ namespace Everybody_Edits_CTF.Core.Bot
                             // Add new players to the database
                             if (PlayersTable.Loaded)
                             {
-                                if (!JoinedWorld.Players[playerId].IsGuest && !PlayersTable.PlayerExists(username))
+                                if (PlayersTable.PlayerExists(username))
                                 {
-                                    PlayersTable.AddNewPlayer(username);
+                                    PlayersTableRow playerData = PlayersTable.GetRow(username);
 
-                                    SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
+                                    // Kick the player if they are banned
+                                    if (playerData != null)
+                                    {
+                                        if (playerData.IsBanned)
+                                        {
+                                            KickPlayer(username, "You are banned from this world");
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (!JoinedWorld.Players[playerId].IsGuest)
+                                    {
+                                        PlayersTable.AddNewPlayer(username);
+
+                                        SendPrivateMessage(JoinedWorld.Players[playerId], "Welcome newcomer! Type !help to learn how to play in this world.");
+                                    }
                                 }
                             }
 
