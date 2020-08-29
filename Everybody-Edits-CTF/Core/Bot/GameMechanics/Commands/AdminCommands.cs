@@ -10,7 +10,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public sealed class AdminCommands : Command
     {
-        public AdminCommands() : base(new string[] { "ban", "disconnect", "kick" })
+        public AdminCommands() : base(new string[] { "ban", "disconnect", "kick", "unban" })
         {
 
         }
@@ -36,6 +36,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                     switch (parsedCommand.Command)
                     {
                         case "ban":
+                        case "unban":
                             {
                                 // TODO: Make it so that players that don't exist in the database are first inserted and then banned...
 
@@ -46,16 +47,37 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                         string username = parsedCommand.Parameters[0];
                                         PlayersTableRow playerData = PlayersTable.GetRow(username);
 
-                                        if (playerData != null)
+                                        if (parsedCommand.Command.Equals("ban", System.StringComparison.OrdinalIgnoreCase))
                                         {
                                             if (!playerData.IsBanned)
                                             {
-                                                ctfBot?.KickPlayer(username, $"You've been banned from this world.");
+                                                ctfBot?.KickPlayer(username, "You've been banned from this world.");
                                                 playerData.IsBanned = true;
                                             }
                                             else
                                             {
                                                 ctfBot?.SendPrivateMessage(player, $"Player {username.ToUpper()} is already banned!");
+                                            }
+                                        }
+                                        else // The command is "unban"
+                                        {
+                                            if (playerData != null)
+                                            {
+                                                if (playerData.IsBanned)
+                                                {
+                                                    playerData.IsBanned = false;
+
+                                                    ctfBot?.ForgivePlayer(username);
+                                                    ctfBot?.SendPrivateMessage(player, $"Player {username.ToUpper()} has been unbanned.");
+                                                }
+                                                else
+                                                {
+                                                    ctfBot?.SendPrivateMessage(player, $"Player {username.ToUpper()} is not banned!");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                ctfBot?.SendPrivateMessage(player, $"Cannot ban player {username.ToUpper()} because they don't exist.");
                                             }
                                         }
                                     }

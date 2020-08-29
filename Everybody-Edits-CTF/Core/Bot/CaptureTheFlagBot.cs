@@ -278,5 +278,15 @@ namespace Everybody_Edits_CTF.Core.Bot
         {
             Send(EverybodyEditsMessage.ChatMessage, $"/forcefly {player.Username} {forceFly}");
         }
+
+        /// <summary>
+        /// Forgives a player in the Everybody Edits world. This method removes the 5 minute cooldown time for a player that was kicked. This overall allows a player
+        /// to rejoin the world without having to wait the cooldown time.
+        /// </summary>
+        /// <param name="username">The username of the player to forgive.</param>
+        public void ForgivePlayer(string username)
+        {
+            Send(EverybodyEditsMessage.ChatMessage, $"/forgive {username}");
+        }
     }
 }
