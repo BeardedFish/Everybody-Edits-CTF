@@ -41,7 +41,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 
                                 if (PlayersTable.Loaded)
                                 {
-                                    if (parsedCommand.Parameters.Length != 1)
+                                    if (parsedCommand.Parameters.Length >= 1)
                                     {
                                         string username = parsedCommand.Parameters[0];
                                         PlayersTableRow playerData = PlayersTable.GetRow(username);
@@ -61,7 +61,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                     }
                                     else
                                     {
-                                        ctfBot?.SendPrivateMessage(player, "Invalid amount of parameters! Total required: 1.");
+                                        ctfBot?.SendPrivateMessage(player, "Insufficient amount of parameters!");
                                     }
                                 }
                                 else
