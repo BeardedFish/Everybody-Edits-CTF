@@ -57,11 +57,14 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         }
 
         /// <summary>
+        /// States whether this player is currently respawning in the Capture The Flag Game or not.
+        /// </summary>
+        public bool IsRespawning => Location == RespawnSystem.BlueRespawnCooldownLocation || Location == RespawnSystem.RedRespawnCooldownLocation;
+
+        /// <summary>
         /// States whether the player is currently pressing the spacebar or not.
         /// </summary>
         public bool IsPressingSpacebar { get; set; }
-
-        public bool IsRespawning => Location == RespawnSystem.BlueRespawnCooldownLocation || Location == RespawnSystem.RedRespawnCooldownLocation;
 
         /// <summary>
         /// States whether the player is currently in God mode or not.
