@@ -28,8 +28,10 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 ### Administrator:
 | Command | Parameter(s) | Description |
 | - | - | - |
+| `ban` | `username` | Bans the player with the specified username from the Everybody Edits world. When a player is banned, they are auto kicked every time they try to join the Everybody Edits world. The MySql database must be loaded in order for this command to work. |
 | `disconnect` | | Disconnects the bot from the Everybody Edits world. |
 | `kick` | `username` `reason`  | Kicks the specified user from the Everybody Edits world. |
+| `unban` | `username` | Unbans the player with the specified username from the Everybody Edits world. The MySql database must be loaded in order for this command to work. |
 
 ### Regular:
 | Command | Parameter(s) | Description |
