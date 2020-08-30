@@ -4,5 +4,6 @@ CREATE TABLE `everybody_edits_ctf`.`players`
     `Username` TEXT NOT NULL,
     `LastVisitDate` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `IsAdministrator` BOOLEAN NOT NULL,
+    `IsBanned` BOOLEAN NOT NULL,
     PRIMARY KEY (`Id`)
 ) ENGINE = InnoDB;
