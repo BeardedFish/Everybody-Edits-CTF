@@ -23,7 +23,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <summary>
         /// Credits a player if they succesfully kill another player during the Capture The Flag game.
         /// 
-        /// NOTE: If the <see cref="PlayersTable"/> is not loaded then the kill is not accumulated to the attackers total kill count.
+        /// NOTE: If the <see cref="MySqlDatabase"/> is not loaded then the kill is not accumulated to the attackers total kill count.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="eventArgs">The arguments for when the player (or players) was/were reset.</param>
@@ -38,9 +38,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                     ctfBot.SendPrivateMessage(killedPlayer, $"You were killed by player {killedPlayer.LastAttacker.Username}!");
                     ctfBot.SendPrivateMessage(killedPlayer.LastAttacker, $"You killed player {killedPlayer.Username}!");
 
-                    if (PlayersTable.Loaded)
+                    if (MySqlDatabase.Loaded)
                     {
-                        PlayersTableRow playerData = PlayersTable.GetRow(killedPlayer.LastAttacker.Username);
+                        PlayerData playerData = MySqlDatabase.GetRow(killedPlayer.LastAttacker.Username);
 
                         if (playerData != null)
                         {

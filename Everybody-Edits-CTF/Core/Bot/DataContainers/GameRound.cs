@@ -47,7 +47,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
             int coinsWon = GetGameFundShare(ctfBot.JoinedWorld.Players, winningTeam);
             foreach (Player player in ctfBot.JoinedWorld.Players.Values)
             {
-                PlayersTableRow playerData = PlayersTable.GetRow(player.Username);
+                PlayerData playerData = MySqlDatabase.GetRow(player.Username);
 
                 if (playerData != null && player.IsPlayingGame)
                 {
@@ -66,7 +66,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
             }
 
             ResetRoundStatistics();
-            PlayersTable.Save();
+            MySqlDatabase.Save();
 
             ctfBot.ResetLevel();
         }

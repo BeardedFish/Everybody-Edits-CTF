@@ -40,9 +40,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to be handled.</param>
         private void OnPlayerJoined(CaptureTheFlagBot ctfBot, Player player)
         {
-            if (PlayersTable.Loaded && PlayersTable.PlayerExists(player.Username))
+            if (MySqlDatabase.Loaded && MySqlDatabase.PlayerExists(player.Username))
             {
-                PlayersTableRow playerData = PlayersTable.GetRow(player.Username);
+                PlayerData playerData = MySqlDatabase.GetRow(player.Username);
 
                 if (playerData != null && DateTime.Today > playerData.LastVisitDate)
                 {

@@ -34,16 +34,16 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                 {
                     case "amiadmin":
                         {
-                            string result = PlayersTable.GetRow(player.Username).IsAdministrator ? "You are an administrator." : "You are not an administrator.";
+                            string result = MySqlDatabase.GetRow(player.Username).IsAdministrator ? "You are an administrator." : "You are not an administrator.";
 
                             ctfBot.SendPrivateMessage(player, result);
                         }
                         break;
                     case "coins":
                         {
-                            if (PlayersTable.Loaded)
+                            if (MySqlDatabase.Loaded)
                             {
-                                PlayersTableRow row = PlayersTable.GetRow(player.Username);
+                                PlayerData row = MySqlDatabase.GetRow(player.Username);
 
                                 ctfBot.SendPrivateMessage(player, $"You currently have {row.Statistics.Coins} coin{(row.Statistics.Coins == 1 ? "" : "s")}.");
                             }
@@ -51,17 +51,17 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         break;
                     case "donatecoins":
                         {
-                            if (PlayersTable.Loaded)
+                            if (MySqlDatabase.Loaded)
                             {
                                 if (parsedCommand.Parameters.Length >= 2)
                                 {
                                     if (parsedCommand.Parameters[0] != player.Username)
                                     {
-                                        PlayersTableRow playerToDonateData = PlayersTable.GetRow(parsedCommand.Parameters[0]);
+                                        PlayerData playerToDonateData = MySqlDatabase.GetRow(parsedCommand.Parameters[0]);
 
                                         if (playerToDonateData != null)
                                         {
-                                            PlayersTableRow donatorData = PlayersTable.GetRow(player.Username);
+                                            PlayerData donatorData = MySqlDatabase.GetRow(player.Username);
 
                                             if (int.TryParse(parsedCommand.Parameters[1], out int amount))
                                             {
@@ -146,9 +146,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                     case "losses":
                     case "wins":
                         {
-                            if (PlayersTable.Loaded)
+                            if (MySqlDatabase.Loaded)
                             {
-                                PlayersTableRow row = PlayersTable.GetRow(player.Username);
+                                PlayerData row = MySqlDatabase.GetRow(player.Username);
                                 int resultCount = parsedCommand.Command == "totalwins" || parsedCommand.Command == "wins" ? row.Statistics.TotalWins : row.Statistics.TotalLosses;
                                 string type = parsedCommand.Command == "totalwins" || parsedCommand.Command == "wins" ? "won" : "lost";
 
@@ -158,9 +158,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         break;
                     case "totalkills":
                         {
-                            if (PlayersTable.Loaded)
+                            if (MySqlDatabase.Loaded)
                             {
-                                PlayersTableRow playerData = PlayersTable.GetRow(player.Username);
+                                PlayerData playerData = MySqlDatabase.GetRow(player.Username);
 
                                 ctfBot.SendPrivateMessage(player, $"You have killed a total of {playerData.Statistics.TotalKills} player{(playerData.Statistics.TotalKills == 1 ? "" : "s")}.");
                             }

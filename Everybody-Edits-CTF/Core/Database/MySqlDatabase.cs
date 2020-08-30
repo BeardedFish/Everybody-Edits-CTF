@@ -1,4 +1,4 @@
-﻿// File Name:     PlayersTable.cs
+﻿// File Name:     MySqlDatabase.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, June 29, 2020
 
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Everybody_Edits_CTF.Core.Database
 {
-    public static class PlayersTable
+    public static class MySqlDatabase
     {
         /// <summary>
         /// States whether the Players table has been loaded or not.
@@ -64,14 +64,14 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// The rows of the Players table loaded from the MySql database.
         /// </summary>
-        private static List<PlayersTableRow> rows;
+        private static List<PlayerData> rows;
 
         /// <summary>
         /// Loads the Players table from the MySql database.
         /// </summary>
         public static void Load()
         {
-            rows = new List<PlayersTableRow>();
+            rows = new List<PlayerData>();
 
             try
             {
@@ -91,7 +91,7 @@ namespace Everybody_Edits_CTF.Core.Database
                                 sqlReader.GetInt32(5),
                                 sqlReader.GetInt32(6));
 
-                            PlayersTableRow playerData = new PlayersTableRow(sqlReader.GetString(0),
+                            PlayerData playerData = new PlayerData(sqlReader.GetString(0),
                                 sqlReader.GetDateTime(1),
                                 sqlReader.GetBoolean(2),
                                 sqlReader.GetBoolean(3),
@@ -122,18 +122,18 @@ namespace Everybody_Edits_CTF.Core.Database
         }
 
         /// <summary>
-        /// Gets the <see cref="PlayersTableRow"/> of a specified player via their username.
+        /// Gets the <see cref="PlayerData"/> of a specified player via their username.
         /// </summary>
         /// <param name="username">The username of the player to be searched for in the "Rows" list.</param>
         /// <returns>
-        /// If the player is found, then the <see cref="PlayersTableRow"/> object that correspond to that player is returned. If the player is not found, then null is
+        /// If the player is found, then the <see cref="PlayerData"/> object that correspond to that player is returned. If the player is not found, then null is
         /// returned.
         /// </returns>
-        public static PlayersTableRow GetRow(string username)
+        public static PlayerData GetRow(string username)
         {
             if (Loaded)
             {
-                foreach (PlayersTableRow player in rows)
+                foreach (PlayerData player in rows)
                 {
                     if (string.Equals(username, player.Username, StringComparison.OrdinalIgnoreCase))
                     {
@@ -152,7 +152,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="isBanned">States whether this player is banned from the Everybody Edits world or not.</param>
         public static void AddNewPlayer(string username, bool isBanned)
         {
-            rows.Add(new PlayersTableRow(username, DateTime.Today, false, isBanned, new PlayerGameStatistics(), true));
+            rows.Add(new PlayerData(username, DateTime.Today, false, isBanned, new PlayerGameStatistics(), true));
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Everybody_Edits_CTF.Core.Database
             {
                 connection.Open();
 
-                foreach (PlayersTableRow playerData in rows)
+                foreach (PlayerData playerData in rows)
                 {
                     if (!playerData.ChangesOccured)
                     {

@@ -31,19 +31,19 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 
             if (canHandle)
             {
-                if (PlayersTable.GetRow(player.Username).IsAdministrator)
+                if (MySqlDatabase.GetRow(player.Username).IsAdministrator)
                 {
                     switch (parsedCommand.Command)
                     {
                         case "ban":
                         case "unban":
                             {
-                                if (PlayersTable.Loaded)
+                                if (MySqlDatabase.Loaded)
                                 {
                                     if (parsedCommand.Parameters.Length >= 1)
                                     {
                                         string username = parsedCommand.Parameters[0];
-                                        PlayersTableRow playerData = PlayersTable.GetRow(username);
+                                        PlayerData playerData = MySqlDatabase.GetRow(username);
 
                                         if (parsedCommand.Command.Equals("ban", System.StringComparison.OrdinalIgnoreCase))
                                         {
@@ -61,7 +61,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                             }
                                             else // Player does not exist in the database
                                             {
-                                                PlayersTable.AddNewPlayer(username, true);
+                                                MySqlDatabase.AddNewPlayer(username, true);
                                             }
 
                                             ctfBot?.SendPrivateMessage(player, $"Player {username.ToUpper()} has been banned from the world.");

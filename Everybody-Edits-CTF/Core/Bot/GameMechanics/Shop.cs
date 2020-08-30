@@ -65,12 +65,12 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="player">The player to be handled.</param>
         private void OnPlayerMoved(CaptureTheFlagBot ctfBot, Player player)
         {
-            if (!PlayersTable.Loaded || !player.IsPlayingGame || player.IsInGodMode || player.VerticalDirection != VerticalDirection.Down)
+            if (!MySqlDatabase.Loaded || !player.IsPlayingGame || player.IsInGodMode || player.VerticalDirection != VerticalDirection.Down)
             {
                 return;
             }
 
-            PlayersTableRow playerData = PlayersTable.GetRow(player.Username);
+            PlayerData playerData = MySqlDatabase.GetRow(player.Username);
             if (playerData != null)
             {
                 foreach (ShopItem shopItem in shopItems)

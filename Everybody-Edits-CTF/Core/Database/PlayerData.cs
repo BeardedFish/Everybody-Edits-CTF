@@ -1,4 +1,4 @@
-﻿// File Name:     PlayersTableRow.cs
+﻿// File Name:     PlayerData.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Friday, July 3, 2020
 
@@ -6,7 +6,7 @@ using System;
 
 namespace Everybody_Edits_CTF.Core.Database
 {
-    public class PlayersTableRow
+    public class PlayerData
     {
         /// <summary>
         /// The username of the player.
@@ -34,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Database
         public bool IsNewPlayer { get; set; }
 
         /// <summary>
-        /// 
+        /// The object that holds the Capture The Flag game statistics for this player.
         /// </summary>
         public PlayerGameStatistics Statistics { get; private set; }
 
@@ -61,12 +61,12 @@ namespace Everybody_Edits_CTF.Core.Database
         private PlayerGameStatistics initalStatistics;
 
         /// <summary>
-        /// Constructor for creating a <see cref="PlayersTableRow"/> object which holds data about a player from the <see cref="PlayersTable"/>.
+        /// Constructor for creating a <see cref="PlayerData"/> object which holds data about a player from the <see cref="MySqlDatabase"/>.
         /// </summary>
         /// <param name="username">Refer to <see cref="Username"/> for description.</param>
         /// <param name="isAdministrator">Refer to <see cref="IsAdministrator"/> for description.</param>
         /// <param name="isNewPlayer">Refer to <see cref="IsNewPlayer"/> for description.</param>
-        public PlayersTableRow(string username, DateTime lastVisitDate, bool isAdministrator, bool isBanned, PlayerGameStatistics statistics, bool isNewPlayer)
+        public PlayerData(string username, DateTime lastVisitDate, bool isAdministrator, bool isBanned, PlayerGameStatistics statistics, bool isNewPlayer)
         {
             Username = username;
             LastVisitDate = lastVisitDate;
