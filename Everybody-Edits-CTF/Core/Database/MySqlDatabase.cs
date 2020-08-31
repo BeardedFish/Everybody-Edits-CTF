@@ -1,4 +1,4 @@
-// File Name:     MySqlDatabase.cs
+﻿// File Name:     MySqlDatabase.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, June 29, 2020
 
@@ -182,18 +182,35 @@ namespace Everybody_Edits_CTF.Core.Database
                     {
                         List<MySqlCommand> queries = new List<MySqlCommand>();
 
+                        MySqlCommand playersTableQuery;
+                        MySqlCommand statisticsTableQuery;
+
                         if (playerData.IsNewPlayer)
                         {
-                            queries.Add(new MySqlCommand($"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator, IsBanned) VALUES (NULL, \"{playerData.Username}\", \"{playerData.LastVisitDate.ToString(DateTimeFormat)}\", {Convert.ToInt32(playerData.IsAdministrator)}, {Convert.ToInt32(playerData.IsBanned)});", connection));
-                            queries.Add(new MySqlCommand($"INSERT INTO {GameStatisticsTableName} (PlayerId, TotalWins, TotalLosses, TotalKills, Coins) VALUES ((SELECT Id FROM {PlayersTableName} WHERE Username=\"{playerData.Username}\" LIMIT 1), {playerData.Statistics.TotalWins}, {playerData.Statistics.TotalLosses}, {playerData.Statistics.TotalKills}, {playerData.Statistics.Coins});", connection));
+                            playersTableQuery = new MySqlCommand($"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator, IsBanned) VALUES(NULL, @username, @lastVisitDate, @isAdmin, @isBanned);", connection);
+                            statisticsTableQuery = new MySqlCommand($"INSERT INTO {GameStatisticsTableName} (PlayerId, TotalWins, TotalLosses, TotalKills, Coins) VALUES ((SELECT Id FROM {PlayersTableName} WHERE Username=@username LIMIT 1), ?totalWins, ?totalLosses, ?totalKills, ?totalCoins);", connection);
 
                             playerData.IsNewPlayer = false;
                         }
                         else
                         {
-                            queries.Add(new MySqlCommand($"UPDATE {PlayersTableName} SET LastVisitDate=\"{playerData.LastVisitDate.ToString(DateTimeFormat)}\", IsAdministrator={Convert.ToInt32(playerData.IsAdministrator)}, IsBanned={Convert.ToInt32(playerData.IsBanned)} WHERE Username=\"{playerData.Username}\";", connection));
-                            queries.Add(new MySqlCommand($"UPDATE {GameStatisticsTableName} SET TotalWins={playerData.Statistics.TotalWins}, TotalLosses={playerData.Statistics.TotalLosses}, TotalKills={playerData.Statistics.TotalKills}, Coins={playerData.Statistics.Coins} WHERE PlayerId=(SELECT Id FROM {PlayersTableName} WHERE Username=\"{playerData.Username}\" LIMIT 1);", connection));
+                            playersTableQuery = new MySqlCommand($"UPDATE {PlayersTableName} SET LastVisitDate=@lastVisitDate, IsAdministrator=@isAdmin, IsBanned=@isBanned WHERE Username=@username;", connection);
+                            statisticsTableQuery = new MySqlCommand($"UPDATE {GameStatisticsTableName} SET TotalWins=@totalWins, TotalLosses=@totalLosses, TotalKills=@totalKills, Coins=@coins WHERE PlayerId=(SELECT Id FROM {PlayersTableName} WHERE Username=@username LIMIT 1);", connection);
                         }
+
+                        playersTableQuery.Parameters.AddWithValue("@username", playerData.Username);
+                        playersTableQuery.Parameters.AddWithValue("@lastVisitDate", playerData.LastVisitDate.ToString(DateTimeFormat));
+                        playersTableQuery.Parameters.AddWithValue("@isAdmin", playerData.IsAdministrator);
+                        playersTableQuery.Parameters.AddWithValue("@isBanned", playerData.IsBanned);
+
+                        statisticsTableQuery.Parameters.AddWithValue("@username", playerData.Username);
+                        statisticsTableQuery.Parameters.AddWithValue("@totalWins", playerData.Statistics.TotalWins);
+                        statisticsTableQuery.Parameters.AddWithValue("@totalLosses", playerData.Statistics.TotalLosses);
+                        statisticsTableQuery.Parameters.AddWithValue("@totalKills", playerData.Statistics.TotalKills);
+                        statisticsTableQuery.Parameters.AddWithValue("@coins", playerData.Statistics.Coins);
+
+                        queries.Add(playersTableQuery);
+                        queries.Add(statisticsTableQuery);
 
                         // Run all SQL queries
                         foreach (MySqlCommand sqlQuery in queries)
