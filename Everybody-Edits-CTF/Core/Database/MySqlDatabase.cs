@@ -1,4 +1,4 @@
-﻿// File Name:     MySqlDatabase.cs
+// File Name:     MySqlDatabase.cs
 // By:            Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date:          Monday, June 29, 2020
 
@@ -86,10 +86,10 @@ namespace Everybody_Edits_CTF.Core.Database
                         MySqlDataReader sqlReader = cmd.ExecuteReader();
                         while (sqlReader.Read())
                         {
-                            PlayerGameStatistics statistics = new PlayerGameStatistics(sqlReader.GetInt32(3),
-                                sqlReader.GetInt32(4),
+                            PlayerGameStatistics statistics = new PlayerGameStatistics(sqlReader.GetInt32(4),
                                 sqlReader.GetInt32(5),
-                                sqlReader.GetInt32(6));
+                                sqlReader.GetInt32(6),
+                                sqlReader.GetInt32(7));
 
                             PlayerData playerData = new PlayerData(sqlReader.GetString(0),
                                 sqlReader.GetDateTime(1),
