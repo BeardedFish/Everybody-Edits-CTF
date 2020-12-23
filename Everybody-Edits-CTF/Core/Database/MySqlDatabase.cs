@@ -167,66 +167,63 @@ namespace Everybody_Edits_CTF.Core.Database
 
             int totalDatabaseModifications = 0;
 
-            using (MySqlConnection connection = new MySqlConnection(SqlConnectionString))
+            foreach (PlayerData playerData in rows)
             {
-                connection.Open();
-
-                foreach (PlayerData playerData in rows)
+                if (!playerData.ChangesOccured)
                 {
-                    if (!playerData.ChangesOccured)
+                    continue;
+                }
+
+                try
+                {
+                    using (MySqlConnection mySqlConnection = new MySqlConnection(SqlConnectionString))
                     {
-                        continue;
-                    }
+                        mySqlConnection.Open();
 
-                    try
-                    {
-                        List<MySqlCommand> queries = new List<MySqlCommand>();
+                        // BEGIN UPDATING PLAYERS TABLE //
 
-                        MySqlCommand playersTableQuery;
-                        MySqlCommand statisticsTableQuery;
+                        string sqlQuery = playerData.IsNewPlayer
+                            ? $"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator, IsBanned) VALUES(NULL, @username, @lastVisitDate, @isAdmin, @isBanned);"
+                            : $"UPDATE {PlayersTableName} SET LastVisitDate=@lastVisitDate, IsAdministrator=@isAdmin, IsBanned=@isBanned WHERE Username=@username;";
 
-                        if (playerData.IsNewPlayer)
+                        using (MySqlCommand query = new MySqlCommand(sqlQuery, mySqlConnection))
                         {
-                            playersTableQuery = new MySqlCommand($"INSERT INTO {PlayersTableName} (Id, Username, LastVisitDate, IsAdministrator, IsBanned) VALUES(NULL, @username, @lastVisitDate, @isAdmin, @isBanned);", connection);
-                            statisticsTableQuery = new MySqlCommand($"INSERT INTO {GameStatisticsTableName} (PlayerId, TotalWins, TotalLosses, TotalKills, Coins) VALUES ((SELECT Id FROM {PlayersTableName} WHERE Username=@username LIMIT 1), ?totalWins, ?totalLosses, ?totalKills, ?totalCoins);", connection);
-
-                            playerData.IsNewPlayer = false;
-                        }
-                        else
-                        {
-                            playersTableQuery = new MySqlCommand($"UPDATE {PlayersTableName} SET LastVisitDate=@lastVisitDate, IsAdministrator=@isAdmin, IsBanned=@isBanned WHERE Username=@username;", connection);
-                            statisticsTableQuery = new MySqlCommand($"UPDATE {GameStatisticsTableName} SET TotalWins=@totalWins, TotalLosses=@totalLosses, TotalKills=@totalKills, Coins=@coins WHERE PlayerId=(SELECT Id FROM {PlayersTableName} WHERE Username=@username LIMIT 1);", connection);
-                        }
-
-                        playersTableQuery.Parameters.AddWithValue("@username", playerData.Username);
-                        playersTableQuery.Parameters.AddWithValue("@lastVisitDate", playerData.LastVisitDate.ToString(DateTimeFormat));
-                        playersTableQuery.Parameters.AddWithValue("@isAdmin", playerData.IsAdministrator);
-                        playersTableQuery.Parameters.AddWithValue("@isBanned", playerData.IsBanned);
-
-                        statisticsTableQuery.Parameters.AddWithValue("@username", playerData.Username);
-                        statisticsTableQuery.Parameters.AddWithValue("@totalWins", playerData.Statistics.TotalWins);
-                        statisticsTableQuery.Parameters.AddWithValue("@totalLosses", playerData.Statistics.TotalLosses);
-                        statisticsTableQuery.Parameters.AddWithValue("@totalKills", playerData.Statistics.TotalKills);
-                        statisticsTableQuery.Parameters.AddWithValue("@coins", playerData.Statistics.Coins);
-
-                        queries.Add(playersTableQuery);
-                        queries.Add(statisticsTableQuery);
-
-                        // Run all SQL queries
-                        foreach (MySqlCommand sqlQuery in queries)
-                        {
-                            sqlQuery.ExecuteNonQuery();
-                            playerData.UpdateChanges();
-
-                            sqlQuery.Dispose();
+                            query.Parameters.AddWithValue("@username", playerData.Username);
+                            query.Parameters.AddWithValue("@lastVisitDate", playerData.LastVisitDate.ToString(DateTimeFormat));
+                            query.Parameters.AddWithValue("@isAdmin", playerData.IsAdministrator);
+                            query.Parameters.AddWithValue("@isBanned", playerData.IsBanned);
+                            query.ExecuteNonQuery();
                         }
 
-                        totalDatabaseModifications++;
+                        //  END UPDATING PLAYERS TABLE  //
+
+                        // BEGIN UPDATING PLAYER STATISTICS TABLE //
+
+                        sqlQuery = playerData.IsNewPlayer
+                            ? $"INSERT INTO {GameStatisticsTableName} (PlayerId, TotalWins, TotalLosses, TotalKills, Coins) VALUES ((SELECT Id FROM {PlayersTableName} WHERE Username=@username LIMIT 1), ?totalWins, ?totalLosses, ?totalKills, ?coins);"
+                            : $"UPDATE { GameStatisticsTableName} SET TotalWins = @totalWins, TotalLosses = @totalLosses, TotalKills = @totalKills, Coins = @coins WHERE PlayerId = (SELECT Id FROM {PlayersTableName} WHERE Username = @username LIMIT 1);";
+
+                        using (MySqlCommand query = new MySqlCommand(sqlQuery, mySqlConnection))
+                        {
+                            query.Parameters.AddWithValue("@username", playerData.Username);
+                            query.Parameters.AddWithValue("@totalWins", playerData.Statistics.TotalWins);
+                            query.Parameters.AddWithValue("@totalLosses", playerData.Statistics.TotalLosses);
+                            query.Parameters.AddWithValue("@totalKills", playerData.Statistics.TotalKills);
+                            query.Parameters.AddWithValue("@coins", playerData.Statistics.Coins);
+                            query.ExecuteNonQuery();
+                        }
+
+                        //  END UPDATING PLAYER STATISTICS TABLE  //
                     }
-                    catch (MySqlException ex)
-                    {
-                        Logger.WriteLog(LogType.Exception, $"Fail while trying to save the database (reason: {ex.Message}).");
-                    }
+
+                    playerData.IsNewPlayer = false;
+                    playerData.UpdateChanges();
+
+                    totalDatabaseModifications++;
+                }
+                catch (MySqlException ex)
+                {
+                    Logger.WriteLog(LogType.Exception, $"Fail while trying to save the database (reason: {ex.Message}).");
                 }
             }
 
