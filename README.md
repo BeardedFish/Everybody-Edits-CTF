@@ -31,6 +31,7 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 | `ban` | `username` | Bans the player with the specified username from the Everybody Edits world. When a player is banned, they are auto kicked every time they try to join the Everybody Edits world. The MySql database must be loaded in order for this command to work. |
 | `disconnect` | | Disconnects the bot from the Everybody Edits world. |
 | `kick` | `username` `reason`  | Kicks the specified user from the Everybody Edits world. |
+| `retf` | `team_colour` | Returns a team's flag to their base. The team's flag must be taken by a player for this command to work. Moreover, the first parameter must be either `blue` or `red`. Any other value will not be accepted. |
 | `unban` | `username` | Unbans the player with the specified username from the Everybody Edits world. The MySql database must be loaded in order for this command to work. |
 
 ### Regular:

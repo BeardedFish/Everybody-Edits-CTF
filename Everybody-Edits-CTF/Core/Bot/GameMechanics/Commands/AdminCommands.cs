@@ -3,14 +3,15 @@
 // Date:          Thursday, August 13, 2020
 
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
+using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Database;
-using System.Linq;
+using System;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 {
     public sealed class AdminCommands : Command
     {
-        public AdminCommands() : base(new string[] { "ban", "disconnect", "kick", "unban" })
+        public AdminCommands() : base(new string[] { "ban", "disconnect", "kick", "retf", "unban" })
         {
 
         }
@@ -124,6 +125,38 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                 else
                                 {
                                     ctfBot.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
+                                }
+                            }
+                            break;
+                        case "retf": // Return flag
+                            {
+                                if (parsedCommand.Parameters.Length >= 1)
+                                {
+                                    bool isValidParameter = string.Equals(parsedCommand.Parameters[0], "blue", StringComparison.OrdinalIgnoreCase) || string.Equals(parsedCommand.Parameters[0], "red", StringComparison.OrdinalIgnoreCase);
+
+                                    if (isValidParameter)
+                                    {
+                                        if (string.Equals(parsedCommand.Parameters[0], "blue", StringComparison.OrdinalIgnoreCase) && ctfBot.FlagSystem.Flags[Team.Blue].IsTaken)
+                                        {
+                                            ctfBot?.FlagSystem.Flags[Team.Blue].Return(ctfBot, null, false);
+                                        }
+                                        else if (string.Equals(parsedCommand.Parameters[0], "red", StringComparison.OrdinalIgnoreCase) && ctfBot.FlagSystem.Flags[Team.Red].IsTaken)
+                                        {
+                                            ctfBot?.FlagSystem.Flags[Team.Red].Return(ctfBot, null, false);
+                                        }
+                                        else
+                                        {
+                                            ctfBot?.SendPrivateMessage(player, $"Cannot return the {parsedCommand.Parameters[0].ToLower()} flag as it is already at its base!");
+                                        }
+                                    }
+                                    else // Parameter is not "blue" or "red"
+                                    {
+                                        ctfBot?.SendPrivateMessage(player, "Unknown flag type.");
+                                    }
+                                }
+                                else
+                                {
+                                    ctfBot?.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
                                 }
                             }
                             break;
