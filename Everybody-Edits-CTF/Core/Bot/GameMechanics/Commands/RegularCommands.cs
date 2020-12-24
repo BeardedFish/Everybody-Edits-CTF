@@ -34,7 +34,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                 {
                     case "amiadmin":
                         {
-                            string result = MySqlDatabase.GetRow(player.Username).IsAdministrator ? "You are an administrator." : "You are not an administrator.";
+                            string result = MySqlDatabase.Loaded && MySqlDatabase.GetRow(player.Username).IsAdministrator ? "You are an administrator." : "You are not an administrator.";
 
                             ctfBot.SendPrivateMessage(player, result);
                         }

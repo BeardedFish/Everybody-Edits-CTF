@@ -17,7 +17,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         }
 
         /// <summary>
-        /// Handles a player executing an administrator command. Administrator players are defined in the MySql database.
+        /// Handles a player executing an administrator command. Administrators are defined in the MySql database.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player executing the command.</param>
@@ -32,14 +32,14 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 
             if (canHandle)
             {
-                if (MySqlDatabase.GetRow(player.Username).IsAdministrator)
+                if (MySqlDatabase.Loaded)
                 {
-                    switch (parsedCommand.Command)
+                    if (MySqlDatabase.GetRow(player.Username).IsAdministrator)
                     {
-                        case "ban":
-                        case "unban":
-                            {
-                                if (MySqlDatabase.Loaded)
+                        switch (parsedCommand.Command)
+                        {
+                            case "ban":
+                            case "unban":
                                 {
                                     if (parsedCommand.Parameters.Length >= 1)
                                     {
@@ -94,77 +94,77 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                                         ctfBot?.SendPrivateMessage(player, "Insufficient amount of parameters!");
                                     }
                                 }
-                                else
+                                break;
+                            case "disconnect":
                                 {
-                                    ctfBot?.SendPrivateMessage(player, "This command is disabled due to the database not being loaded!");
+                                    ctfBot.Disconnect();
                                 }
-                            }
-                            break;
-                        case "disconnect":
-                            {
-                                ctfBot.Disconnect();
-                            }
-                            break;
-                        case "kick":
-                            {
-                                if (parsedCommand.Parameters.Length >= 1)
+                                break;
+                            case "kick":
                                 {
-                                    string playerToKick = parsedCommand.Parameters[0];
-                                    string reason = "";
-
-                                    if (parsedCommand.Parameters.Length >= 2)
+                                    if (parsedCommand.Parameters.Length >= 1)
                                     {
-                                        for (int i = 2; i < parsedCommand.Parameters.Length; i++)
+                                        string playerToKick = parsedCommand.Parameters[0];
+                                        string reason = "";
+
+                                        if (parsedCommand.Parameters.Length >= 2)
                                         {
-                                            reason += parsedCommand.Parameters[i] + " ";
+                                            for (int i = 2; i < parsedCommand.Parameters.Length; i++)
+                                            {
+                                                reason += parsedCommand.Parameters[i] + " ";
+                                            }
                                         }
+
+                                        ctfBot.KickPlayer(playerToKick, reason);
                                     }
-
-                                    ctfBot.KickPlayer(playerToKick, reason);
-                                }
-                                else
-                                {
-                                    ctfBot.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
-                                }
-                            }
-                            break;
-                        case "retf": // Return flag
-                            {
-                                if (parsedCommand.Parameters.Length >= 1)
-                                {
-                                    bool isValidParameter = string.Equals(parsedCommand.Parameters[0], "blue", StringComparison.OrdinalIgnoreCase) || string.Equals(parsedCommand.Parameters[0], "red", StringComparison.OrdinalIgnoreCase);
-
-                                    if (isValidParameter)
+                                    else
                                     {
-                                        if (string.Equals(parsedCommand.Parameters[0], "blue", StringComparison.OrdinalIgnoreCase) && ctfBot.FlagSystem.Flags[Team.Blue].IsTaken)
-                                        {
-                                            ctfBot?.FlagSystem.Flags[Team.Blue].Return(ctfBot, null, false);
-                                        }
-                                        else if (string.Equals(parsedCommand.Parameters[0], "red", StringComparison.OrdinalIgnoreCase) && ctfBot.FlagSystem.Flags[Team.Red].IsTaken)
-                                        {
-                                            ctfBot?.FlagSystem.Flags[Team.Red].Return(ctfBot, null, false);
-                                        }
-                                        else
-                                        {
-                                            ctfBot?.SendPrivateMessage(player, $"Cannot return the {parsedCommand.Parameters[0].ToLower()} flag as it is already at its base!");
-                                        }
-                                    }
-                                    else // Parameter is not "blue" or "red"
-                                    {
-                                        ctfBot?.SendPrivateMessage(player, "Unknown flag type.");
+                                        ctfBot.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
                                     }
                                 }
-                                else
+                                break;
+                            case "retf": // Return flag
                                 {
-                                    ctfBot?.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
+                                    if (parsedCommand.Parameters.Length >= 1)
+                                    {
+                                        bool isValidParameter = string.Equals(parsedCommand.Parameters[0], "blue", StringComparison.OrdinalIgnoreCase) || string.Equals(parsedCommand.Parameters[0], "red", StringComparison.OrdinalIgnoreCase);
+
+                                        if (isValidParameter)
+                                        {
+                                            if (string.Equals(parsedCommand.Parameters[0], "blue", StringComparison.OrdinalIgnoreCase) && ctfBot.FlagSystem.Flags[Team.Blue].IsTaken)
+                                            {
+                                                ctfBot?.FlagSystem.Flags[Team.Blue].Return(ctfBot, null, false);
+                                            }
+                                            else if (string.Equals(parsedCommand.Parameters[0], "red", StringComparison.OrdinalIgnoreCase) && ctfBot.FlagSystem.Flags[Team.Red].IsTaken)
+                                            {
+                                                ctfBot?.FlagSystem.Flags[Team.Red].Return(ctfBot, null, false);
+                                            }
+                                            else
+                                            {
+                                                ctfBot?.SendPrivateMessage(player, $"Cannot return the {parsedCommand.Parameters[0].ToLower()} flag as it is already at its base!");
+                                            }
+                                        }
+                                        else // Parameter is not "blue" or "red"
+                                        {
+                                            ctfBot?.SendPrivateMessage(player, "Unknown flag type.");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ctfBot?.SendPrivateMessage(player, "Insufficient amount of parameters for command.");
+                                    }
                                 }
-                            }
-                            break;
+                                break;
+                        }
+                    }
+                    else // User is not an administrator
+                    {
+                        ctfBot?.SendPrivateMessage(player, "You don't have permission to execute this command.");
                     }
                 }
                 else
                 {
-                    ctfBot.SendPrivateMessage(player, "You don't have permission to execute this command.");
+                    ctfBot?.SendPrivateMessage(player, "Administrator commands are disabled due to the database not being loaded!");
                 }
             }
 
