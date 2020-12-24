@@ -24,7 +24,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public Point PurchaseLocation { get; private set; }
 
         /// <summary>
-        /// The location in the Everybody Edits world where the purchasing player will be teleported if a succesful purchase is made.
+        /// The location in the Everybody Edits world where the purchasing player will be teleported if a successful purchase is made.
         /// </summary>
         public Point PurchaseTeleportLocation { get; private set; }
 

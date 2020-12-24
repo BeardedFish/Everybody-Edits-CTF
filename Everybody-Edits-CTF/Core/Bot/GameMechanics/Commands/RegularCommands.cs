@@ -21,7 +21,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         /// <param name="player">The player executing the command.</param>
         /// <param name="parsedCommand">The command being executed.</param>
         /// <returns>
-        /// True if the command was succesfully handled, if not, false. A succesful handle is when the parsed command is not equal to null and also the ValidCommands string
+        /// True if the command was successfully handled, if not, false. A successful handle is when the parsed command is not equal to null and also the ValidCommands string
         /// array contains the parsed command.
         /// </returns>
         public override bool Handle(CaptureTheFlagBot ctfBot, Player player, ParsedCommand parsedCommand)

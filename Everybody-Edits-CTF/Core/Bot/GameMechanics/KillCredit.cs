@@ -21,7 +21,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         }
 
         /// <summary>
-        /// Credits a player if they succesfully kill another player during the Capture The Flag game.
+        /// Credits a player if they successfully kill another player during the Capture The Flag game.
         /// 
         /// NOTE: If the <see cref="MySqlDatabase"/> is not loaded then the kill is not accumulated to the attackers total kill count.
         /// </summary>

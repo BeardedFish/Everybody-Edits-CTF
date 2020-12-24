@@ -19,7 +19,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         private const int PurchaseFloorY = 65;
 
         /// <summary>
-        /// The Y coordinate that a player will be teleported to when they succesfully purchase a shop item.
+        /// The Y coordinate that a player will be teleported to when they successfully purchase a shop item.
         /// </summary>
         private const int SuccesfulPurchaseY = 61;
 
@@ -82,7 +82,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                         if (playerData.Statistics.Coins >= shopItem.Cost)
                         {
                             playerData.Statistics.Coins -= shopItem.Cost;
-                            msgResult = $"You succesfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Statistics.Coins == 1 ? "" : "s")}.";
+                            msgResult = $"You have successfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Statistics.Coins == 1 ? "" : "s")}.";
 
                             // Set flag variable for the anti-cheat system
                             if (effectNameMap.ContainsValue(shopItem.Name))

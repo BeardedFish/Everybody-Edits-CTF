@@ -69,7 +69,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// </summary>
         /// <param name="connectionInformation">The bot connection information which contains the email, password, and world id.</param>
         /// <returns>
-        /// Either null if the bot connected to Everybody Edits succesfully or a PlayerIOError object that contains the error on why the bot could not connect to Everybody
+        /// Either null if the bot connected to Everybody Edits successfully or a PlayerIOError object that contains the error on why the bot could not connect to Everybody
         /// Edits.
         /// </returns>
         public PlayerIOError Connect(ConnectionInformation connectionInformation)

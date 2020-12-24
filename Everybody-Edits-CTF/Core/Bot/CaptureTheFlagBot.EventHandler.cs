@@ -191,7 +191,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                             {
                                 foreach (Command command in BotCommands)
                                 {
-                                    if (command.Handle(this, JoinedWorld.Players[playerId], parsedCommand)) // Break out of foreach loop if the command was succesfully handled
+                                    if (command.Handle(this, JoinedWorld.Players[playerId], parsedCommand)) // Break out of foreach loop if the command was successfully handled
                                     {
                                         break;
                                     }
@@ -267,7 +267,7 @@ namespace Everybody_Edits_CTF.Core.Bot
 
                         FinishedInit = true;
 
-                        Logger.WriteLog(LogType.EverybodyEditsMessage, "Connected to Everybody Edits succesfully!");
+                        Logger.WriteLog(LogType.EverybodyEditsMessage, "Connected to Everybody Edits successfully!");
                     }
                     break;
                 case EverybodyEditsMessage.PlayerJoinedWorld:

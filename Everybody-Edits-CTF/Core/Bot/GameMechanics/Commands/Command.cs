@@ -35,7 +35,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         /// <param name="player">The player to be handled.</param>
         /// <param name="parsedCommand">The command to be handled.</param>
         /// <returns>
-        /// Default implementation returns true if the command was succesfully handled, if not, false. A succesful handle is when the parsed command is not equal to null
+        /// Default implementation returns true if the command was successfully handled, if not, false. A successful handle is when the parsed command is not equal to null
         /// and also the ValidCommands string array contains the parsed command.
         /// </returns>
         public virtual bool Handle(CaptureTheFlagBot ctfBot, Player player, ParsedCommand parsedCommand)
@@ -69,7 +69,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
         /// in order to be parsed.
         /// </summary>
         /// <param name="message">The chat message to be parsed.</param>
-        /// <returns>A <see cref="ParsedCommand"/> object if the chat message was succesfully parsed, if not, null.</returns>
+        /// <returns>A <see cref="ParsedCommand"/> object if the chat message was successfully parsed, if not, null.</returns>
         public static ParsedCommand GetParsedCommand(string message)
         {
             if (!IsBotCommand(message))
