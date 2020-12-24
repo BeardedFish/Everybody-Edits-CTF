@@ -157,7 +157,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
             }
 
             ctfBot.PlaceBlock(BlockLayer.Foreground, dropLocation, Block);
-            ctfBot.SayChatMessage($"Player {Holder.Username} has dropped the {OwnerTeam.GetStringName()} teams flag.");
+            ctfBot.SayChatMessage($"Player {Holder.Username} has dropped the {OwnerTeam.GetStringName()} team's flag.");
 
             lastDropTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
@@ -173,7 +173,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         public void Take(CaptureTheFlagBot ctfBot, Player taker)
         {
             ctfBot.PlaceBlock(BlockLayer.Foreground, CurrentLocation, Blocks.None);
-            ctfBot.SayChatMessage($"Player {taker.Username} has taken the {OwnerTeam.GetStringName()} teams flag.");
+            ctfBot.SayChatMessage($"Player {taker.Username} has taken the {OwnerTeam.GetStringName()} team's flag.");
 
             Holder = taker;
         }
@@ -202,7 +202,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
                 StringBuilder teamName = new StringBuilder(OwnerTeam.GetStringName());
                 teamName[0] = char.ToUpper(teamName[0]);
 
-                ctfBot.SayChatMessage($"{teamName} teams flag has been returned to base{(returnee == null ? "." : $" by player {returnee.Username}.")}");
+                ctfBot.SayChatMessage($"{teamName} team's flag has been returned to base{(returnee == null ? "." : $" by player {returnee.Username}.")}");
             }
         }
     }
