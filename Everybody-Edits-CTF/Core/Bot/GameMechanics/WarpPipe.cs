@@ -48,9 +48,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                     && ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y + 1].Id == WarpPipeEntranceBlockId)
                 {
                     ctfBot.TeleportPlayer(player, player.Location.X, player.Location.Y + 1);
-                }
 
-                UpdatePlayerCurrentTick(player);
+                    UpdatePlayerCurrentTick(player);
+                }
             }
         }
     }
