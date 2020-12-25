@@ -6,6 +6,7 @@ using Everybody_Edits_CTF.Core.Bot;
 using Everybody_Edits_CTF.Core.Bot.DataContainers;
 using Everybody_Edits_CTF.Core.Database;
 using Everybody_Edits_CTF.Logging;
+using Everybody_Edits_CTF.Security;
 using System;
 
 namespace Everybody_Edits_CTF
@@ -117,13 +118,13 @@ namespace Everybody_Edits_CTF
                             break;
                         case "setup":
                             {
-                                Console.WriteLine("[!] NOTICE: The information entered here is NOT encrypted or stored securely.\n");
+                                Console.WriteLine("[!] NOTICE: The information entered here is NOT encrypted or stored securely.\n"); // The values below are stored as plain text in memory
 
                                 Console.Write("Email: ");
                                 string botEmail = Console.ReadLine();
 
                                 Console.Write("Password: ");
-                                string botPassword = Console.ReadLine();
+                                string botPassword = ConsoleSecurity.GetMaskedConsoleInput('*');
 
                                 Console.Write("World Id: ");
                                 string worldId = Console.ReadLine();
