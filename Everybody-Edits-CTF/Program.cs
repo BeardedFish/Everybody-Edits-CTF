@@ -117,7 +117,7 @@ namespace Everybody_Edits_CTF
                             break;
                         case "setup":
                             {
-                                Console.WriteLine("[!] NOTE: The information entered here is NOT encrypted or stored securely.\n");
+                                Console.WriteLine("[!] NOTICE: The information entered here is NOT encrypted or stored securely.\n");
 
                                 Console.Write("Email: ");
                                 string botEmail = Console.ReadLine();
