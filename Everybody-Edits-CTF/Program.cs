@@ -48,8 +48,8 @@ namespace Everybody_Edits_CTF
             do
             {
                 Console.Write(">> ");
-                userInput = Console.ReadLine().Trim();
 
+                userInput = Console.ReadLine().Trim();
                 quitFlag = string.Equals(userInput, "quit", StringComparison.OrdinalIgnoreCase);
 
                 if (!quitFlag)
