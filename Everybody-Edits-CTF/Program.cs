@@ -37,7 +37,6 @@ namespace Everybody_Edits_CTF
         {
             Console.Title = ProgramTitle;
             Console.WriteLine($"{TitleArt}\n");
-
             Console.WriteLine("Type \"help\" for a list of commands.\n");
 
             CaptureTheFlagBot ctfBot = new CaptureTheFlagBot();
@@ -57,6 +56,13 @@ namespace Everybody_Edits_CTF
                 {
                     switch (userInput.ToLower())
                     {
+                        case "about":
+                            {
+                                Console.WriteLine("Capture The Flag Bot - By: Darian Benam");
+                                Console.WriteLine("\nOriginally programmed in the year 2015, this application allows the ability for a Capture The Flag game to be played in the flash game Everybody Edits. This application was programmed in C# .NET Framework (v4.7.2) and integrates a MySQL database to save player data.\n");
+                                Console.WriteLine("If you are interested in downloading the source code of this application or are interested in the viewing list of features this application offers, visit this link: https://github.com/BeardedFish/Everybody-Edits-CTF/");
+                            }
+                            break;
                         case "cls":
                         case "clear":
                             {
@@ -104,7 +110,7 @@ namespace Everybody_Edits_CTF
                             break;
                         case "help":
                             {
-                                Console.WriteLine("about - Shows information about the program.");
+                                Console.WriteLine("about - Displays information about the application.");
                                 Console.WriteLine("connect - Connects the bot to Everybody Edits.");
                                 Console.WriteLine("disconnect - Disconnects the bot from Everybody Edits.");
                                 Console.WriteLine("help - Shows a list of commands on how to use the program.");
