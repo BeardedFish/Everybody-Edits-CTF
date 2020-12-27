@@ -7,6 +7,7 @@ using Everybody_Edits_CTF.Core.Bot.Enums;
 using Everybody_Edits_CTF.Core.Bot.Enums.Extensions;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
 {
@@ -54,20 +55,10 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// </summary>
         /// <param name="playersInWorld">The dictionary of players in the Everybody Edits world.</param>
         /// <param name="team">The team a player must belong to in order to be accumulated.</param>
-        /// <returns>An integer that represents the number of players that are on the specified team.</returns>
+        /// <returns>An <see cref="int"/> that represents the number of players that are on the specified team.</returns>
         private int CountTeamPlayers(Dictionary<int, Player> playersInWorld, Team team)
         {
-            int total = 0;
-
-            foreach (Player player in playersInWorld.Values)
-            {
-                if (player.Team == team)
-                {
-                    total++;
-                }
-            }
-
-            return total;
+            return playersInWorld.Where(keyValuePair => keyValuePair.Value.Team == team).Count();
         }
     }
 }
