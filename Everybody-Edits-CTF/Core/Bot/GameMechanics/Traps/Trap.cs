@@ -42,13 +42,16 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
         public abstract void Handle(CaptureTheFlagBot ctfBot, Player player);
 
         /// <summary>
+        /// <para>
         /// States whether a player can trigger this trap or not.
-        /// 
+        /// </para>
+        /// <para>
         /// By default, the condition to trigger a trap is:
-        ///     - The trap must not be currently activated.
-        ///     - The player must not be in God mode.
-        ///     - The player must be playing the Capture The Flag game (aka: team must be blue or red).
-        ///     - The players vertical direction must be equal to <see cref="VerticalDirection.Down"/>.
+        /// <br>- The trap must not be currently activated.</br>
+        /// <br>- The player must not be in God mode.</br>
+        /// <br>- The player must be playing the Capture The Flag game (aka: team must be blue or red).</br>
+        /// <br>- The players vertical direction must be equal to <see cref="VerticalDirection.Down"/>.</br>
+        /// </para>
         /// </summary>
         /// <param name="player">The player to check if they can trigger this trap or not.</param>
         /// <returns>True if the player can trigger this trap, if not, false.</returns>

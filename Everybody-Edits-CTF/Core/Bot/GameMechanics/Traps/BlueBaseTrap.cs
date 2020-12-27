@@ -67,11 +67,14 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Traps
         }
 
         /// <summary>
+        /// <para>
         /// States whether a player can trigger this trap or not.
-        /// 
+        /// </para>
+        /// <para>
         /// The condition to trigger this trap is:
-        ///     - The base implementation is met.
-        ///     - The players team is blue.
+        /// <br>- The base implementation is met.</br>
+        /// <br>- The players team is blue.</br>
+        /// </para>
         /// </summary>
         /// <param name="player">The player to check if they can trigger this trap or not.</param>
         /// <returns>True if the player can trigger this trap, if not, false.</returns>
