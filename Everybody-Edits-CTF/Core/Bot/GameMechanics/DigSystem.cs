@@ -18,10 +18,10 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <summary>
         /// The block id's that can be dug in the Everybody Edits world.
         /// </summary>
-        private readonly int[] diggableBlocks = { 16, 21, 1045, 142, 179, 180, 181 };
+        private readonly int[] m_diggableBlocks = { 16, 21, 1045, 142, 179, 180, 181 };
 
         /// <summary>
-        /// Game mechanic which handles a player digging dirt blocks in the Capture The Flag game. All diggable blocks are defined in the <see cref="diggableBlocks"/>
+        /// Game mechanic which handles a player digging dirt blocks in the Capture The Flag game. All diggable blocks are defined in the <see cref="m_diggableBlocks"/>
         /// integer array, where the integer represents a block id. The dig system only works for players wearing the <see cref="Smiley.HardHat"/> or the <see cref="Smiley.Worker"/>.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
@@ -56,7 +56,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             {
                 bool handled;
 
-                foreach (int blockId in diggableBlocks)
+                foreach (int blockId in m_diggableBlocks)
                 {
                     if (handled = CanDigLeft(ctfBot, player, blockId))
                     {

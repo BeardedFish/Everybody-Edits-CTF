@@ -94,11 +94,11 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// The username of the player. The string returned is CAPITALIZED.
         /// </summary>
-        private string _username;
+        private string m_username;
         public string Username
         {
-            get => _username.ToUpper();
-            set => _username = value;
+            get => m_username.ToUpper();
+            set => m_username = value;
         }
 
         /// <summary>

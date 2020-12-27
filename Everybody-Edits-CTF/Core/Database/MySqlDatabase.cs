@@ -14,7 +14,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// States whether the Players table has been loaded or not.
         /// </summary>
-        public static bool Loaded => rows != null;
+        public static bool Loaded => m_rows != null;
 
         /// <summary>
         /// The date time format in the MySql database.
@@ -64,14 +64,14 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// The rows of the Players table loaded from the MySql database.
         /// </summary>
-        private static List<PlayerData> rows;
+        private static List<PlayerData> m_rows;
 
         /// <summary>
         /// Loads the Players table from the MySql database.
         /// </summary>
         public static void Load()
         {
-            rows = new List<PlayerData>();
+            m_rows = new List<PlayerData>();
 
             try
             {
@@ -98,14 +98,14 @@ namespace Everybody_Edits_CTF.Core.Database
                                 statistics,
                                 false);
 
-                            rows.Add(playerData);
+                            m_rows.Add(playerData);
                         }
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                rows = null;
+                m_rows = null;
 
                 Logger.WriteLog(LogType.Exception, $"Exception caught while trying to load the database (message: {ex.Message}).");
             }
@@ -133,7 +133,7 @@ namespace Everybody_Edits_CTF.Core.Database
         {
             if (Loaded)
             {
-                foreach (PlayerData player in rows)
+                foreach (PlayerData player in m_rows)
                 {
                     if (string.Equals(username, player.Username, StringComparison.OrdinalIgnoreCase))
                     {
@@ -152,7 +152,7 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <param name="isBanned">States whether this player is banned from the Everybody Edits world or not.</param>
         public static void AddNewPlayer(string username, bool isBanned)
         {
-            rows.Add(new PlayerData(username, DateTime.Today, false, isBanned, new PlayerGameStatistics(), true));
+            m_rows.Add(new PlayerData(username, DateTime.Today, false, isBanned, new PlayerGameStatistics(), true));
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Everybody_Edits_CTF.Core.Database
 
             int totalDatabaseModifications = 0;
 
-            foreach (PlayerData playerData in rows)
+            foreach (PlayerData playerData in m_rows)
             {
                 if (!playerData.ChangesOccured)
                 {

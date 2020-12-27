@@ -45,10 +45,10 @@ namespace Everybody_Edits_CTF.Core.Database
         {
             get
             {
-                return LastVisitDate != initialLastVisitDate
-                    || IsAdministrator != initialIsAdministrator
-                    || IsBanned != initialIsBanned
-                    || !Statistics.Equals(initalStatistics)
+                return LastVisitDate != m_initialLastVisitDate
+                    || IsAdministrator != m_initialIsAdministrator
+                    || IsBanned != m_initialIsBanned
+                    || !Statistics.Equals(m_initalStatistics)
                     || IsNewPlayer;
             }
         }
@@ -56,9 +56,9 @@ namespace Everybody_Edits_CTF.Core.Database
         /// <summary>
         /// States the inital values of the database values when loaded/saved. The username is ignored because it never changes in the MySql database.
         /// </summary>
-        private bool initialIsAdministrator, initialIsBanned;
-        private DateTime initialLastVisitDate;
-        private PlayerGameStatistics initalStatistics;
+        private bool m_initialIsAdministrator, m_initialIsBanned;
+        private DateTime m_initialLastVisitDate;
+        private PlayerGameStatistics m_initalStatistics;
 
         /// <summary>
         /// Constructor for creating a <see cref="PlayerData"/> object which holds data about a player from the <see cref="MySqlDatabase"/>.
@@ -84,10 +84,10 @@ namespace Everybody_Edits_CTF.Core.Database
         /// </summary>
         public void UpdateChanges()
         {
-            initialLastVisitDate = LastVisitDate;
-            initialIsAdministrator = IsAdministrator;
-            initialIsBanned = IsBanned;
-            initalStatistics = Statistics.Clone() as PlayerGameStatistics;
+            m_initialLastVisitDate = LastVisitDate;
+            m_initialIsAdministrator = IsAdministrator;
+            m_initialIsBanned = IsBanned;
+            m_initalStatistics = Statistics.Clone() as PlayerGameStatistics;
         }
     }
 }

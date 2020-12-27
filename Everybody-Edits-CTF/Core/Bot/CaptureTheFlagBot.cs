@@ -19,18 +19,18 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <summary>
         /// States whether the bot is connected to Everybody Edits or not.
         /// </summary>
-        public bool Connected => connection != null && connection.Connected;
+        public bool Connected => m_connection != null && m_connection.Connected;
 
         /// <summary>
         /// The connection object of the bot that allows communication with the Everybody Edits world it joined.
         /// </summary>
-        private Connection connection;
+        private Connection m_connection;
 
         /// <summary>
         /// The connection information about the bot. This value is only set when <see cref="Connect(ConnectionInformation)"/> is invoked. If <see cref="Disconnect"/>
         /// is invoked, then this value becomes null.
         /// </summary>
-        private ConnectionInformation connectionInformation;
+        private ConnectionInformation m_connectionInformation;
 
         /// <summary>
         /// Constructor for creating an <see cref="CaptureTheFlagBot"/> object. The bot is able to host a Capture The Flag game in an Everybody Edits world.
@@ -80,12 +80,12 @@ namespace Everybody_Edits_CTF.Core.Bot
                 Client client = PlayerIO.QuickConnect.SimpleConnect(EverybodyEditsGameId, connectionInformation.Email, connectionInformation.Password, null);
 #pragma warning restore 612
 
-                connection = client.Multiplayer.CreateJoinRoom(connectionInformation.WorldId, "Everybodyedits" + client.BigDB.Load("config", "config")["version"], true, null, null);
-                connection.OnDisconnect += OnDisconnect;
-                connection.OnMessage += OnMessage;
-                connection.Send(EverybodyEditsMessage.InitBegin);
+                m_connection = client.Multiplayer.CreateJoinRoom(connectionInformation.WorldId, "Everybodyedits" + client.BigDB.Load("config", "config")["version"], true, null, null);
+                m_connection.OnDisconnect += OnDisconnect;
+                m_connection.OnMessage += OnMessage;
+                m_connection.Send(EverybodyEditsMessage.InitBegin);
 
-                this.connectionInformation = connectionInformation;
+                this.m_connectionInformation = connectionInformation;
             }
             catch (PlayerIOError error)
             {
@@ -103,8 +103,8 @@ namespace Everybody_Edits_CTF.Core.Bot
             SayChatMessage("Disconnecting...");
             SetWorldTitle($"{WorldTitle} [OFF]");
 
-            connection?.Disconnect();
-            connectionInformation = null;
+            m_connection?.Disconnect();
+            m_connectionInformation = null;
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="message">The message to be sent.</param>
         public void Send(string message)
         {
-            connection?.Send(message);
+            m_connection?.Send(message);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="parameters">The parameters of the message.</param>
         public void Send(string message, params object[] parameters)
         {
-            connection?.Send(message, parameters);
+            m_connection?.Send(message, parameters);
         }
 
         /// <summary>

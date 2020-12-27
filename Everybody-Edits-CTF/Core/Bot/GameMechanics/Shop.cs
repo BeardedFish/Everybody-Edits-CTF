@@ -26,7 +26,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <summary>
         /// Dictionary which defines the string names for effect shop items.
         /// </summary>
-        private static readonly Dictionary<Effect, string> effectNameMap = new Dictionary<Effect, string>()
+        private static readonly Dictionary<Effect, string> m_effectNameMap = new Dictionary<Effect, string>()
         {
             { Effect.Curse, "curse effect" },
             { Effect.Fly, "fly effect" },
@@ -38,19 +38,19 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <summary>
         /// The list of items that the shop offers to players in the Everybody Edits world.
         /// </summary>
-        private static readonly List<ShopItem> shopItems = new List<ShopItem>()
+        private static readonly List<ShopItem> m_shopItems = new List<ShopItem>()
         {
-            new ShopItem(effectNameMap[Effect.Curse], 30, new Point(232, PurchaseFloorY), new Point(232, SuccesfulPurchaseY)),
-            new ShopItem(effectNameMap[Effect.Zombie], 60, new Point(234, PurchaseFloorY), new Point(234, SuccesfulPurchaseY)),
-            new ShopItem(effectNameMap[Effect.Jump], 500, new Point(236, PurchaseFloorY), new Point(236, SuccesfulPurchaseY)),
-            new ShopItem(effectNameMap[Effect.Speed], 1000, new Point(238, PurchaseFloorY), new Point(238, SuccesfulPurchaseY)),
+            new ShopItem(m_effectNameMap[Effect.Curse], 30, new Point(232, PurchaseFloorY), new Point(232, SuccesfulPurchaseY)),
+            new ShopItem(m_effectNameMap[Effect.Zombie], 60, new Point(234, PurchaseFloorY), new Point(234, SuccesfulPurchaseY)),
+            new ShopItem(m_effectNameMap[Effect.Jump], 500, new Point(236, PurchaseFloorY), new Point(236, SuccesfulPurchaseY)),
+            new ShopItem(m_effectNameMap[Effect.Speed], 1000, new Point(238, PurchaseFloorY), new Point(238, SuccesfulPurchaseY)),
             new ShopItem("minimap", 3000, new Point(240, PurchaseFloorY), new Point(240, SuccesfulPurchaseY)),
             new ShopItem("mysterious switch", 5000, new Point(242, PurchaseFloorY), new Point(242, SuccesfulPurchaseY)),
-            new ShopItem(effectNameMap[Effect.Fly], 10000, new Point(244, PurchaseFloorY), new Point(244, SuccesfulPurchaseY))
+            new ShopItem(m_effectNameMap[Effect.Fly], 10000, new Point(244, PurchaseFloorY), new Point(244, SuccesfulPurchaseY))
         };
 
         /// <summary>
-        /// Game mechanic which handles players trying to purcahse items in the Capture The Flag game. Shop items are defined in the <see cref="shopItem"/> array.
+        /// Game mechanic which handles players trying to purcahse items in the Capture The Flag game. Shop items are defined in the <see cref="m_shopItems"/> array.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         public Shop(CaptureTheFlagBot ctfBot)
@@ -59,7 +59,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         }
 
         /// <summary>
-        /// Handles when a player wants to purchase an item at the shop in the Everybody Edits world. All shop items are defined in the <see cref="shopItems"/> array.
+        /// Handles when a player wants to purchase an item at the shop in the Everybody Edits world. All shop items are defined in the <see cref="m_shopItems"/> array.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>
@@ -73,7 +73,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             PlayerData playerData = MySqlDatabase.GetRow(player.Username);
             if (playerData != null)
             {
-                foreach (ShopItem shopItem in shopItems)
+                foreach (ShopItem shopItem in m_shopItems)
                 {
                     if (player.Location == shopItem.PurchaseLocation) // Player wants to purchase an item
                     {
@@ -85,9 +85,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
                             msgResult = $"You have successfully bought the {shopItem.Name} for {shopItem.Cost} coin{(playerData.Statistics.Coins == 1 ? "" : "s")}.";
 
                             // Set flag variable for the anti-cheat system
-                            if (effectNameMap.ContainsValue(shopItem.Name))
+                            if (m_effectNameMap.ContainsValue(shopItem.Name))
                             {
-                                player.PurchasedEffectFlag = effectNameMap.FirstOrDefault(x => x.Value == shopItem.Name).Key;
+                                player.PurchasedEffectFlag = m_effectNameMap.FirstOrDefault(x => x.Value == shopItem.Name).Key;
                             }
 
                             ctfBot.TeleportPlayer(player, shopItem.PurchaseTeleportLocation.X, shopItem.PurchaseTeleportLocation.Y);

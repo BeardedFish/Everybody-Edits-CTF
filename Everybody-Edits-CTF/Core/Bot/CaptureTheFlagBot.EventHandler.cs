@@ -123,8 +123,8 @@ namespace Everybody_Edits_CTF.Core.Bot
         private void OnDisconnect(object sender, string message)
         {
             // Unsubscribe from events
-            connection.OnDisconnect -= OnDisconnect;
-            connection.OnMessage -= OnMessage;
+            m_connection.OnDisconnect -= OnDisconnect;
+            m_connection.OnMessage -= OnMessage;
 
             FinishedInit = false;
             JoinedWorld.Players.Clear();
@@ -137,7 +137,7 @@ namespace Everybody_Edits_CTF.Core.Bot
             {
                 Logger.WriteLog(LogType.EverybodyEditsMessage, "Auto reconnecting...");
 
-                Connect(connectionInformation);
+                Connect(m_connectionInformation);
             }
         }
 
