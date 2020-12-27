@@ -22,7 +22,8 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         }
 
         /// <summary>
-        /// Handles team balance in the Capture The Flag game. If a player joins a team with more players than the other eam, then they are transferred to the other team.
+        /// Handles team balance in the Capture The Flag game. If a player joins a team with more players than the other team, then they are transferred to the other team
+        /// with less players.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player to be handled.</param>

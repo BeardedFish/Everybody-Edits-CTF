@@ -286,7 +286,7 @@ namespace Everybody_Edits_CTF.Core.Bot.Deserializer
         /// object does indeed have the <see cref="EverybodyEditsMessage.WorldStart"/> message. To ensure it does, use the <see cref="CanDeserializeBlocks"/> method.
         /// </summary>
         /// <param name="m">The Message object to be searched for <see cref="EverybodyEditsMessage.WorldStart"/>.</param>
-        /// <returns>A uint which represents the location where the <see cref="EverybodyEditsMessage.WorldStart"/> message is located.</returns>
+        /// <returns>A <see cref="uint"/> which represents the location where the <see cref="EverybodyEditsMessage.WorldStart"/> message is located.</returns>
         private static uint GetWorldStart(Message m)
         {
             uint worldStartIndex = 0;
