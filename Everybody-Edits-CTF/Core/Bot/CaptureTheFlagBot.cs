@@ -85,7 +85,7 @@ namespace Everybody_Edits_CTF.Core.Bot
                 m_connection.OnMessage += OnMessage;
                 m_connection.Send(EverybodyEditsMessage.InitBegin);
 
-                this.m_connectionInformation = connectionInformation;
+                m_connectionInformation = connectionInformation;
             }
             catch (PlayerIOError error)
             {
