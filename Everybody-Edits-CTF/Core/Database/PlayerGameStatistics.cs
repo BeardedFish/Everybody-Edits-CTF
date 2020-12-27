@@ -51,17 +51,19 @@ namespace Everybody_Edits_CTF.Core.Database
             Coins = coins;
         }
 
+#nullable enable
         /// <summary>
         /// States whether an object is equal to this <see cref="PlayerGameStatistics"/> instance or not.
         /// </summary>
         /// <param name="obj">The object to be compared.</param>
         /// <returns>True if the object is equal to this instance, if not, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            PlayerGameStatistics pgs = obj as PlayerGameStatistics;
+            PlayerGameStatistics? pgs = obj as PlayerGameStatistics;
 
-            return obj != null && TotalWins == pgs.TotalWins && TotalKills == pgs.TotalKills && pgs.TotalLosses == pgs.TotalLosses && Coins == pgs.Coins;
+            return obj != null && TotalWins == pgs?.TotalWins && TotalKills == pgs?.TotalKills && pgs?.TotalLosses == pgs?.TotalLosses && Coins == pgs?.Coins;
         }
+#nullable disable
 
         /// <summary>
         /// Gets the unique hash code of this object instance.

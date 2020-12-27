@@ -61,10 +61,12 @@ namespace Everybody_Edits_CTF.Core.Database
         /// </summary>
         private static readonly string SqlConnectionString = $"Server={ServerUrl}; Port={Port}; Database={Name}; Uid={Username}; Pwd={Password};";
 
+#nullable enable
         /// <summary>
         /// The rows of the Players table loaded from the MySql database.
         /// </summary>
-        private static List<PlayerData> m_rows;
+        private static List<PlayerData>? m_rows;
+#nullable disable
 
         /// <summary>
         /// Loads the Players table from the MySql database.

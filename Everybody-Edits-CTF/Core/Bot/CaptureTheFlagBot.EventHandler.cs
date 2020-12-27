@@ -51,13 +51,14 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// </summary>
         public WorldInformation JoinedWorld { get; private set; }
 
+#nullable enable
         /// <summary>
         /// Event handler for when a player enters or leaves God mode in the Everybody Edits world.
         /// </summary>
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player that entered or left God mode.</param>
         public delegate void GodModeToggledHandler(CaptureTheFlagBot ctfBot, Player player);
-        public event GodModeToggledHandler OnGodModeToggled;
+        public event GodModeToggledHandler? OnGodModeToggled;
 
         /// <summary>
         /// Event handler for when a player receives or loses an effect in the Everybody Edits world.
@@ -65,7 +66,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="eventArgs">The arguments for when the player received/lost an effect.</param>
         public delegate void OnEffectToggledHandler(CaptureTheFlagBot ctfBot, EffectToggledEventArgs eventArgs);
-        public event OnEffectToggledHandler OnEffectToggled;
+        public event OnEffectToggledHandler? OnEffectToggled;
 
         /// <summary>
         /// Event handler for when a player joins the Everybody Edits world.
@@ -73,7 +74,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player that joined the world.</param>
         public delegate void PlayerJoinedHandler(CaptureTheFlagBot ctfBot, Player player);
-        public event PlayerJoinedHandler OnPlayerJoined;
+        public event PlayerJoinedHandler? OnPlayerJoined;
 
         /// <summary>
         /// Event handler for when a player leaves the Everybody Edits world.
@@ -81,7 +82,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player that left the world.</param>
         public delegate void PlayerLeftHandler(CaptureTheFlagBot ctfBot, Player player);
-        public event PlayerLeftHandler OnPlayerLeft;
+        public event PlayerLeftHandler? OnPlayerLeft;
 
         /// <summary>
         /// Event handler for when a player moves in the Everybody Edits world.
@@ -89,7 +90,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player that moved.</param>
         public delegate void PlayerMovedHandler(CaptureTheFlagBot ctfBot, Player player);
-        public event PlayerMovedHandler OnPlayerMoved;
+        public event PlayerMovedHandler? OnPlayerMoved;
 
         /// <summary>
         /// Event handler for when a player is reset in the Everybody Edits world.
@@ -97,7 +98,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="eventArgs">The arguments for when the player (or players) was/were reset.</param>
         public delegate void PlayerResetHandler(CaptureTheFlagBot ctfBot, PlayerResetEventArgs eventArgs);
-        public event PlayerResetHandler OnPlayerReset;
+        public event PlayerResetHandler? OnPlayerReset;
 
         /// <summary>
         /// Event handler for when a player changes their smiley in the Everybody Edits world.
@@ -105,7 +106,7 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player that changed their smiley.</param>
         public delegate void SmileyChangedHandler(CaptureTheFlagBot ctfBot, Player player);
-        public event SmileyChangedHandler OnSmileyChanged;
+        public event SmileyChangedHandler? OnSmileyChanged;
 
         /// <summary>
         /// Event handler for when a player joins or leaves a team in the Everybody Edits world.
@@ -113,7 +114,8 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// <param name="ctfBot">The <see cref="CaptureTheFlagBot"/> instance.</param>
         /// <param name="player">The player that joined or left a team.</param>
         public delegate void TeamChangedHandler(CaptureTheFlagBot ctfBot, Player player);
-        public event TeamChangedHandler OnTeamChanged;
+        public event TeamChangedHandler? OnTeamChanged;
+#nullable disable
 
         /// <summary>
         /// Event handler for when the bot is disconnected from Everybody Edits.

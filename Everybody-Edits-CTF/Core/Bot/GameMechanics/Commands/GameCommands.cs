@@ -39,9 +39,9 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
                         case "redflag":
                             {
                                 Team targetTeam = parsedCommand.Command == "blueflag" ? Team.Blue : Team.Red;
-                                string flagHolderUsername = ctfBot.FlagSystem.Flags[targetTeam].Holder == null ? null : ctfBot.FlagSystem.Flags[targetTeam].Holder.Username;
+                                string flagHolderUsername = ctfBot.FlagSystem.Flags[targetTeam].Holder?.Username ?? "";
                                 string teamName = targetTeam.GetStringName();
-                                string msgToSend = flagHolderUsername != null ? $"Player {flagHolderUsername} has the {teamName} flag." : $"No one has {teamName} flag.";
+                                string msgToSend = !string.IsNullOrEmpty(flagHolderUsername) ? $"Player {flagHolderUsername} has the {teamName} flag." : $"No one has {teamName} flag.";
 
                                 ctfBot.SayChatMessage(msgToSend);
                             }

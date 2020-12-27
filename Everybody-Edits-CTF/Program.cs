@@ -40,7 +40,9 @@ namespace Everybody_Edits_CTF
             Console.WriteLine("Type \"help\" for a list of commands.\n");
 
             CaptureTheFlagBot ctfBot = new CaptureTheFlagBot();
-            ConnectionInformation botConnectionInfo = null;
+#nullable enable
+            ConnectionInformation? botConnectionInfo = null;
+#nullable disable
 
             bool quitFlag;
             string userInput;

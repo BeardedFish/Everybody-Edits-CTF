@@ -28,10 +28,12 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// </summary>
         public readonly MorphableBlock Block;
 
+#nullable enable
         /// <summary>
         /// The player currently holding this flag.
         /// </summary>
-        public Player Holder { get; private set; } = null;
+        public Player? Holder { get; private set; } = null;
+#nullable disable
 
         /// <summary>
         /// The drop location of the flag.

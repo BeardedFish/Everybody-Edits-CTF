@@ -58,7 +58,9 @@ namespace Everybody_Edits_CTF.Core.Database
         /// </summary>
         private bool m_initialIsAdministrator, m_initialIsBanned;
         private DateTime m_initialLastVisitDate;
-        private PlayerGameStatistics m_initalStatistics;
+#nullable enable
+        private PlayerGameStatistics? m_initalStatistics;
+#nullable disable
 
         /// <summary>
         /// Constructor for creating a <see cref="PlayerData"/> object which holds data about a player from the <see cref="MySqlDatabase"/>.

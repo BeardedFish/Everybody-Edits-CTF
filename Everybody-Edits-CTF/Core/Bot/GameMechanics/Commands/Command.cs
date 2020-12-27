@@ -64,13 +64,14 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
             return false;
         }
 
+#nullable enable
         /// <summary>
         /// Parses an Everybody Edits chat message to a <see cref="ParsedCommand"/> object. The chat message must meet the <see cref="IsBotCommand(string)"/> condition
         /// in order to be parsed.
         /// </summary>
         /// <param name="message">The chat message to be parsed.</param>
         /// <returns>A <see cref="ParsedCommand"/> object if the chat message was successfully parsed, if not, null.</returns>
-        public static ParsedCommand GetParsedCommand(string message)
+        public static ParsedCommand? GetParsedCommand(string message)
         {
             if (!IsBotCommand(message))
             {
@@ -84,5 +85,6 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics.Commands
 
             return new ParsedCommand(message[0], tokens[0], parameters); // Prefix, command, parameters
         }
+#nullable disable
     }
 }

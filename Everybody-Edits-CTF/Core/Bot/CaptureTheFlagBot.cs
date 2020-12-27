@@ -21,10 +21,12 @@ namespace Everybody_Edits_CTF.Core.Bot
         /// </summary>
         public bool Connected => m_connection != null && m_connection.Connected;
 
+#nullable enable
         /// <summary>
         /// The connection object of the bot that allows communication with the Everybody Edits world it joined.
         /// </summary>
-        private Connection m_connection;
+        private Connection? m_connection;
+#nullable disable
 
         /// <summary>
         /// The connection information about the bot. This value is only set when <see cref="Connect(ConnectionInformation)"/> is invoked. If <see cref="Disconnect"/>

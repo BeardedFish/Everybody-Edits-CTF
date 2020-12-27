@@ -26,7 +26,7 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// <summary>
         /// States whether this player is a guest or not.
         /// </summary>
-        public bool IsGuest => Username.ToLower().StartsWith("guest-");
+        public bool IsGuest => Username != null ? Username.ToLower().StartsWith("guest-") : false;
 
         /// <summary>
         /// States whether the player is in the blue teams base or not.
@@ -91,15 +91,17 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
         /// </summary>
         public int Health { get; private set; } = MaxHealth;
 
+#nullable enable
         /// <summary>
         /// The username of the player. The string returned is CAPITALIZED.
         /// </summary>
-        private string m_username;
-        public string Username
+        private string? m_username;
+        public string? Username
         {
-            get => m_username.ToUpper();
+            get => m_username?.ToUpper();
             set => m_username = value;
         }
+#nullable disable
 
         /// <summary>
         /// The location of the player in the Everybody Edits world. This location is not always accurate because Everybody Edits only reports the location of a player

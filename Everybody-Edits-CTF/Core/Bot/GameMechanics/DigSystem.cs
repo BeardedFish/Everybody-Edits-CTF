@@ -94,6 +94,11 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <returns>True if the player can dig left, if not, false.</returns>
         private bool CanDigLeft(CaptureTheFlagBot ctfBot, Player player, int blockId)
         {
+            if (ctfBot.JoinedWorld.Blocks is null)
+            {
+                return false;
+            }
+
             return player.HorizontalDirection == HorizontalDirection.Left
                 && player.Location.X > 0
                 && ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X - 1, player.Location.Y].Id == blockId;
@@ -108,6 +113,11 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <returns>True if the player can dig right, if not, false.</returns>
         private bool CanDigRight(CaptureTheFlagBot ctfBot, Player player, int blockId)
         {
+            if (ctfBot.JoinedWorld.Blocks is null)
+            {
+                return false;
+            }
+
             return player.HorizontalDirection == HorizontalDirection.Right
                 && player.Location.X < ctfBot.JoinedWorld.Width
                 && ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X + 1, player.Location.Y].Id == blockId;
@@ -122,6 +132,11 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <returns>True if the player can dig up, if not, false.</returns>
         private bool CanDigUp(CaptureTheFlagBot ctfBot, Player player, int blockId)
         {
+            if (ctfBot.JoinedWorld.Blocks is null)
+            {
+                return false;
+            }
+
             return player.VerticalDirection == VerticalDirection.Up
                 && player.Location.Y > 0
                 && ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y - 1].Id == blockId;
@@ -136,6 +151,11 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <returns>True if the player can dig down, if not, false.</returns>
         private bool CanDigDown(CaptureTheFlagBot ctfBot, Player player, int blockId)
         {
+            if (ctfBot.JoinedWorld.Blocks is null)
+            {
+                return false;
+            }
+
             return player.VerticalDirection == VerticalDirection.Down
                 && player.Location.Y < ctfBot.JoinedWorld.Height
                 && ctfBot.JoinedWorld.Blocks[(uint)BlockLayer.Foreground, player.Location.X, player.Location.Y + 1].Id == blockId;

@@ -11,10 +11,12 @@ namespace Everybody_Edits_CTF.Core.Bot.DataContainers
 {
     public class WorldInformation
     {
+#nullable enable
         /// <summary>
         /// The array of blocks in the Everybody Edits world. This array will have a length of <see cref="Width"/> and a width of <see cref="Height"/>.
         /// </summary>
-        public Block[,,] Blocks { get; set; }
+        public Block[,,]? Blocks { get; set; }
+#nullable disable
 
         /// <summary>
         /// The millisecond time a curse effect was last removed from a player in the Everybody Edits world.
