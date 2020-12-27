@@ -36,8 +36,8 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
             }
 
             string resultMsg = $"You joined the {player.Team.GetStringName()} team!";
-            int joinedTeamTotalPlayers = CountTeamPlayers(ctfBot.JoinedWorld.Players, player.Team) - 1;
-            int oppositeTeamTotalPlayers = CountTeamPlayers(ctfBot.JoinedWorld.Players, player.Team.GetOppositeTeam());
+            int joinedTeamTotalPlayers = GetTeamPlayersCount(ctfBot.JoinedWorld.Players, player.Team) - 1;
+            int oppositeTeamTotalPlayers = GetTeamPlayersCount(ctfBot.JoinedWorld.Players, player.Team.GetOppositeTeam());
 
             if (joinedTeamTotalPlayers > oppositeTeamTotalPlayers)
             {
@@ -56,7 +56,7 @@ namespace Everybody_Edits_CTF.Core.Bot.GameMechanics
         /// <param name="playersInWorld">The dictionary of players in the Everybody Edits world.</param>
         /// <param name="team">The team a player must belong to in order to be accumulated.</param>
         /// <returns>An <see cref="int"/> that represents the number of players that are on the specified team.</returns>
-        private int CountTeamPlayers(Dictionary<int, Player> playersInWorld, Team team)
+        private int GetTeamPlayersCount(Dictionary<int, Player> playersInWorld, Team team)
         {
             return playersInWorld.Where(keyValuePair => keyValuePair.Value.Team == team).Count();
         }
