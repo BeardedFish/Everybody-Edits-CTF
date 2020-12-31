@@ -15,7 +15,7 @@ This bot was originally written in 2015, however, due to the Everybody Edits pro
 * Ban system.
 * Daily bonus system.
 * Dig system.
-* Player data (coins, total wins, total losses, etc.), excluding guest accounts, is saved through a MySql database.
+* Player data (coins, total wins, total losses, etc.), excluding guest accounts, is saved through a MySQL database.
 * Respawn cooldown when a player dies.
 * Room entrance/warp pipe system.
 * Shop where players can spend coins on items.
@@ -28,11 +28,11 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 ### Administrator:
 | Command | Parameter(s) | Description |
 | - | - | - |
-| `ban` | `username` | Bans the player with the specified username from the Everybody Edits world. When a player is banned, they are auto kicked every time they try to join the Everybody Edits world. The MySql database must be loaded in order for this command to work. |
+| `ban` | `username` | Bans the player with the specified username from the Everybody Edits world. When a player is banned, they are auto kicked every time they try to join the Everybody Edits world. The MySQL database must be loaded in order for this command to work. |
 | `disconnect` | | Disconnects the bot from the Everybody Edits world. |
 | `kick` | `username` `reason`  | Kicks the specified user from the Everybody Edits world. |
 | `retf` | `team_colour` | Returns a team's flag to their base. The team's flag must be taken by a player for this command to work. Moreover, the first parameter must be either `blue` or `red`. Any other value will not be accepted. |
-| `unban` | `username` | Unbans the player with the specified username from the Everybody Edits world. The MySql database must be loaded in order for this command to work. |
+| `unban` | `username` | Unbans the player with the specified username from the Everybody Edits world. The MySQL database must be loaded in order for this command to work. |
 
 ### Regular:
 | Command | Parameter(s) | Description |
@@ -66,13 +66,13 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 You need .NET Framework v4.7.2 in order to run this program.
 
 ### What software did you use to run the database? 
-I used [XAMPP](https://www.apachefriends.org/index.html) to run a MySql database locally on my machine.
+I used [XAMPP](https://www.apachefriends.org/index.html) to run a MySQL database locally on my machine.
 
 ### Is data stored securely through this program?
 No.
 
 ### Does this bot work with [Everybody Edits Offline](https://github.com/Seb-135/ee-offline)?
-No, this bot does not work with Everybody Edits Offline because Everybody Edits Offline does not use the PlayerIO API. PlayerIO is required for this bot to work.
+No, this bot does not work with Everybody Edits Offline because Everybody Edits Offline does not use the PlayerIO API. PlayerIO is required for this bot to run.
 
 ## Screenshots
 ![Console application](Images/Application.png "Showcase of what the program looks like")
