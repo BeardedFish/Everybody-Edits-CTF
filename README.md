@@ -71,6 +71,9 @@ I used [XAMPP](https://www.apachefriends.org/index.html) to run a MySql database
 ### Is data stored securely through this program?
 No.
 
+### Does this bot work with [Everybody Edits Offline](https://github.com/Seb-135/ee-offline)?
+No, this bot does not work with Everybody Edits Offline because Everybody Edits Offline does not use the PlayerIO API. PlayerIO is required for this bot to work.
+
 ## Screenshots
 ![Console application](Images/Application.png "Showcase of what the program looks like")
 ![Blue team trap](Images/BlueTeamTrap.png "Player triggering the blue teams base trap")
