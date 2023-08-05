@@ -1,9 +1,11 @@
 # Everybody-Edits-CTF
+
 This repository contains the source code files for a Capture The Flag bot made for the flash game Everybody Edits.
 
 This bot was originally written in 2015, however, due to the Everybody Edits protocol changes the old bot stopped working. This is a complete rewrite of the entire Capture The Flag bot.
 
 ## Current Features
+
 * Ability for an Everybody Edits players to:
     * Attack and kill players of the opposite team.
     * Execute commands.
@@ -26,6 +28,7 @@ This bot was originally written in 2015, however, due to the Everybody Edits pro
 These commands can only be executed when the bot is connected to an Everybody Edits world. Commands must start with a specific prefix. The prefixes are: `.`, `>`, `!`, and `#`.
 
 ### Administrator:
+
 | Command | Parameter(s) | Description |
 | - | - | - |
 | `ban` | `username` | Bans the player with the specified username from the Everybody Edits world. When a player is banned, they are auto kicked every time they try to join the Everybody Edits world. The MySQL database must be loaded in order for this command to work. |
@@ -35,6 +38,7 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 | `unban` | `username` | Unbans the player with the specified username from the Everybody Edits world. The MySQL database must be loaded in order for this command to work. |
 
 ### Regular:
+
 | Command | Parameter(s) | Description |
 | - | - | - |
 | `amiadmin` | | Sends the user saying the command a private message stating whether they are an administrator or not. |
@@ -47,6 +51,7 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 | `totalkills` | | Sends the user saying the command a private message stating the total amount of players they've killed. |
 
 ### Game:
+
 | Command | Parameter(s) | Description |
 | - | - | - |
 | `blueflag` | | Sends a chat message saying the username of the player holding the blue flag. |
@@ -63,18 +68,23 @@ These commands can only be executed when the bot is connected to an Everybody Ed
 ## Frequently Asked Questions
 
 ### What version of .NET Framework is required in order to run this program?
+
 You need .NET Framework v4.7.2 in order to run this program.
 
-### What software did you use to run the database? 
+### What software did you use to run the database?
+
 I used [XAMPP](https://www.apachefriends.org/index.html) to run a MySQL database locally on my machine.
 
 ### Is data stored securely through this program?
+
 No.
 
 ### Does this bot work with [Everybody Edits Offline](https://github.com/Seb-135/ee-offline)?
+
 No, this bot does not work with Everybody Edits Offline because Everybody Edits Offline does not use the PlayerIO API. PlayerIO is required for this bot to run.
 
 ## Screenshots
+
 ![Console application](Images/Application.png "Showcase of what the program looks like")
 ![Blue team trap](Images/BlueTeamTrap.png "Player triggering the blue teams base trap")
 ![Bridge trap](Images/BridgeTrap.png "Player triggering the bridge trap")
@@ -84,4 +94,5 @@ No, this bot does not work with Everybody Edits Offline because Everybody Edits 
 ![Player digging](Images/PlayerDigging.png "Player wearing the Hard Hat smiley digging dirt")
 
 ## Video Showcase
+
 Click [here](https://www.youtube.com/watch?v=n2VMRJCXPEw) to watch a YouTube video of the bot in action.
